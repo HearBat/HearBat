@@ -67,78 +67,47 @@ class AnswerGroup {
 }
 
 class Module {
+  final String name;
   final List<AnswerGroup> answerGroups;
-  Module(this.answerGroups);
+  Module(this.name, this.answerGroups);
 
   static Module fromJson(Map<String, dynamic> json) {
-    return Module((json['answerGroups'] as List).map((item) => AnswerGroup.fromJson(item)).toList());
+    return Module(
+        json['name'],
+        (json['answerGroups'] as List<dynamic>).map((item) => AnswerGroup.fromJson(item as Map<String, dynamic>)).toList()
+    );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'name': name,
       'answerGroups': answerGroups.map((group) => group.toJson()).toList(),
     };
   }
 }
 
 class Chapter {
+  final String name;
   final Map<String, Module> modules;
-  Chapter(this.modules);
+  Chapter(this.name, this.modules);
 
-  static final Chapter _empty = Chapter({});
+  static final Chapter _empty = Chapter("", {});
 
   factory Chapter.empty() {
     return _empty;
   }
   static Chapter fromJson(Map<String, dynamic> json) {
     return Chapter(
-      {for (var module in json['modules']) module['name'] : Module.fromJson(module) }
+        json['name'],
+        //json['modules'].map((module) => MapEntry(module['name'], Module.fromJson(module)))
+        { for (Map<String, dynamic> module in (json['modules'] as List<dynamic>)) module['name'] : Module.fromJson(module) }
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'modules': modules.map((id, module) => MapEntry(id, module.toJson())),
+      'name': name,
+      'modules': modules.map((name, module) => MapEntry(name, module.toJson())),
     };
   }
-}
-
-class SpeechModule {
-  final List<String> speechGroups;
-  SpeechModule(this.speechGroups);
-
-  static SpeechModule fromJson(Map<String, dynamic> json) {
-    return SpeechModule(
-      [for (var item in json['speechGroups']) item.toString()]
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'speechGroups': speechGroups.map((group) => group).toList(),
-    };
-  }
-}
-
-class SpeechChapter {
-  final Map<String, SpeechModule> speechModules;
-  SpeechChapter(this.speechModules);
-
- static final SpeechChapter _empty = SpeechChapter({});
-
- factory SpeechChapter.empty() {
-   return _empty;
- }
-
- static SpeechChapter fromJson(Map<String, dynamic> json) {
-   return SpeechChapter(
-     {for (var module in json['modules']) module['name'] : SpeechModule.fromJson(module)}
-   );
- }
-
- Map<String, dynamic> toJson() {
-   return {
-     'modules': speechModules.map((id, module) => MapEntry(id, module.toJson()))
-   };
- }
 }

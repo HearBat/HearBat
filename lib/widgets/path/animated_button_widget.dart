@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 
 class AnimatedButton extends StatefulWidget {
   final String moduleName;

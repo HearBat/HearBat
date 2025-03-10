@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/widgets/path/speech_module_list_widget.dart';
-import '../../../data/answer_pair.dart';
+import '../../../models/speech_chapter_model.dart';
 import '../../../utils/data_service_util.dart';
-import '../../../utils/module_util.dart';
 import '../../../widgets/top_bar_widget.dart';
 
 class SpeechPath extends StatefulWidget {
@@ -17,9 +16,7 @@ class SpeechPath extends StatefulWidget {
 class _SpeechPathState extends State<SpeechPath> {
   @override
   Widget build(BuildContext context) {
-    SpeechChapter chapter = DataService().getSpeechChapter(widget.chapter);
-    Map<String, SpeechModule> modules = chapter.speechModules;
-    //Map<String, List<String>> modules = getModulesForSpeech(widget.chapter);
+    Map<String, SpeechModule> modules = DataService().getSpeechChapter(widget.chapter).speechModules;
     return Scaffold(
       appBar: TopBar(
         title: widget.chapter.toUpperCase(),

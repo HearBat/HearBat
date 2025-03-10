@@ -1,0 +1,1729 @@
+{
+  "chapters": [
+    {
+      "name": "Beginner Foundations",
+      "modules": [
+        {
+          "name": "Module 1",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Kangaroo" },
+                { "answer": "Ice" },
+                { "answer": "Peanut" },
+                { "answer": "Encyclopedia" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Salt" },
+                { "answer": "Cafeteria" },
+                { "answer": "Football" },
+                { "answer": "Hamburger" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Popcorn" },
+                { "answer": "Superbowl" },
+                { "answer": "Vote" },
+                { "answer": "Nebraska" }
+              ]
+            }, 
+            {
+              "answers": [
+                { "answer": "Umbrella" },
+                { "answer": "Cupcake" },
+                { "answer": "Motorcycle" },
+                { "answer": "Shoe" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Seven" },
+                { "answer": "Certify" },
+                { "answer": "Twice" },
+                { "answer": "Escalator" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Dictionary" },
+                { "answer": "Suitcase" },
+                { "answer": "Unicorn" },
+                { "answer": "Book" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Seventeen" },
+                { "answer": "Baseball" },
+                { "answer": "Gum" },
+                { "answer": "Bottle" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Airport" },
+                { "answer": "Pen" },
+                { "answer": "Briefcase" },
+                { "answer": "Computer" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Calendar" },
+                { "answer": "Ball" },
+                { "answer": "Anniversary" },
+                { "answer": "Window" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Eyes" },
+                { "answer": "Dalmatian" },
+                { "answer": "Apple" },
+                { "answer": "Orange" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 2",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Ten" },
+                { "answer": "Republican" },
+                { "answer": "Telescope" },
+                { "answer": "Party" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Charcoal" },
+                { "answer": "Camera" },
+                { "answer": "Keep" },
+                { "answer": "Africa" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Telephone" },
+                { "answer": "Supernatural" },
+                { "answer": "Key" },
+                { "answer": "Hotdog" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "America" },
+                { "answer": "Soccer" },
+                { "answer": "Snowman" },
+                { "answer": "Six" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Oregon" },
+                { "answer": "Can" },
+                { "answer": "Elastic" },
+                { "answer": "Shovel" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Barbeque" },
+                { "answer": "Onion" },
+                { "answer": "Paperclip" },
+                { "answer": "Storm" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Spaghetti" },
+                { "answer": "Printer" },
+                { "answer": "Shoelace" },
+                { "answer": "Hey" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Mouse" },
+                { "answer": "University" },
+                { "answer": "Celebrate" },
+                { "answer": "Bookcase" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Pill" },
+                { "answer": "Figure" },
+                { "answer": "Statue" },
+                { "answer": "Guitar" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Umbrella" },
+                { "answer": "Cupcake" },
+                { "answer": "Motorcycle" },
+                { "answer": "Shoe" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 3",
+          "answerGroups": [
+                        {
+              "answers": [
+                { "answer": "Dice" },
+                { "answer": "Bed" },
+                { "answer": "Pan" },
+                { "answer": "Flute" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Knee" },
+                { "answer": "Catch" },
+                { "answer": "More" },
+                { "answer": "Pass" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Phone" },
+                { "answer": "Met" },
+                { "answer": "Play" },
+                { "answer": "Deuce" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Lamb" },
+                { "answer": "Soft" },
+                { "answer": "Truck" },
+                { "answer": "Key" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Throw" },
+                { "answer": "Plum" },
+                { "answer": "Splash" },
+                { "answer": "Reach" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Sack" },
+                { "answer": "Chain" },
+                { "answer": "Deep" },
+                { "answer": "Nose" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Mean" },
+                { "answer": "Plate" },
+                { "answer": "Store" },
+                { "answer": "Hat" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Peer" },
+                { "answer": "Wrong" },
+                { "answer": "Light" },
+                { "answer": "Gold" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Call" },
+                { "answer": "Whip" },
+                { "answer": "Cheese" },
+                { "answer": "Roof" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bean" },
+                { "answer": "Sauce" },
+                { "answer": "Feet" },
+                { "answer": "Car" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 4",
+          "answerGroups": [
+                        {
+              "answers": [
+                { "answer": "Meal" },
+                { "answer": "Joke" },
+                { "answer": "Ring" },
+                { "answer": "Tune" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Broom" },
+                { "answer": "Cat" },
+                { "answer": "Trash" },
+                { "answer": "Witch" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Soft" },
+                { "answer": "Lamb" },
+                { "answer": "Truck" },
+                { "answer": "Key" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Deep" },
+                { "answer": "Nose" },
+                { "answer": "Sack" },
+                { "answer": "Chain" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cash" },
+                { "answer": "Fun" },
+                { "answer": "Pear" },
+                { "answer": "Bees" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Throw" },
+                { "answer": "Plum" },
+                { "answer": "Splash" },
+                { "answer": "Reach" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Pot" },
+                { "answer": "Hoop" },
+                { "answer": "Stem" },
+                { "answer": "Mouse" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bean" },
+                { "answer": "Sauce" },
+                { "answer": "Feet" },
+                { "answer": "Car" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Perch" },
+                { "answer": "Sold" },
+                { "answer": "Ship" },
+                { "answer": "My" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Phone" },
+                { "answer": "Met" },
+                { "answer": "Play" },
+                { "answer": "Deuce" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Intermediate Progress",
+      "modules": [
+        {
+          "name": "Module 1",
+          "answerGroups": [
+                        {
+              "answers": [
+                { "answer": "Key" },
+                { "answer": "Comb" },
+                { "answer": "Kiss" },
+                { "answer": "Kite" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Chalk" },
+                { "answer": "Chops" },
+                { "answer": "Chin" },
+                { "answer": "Cheese" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Knife" },
+                { "answer": "Niece" },
+                { "answer": "Noon" },
+                { "answer": "Knack" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Fin" },
+                { "answer": "Few" },
+                { "answer": "Feel" },
+                { "answer": "Far" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Peel" },
+                { "answer": "Pan" },
+                { "answer": "Pop" },
+                { "answer": "Pie" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Pile" },
+                { "answer": "Peep" },
+                { "answer": "Pin" },
+                { "answer": "Push" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cave" },
+                { "answer": "Coal" },
+                { "answer": "Cash" },
+                { "answer": "Kite" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Hen" },
+                { "answer": "Hat" },
+                { "answer": "He" },
+                { "answer": "Hay" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Sick" },
+                { "answer": "Soap" },
+                { "answer": "Sue" },
+                { "answer": "Sun" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Feet" },
+                { "answer": "Fish" },
+                { "answer": "Face" },
+                { "answer": "Fan" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 2",
+          "answerGroups": [
+                        {
+              "answers": [
+                { "answer": "Ship" },
+                { "answer": "She" },
+                { "answer": "Shoe" },
+                { "answer": "Rack" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Tea" },
+                { "answer": "Tie" },
+                { "answer": "Ten" },
+                { "answer": "Tail" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Chops" },
+                { "answer": "Chalk" },
+                { "answer": "Chin" },
+                { "answer": "Cheese" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Comb" },
+                { "answer": "Key" },
+                { "answer": "Kiss" },
+                { "answer": "Kite" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Shack" },
+                { "answer": "She" },
+                { "answer": "Shoe" },
+                { "answer": "Ship" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Fish" },
+                { "answer": "Face" },
+                { "answer": "Fan" },
+                { "answer": "Feet" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Chops" },
+                { "answer": "Chalk" },
+                { "answer": "Cheese" },
+                { "answer": "Chin" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Seal" },
+                { "answer": "Sew" },
+                { "answer": "Sack" },
+                { "answer": "Soon" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Fan" },
+                { "answer": "Face" },
+                { "answer": "Feet" },
+                { "answer": "Fish" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Fin" },
+                { "answer": "Few" },
+                { "answer": "Feel" },
+                { "answer": "Far" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 3",
+          "answerGroups": [
+                        {
+              "answers": [
+                { "answer": "Cope" },
+                { "answer": "Keep" },
+                { "answer": "Hope" },
+                { "answer": "Heap" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Peel" },
+                { "answer": "Feel" },
+                { "answer": "Pan" },
+                { "answer": "Fan" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Dud" },
+                { "answer": "Sin" },
+                { "answer": "Mud" },
+                { "answer": "Tin" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Fail" },
+                { "answer": "Pail" },
+                { "answer": "Fair" },
+                { "answer": "Pair" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Shin" },
+                { "answer": "Shape" },
+                { "answer": "Tin" },
+                { "answer": "Tape" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Two" },
+                { "answer": "Chair" },
+                { "answer": "Tear" },
+                { "answer": "Chew" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Dame" },
+                { "answer": "Deal" },
+                { "answer": "Name" },
+                { "answer": "Kneel" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Shape" },
+                { "answer": "Toot" },
+                { "answer": "Tape" },
+                { "answer": "Shoot" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Fail" },
+                { "answer": "Pair" },
+                { "answer": "Pail" },
+                { "answer": "Fair" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Date" },
+                { "answer": "Nate" },
+                { "answer": "Dumb" },
+                { "answer": "Numb" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 4",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Zoo" },
+                { "answer": "Do" },
+                { "answer": "Zen" },
+                { "answer": "Den" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Shake" },
+                { "answer": "Shell" },
+                { "answer": "Tell" },
+                { "answer": "Take" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Tick" },
+                { "answer": "Send" },
+                { "answer": "Sick" },
+                { "answer": "Tend" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Hop" },
+                { "answer": "He" },
+                { "answer": "Key" },
+                { "answer": "Cop" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Pat" },
+                { "answer": "Fat" },
+                { "answer": "Pin" },
+                { "answer": "Fin" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Hope" },
+                { "answer": "Cope" },
+                { "answer": "Keep" },
+                { "answer": "Heap" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Shape" },
+                { "answer": "Tape" },
+                { "answer": "Shoot" },
+                { "answer": "Toot" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Peel" },
+                { "answer": "Feel" },
+                { "answer": "Pan" },
+                { "answer": "Fan" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "He" },
+                { "answer": "Hop" },
+                { "answer": "Key" },
+                { "answer": "Cop" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Tin" },
+                { "answer": "Shin" },
+                { "answer": "Tape" },
+                { "answer": "Shape" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Advanced Exploration",
+      "modules": [
+        {
+          "name": "Module 1",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Hatch" },
+                { "answer": "Hat" },
+                { "answer": "Wit" },
+                { "answer": "Witch" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "But" },
+                { "answer": "Kate" },
+                { "answer": "Bus" },
+                { "answer": "Case" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Wrong" },
+                { "answer": "Sick" },
+                { "answer": "Sing" },
+                { "answer": "Rock" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Side" },
+                { "answer": "Lane" },
+                { "answer": "Sign" },
+                { "answer": "Laid" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Feet" },
+                { "answer": "Case" },
+                { "answer": "Kay" },
+                { "answer": "Fee" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Notch" },
+                { "answer": "Cat" },
+                { "answer": "Catch" },
+                { "answer": "Knot" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Hit" },
+                { "answer": "Face" },
+                { "answer": "Fate" },
+                { "answer": "Hiss" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Sing" },
+                { "answer": "Wrong" },
+                { "answer": "Rock" },
+                { "answer": "Sick" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cuff" },
+                { "answer": "Lap" },
+                { "answer": "Laugh" },
+                { "answer": "Cup" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "House" },
+                { "answer": "Main" },
+                { "answer": "How" },
+                { "answer": "May" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 2",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Kay" },
+                { "answer": "Feet" },
+                { "answer": "Fee" },
+                { "answer": "Case" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Leap" },
+                { "answer": "Hoop" },
+                { "answer": "Leaf" },
+                { "answer": "Hoof" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bait" },
+                { "answer": "Loot" },
+                { "answer": "Loose" },
+                { "answer": "Base" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Hoof" },
+                { "answer": "Leaf" },
+                { "answer": "Leap" },
+                { "answer": "Hoop" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "But" },
+                { "answer": "Kate" },
+                { "answer": "Bus" },
+                { "answer": "Case" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Leash" },
+                { "answer": "Wash" },
+                { "answer": "Walk" },
+                { "answer": "Leak" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Wit" },
+                { "answer": "Roach" },
+                { "answer": "Witch" },
+                { "answer": "Wrote" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cat" },
+                { "answer": "Read" },
+                { "answer": "Reach" },
+                { "answer": "Catch" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Soon" },
+                { "answer": "Pain" },
+                { "answer": "Sued" },
+                { "answer": "Paid" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "House" },
+                { "answer": "Main" },
+                { "answer": "How" },
+                { "answer": "May" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 3",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Mob" },
+                { "answer": "Lab" },
+                { "answer": "Lap" },
+                { "answer": "Mop" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Have" },
+                { "answer": "Half" },
+                { "answer": "Wave" },
+                { "answer": "Waif" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Sob" },
+                { "answer": "Tap" },
+                { "answer": "Tab" },
+                { "answer": "Sop" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Slayed" },
+                { "answer": "Slate" },
+                { "answer": "Late" },
+                { "answer": "Laid" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Hog" },
+                { "answer": "Brick" },
+                { "answer": "Brig" },
+                { "answer": "Hawk" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Sop" },
+                { "answer": "Sob" },
+                { "answer": "Tab" },
+                { "answer": "Tap" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Seed" },
+                { "answer": "Coat" },
+                { "answer": "Seat" },
+                { "answer": "Code" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Leaf" },
+                { "answer": "Save" },
+                { "answer": "Safe" },
+                { "answer": "Leave" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Grace" },
+                { "answer": "News" },
+                { "answer": "Graze" },
+                { "answer": "Noose" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Calve" },
+                { "answer": "Calf" },
+                { "answer": "Life" },
+                { "answer": "Live" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 4",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Boat" },
+                { "answer": "Bode" },
+                { "answer": "Plate" },
+                { "answer": "Played" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cab" },
+                { "answer": "Rope" },
+                { "answer": "Robe" },
+                { "answer": "Cap" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Slayed" },
+                { "answer": "Late" },
+                { "answer": "Slate" },
+                { "answer": "Laid" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Write" },
+                { "answer": "Sad" },
+                { "answer": "Ride" },
+                { "answer": "Sat" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Peace" },
+                { "answer": "Rays" },
+                { "answer": "Peas" },
+                { "answer": "Race" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Graze" },
+                { "answer": "Grace" },
+                { "answer": "Noose" },
+                { "answer": "News" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bag" },
+                { "answer": "Wick" },
+                { "answer": "Back" },
+                { "answer": "Wig" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Heart" },
+                { "answer": "Hard" },
+                { "answer": "Need" },
+                { "answer": "Neat" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Dug" },
+                { "answer": "Duck" },
+                { "answer": "Dog" },
+                { "answer": "Dock" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Calve" },
+                { "answer": "Calf" },
+                { "answer": "Life" },
+                { "answer": "Live" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Proficient Application",
+      "modules": [
+        {
+          "name": "Module 1",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Pear" },
+                { "answer": "Bear" },
+                { "answer": "Peas" },
+                { "answer": "Bees" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Few" },
+                { "answer": "Vic's" },
+                { "answer": "Fix" },
+                { "answer": "View" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Coast" },
+                { "answer": "Gob" },
+                { "answer": "Cob" },
+                { "answer": "Ghost" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Gate" },
+                { "answer": "Gone" },
+                { "answer": "Khan" },
+                { "answer": "Kate" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Doll" },
+                { "answer": "Tall" },
+                { "answer": "Dan" },
+                { "answer": "Tan" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Kate" },
+                { "answer": "Gone" },
+                { "answer": "Khan" },
+                { "answer": "Gate" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Dug" },
+                { "answer": "Dock" },
+                { "answer": "Talk" },
+                { "answer": "Tug" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Goat" },
+                { "answer": "Coat" },
+                { "answer": "Gill" },
+                { "answer": "Kill" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Fee" },
+                { "answer": "Fail" },
+                { "answer": "Vee" },
+                { "answer": "Vail" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Gill" },
+                { "answer": "Coat" },
+                { "answer": "Goat" },
+                { "answer": "Kill" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 2",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Bony" },
+                { "answer": "Bill" },
+                { "answer": "Pony" },
+                { "answer": "Pill" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cave" },
+                { "answer": "Gave" },
+                { "answer": "Cap" },
+                { "answer": "Gap" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Vine" },
+                { "answer": "Fender" },
+                { "answer": "Fine" },
+                { "answer": "Vendor" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Pack" },
+                { "answer": "Back" },
+                { "answer": "Pen" },
+                { "answer": "Ben" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Van" },
+                { "answer": "Foul" },
+                { "answer": "Fan" },
+                { "answer": "Vowel" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Fault" },
+                { "answer": "Vault" },
+                { "answer": "Vast" },
+                { "answer": "Fast" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Fee" },
+                { "answer": "Vee" },
+                { "answer": "Veil" },
+                { "answer": "Fail" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Ghost" },
+                { "answer": "Cob" },
+                { "answer": "Coast" },
+                { "answer": "Gob" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Sue" },
+                { "answer": "Zoo" },
+                { "answer": "Zach" },
+                { "answer": "Sack" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Gate" },
+                { "answer": "Gone" },
+                { "answer": "Khan" },
+                { "answer": "Kate" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 3",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Don" },
+                { "answer": "Gate" },
+                { "answer": "Gone" },
+                { "answer": "Date" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Boast" },
+                { "answer": "Ghost" },
+                { "answer": "Bun" },
+                { "answer": "Gun" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Kneel" },
+                { "answer": "Moon" },
+                { "answer": "Meal" },
+                { "answer": "Moon" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Dune" },
+                { "answer": "Door" },
+                { "answer": "Gore" },
+                { "answer": "Goon" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Narc" },
+                { "answer": "Mark" },
+                { "answer": "Knee" },
+                { "answer": "Me" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bubble" },
+                { "answer": "Double" },
+                { "answer": "Bear" },
+                { "answer": "Dare" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Keys" },
+                { "answer": "Pen" },
+                { "answer": "Ken" },
+                { "answer": "Peas" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Taste" },
+                { "answer": "Pear" },
+                { "answer": "Tear" },
+                { "answer": "Paste" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Case" },
+                { "answer": "Cart" },
+                { "answer": "Pace" },
+                { "answer": "Part" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Gone" },
+                { "answer": "Date" },
+                { "answer": "Gate" },
+                { "answer": "Don" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 4",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Gone" },
+                { "answer": "Date" },
+                { "answer": "Gate" },
+                { "answer": "Don" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bell" },
+                { "answer": "Like" },
+                { "answer": "Dell" },
+                { "answer": "Bike" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Kneel" },
+                { "answer": "Noon" },
+                { "answer": "Moon" },
+                { "answer": "Meal" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Tick" },
+                { "answer": "Teen" },
+                { "answer": "Kick" },
+                { "answer": "Keen" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Mark" },
+                { "answer": "Me" },
+                { "answer": "Narc" },
+                { "answer": "Knee" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Tall" },
+                { "answer": "Tan" },
+                { "answer": "Can" },
+                { "answer": "Call" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Tool" },
+                { "answer": "Pool" },
+                { "answer": "Pea" },
+                { "answer": "Tea" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bury" },
+                { "answer": "Gore" },
+                { "answer": "Gary" },
+                { "answer": "Boar" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Keys" },
+                { "answer": "Pen" },
+                { "answer": "Ken" },
+                { "answer": "Peas" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Taste" },
+                { "answer": "Pear" },
+                { "answer": "Tear" },
+                { "answer": "Paste" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Expert Mastery",
+      "modules": [
+        {
+          "name": "Module 1",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Soap" },
+                { "answer": "Sick" },
+                { "answer": "Soak" },
+                { "answer": "Sip" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Same" },
+                { "answer": "Cone" },
+                { "answer": "Comb" },
+                { "answer": "Sane" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Meek" },
+                { "answer": "Back" },
+                { "answer": "Bat" },
+                { "answer": "Meet" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Beak" },
+                { "answer": "Bait" },
+                { "answer": "Beat" },
+                { "answer": "Bake" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Tin" },
+                { "answer": "Tim" },
+                { "answer": "Cane" },
+                { "answer": "Came" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bart" },
+                { "answer": "Peak" },
+                { "answer": "Bark" },
+                { "answer": "Pete" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bait" },
+                { "answer": "Bake" },
+                { "answer": "Beak" },
+                { "answer": "Beat" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Mate" },
+                { "answer": "Seek" },
+                { "answer": "Seat" },
+                { "answer": "Make" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cake" },
+                { "answer": "Kate" },
+                { "answer": "Mart" },
+                { "answer": "Mark" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Dumb" },
+                { "answer": "Hone" },
+                { "answer": "Home" },
+                { "answer": "Done" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 2",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Soak" },
+                { "answer": "Sip" },
+                { "answer": "Sick" },
+                { "answer": "Soap" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cone" },
+                { "answer": "Comb" },
+                { "answer": "Sane" },
+                { "answer": "Same" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cot" },
+                { "answer": "Cop" },
+                { "answer": "Hype" },
+                { "answer": "Height" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Dane" },
+                { "answer": "Pam" },
+                { "answer": "Dame" },
+                { "answer": "Pan" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Clod" },
+                { "answer": "Mud" },
+                { "answer": "Mug" },
+                { "answer": "Clog" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bike" },
+                { "answer": "Rat" },
+                { "answer": "Rack" },
+                { "answer": "Bite" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cane" },
+                { "answer": "Came" },
+                { "answer": "Tin" },
+                { "answer": "Tim" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Hop" },
+                { "answer": "Ripe" },
+                { "answer": "Write" },
+                { "answer": "Hot" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Mark" },
+                { "answer": "Kate" },
+                { "answer": "Mart" },
+                { "answer": "Cake" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Make" },
+                { "answer": "Seat" },
+                { "answer": "Seek" },
+                { "answer": "Mate" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 3",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Rad" },
+                { "answer": "Did" },
+                { "answer": "Dig" },
+                { "answer": "Rag" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cap" },
+                { "answer": "Cat" },
+                { "answer": "Loop" },
+                { "answer": "Loot" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Rad" },
+                { "answer": "Rag" },
+                { "answer": "Did" },
+                { "answer": "Dig" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Soap" },
+                { "answer": "Sick" },
+                { "answer": "Sip" },
+                { "answer": "Soak" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Dig" },
+                { "answer": "Did" },
+                { "answer": "Rag" },
+                { "answer": "Rad" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Sip" },
+                { "answer": "Soap" },
+                { "answer": "Soak" },
+                { "answer": "Sick" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Tim" },
+                { "answer": "Cane" },
+                { "answer": "Came" },
+                { "answer": "Tin" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bat" },
+                { "answer": "Meet" },
+                { "answer": "Back" },
+                { "answer": "Meek" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Comb" },
+                { "answer": "Sane" },
+                { "answer": "Cone" },
+                { "answer": "Same" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Beak" },
+                { "answer": "Beat" },
+                { "answer": "Bait" },
+                { "answer": "Bake" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 4",
+          "answerGroups": [
+            {
+              "answers": [
+                { "answer": "Done" },
+                { "answer": "Dumb" },
+                { "answer": "Home" },
+                { "answer": "Hone" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cake" },
+                { "answer": "Mart" },
+                { "answer": "Kate" },
+                { "answer": "Mark" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cone" },
+                { "answer": "Sane" },
+                { "answer": "Comb" },
+                { "answer": "Same" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Dig" },
+                { "answer": "Rag" },
+                { "answer": "Did" },
+                { "answer": "Rad" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Bark" },
+                { "answer": "Bart" },
+                { "answer": "Peak" },
+                { "answer": "Pete" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Seat" },
+                { "answer": "Mate" },
+                { "answer": "Seek" },
+                { "answer": "Make" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Rack" },
+                { "answer": "Bite" },
+                { "answer": "Rat" },
+                { "answer": "Bike" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Cop" },
+                { "answer": "Height" },
+                { "answer": "Hype" },
+                { "answer": "Cot" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Tim" },
+                { "answer": "Tin" },
+                { "answer": "Cane" },
+                { "answer": "Came" }
+              ]
+            },
+            {
+              "answers": [
+                { "answer": "Loop" },
+                { "answer": "Cat" },
+                { "answer": "Cap" },
+                { "answer": "Loot" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

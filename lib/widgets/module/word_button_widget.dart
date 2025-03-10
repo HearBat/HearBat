@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 
 class WordButton extends StatelessWidget {
   final Answer word;

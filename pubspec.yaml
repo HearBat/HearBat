@@ -87,9 +87,9 @@ flutter:
     - assets/visuals/home/
     - assets/visuals/music/
     - assets/visuals/nature/
-    - lib/data/sound_modules_data.json
-    - lib/data/speech_modules_data.json
-    - lib/data/word_modules_data.json
+    - assets/data/sound_modules_data.json
+    - assets/data/speech_modules_data.json
+    - assets/data/word_modules_data.json
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

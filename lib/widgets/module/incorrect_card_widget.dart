@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import '../../utils/google_tts_util.dart';
 import '../../utils/audio_util.dart';
 

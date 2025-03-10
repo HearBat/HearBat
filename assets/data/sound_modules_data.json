@@ -1,11 +1,9 @@
 {
   "chapters": [
     {
-      "id": "chapter1",
       "name": "Home Sounds",
       "modules": [
         {
-          "id": "module1",
           "name": "Module 1",
           "answerGroups": [
             {
@@ -251,7 +249,6 @@
           ]
         },
         {
-          "id": "module2",
           "name": "Module 2",
           "answerGroups": [
             {
@@ -497,7 +494,6 @@
           ]
         },
         {
-          "id": "module3",
           "name": "Module 3",
           "answerGroups": [
             {
@@ -743,7 +739,6 @@
           ]
         },
         {
-          "id": "module4",
           "name": "Module 4",
           "answerGroups": [
             {
@@ -991,11 +986,9 @@
       ]
     },
     {
-      "id": "chapter2",
       "name": "Music Sounds",
       "modules": [
         {
-          "id": "module1",
           "name": "Module 1",
           "answerGroups": [
             {
@@ -1241,7 +1234,6 @@
           ]
         },
         {
-          "id": "module2",
           "name": "Module 2",
           "answerGroups": [
             {
@@ -1487,7 +1479,6 @@
           ]
         },
         {
-          "id": "module3",
           "name": "Module 3",
           "answerGroups": [
             {
@@ -1733,7 +1724,6 @@
           ]
         },
         {
-          "id": "module4",
           "name": "Module 4",
           "answerGroups": [
             {
@@ -1981,11 +1971,9 @@
       ]
     },
     {
-      "id": "chapter3",
       "name": "Nature Sounds",
       "modules": [
         {
-          "id": "module1",
           "name": "Module 1",
           "answerGroups": [
             {
@@ -2231,7 +2219,6 @@
           ]
         },
         {
-          "id": "module2",
           "name": "Module 2",
           "answerGroups": [
             {
@@ -2477,7 +2464,6 @@
           ]
         },
         {
-          "id": "module3",
           "name": "Module 3",
           "answerGroups": [
             {
@@ -2723,7 +2709,6 @@
           ]
         },
         {
-          "id": "module4",
           "name": "Module 4",
           "answerGroups": [
             {

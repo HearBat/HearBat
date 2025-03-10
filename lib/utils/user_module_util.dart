@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 
 class UserModuleUtil {
   static const String _storageKey = 'userCustomModules';
@@ -38,10 +38,7 @@ class UserModuleUtil {
 
       modulesData.forEach((key, value) {
         if (value is List<dynamic>) {
-          List<AnswerGroup> answerGroups = value
-              .map((agData) =>
-                  AnswerGroup.fromJson(Map<String, dynamic>.from(agData)))
-              .toList();
+          List<AnswerGroup> answerGroups = value.map((agData) => AnswerGroup.fromJson(Map<String, dynamic>.from(agData))).toList();
           modules[key] = answerGroups;
         } else {
           // Handle unexpected data format here

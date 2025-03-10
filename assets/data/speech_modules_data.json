@@ -1,11 +1,9 @@
 {
   "chapters": [
     {
-      "id": "chapter1",
       "name": "Vowels",
       "modules": [
         {
-          "id": "module1",
           "name": "Module 1",
           "speechGroups": [
             "A big cat sat on the mat.",
@@ -21,7 +19,6 @@
           ]
         },
         {
-          "id": "module2",
           "name": "Module 2",
           "speechGroups": [
             "Open the window in the evening.",
@@ -37,7 +34,6 @@
           ]
         },
         {
-          "id": "module3",
           "name": "Module 3",
           "speechGroups": [
             "Pull the rope up the hill.",
@@ -53,7 +49,6 @@
           ]
         },
         {
-          "id": "module4",
           "name": "Module 4",
           "speechGroups": [
             "The cold frost covers the plants.",
@@ -71,11 +66,9 @@
       ]
     },
     {
-      "id": "chapter2",
       "name": "Consonants",
       "modules": [
         {
-          "id": "module1",
           "name": "Module 1",
           "speechGroups": [
             "Mark jumped over the fence.",
@@ -91,7 +84,6 @@
           ]
         },
         {
-          "id": "module2",
           "name": "Module 2",
           "speechGroups": [
             "A tree fell across the road.",
@@ -107,7 +99,6 @@
           ]
         },
         {
-          "id": "module3",
           "name": "Module 3",
           "speechGroups": [
             "The clock ticked loudly at night.",
@@ -123,7 +114,6 @@
           ]
         },
         {
-          "id": "module4",
           "name": "Module 4",
           "speechGroups": [
             "She grabbed her bag and left.",
@@ -141,11 +131,9 @@
       ]
     },
     {
-      "id": "chapter3",
       "name": "Prosody and Intonation",
       "modules": [
         {
-          "id": "module1",
           "name": "Module 1",
           "speechGroups": [
             "Are you coming to the party?",
@@ -161,7 +149,6 @@
           ]
         },
         {
-          "id": "module2",
           "name": "Module 2",
           "speechGroups": [
             "Did it really happen?",
@@ -177,7 +164,6 @@
           ]
         },
         {
-          "id": "module3",
           "name": "Module 3",
           "speechGroups": [
             "Why are you whispering?",
@@ -193,7 +179,6 @@
           ]
         },
         {
-          "id": "module4",
           "name": "Module 4",
           "speechGroups": [
             "Is this seat taken?",

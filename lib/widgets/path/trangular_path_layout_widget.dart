@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../pages/module_types/words/words_list_page.dart';
-import '../../../utils/module_util.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
+
+import '../../utils/data_service_util.dart';
 
 class TriangularPathLayout extends StatefulWidget {
   final IndexedWidgetBuilder itemBuilder;
@@ -25,7 +26,7 @@ class _TriangularPathLayoutState extends State<TriangularPathLayout> {
   double elevation = 5.0;
 
   void _navigateToWordsList(BuildContext context,
-      Map<String, List<AnswerGroup>> modules, String chapterName) {
+      Map<String, Module> modules, String chapterName) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -36,8 +37,9 @@ class _TriangularPathLayoutState extends State<TriangularPathLayout> {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, List<AnswerGroup>> modules =
-        getModulesForChapter(widget.chapter);
+    Map<String, Module> modules = DataService().getWordChapter(widget.chapter).modules;
+    //Map<String, List<AnswerGroup>> modules =
+    //    getModulesForChapter(widget.chapter);
     List<Widget> positionedItems = [];
 
     double layoutWidth = MediaQuery.of(context).size.width;

@@ -1,6 +1,6 @@
 import "dart:math";
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import 'word_button_widget.dart';
 import 'incorrect_card_widget.dart';
 import '../../utils/google_tts_util.dart';
