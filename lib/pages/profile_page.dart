@@ -194,7 +194,6 @@ class LanguageOptionsWidgetState extends State<LanguageOptionsWidget> {
     });
   }
 
-
   void _handleTap(String value) {
     setState(() {
       _selectedLanguage = value;
@@ -238,14 +237,14 @@ class LanguageOptionsWidgetState extends State<LanguageOptionsWidget> {
     return Column(
       children: <Widget>[
         _buildOption('English', 'English', 'assets/visuals/us_flag.png'),
-        Divider(
-          color: Color.fromARGB(255, 7, 45, 78),
-          thickness: 3,
-          indent: 20,
-          endIndent: 20,
-        ),
-        _buildOption(
-            'Vietnamese', 'Vietnamese', 'assets/visuals/vietnam_flag.png'),
+        // Divider(
+        //   color: Color.fromARGB(255, 7, 45, 78),
+        //   thickness: 3,
+        //   indent: 20,
+        //   endIndent: 20,
+        // ),
+        // _buildOption(
+        //     'Vietnamese', 'Vietnamese', 'assets/visuals/vietnam_flag.png'),
       ],
     );
   }
@@ -298,11 +297,11 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
       savedVoice = 'en-US-Studio-O';
       await prefs.setString('voicePreference', savedVoice);
     }
-      setState(() {
-        _selectedVoicePreference = savedVoice;
-      });
+    setState(() {
+      _selectedVoicePreference = savedVoice;
+    });
   }
-  
+
   void _handleTap(String value) {
     setState(() {
       _selectedVoicePreference = value;

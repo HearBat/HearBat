@@ -64,12 +64,9 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
 
   void _loadVoiceType() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String language = prefs.getString('languagePreference') ?? 'English';
+    // final String language = prefs.getString('languagePreference') ?? 'English';
     setState(() {
       _voiceType = prefs.getString('voicePreference') ?? "en-US-Studio-O";
-      if (language == 'Vietnamese') {
-        _voiceType = 'vi-VN-Standard-A';
-      }
     });
   }
 
@@ -271,10 +268,10 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   child: ElevatedButton(
                     onPressed: () {
                       SharedPreferences.getInstance().then((prefs) {
-                      prefs.setString('difficultyPreference', 'Normal');
-                      prefs.setString('backgroundSoundPreference', 'None');
-                      prefs.setString('audioVolumePreference', 'Low');
-                    });
+                        prefs.setString('difficultyPreference', 'Normal');
+                        prefs.setString('backgroundSoundPreference', 'None');
+                        prefs.setString('audioVolumePreference', 'Low');
+                      });
                       Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
@@ -324,6 +321,7 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
     super.initState();
     _loadSavedPreference();
   }
+
   @override
   void dispose() {
     BackgroundNoiseUtil.stopSound();
@@ -354,7 +352,6 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
       BackgroundNoiseUtil.playPreview();
     }
   }
-
 
   Widget _buildOption(String sound, String value) {
     bool isSelected = _selectedSound == value;
@@ -426,6 +423,7 @@ class VolumeOptionsWidgetState extends State<VolumeOptionsWidget> {
     super.initState();
     _loadSavedPreference();
   }
+
   @override
   void dispose() {
     BackgroundNoiseUtil.stopSound();

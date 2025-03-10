@@ -42,10 +42,10 @@ class _ModulePageState extends State<ModuleWidget> {
     super.initState();
     getVoiceType();
     _confettiController.play();
-    
+
     googleTTSUtil.initialize();
     AudioUtil.initialize();
-    
+
     if (widget.isWord) {
       BackgroundNoiseUtil.initialize().then((_) {
         BackgroundNoiseUtil.playSavedSound();
@@ -64,7 +64,7 @@ class _ModulePageState extends State<ModuleWidget> {
       prefs.setString('backgroundSoundPreference', 'None');
       prefs.setString('audioVolumePreference', 'Low');
     });
-    
+
     super.dispose();
   }
 
@@ -72,12 +72,10 @@ class _ModulePageState extends State<ModuleWidget> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? storedVoiceType = prefs.getString('voicePreference');
     language = prefs.getString('languagePreference')!;
-    if (language == 'Vietnamese') {
-      storedVoiceType = 'vi-VN-Standard-A';
-    }
+
     if (storedVoiceType != null) {
       setState(() {
-        voiceType = storedVoiceType!;
+        voiceType = storedVoiceType;
       });
     }
   }
@@ -132,7 +130,7 @@ class _ModulePageState extends State<ModuleWidget> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Text(
-                    language == 'Vietnamese' ? 'Từ đã sai' : 'Words Missed',
+                    'Words Missed',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -163,9 +161,7 @@ class _ModulePageState extends State<ModuleWidget> {
                             answer: incorrectAnswerPairs[index][0].answer,
                             onPressed: () =>
                                 playAnswer(incorrectAnswerPairs[index][0]),
-                            headerText: language == 'Vietnamese'
-                                ? 'Đã chọn'
-                                : 'You Chose',
+                            headerText: 'You Chose',
                             color: Color.fromARGB(255, 195, 74, 74),
                           ),
                           SizedBox(width: 8),
@@ -173,9 +169,7 @@ class _ModulePageState extends State<ModuleWidget> {
                               answer: incorrectAnswerPairs[index][1].answer,
                               onPressed: () =>
                                   playAnswer(incorrectAnswerPairs[index][1]),
-                              headerText: language == 'Vietnamese'
-                                  ? "Từ Đúng"
-                                  : 'Correct Answer',
+                              headerText: 'Correct Answer',
                               color: Color.fromARGB(255, 129, 221, 121)),
                         ],
                       ),
