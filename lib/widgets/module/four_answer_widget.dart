@@ -7,6 +7,9 @@ import '../../utils/google_tts_util.dart';
 import '../../utils/audio_util.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:audioplayers/audioplayers.dart';
+
+import '../path/difficulty_selection_widget.dart';
 
 class FourAnswerWidget extends StatefulWidget {
   final List<AnswerGroup> answerGroups;
@@ -44,6 +47,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
   bool readyForCompletion = false;
   int currentIndex = 0;
   String language = 'English';
+  String selectedFeedback = 'On';
 
   @override
   void initState() {
@@ -51,6 +55,15 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
     _loadPreference();
     answerGroups = List<AnswerGroup>.from(widget.answerGroups);
     setNextPair();
+    _loadFeedbackPreference();
+  }
+
+  // Load the saved feedback preference from SharedPreferences
+  void _loadFeedbackPreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedFeedback = prefs.getString('feedbackPreference') ?? 'On'; // Default to 'On' if no saved value
+    });
   }
 
   // Loads the language preference from SharedPreferences.
@@ -99,12 +112,15 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
   void checkAnswer() {
     setState(() {
       if (selectedWord!.answer == correctWord.answer) {
+        if (selectedFeedback == 'On') {
+          playCorrectChime(); // Play a tune if the answer is correct
+        }
         print("Correct");
         widget.onCorrectAnswer();
         isAnswerTrue = true;
 
         // For correct answers, automatically move to next question after a short delay
-        Future.delayed(Duration(milliseconds: 800), () {
+        Future.delayed(Duration(milliseconds: 1000), () {
           if (answerGroups.isEmpty) {
             widget.onCompletion();
           } else {
@@ -144,6 +160,12 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
     } else {
       AudioUtil.playSound(correctWord.path!);
     }
+  }
+
+  // Plays the audio that indicates the user selected the correct answer
+  void playCorrectChime() async {
+    final player = AudioPlayer();
+    await player.play(AssetSource("audio/sounds/feedback/correct answer chime.mp3"));
   }
 
   // Updates the progress bar in the parent widget.
