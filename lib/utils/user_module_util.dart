@@ -40,7 +40,7 @@ class UserModuleUtil {
         if (value is List<dynamic>) {
           List<AnswerGroup> answerGroups = value
               .map((agData) =>
-                AnswerGroup.fromJson(Map<String, dynamic>.from(agData)))
+                  AnswerGroup.fromJson(Map<String, dynamic>.from(agData)))
               .toList();
           modules[key] = answerGroups;
         } else {
