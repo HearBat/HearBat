@@ -99,7 +99,6 @@ class Chapter {
   static Chapter fromJson(Map<String, dynamic> json) {
     return Chapter(
         json['name'],
-        //json['modules'].map((module) => MapEntry(module['name'], Module.fromJson(module)))
         { for (Map<String, dynamic> module in (json['modules'] as List<dynamic>)) module['name'] : Module.fromJson(module) }
     );
   }
