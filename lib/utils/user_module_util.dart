@@ -38,7 +38,10 @@ class UserModuleUtil {
 
       modulesData.forEach((key, value) {
         if (value is List<dynamic>) {
-          List<AnswerGroup> answerGroups = value.map((agData) => AnswerGroup.fromJson(Map<String, dynamic>.from(agData))).toList();
+          List<AnswerGroup> answerGroups = value
+              .map((agData) =>
+                AnswerGroup.fromJson(Map<String, dynamic>.from(agData)))
+              .toList();
           modules[key] = answerGroups;
         } else {
           // Handle unexpected data format here
