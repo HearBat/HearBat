@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../pages/module_types/words/words_list_page.dart';
 import 'package:hearbat/models/chapter_model.dart';
-
+import '../../pages/module_types/words/words_list_page.dart';
 import '../../utils/data_service_util.dart';
 
 class TriangularPathLayout extends StatefulWidget {
@@ -38,8 +37,6 @@ class _TriangularPathLayoutState extends State<TriangularPathLayout> {
   @override
   Widget build(BuildContext context) {
     Map<String, Module> modules = DataService().getWordChapter(widget.chapter).modules;
-    //Map<String, List<AnswerGroup>> modules =
-    //    getModulesForChapter(widget.chapter);
     List<Widget> positionedItems = [];
 
     double layoutWidth = MediaQuery.of(context).size.width;

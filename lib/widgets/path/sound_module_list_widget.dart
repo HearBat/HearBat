@@ -5,8 +5,6 @@ import '../module/module_widget.dart';
 import 'sound_trangular_path_layout_widget.dart';
 
 class SoundModuleListWidget extends StatelessWidget {
-  //final Map<String, List<AnswerGroup>> modules;
-
   final Map<String, Module> modules;
   SoundModuleListWidget({super.key, required this.modules});
 

@@ -7,8 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/utils/cache_sentences_util.dart';
 
 class SpeechModuleListWidget extends StatelessWidget {
-  //final Map<String, List<String>> modules;
-
   final Map<String, SpeechModule> modules;
   SpeechModuleListWidget({super.key, required this.modules});
 
