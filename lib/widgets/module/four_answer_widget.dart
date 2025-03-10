@@ -90,7 +90,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
     setState(() {
       selectedWord = word;
     });
-    
+
     // Automatically check the answer after selection
     checkAnswer();
   }
@@ -102,7 +102,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
         print("Correct");
         widget.onCorrectAnswer();
         isAnswerTrue = true;
-        
+
         // For correct answers, automatically move to next question after a short delay
         Future.delayed(Duration(milliseconds: 800), () {
           if (answerGroups.isEmpty) {
@@ -119,7 +119,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
         isAnswerFalse = true;
         // For incorrect answers, we'll let the user proceed manually with the continue button
       }
-      
+
       if (answerGroups.isEmpty) readyForCompletion = true;
       ++currentIndex;
       indexChange();
@@ -166,7 +166,6 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "What do you hear?",
-
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 28,
@@ -337,7 +336,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                             ),
                             onPressed: proceedToNext,
                             child: Text(
-                              language == 'Vietnamese' ? 'Tiếp tục' : 'Continue',
+                              'Continue',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
