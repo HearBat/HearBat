@@ -1,5 +1,5 @@
 import 'package:hearbat/utils/google_tts_util.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 

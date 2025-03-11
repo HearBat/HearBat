@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import 'trangular_path_layout_widget.dart';
 import 'animated_button_widget.dart';
 
 class ModuleListWidget extends StatefulWidget {
-  final Map<String, List<AnswerGroup>> modules;
+  final Map<String, Module> modules;
   final String chapter;
 
   ModuleListWidget({super.key, required this.modules, required this.chapter});
@@ -54,7 +54,7 @@ class ModuleListWidgetState extends State<ModuleListWidget>
                 ),
                 AnimatedButton(
                   moduleName: module.key,
-                  answerGroups: module.value,
+                  answerGroups: module.value.answerGroups,
                   onButtonPressed: (String key, List<dynamic> value) {
                     navigate(key, value.cast<AnswerGroup>());
                   },

@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/background_noise_util.dart';
 import 'package:hearbat/utils/audio_util.dart';
 import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
