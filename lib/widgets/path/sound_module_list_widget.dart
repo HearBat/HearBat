@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/widgets/path/animated_button_widget.dart';
+import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
 import '../module/module_widget.dart';
 import 'sound_trangular_path_layout_widget.dart';
 
@@ -15,10 +16,11 @@ class SoundModuleListWidget extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ModuleWidget(
-            title: moduleName,
+          builder: (context) => DifficultySelectionWidget(
+            moduleName: moduleName,
             answerGroups: answerGroups,
             isWord: false,
+            displayDifficulty: false,
           ),
         ),
       );

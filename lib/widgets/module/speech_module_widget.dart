@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:hearbat/utils/background_noise_util.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../utils/google_stt_util.dart';
@@ -54,6 +55,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     _sentence = _getRandomSentence();
     _confettiController.play();
     setState(() {});
+    BackgroundNoiseUtil.playSavedSound();
   }
 
   Future<void> _init() async {
@@ -420,5 +422,6 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     _recorder.closeRecorder();
     super.dispose();
     _confettiController.dispose();
+    BackgroundNoiseUtil.stopSound();
   }
 }

@@ -4,16 +4,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class BackgroundNoiseUtil {
-  static final AudioPlayer _audioPlayer = AudioPlayer()
+  static final AudioPlayer _backgroundAudioPlayer = AudioPlayer()
     ..setReleaseMode(ReleaseMode.loop);
 
   static bool _isPlaying = false; //Track if audio currently playing
   static Timer? _previewTimer; //Track the timer for use in settings
 
   static Future<void> initialize() async {
-    await _audioPlayer.setPlayerMode(PlayerMode.mediaPlayer);
+    await _backgroundAudioPlayer.setPlayerMode(PlayerMode.mediaPlayer);
     // Need this so that the audio doesn't get taken over from other audio players
-    await _audioPlayer.setAudioContext(AudioContext(
+    await _backgroundAudioPlayer.setAudioContext(AudioContext(
       android: AudioContextAndroid(
         isSpeakerphoneOn: false,
         stayAwake: false,
@@ -43,7 +43,7 @@ class BackgroundNoiseUtil {
       _isPlaying = true;
       String fileName = backgroundSound.replaceAll(' Sound', '').toLowerCase();
       await _adjustVolume(audioVolume);
-      await _audioPlayer.play(
+      await _backgroundAudioPlayer.play(
         AssetSource("audio/background/$fileName.mp3"),
       );
     }
@@ -61,7 +61,7 @@ class BackgroundNoiseUtil {
 
   // Stops the currently playing background sound.
   static Future<void> stopSound() async {
-    await _audioPlayer.stop();
+    await _backgroundAudioPlayer.stop();
     _isPlaying = false;
     _previewTimer?.cancel(); // Cancel the preview timer
     _previewTimer = null;
@@ -71,13 +71,13 @@ class BackgroundNoiseUtil {
   static Future<void> _adjustVolume(String? volumeLevel) async {
     switch (volumeLevel) {
       case 'Low':
-        _audioPlayer.setVolume(0.2);
+        _backgroundAudioPlayer.setVolume(0.2);
       case 'Medium':
-        _audioPlayer.setVolume(0.6);
+        _backgroundAudioPlayer.setVolume(0.6);
       case 'High':
-        _audioPlayer.setVolume(1.0);
+        _backgroundAudioPlayer.setVolume(1.0);
       default:
-        _audioPlayer.setVolume(0.2);
+        _backgroundAudioPlayer.setVolume(0.2);
     }
   }
 }

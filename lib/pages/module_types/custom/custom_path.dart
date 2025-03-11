@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
 import 'package:hearbat/widgets/top_bar_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/utils/custom_util.dart';
@@ -69,10 +70,12 @@ class CustomPathState extends State<CustomPath> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CustomModule(
-            moduleName: moduleName,
-            answerGroups: answerGroups,
-            voiceType: _voiceType!,
+          builder: (context) => DifficultySelectionWidget(
+              moduleName: moduleName,
+              answerGroups: answerGroups,
+              voiceType: _voiceType!,
+              isWord: true,
+              displayDifficulty: false,
           ),
         ),
       );
