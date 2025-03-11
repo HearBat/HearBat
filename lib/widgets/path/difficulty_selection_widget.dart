@@ -20,9 +20,11 @@ class DifficultySelectionWidget extends StatefulWidget {
 
 class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
   String _difficulty = 'Normal';
+  String _feedback = 'On';
   final CacheWordsUtil cacheUtil = CacheWordsUtil();
   bool isCaching = false;
   String? _voiceType;
+
 
   List<String> voiceTypes = [
     "en-US-Studio-O",
@@ -59,6 +61,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _difficulty = prefs.getString('difficultyPreference') ?? 'Normal';
+      _feedback = prefs.getString('feedbackPreference') ?? 'On';
     });
   }
 
@@ -81,6 +84,13 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
       _difficulty = value!;
     });
     _updatePreference('difficultyPreference', _difficulty);
+  }
+
+  void _updateFeedback(String? value) {
+    setState(() {
+      _feedback = value!;
+    });
+    _updatePreference('feedbackPreference', _feedback);
   }
 
   Future<void> _cacheAndNavigate(
@@ -236,6 +246,40 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                       VolumeOptionsWidget(
                         updatePreferenceCallback: (preference, value) =>
                             _updatePreference(preference, value),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  "Feedback Noise",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "Choose to hear a chime for correct answers",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10.0),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      FeedbackOptionsWidget(
+                        updateFeedbackCallback: (feedback) =>
+                            _updateFeedback(feedback),
                       ),
                     ],
                   ),
@@ -582,6 +626,89 @@ class DifficultyOptionsWidgetState extends State<DifficultyOptionsWidget> {
           endIndent: 20,
         ),
         _buildOption('Hard'),
+      ],
+    );
+  }
+}
+//test vvv
+class FeedbackOptionsWidget extends StatefulWidget {
+  final Function(String) updateFeedbackCallback;
+
+  FeedbackOptionsWidget({required this.updateFeedbackCallback});
+
+  @override
+  FeedbackOptionsWidgetState createState() => FeedbackOptionsWidgetState();
+}
+
+class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
+  String _selectedFeedback = 'On';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedPreference();
+  }
+
+  void _loadSavedPreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? savedFeedback = prefs.getString('feedbackPreference');
+    if (savedFeedback != null) {
+      _selectedFeedback = savedFeedback;
+    }
+  }
+
+  void _handleTap(String feedback) async{
+    setState(() {
+      _selectedFeedback = feedback;
+      widget.updateFeedbackCallback(feedback);
+    });
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('feedbackPreference', _selectedFeedback);  // Save the selected feedback
+
+  }
+
+  Widget _buildOption(String feedback) {
+    bool isSelected = _selectedFeedback == feedback;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8.0),
+      child: InkWell(
+        onTap: () => _handleTap(feedback),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: ListTile(
+              title: Text(
+                feedback,
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+              trailing: isSelected
+                  ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
+                  : null,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        _buildOption('Off'),
+        Divider(
+          color: Color.fromARGB(255, 7, 45, 78),
+          thickness: 3,
+          indent: 20,
+          endIndent: 20,
+        ),
+        _buildOption('On'),
       ],
     );
   }
