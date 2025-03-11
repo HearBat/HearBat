@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
+import '../../models/speech_chapter_model.dart';
 import '../module/speech_module_widget.dart';
 import 'sound_trangular_path_layout_widget.dart';
 import 'animated_button_widget.dart';
@@ -7,8 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/utils/cache_sentences_util.dart';
 
 class SpeechModuleListWidget extends StatelessWidget {
-  final Map<String, List<String>> modules;
-
+  final Map<String, SpeechModule> modules;
   SpeechModuleListWidget({super.key, required this.modules});
 
   @override
@@ -95,9 +95,9 @@ class SpeechModuleListWidget extends StatelessWidget {
                 ),
                 AnimatedButton(
                   moduleName: module.key,
-                  answerGroups: module.value,
+                  answerGroups: module.value.speechGroups,
                   onButtonPressed: (String key, List<dynamic> value) {
-                    navigate(module.key, module.value);
+                    navigate(module.key, module.value.speechGroups);
                   },
                 ),
               ],
