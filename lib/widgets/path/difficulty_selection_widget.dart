@@ -11,11 +11,12 @@ class DifficultySelectionWidget extends StatefulWidget {
   final String moduleName;
   final List<AnswerGroup> answerGroups;
   final bool isWord; //determines if TTS is used
+  final bool displayDifficulty; //determines if difficulty setting is shown
   final List<String>? sentences; // Speech module specific
   final String? voiceType; //Speech module specific
 
   DifficultySelectionWidget(
-      {required this.moduleName, required this.answerGroups, required this.isWord, this.sentences, this.voiceType});
+      {required this.moduleName, required this.answerGroups, required this.isWord,required this.displayDifficulty, this.sentences, this.voiceType,});
 
   @override
   DifficultySelectionWidgetState createState() =>
@@ -162,8 +163,8 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.0),
-                //only display difficulty setting for word module
-                if (widget.isWord)...[
+                //only display difficulty setting if requested
+                if (widget.displayDifficulty)...[
                 Text(
                   "Difficulty",
                   textAlign: TextAlign.left,

@@ -21,7 +21,7 @@ class ModuleListWidgetState extends State<ModuleListWidget>
       context,
       MaterialPageRoute(
         builder: (context) => DifficultySelectionWidget(
-            moduleName: moduleName, answerGroups: answerGroups, isWord: true),
+            moduleName: moduleName, answerGroups: answerGroups, isWord: true, displayDifficulty: true,),
       ),
     );
   }

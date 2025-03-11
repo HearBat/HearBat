@@ -74,7 +74,8 @@ class CustomPathState extends State<CustomPath> {
               moduleName: moduleName,
               answerGroups: answerGroups,
               voiceType: _voiceType!,
-              isWord: false
+              isWord: true,
+              displayDifficulty: false,
           ),
         ),
       );
