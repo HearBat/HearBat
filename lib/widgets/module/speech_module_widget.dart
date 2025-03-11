@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:hearbat/utils/background_noise_util.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../utils/google_stt_util.dart';
@@ -10,6 +11,7 @@ import 'module_progress_bar_widget.dart';
 import 'check_button_widget.dart';
 import 'package:confetti/confetti.dart';
 import 'dart:math';
+import 'score_widget.dart';
 
 class SpeechModuleWidget extends StatefulWidget {
   final String chapter;
@@ -31,6 +33,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   String _transcription = '';
   String _sentence = '';
   double _grade = 0.0;
+  double _gradeSum = 0.0;
+  int _attempts = 0;
   String voiceType = '';
   bool _isSubmitted = false;
   bool _isCompleted = false;
@@ -51,6 +55,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     _sentence = _getRandomSentence();
     _confettiController.play();
     setState(() {});
+    BackgroundNoiseUtil.playSavedSound();
   }
 
   Future<void> _init() async {
@@ -154,6 +159,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
 
   void _submitRecording() {
     setState(() {
+      _gradeSum += _grade;
+      _attempts++;
       _isCheckPressed = !_isCheckPressed;
       if (_isCheckPressed == false) {
         currentSentenceIndex++;
@@ -333,50 +340,79 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
             Colors.green
           ],
         ),
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Spacer(flex: 1),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
-                  child: AutoSizeText(
-                    'Good Job Completing the Module!',
-                    maxLines: 3,
-                    style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 7, 45, 78)),
-                    textAlign: TextAlign.center,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding:
+                const EdgeInsets.only(left: 120.0, right: 120.0, top: 60.0),
+              child: Image.asset("assets/visuals/HBCompletion.png", fit: BoxFit.contain),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
+              child: AutoSizeText(
+                'Lesson Complete!',
+                maxLines: 1,
+                style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 7, 45, 78)),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            // Today's score
+            ScoreWidget(
+              context: context,
+              type: ScoreType.average,
+              correctAnswersCount: (_gradeSum / _attempts).toStringAsFixed(2),
+              subtitleText: "Average Accuracy",
+              icon: Icon(
+                Icons.star,
+                color: Color.fromARGB(255, 7, 45, 78),
+                size: 30,
+              ),
+              boxDecoration: gradientBoxDecoration,
+              total: 100, // editing
+            ),
+            ScoreWidget(
+              context: context,
+              type: ScoreType.average,
+              correctAnswersCount: (_gradeSum / _attempts).toStringAsFixed(2),
+              subtitleText: "Highest Average Accuracy",
+              icon: Icon(
+                Icons.emoji_events,
+                color: Color.fromARGB(255, 255, 255, 255),
+                size: 30,
+              ),
+              boxDecoration: blueBoxDecoration,
+              total: 100, // editing
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 40.0, bottom: 40.0, left: 20, right: 20),
+              child: ElevatedButton(
+                onPressed: () =>
+                  Navigator.pop(context),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromARGB(255, 94, 224, 82),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  minimumSize: Size(400, 50),
+                  elevation: 5,
+                ),
+                child: Text(
+                  'CONTINUE',
+                  style: TextStyle(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Image.asset("assets/visuals/HBCompletion.png",
-                    fit: BoxFit.contain),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 40.0, bottom: 40.0),
-                child: ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                  ),
-                  child: AutoSizeText(
-                    'Return to Path',
-                    maxLines: 1,
-                    style: TextStyle(
-                        fontSize: 20, color: Color.fromARGB(255, 7, 45, 78)),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+            ),
+          ]
+        )
       ],
     );
   }
@@ -386,5 +422,6 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     _recorder.closeRecorder();
     super.dispose();
     _confettiController.dispose();
+    BackgroundNoiseUtil.stopSound();
   }
 }

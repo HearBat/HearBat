@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/widgets/path/sound_module_list_widget.dart';
-import '../../../utils/module_util.dart';
+import '../../../utils/data_service_util.dart';
 import '../../../widgets/top_bar_widget.dart';
 
 class SoundPath extends StatefulWidget {
@@ -16,8 +16,7 @@ class SoundPath extends StatefulWidget {
 class _SoundPathState extends State<SoundPath> {
   @override
   Widget build(BuildContext context) {
-    Map<String, List<AnswerGroup>> modules =
-        getModulesForChapter(widget.chapter);
+    Map<String, Module> modules = DataService().getSoundChapter(widget.chapter).modules;
     return Scaffold(
       appBar: TopBar(
         title: widget.chapter.toUpperCase(),

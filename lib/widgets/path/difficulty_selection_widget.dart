@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/audio_util.dart';
+import 'package:hearbat/widgets/module/speech_module_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../module/module_widget.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
@@ -9,9 +10,13 @@ import 'package:hearbat/utils/background_noise_util.dart';
 class DifficultySelectionWidget extends StatefulWidget {
   final String moduleName;
   final List<AnswerGroup> answerGroups;
+  final bool isWord; //determines if TTS is used
+  final bool displayDifficulty; //determines if difficulty setting is shown
+  final List<String>? sentences; // Speech module specific
+  final String? voiceType; //Speech module specific
 
   DifficultySelectionWidget(
-      {required this.moduleName, required this.answerGroups});
+      {required this.moduleName, required this.answerGroups, required this.isWord,required this.displayDifficulty, this.sentences, this.voiceType,});
 
   @override
   DifficultySelectionWidgetState createState() =>
@@ -20,9 +25,11 @@ class DifficultySelectionWidget extends StatefulWidget {
 
 class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
   String _difficulty = 'Normal';
+  String _feedback = 'On';
   final CacheWordsUtil cacheUtil = CacheWordsUtil();
   bool isCaching = false;
   String? _voiceType;
+
 
   List<String> voiceTypes = [
     "en-US-Studio-O",
@@ -59,17 +66,15 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _difficulty = prefs.getString('difficultyPreference') ?? 'Normal';
+      _feedback = prefs.getString('feedbackPreference') ?? 'On';
     });
   }
 
   void _loadVoiceType() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String language = prefs.getString('languagePreference') ?? 'English';
+    // final String language = prefs.getString('languagePreference') ?? 'English';
     setState(() {
       _voiceType = prefs.getString('voicePreference') ?? "en-US-Studio-O";
-      if (language == 'Vietnamese') {
-        _voiceType = 'vi-VN-Standard-A';
-      }
     });
   }
 
@@ -84,6 +89,13 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
       _difficulty = value!;
     });
     _updatePreference('difficultyPreference', _difficulty);
+  }
+
+  void _updateFeedback(String? value) {
+    setState(() {
+      _feedback = value!;
+    });
+    _updatePreference('feedbackPreference', _feedback);
   }
 
   Future<void> _cacheAndNavigate(
@@ -110,23 +122,40 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
       },
     );
 
-    // Caching all words
-    await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
+    // Caching all words (only for word and sound modules)
+    if (widget.isWord || widget.sentences == null) {
+      await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
+    }
 
     // Check if the widget is still in the tree (mounted) after the async operation
     if (!mounted) return; // Early return if not mounted
 
-    Navigator.pop(context); // Close the loading dialog if still mounted
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ModuleWidget(
-          title: moduleName,
-          answerGroups: answerGroups,
-          isWord: true,
+    Navigator.pop(context); // Close the loading dialog if still
+
+    // Navigate to the appropriate widget based on module type
+    if (widget.sentences != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SpeechModuleWidget(
+            chapter: moduleName,
+            sentences: widget.sentences!,
+            voiceType: widget.voiceType!,
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ModuleWidget(
+            title: moduleName,
+            answerGroups: answerGroups,
+            isWord: widget.isWord,
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -141,6 +170,8 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.0),
+                //only display difficulty setting if requested
+                if (widget.displayDifficulty)...[
                 Text(
                   "Difficulty",
                   textAlign: TextAlign.left,
@@ -176,6 +207,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   ),
                 ),
                 SizedBox(height: 20.0),
+                ],
                 Text(
                   "Background Noise",
                   style: TextStyle(
@@ -244,6 +276,40 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   ),
                 ),
                 SizedBox(height: 20.0),
+                Text(
+                  "Feedback Noise",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "Choose to hear a chime for correct answers",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10.0),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      FeedbackOptionsWidget(
+                        updateFeedbackCallback: (feedback) =>
+                            _updateFeedback(feedback),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20.0),
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
@@ -271,10 +337,10 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   child: ElevatedButton(
                     onPressed: () {
                       SharedPreferences.getInstance().then((prefs) {
-                      prefs.setString('difficultyPreference', 'Normal');
-                      prefs.setString('backgroundSoundPreference', 'None');
-                      prefs.setString('audioVolumePreference', 'Low');
-                    });
+                        prefs.setString('difficultyPreference', 'Normal');
+                        prefs.setString('backgroundSoundPreference', 'None');
+                        prefs.setString('audioVolumePreference', 'Low');
+                      });
                       Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
@@ -324,6 +390,7 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
     super.initState();
     _loadSavedPreference();
   }
+
   @override
   void dispose() {
     BackgroundNoiseUtil.stopSound();
@@ -354,7 +421,6 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
       BackgroundNoiseUtil.playPreview();
     }
   }
-
 
   Widget _buildOption(String sound, String value) {
     bool isSelected = _selectedSound == value;
@@ -426,6 +492,7 @@ class VolumeOptionsWidgetState extends State<VolumeOptionsWidget> {
     super.initState();
     _loadSavedPreference();
   }
+
   @override
   void dispose() {
     BackgroundNoiseUtil.stopSound();
@@ -584,6 +651,89 @@ class DifficultyOptionsWidgetState extends State<DifficultyOptionsWidget> {
           endIndent: 20,
         ),
         _buildOption('Hard'),
+      ],
+    );
+  }
+}
+//test vvv
+class FeedbackOptionsWidget extends StatefulWidget {
+  final Function(String) updateFeedbackCallback;
+
+  FeedbackOptionsWidget({required this.updateFeedbackCallback});
+
+  @override
+  FeedbackOptionsWidgetState createState() => FeedbackOptionsWidgetState();
+}
+
+class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
+  String _selectedFeedback = 'On';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedPreference();
+  }
+
+  void _loadSavedPreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? savedFeedback = prefs.getString('feedbackPreference');
+    if (savedFeedback != null) {
+      _selectedFeedback = savedFeedback;
+    }
+  }
+
+  void _handleTap(String feedback) async{
+    setState(() {
+      _selectedFeedback = feedback;
+      widget.updateFeedbackCallback(feedback);
+    });
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('feedbackPreference', _selectedFeedback);  // Save the selected feedback
+
+  }
+
+  Widget _buildOption(String feedback) {
+    bool isSelected = _selectedFeedback == feedback;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8.0),
+      child: InkWell(
+        onTap: () => _handleTap(feedback),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: ListTile(
+              title: Text(
+                feedback,
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+              trailing: isSelected
+                  ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
+                  : null,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        _buildOption('Off'),
+        Divider(
+          color: Color.fromARGB(255, 7, 45, 78),
+          thickness: 3,
+          indent: 20,
+          endIndent: 20,
+        ),
+        _buildOption('On'),
       ],
     );
   }

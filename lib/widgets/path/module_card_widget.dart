@@ -1,7 +1,7 @@
 // this is for the module cards when you click on view words in the path
 // holding the respective words that are in the modules
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import '../../pages/module_types/words/module_words_page.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
 

@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/background_noise_util.dart';
 import 'package:hearbat/utils/audio_util.dart';
 import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/utils/google_tts_util.dart';
 import 'word_missed_button_widget.dart';
 import 'package:confetti/confetti.dart';
+import 'score_widget.dart';
 
 class ModuleWidget extends StatefulWidget {
   final String title;
@@ -41,15 +42,13 @@ class _ModulePageState extends State<ModuleWidget> {
     super.initState();
     getVoiceType();
     _confettiController.play();
-    
+
     googleTTSUtil.initialize();
     AudioUtil.initialize();
-    
-    if (widget.isWord) {
-      BackgroundNoiseUtil.initialize().then((_) {
-        BackgroundNoiseUtil.playSavedSound();
-      });
-    }
+
+    BackgroundNoiseUtil.initialize().then((_) {
+      BackgroundNoiseUtil.playSavedSound();
+    });
   }
 
   @override
@@ -63,7 +62,7 @@ class _ModulePageState extends State<ModuleWidget> {
       prefs.setString('backgroundSoundPreference', 'None');
       prefs.setString('audioVolumePreference', 'Low');
     });
-    
+
     super.dispose();
   }
 
@@ -71,12 +70,10 @@ class _ModulePageState extends State<ModuleWidget> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? storedVoiceType = prefs.getString('voicePreference');
     language = prefs.getString('languagePreference')!;
-    if (language == 'Vietnamese') {
-      storedVoiceType = 'vi-VN-Standard-A';
-    }
+
     if (storedVoiceType != null) {
       setState(() {
-        voiceType = storedVoiceType!;
+        voiceType = storedVoiceType;
       });
     }
   }
@@ -131,7 +128,7 @@ class _ModulePageState extends State<ModuleWidget> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Text(
-                    language == 'Vietnamese' ? 'Từ đã sai' : 'Words Missed',
+                    'Words Missed',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -162,9 +159,7 @@ class _ModulePageState extends State<ModuleWidget> {
                             answer: incorrectAnswerPairs[index][0].answer,
                             onPressed: () =>
                                 playAnswer(incorrectAnswerPairs[index][0]),
-                            headerText: language == 'Vietnamese'
-                                ? 'Đã chọn'
-                                : 'You Chose',
+                            headerText: 'You Chose',
                             color: Color.fromARGB(255, 195, 74, 74),
                           ),
                           SizedBox(width: 8),
@@ -172,9 +167,7 @@ class _ModulePageState extends State<ModuleWidget> {
                               answer: incorrectAnswerPairs[index][1].answer,
                               onPressed: () =>
                                   playAnswer(incorrectAnswerPairs[index][1]),
-                              headerText: language == 'Vietnamese'
-                                  ? "Từ Đúng"
-                                  : 'Correct Answer',
+                              headerText: 'Correct Answer',
                               color: Color.fromARGB(255, 129, 221, 121)),
                         ],
                       ),
@@ -293,7 +286,8 @@ class _ModulePageState extends State<ModuleWidget> {
             // Today's score
             ScoreWidget(
               context: context,
-              correctAnswersCount: correctAnswersCount,
+              type: ScoreType.score,
+              correctAnswersCount: correctAnswersCount.toString(),
               subtitleText: "Score",
               icon: Icon(
                 Icons.star,
@@ -305,7 +299,8 @@ class _ModulePageState extends State<ModuleWidget> {
             ),
             ScoreWidget(
               context: context,
-              correctAnswersCount: correctAnswersCount,
+              type: ScoreType.score,
+              correctAnswersCount: correctAnswersCount.toString(),
               subtitleText: "Highest Score",
               icon: Icon(
                 Icons.emoji_events,
@@ -348,113 +343,6 @@ class _ModulePageState extends State<ModuleWidget> {
           ],
         ),
       ],
-    );
-  }
-}
-
-var gradientBoxDecoration = BoxDecoration(
-  gradient: LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-    colors: [
-      Color.fromARGB(255, 248, 213, 245),
-      Color.fromARGB(255, 255, 192, 199),
-      Color.fromARGB(255, 213, 177, 239),
-    ],
-  ),
-  borderRadius: BorderRadius.circular(8.0),
-  border: Border.all(
-    color: Color.fromARGB(255, 7, 45, 78),
-    width: 3.0,
-  ),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.grey.withAlpha((0.5 * 255).toInt()),
-      spreadRadius: 5,
-      blurRadius: 7,
-      offset: Offset(0, 3),
-    ),
-  ],
-);
-
-var blueBoxDecoration = BoxDecoration(
-  color: Color.fromARGB(255, 7, 45, 78),
-  borderRadius: BorderRadius.circular(8.0),
-  border: Border.all(
-    color: Color.fromARGB(255, 7, 45, 78),
-    width: 3.0,
-  ),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.grey.withAlpha((0.5 * 255).toInt()),
-      spreadRadius: 5,
-      blurRadius: 7,
-      offset: Offset(0, 3),
-    ),
-  ],
-);
-
-
-class ScoreWidget extends StatelessWidget {
-  const ScoreWidget(
-      {super.key,
-      required this.context,
-      required this.correctAnswersCount,
-      required this.subtitleText,
-      required this.icon,
-      required this.boxDecoration,
-      required this.total});
-
-  final BuildContext context;
-  final int correctAnswersCount;
-  final String subtitleText;
-  final Icon icon;
-  final BoxDecoration boxDecoration;
-  final int total;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * .90,
-      height: MediaQuery.of(context).size.height * .1,
-      margin: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
-      padding: EdgeInsets.all(8.0),
-      decoration: boxDecoration,
-      child: Stack(
-        children: [
-          Positioned(
-            left: 10,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AutoSizeText(
-                  '$correctAnswersCount / $total',
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w900,
-                      color: subtitleText == "Highest Score"
-                          ? Colors.white
-                          : Color.fromARGB(255, 7, 45, 78)),
-                ),
-                AutoSizeText(
-                  subtitleText,
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w900,
-                      color: subtitleText == "Highest Score"
-                          ? Colors.white
-                          : Color.fromARGB(255, 7, 45, 78)),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 10,
-            right: 10,
-            child: icon,
-          ),
-        ],
-      ),
     );
   }
 }
