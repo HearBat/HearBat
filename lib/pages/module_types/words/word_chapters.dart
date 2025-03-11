@@ -19,18 +19,11 @@ class _WordChaptersState extends State<WordChapters> {
     _loadChapters();
   }
 
-    Future<void> _loadChapters() async {
+  Future<void> _loadChapters() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String language = prefs.getString('languagePreference') ?? 'English';
 
-    if (language == 'Vietnamese') {
-      chapters = [
-        {
-          "name": "Từ Dễ",
-          "image": "assets/visuals/HBWordsChapterOne.png",
-        },
-      ];
-    } else {
+    if (language == 'English') {
       chapters = [
         {
           "name": "Beginner Foundations",
@@ -59,6 +52,7 @@ class _WordChaptersState extends State<WordChapters> {
       isLoading = false; // Update isLoading to false to render the UI
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
