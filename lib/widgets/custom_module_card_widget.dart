@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+
 class CustomModuleCard extends StatelessWidget {
   final String moduleName;
   final VoidCallback onStart;
   final VoidCallback onDelete;
-  final VoidCallback onView;
-  
+  final VoidCallback onEdit;
+
   const CustomModuleCard({
     super.key,
     required this.moduleName,
     required this.onStart,
     required this.onDelete,
-    required this.onView,
+    required this.onEdit,
   });
-  
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -68,7 +69,7 @@ class CustomModuleCard extends StatelessWidget {
                   SizedBox(
                     height: 36,
                     child: ElevatedButton(
-                      onPressed: onView,
+                      onPressed: onEdit,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 154, 187, 154),
                         foregroundColor: Colors.white,
@@ -76,7 +77,7 @@ class CustomModuleCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text('View', style: TextStyle(fontSize: 14)),
+                      child: Text('Edit', style: TextStyle(fontSize: 14)),
                     ),
                   ),
                   SizedBox(height: 8),
