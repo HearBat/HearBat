@@ -9,8 +9,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-import '../path/difficulty_selection_widget.dart';
-
 class FourAnswerWidget extends StatefulWidget {
   final List<AnswerGroup> answerGroups;
   final VoidCallback onCompletion;

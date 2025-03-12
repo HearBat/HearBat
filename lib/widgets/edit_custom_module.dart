@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/gemini_util.dart';
 import 'package:hearbat/utils/user_module_util.dart';
 import '../utils/text_util.dart';

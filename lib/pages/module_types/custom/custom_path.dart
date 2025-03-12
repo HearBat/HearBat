@@ -6,7 +6,6 @@ import 'package:hearbat/widgets/top_bar_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/utils/custom_util.dart';
 import 'package:hearbat/utils/user_module_util.dart';
-import '../../../utils/custom_modules_util.dart';
 import "../../../widgets/custom_module_card_widget.dart";
 
 class CustomPath extends StatefulWidget {
