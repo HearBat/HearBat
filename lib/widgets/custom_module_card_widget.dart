@@ -4,25 +4,29 @@ class CustomModuleCard extends StatelessWidget {
   final String moduleName;
   final VoidCallback onStart;
   final VoidCallback onDelete;
+  final VoidCallback onEdit;
 
   const CustomModuleCard({
     super.key,
     required this.moduleName,
     required this.onStart,
     required this.onDelete,
+    required this.onEdit,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 55,
+      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      child: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            // Header container
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 12),
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 7, 45, 78),
                 borderRadius: BorderRadius.only(
@@ -30,28 +34,26 @@ class CustomModuleCard extends StatelessWidget {
                   topRight: Radius.circular(12.0),
                 ),
               ),
-            ),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              SizedBox(height: 15),
-              Text(
+              child: Text(
                 moduleName,
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 22),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 5.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    ElevatedButton(
+            ),
+            // Buttons container
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  SizedBox(
+                    height: 36,
+                    child: ElevatedButton(
                       onPressed: onStart,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 154, 107, 187),
@@ -60,10 +62,28 @@ class CustomModuleCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text('Start', style: TextStyle(fontSize: 16)),
+                      child: Text('Start', style: TextStyle(fontSize: 14)),
                     ),
-                    SizedBox(height: 5),
-                    ElevatedButton(
+                  ),
+                  SizedBox(height: 8),
+                  SizedBox(
+                    height: 36,
+                    child: ElevatedButton(
+                      onPressed: onEdit,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 154, 187, 154),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Text('Edit', style: TextStyle(fontSize: 14)),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  SizedBox(
+                    height: 36,
+                    child: ElevatedButton(
                       onPressed: onDelete,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 214, 214, 214),
@@ -73,14 +93,14 @@ class CustomModuleCard extends StatelessWidget {
                         padding: EdgeInsets.zero,
                       ),
                       child: Icon(Icons.delete,
-                          color: Color.fromARGB(255, 100, 100, 100), size: 24),
+                          color: Color.fromARGB(255, 100, 100, 100), size: 20),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

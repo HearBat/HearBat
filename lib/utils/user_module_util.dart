@@ -57,6 +57,36 @@ class UserModuleUtil {
     }
   }
 
+  static Future<List<AnswerGroup>> getCustomModuleAnswerGroups(String moduleName) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? modulesJson = prefs.getString(_storageKey);
+    
+    if (modulesJson == null) {
+      return []; 
+    }
+    
+    try {
+      Map<String, dynamic> modulesData = json.decode(modulesJson);
+      
+      if (!modulesData.containsKey(moduleName)) {
+        return [];
+      }
+      
+      var moduleData = modulesData[moduleName];
+      if (moduleData is List<dynamic>) {
+        return moduleData
+            .map((agData) => AnswerGroup.fromJson(Map<String, dynamic>.from(agData)))
+            .toList();
+      } else {
+        print('Unexpected data format for module: $moduleName');
+        return [];
+      }
+    } catch (e) {
+      print('Error retrieving module data: $e');
+      return [];
+    }
+  }
+
   // Delete a custom module
   static Future<void> deleteCustomModule(String moduleName) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
