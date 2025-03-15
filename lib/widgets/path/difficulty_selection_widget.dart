@@ -323,7 +323,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                       minimumSize: Size(380, 50),
                     ),
                     child: Text(
-                      'START EXCERCISE',
+                      'START EXERCISE',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
