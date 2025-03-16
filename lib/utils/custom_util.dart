@@ -61,12 +61,12 @@ class CustomUtilState extends State<CustomUtil> {
           answer3.isNotEmpty &&
           answer4.isNotEmpty) {
         // Creates a complete answer group.
-        AnswerGroup group = AnswerGroup(
+        AnswerGroup group = AnswerGroup([
           Answer(answer1, "", ""),
           Answer(answer2, "", ""),
           Answer(answer3, "", ""),
           Answer(answer4, "", ""),
-        );
+        ]);
         answerGroups.add(group);
       } else if (answer1.isNotEmpty ||
           answer2.isNotEmpty ||
@@ -100,12 +100,12 @@ class CustomUtilState extends State<CustomUtil> {
 
         // Ensures we have a complete set of four words.
         if (wordsToBeCompared.length == 4) {
-          AnswerGroup group = AnswerGroup(
+          AnswerGroup group = AnswerGroup([
             Answer(wordsToBeCompared[0], "", ""),
             Answer(wordsToBeCompared[1], "", ""),
             Answer(wordsToBeCompared[2], "", ""),
             Answer(wordsToBeCompared[3], "", ""),
-          );
+          ]);
           answerGroups.add(group);
         } else {
           print("Not enough words");
