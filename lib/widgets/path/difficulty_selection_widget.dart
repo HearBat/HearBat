@@ -4,11 +4,13 @@ import 'package:hearbat/utils/audio_util.dart';
 import 'package:hearbat/widgets/module/speech_module_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../module/module_widget.dart';
+import '../module/pitch_resolution_exercise.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
 import 'package:hearbat/utils/background_noise_util.dart';
 
 class DifficultySelectionWidget extends StatefulWidget {
   final String moduleName;
+  final String? chapter;
   final List<AnswerGroup> answerGroups;
   final bool isWord; //determines if TTS is used
   final bool displayDifficulty; //determines if difficulty setting is shown
@@ -16,7 +18,7 @@ class DifficultySelectionWidget extends StatefulWidget {
   final String? voiceType; //Speech module specific
 
   DifficultySelectionWidget(
-      {required this.moduleName, required this.answerGroups, required this.isWord,required this.displayDifficulty, this.sentences, this.voiceType,});
+      {required this.moduleName, this.chapter, required this.answerGroups, required this.isWord,required this.displayDifficulty, this.sentences, this.voiceType,});
 
   @override
   DifficultySelectionWidgetState createState() =>
@@ -98,8 +100,8 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
     _updatePreference('feedbackPreference', _feedback);
   }
 
-  Future<void> _cacheAndNavigate(
-      String moduleName, List<AnswerGroup> answerGroups) async {
+  Future<void> _cacheAndNavigate(String moduleName,
+      List<AnswerGroup> answerGroups) async {
     if (_voiceType == null) {
       print("Voice type not set. Unable to cache module words.");
       return;
@@ -137,22 +139,32 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SpeechModuleWidget(
-            chapter: moduleName,
-            sentences: widget.sentences!,
-            voiceType: widget.voiceType!,
-          ),
+          builder: (context) =>
+              SpeechModuleWidget(
+                chapter: moduleName,
+                sentences: widget.sentences!,
+                voiceType: widget.voiceType!,
+              ),
+        ),
+      );
+    } else if (widget.chapter == "Pitch Resolution") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              PitchResolutionExercise(answerGroups: answerGroups),
         ),
       );
     } else {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ModuleWidget(
-            title: moduleName,
-            answerGroups: answerGroups,
-            isWord: widget.isWord,
-          ),
+          builder: (context) =>
+              ModuleWidget(
+                title: moduleName,
+                answerGroups: answerGroups,
+                isWord: widget.isWord,
+              ),
         ),
       );
     }
@@ -172,41 +184,43 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                 SizedBox(height: 20.0),
                 //only display difficulty setting if requested
                 if (widget.displayDifficulty)...[
-                Text(
-                  "Difficulty",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    "Difficulty",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  "By completing modules, you can unlock difficulty levels",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.normal,
+                  Text(
+                    "By completing modules, you can unlock difficulty levels",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10.0),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(
-                        color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10.0),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Theme
+                          .of(context)
+                          .scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(
+                          color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        DifficultyOptionsWidget(
+                          updateDifficultyCallback: (difficulty) =>
+                              _updateDifficulty(difficulty),
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Column(
-                    children: <Widget>[
-                      DifficultyOptionsWidget(
-                        updateDifficultyCallback: (difficulty) =>
-                            _updateDifficulty(difficulty),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20.0),
+                  SizedBox(height: 20.0),
                 ],
                 Text(
                   "Background Noise",
@@ -227,7 +241,9 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   margin: const EdgeInsets.only(top: 10.0),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Theme
+                        .of(context)
+                        .scaffoldBackgroundColor,
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(
                         color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
@@ -261,7 +277,9 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   margin: const EdgeInsets.only(top: 10.0),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Theme
+                        .of(context)
+                        .scaffoldBackgroundColor,
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(
                         color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
@@ -295,7 +313,9 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   margin: const EdgeInsets.only(top: 10.0),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Theme
+                        .of(context)
+                        .scaffoldBackgroundColor,
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(
                         color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
@@ -345,7 +365,9 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
-                          Theme.of(context).scaffoldBackgroundColor,
+                      Theme
+                          .of(context)
+                          .scaffoldBackgroundColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                           side: BorderSide(

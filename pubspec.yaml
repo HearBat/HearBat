@@ -83,10 +83,12 @@ flutter:
     - assets/audio/sounds/music/
     - assets/audio/sounds/nature/
     - assets/audio/background/
+    - assets/audio/sounds/music_pitch/
     - assets/visuals/
     - assets/visuals/home/
     - assets/visuals/music/
     - assets/visuals/nature/
+    - assets/visuals/music_pitch/
     - assets/data/sound_modules_data.json
     - assets/data/speech_modules_data.json
     - assets/data/word_modules_data.json

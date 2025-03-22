@@ -6,17 +6,20 @@ import 'sound_trangular_path_layout_widget.dart';
 
 class SoundModuleListWidget extends StatelessWidget {
   final Map<String, Module> modules;
-  SoundModuleListWidget({super.key, required this.modules});
+  final String chapter;
+  SoundModuleListWidget({super.key, required this.modules, required this.chapter});
 
   @override
   Widget build(BuildContext context) {
     var moduleList = modules.entries.toList();
     void navigate(String moduleName, List<AnswerGroup> answerGroups) {
+      print("Navigating to chapter: $chapter");
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => DifficultySelectionWidget(
             moduleName: moduleName,
+            chapter: chapter,
             answerGroups: answerGroups,
             isWord: false,
             displayDifficulty: false,
