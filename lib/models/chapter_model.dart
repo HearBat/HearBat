@@ -25,44 +25,27 @@ class Answer {
 }
 
 class AnswerGroup {
-  final Answer answer1;
-  final Answer answer2;
-  final Answer answer3;
-  final Answer answer4;
+  final List<Answer> answers;
 
-  AnswerGroup(this.answer1, this.answer2, this.answer3, this.answer4);
+  AnswerGroup(this.answers);
 
   Map<String, dynamic> toJson() {
     return {
-      'answers': [answer1.toJson(), answer2.toJson(), answer3.toJson(), answer4.toJson()]
+      'answers': answers.map((answer) => answer.toJson()).toList(),
     };
   }
 
   static AnswerGroup fromJson(Map<String, dynamic> json) {
+    var answerList = json['answers'] as List<dynamic>;
     return AnswerGroup(
-      Answer.fromJson(json['answers'][0] as Map<String, dynamic>),
-      Answer.fromJson(json['answers'][1] as Map<String, dynamic>),
-      Answer.fromJson(json['answers'][2] as Map<String, dynamic>),
-      Answer.fromJson(json['answers'][3] as Map<String, dynamic>),
+      answerList.map((answer) => Answer.fromJson(answer)).toList(),
     );
   }
 
   Answer getRandomAnswer(AnswerGroup currentGroup) {
     Random random = Random();
-    int number = random.nextInt(4);
-
-    switch (number) {
-      case 0:
-        return currentGroup.answer1;
-      case 1:
-        return currentGroup.answer2;
-      case 2:
-        return currentGroup.answer3;
-      case 3:
-        return currentGroup.answer4;
-      default:
-        return currentGroup.answer1;
-    }
+    int index = random.nextInt(answers.length);
+    return answers[index];
   }
 }
 

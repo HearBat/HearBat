@@ -30,12 +30,7 @@ class _ModuleWordsPageState extends State<ModuleWordsPage> {
   @override
   Widget build(BuildContext context) {
     List<String> words = widget.answerGroups
-        .expand((group) => [
-              group.answer1.answer,
-              group.answer2.answer,
-              group.answer3.answer,
-              group.answer4.answer,
-            ])
+        .expand((group) => group.answers.map((answer) => answer.answer))
         .toList();
 
     return Scaffold(

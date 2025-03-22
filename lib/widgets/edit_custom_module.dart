@@ -52,10 +52,9 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
 
     for (int i = 0; i < groups.length; i++) {
       var group = groups[i];
-      _initControllerForAnswer(i, 1, group.answer1.answer);
-      _initControllerForAnswer(i, 2, group.answer2.answer);
-      _initControllerForAnswer(i, 3, group.answer3.answer);
-      _initControllerForAnswer(i, 4, group.answer4.answer);
+      for (int j = 0; j < group.answers.length; j++) {
+        _initControllerForAnswer(i, j + 1, group.answers[j].answer);
+      }
     }
 
     setState(() {
@@ -85,33 +84,20 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
     String capitalizedValue = capitalizeWord(value);
 
     AnswerGroup currentGroup = answerGroups[groupIndex];
-    Answer updatedAnswer;
     AnswerGroup updatedGroup;
 
-    switch (answerIndex) {
-      case 1:
-        updatedAnswer = Answer(capitalizedValue, currentGroup.answer1.path,
-            currentGroup.answer1.image);
-        updatedGroup = AnswerGroup(updatedAnswer, currentGroup.answer2,
-            currentGroup.answer3, currentGroup.answer4);
-      case 2:
-        updatedAnswer = Answer(capitalizedValue, currentGroup.answer2.path,
-            currentGroup.answer2.image);
-        updatedGroup = AnswerGroup(currentGroup.answer1, updatedAnswer,
-            currentGroup.answer3, currentGroup.answer4);
-      case 3:
-        updatedAnswer = Answer(capitalizedValue, currentGroup.answer3.path,
-            currentGroup.answer3.image);
-        updatedGroup = AnswerGroup(currentGroup.answer1, currentGroup.answer2,
-            updatedAnswer, currentGroup.answer4);
-      case 4:
-        updatedAnswer = Answer(capitalizedValue, currentGroup.answer4.path,
-            currentGroup.answer4.image);
-        updatedGroup = AnswerGroup(currentGroup.answer1, currentGroup.answer2,
-            currentGroup.answer3, updatedAnswer);
-      default:
-        return;
+    List<Answer> updatedAnswers = List.from(currentGroup.answers);
+
+    if (answerIndex >= 1 && answerIndex <= updatedAnswers.length) {
+      Answer updatedAnswer = Answer(
+        capitalizedValue,
+        updatedAnswers[answerIndex - 1].path,
+        updatedAnswers[answerIndex - 1].image,
+      );
+      updatedAnswers[answerIndex - 1] = updatedAnswer;
     }
+
+    updatedGroup = AnswerGroup(updatedAnswers);
 
     List<AnswerGroup> newList = List<AnswerGroup>.from(answerGroups);
     newList[groupIndex] = updatedGroup;
@@ -141,11 +127,13 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
     bool isEmpty = false;
 
     for (var group in answerGroups) {
-      if (group.answer1.answer.trim().isEmpty ||
-          group.answer2.answer.trim().isEmpty ||
-          group.answer3.answer.trim().isEmpty ||
-          group.answer4.answer.trim().isEmpty) {
-        isEmpty = true;
+      for (var answer in group.answers) {
+        if (answer.answer.trim().isEmpty) {
+          isEmpty = true;
+          break;
+        }
+      }
+      if (isEmpty) {
         break;
       }
     }
@@ -161,13 +149,9 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
       return;
     }
 
-    // this looks cursed
-    AnswerGroup newGroup = AnswerGroup(
-      Answer("", "", ""),
-      Answer("", "", ""),
-      Answer("", "", ""),
-      Answer("", "", ""),
-    );
+
+    List<Answer> emptyAnswers = List.generate(4, (index) => Answer("", "", ""));
+    AnswerGroup newGroup = AnswerGroup(emptyAnswers);
 
     int newIndex = answerGroups.length;
     _initControllerForAnswer(newIndex, 1, "");
@@ -204,10 +188,9 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
   }
 
   void _rebuildControllersForGroup(int newGroupIndex, AnswerGroup group) {
-    _initControllerForAnswer(newGroupIndex, 1, group.answer1.answer);
-    _initControllerForAnswer(newGroupIndex, 2, group.answer2.answer);
-    _initControllerForAnswer(newGroupIndex, 3, group.answer3.answer);
-    _initControllerForAnswer(newGroupIndex, 4, group.answer4.answer);
+    for (int i = 0; i < group.answers.length; i++) {
+      _initControllerForAnswer(newGroupIndex, i + 1, group.answers[i].answer);
+    }
   }
 
   Future<void> _deleteAnswerGroup(int visualIndex) async {
@@ -312,25 +295,14 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
     for (int i = 0; i < answerGroups.length; i++) {
       AnswerGroup group = answerGroups[i];
 
-      String answer1 = group.answer1.answer.trim();
-      String answer2 = group.answer2.answer.trim();
-      String answer3 = group.answer3.answer.trim();
-      String answer4 = group.answer4.answer.trim();
+      List<String> answers = group.answers.map((answer) => answer.answer.trim()).toList();
 
-      if (answer1.isNotEmpty &&
-          answer2.isNotEmpty &&
-          answer3.isNotEmpty &&
-          answer4.isNotEmpty) {
+      // Check if all answers are non-empty
+      if (answers.every((answer) => answer.isNotEmpty)) {
         finalAnswerGroups.add(group);
-      } else if (answer1.isNotEmpty ||
-          answer2.isNotEmpty ||
-          answer3.isNotEmpty ||
-          answer4.isNotEmpty) {
-        List<String> existingWords = [];
-        if (answer1.isNotEmpty) existingWords.add(answer1);
-        if (answer2.isNotEmpty) existingWords.add(answer2);
-        if (answer3.isNotEmpty) existingWords.add(answer3);
-        if (answer4.isNotEmpty) existingWords.add(answer4);
+      } else if (answers.any((answer) => answer.isNotEmpty)) {
+        // If some answers are non-empty, generate missing words
+        List<String> existingWords = answers.where((answer) => answer.isNotEmpty).toList();
 
         try {
           String llmOutput = await GeminiUtil.generateContent(existingWords);
@@ -348,12 +320,10 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
           }
 
           if (allWords.length == 4) {
-            AnswerGroup completeGroup = AnswerGroup(
-              Answer(capitalizeWord(allWords[0]), "", ""),
-              Answer(capitalizeWord(allWords[1]), "", ""),
-              Answer(capitalizeWord(allWords[2]), "", ""),
-              Answer(capitalizeWord(allWords[3]), "", ""),
-            );
+            List<Answer> completeAnswers = allWords
+                .map((word) => Answer(capitalizeWord(word), "", ""))
+                .toList();
+            AnswerGroup completeGroup = AnswerGroup(completeAnswers);
             finalAnswerGroups.add(completeGroup);
           } else {
             if (mounted) {
@@ -392,10 +362,9 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
 
         for (int i = 0; i < finalAnswerGroups.length; i++) {
           var group = finalAnswerGroups[i];
-          _updateControllerWithoutListener(i, 1, group.answer1.answer);
-          _updateControllerWithoutListener(i, 2, group.answer2.answer);
-          _updateControllerWithoutListener(i, 3, group.answer3.answer);
-          _updateControllerWithoutListener(i, 4, group.answer4.answer);
+          for (int j = 0; j < group.answers.length; j++) {
+            _updateControllerWithoutListener(i, j + 1, group.answers[j].answer);
+          }
         }
 
         ScaffoldMessenger.of(context).showSnackBar(
@@ -597,15 +566,8 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
       String initialValue = "";
       if (groupIndex < answerGroups.length) {
         AnswerGroup group = answerGroups[groupIndex];
-        switch (answerIndex) {
-          case 1:
-            initialValue = group.answer1.answer;
-          case 2:
-            initialValue = group.answer2.answer;
-          case 3:
-            initialValue = group.answer3.answer;
-          case 4:
-            initialValue = group.answer4.answer;
+        if (answerIndex >= 1 && answerIndex <= group.answers.length) {
+          initialValue = group.answers[answerIndex - 1].answer;
         }
       }
       _initControllerForAnswer(groupIndex, answerIndex, initialValue);

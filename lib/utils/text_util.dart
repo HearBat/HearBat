@@ -8,6 +8,8 @@ String speechDesc =
     'Refine your listening by hearing sentences and repeating them back';
 String customDesc =
     'Personalize your auditory learning by creating your own modules';
+String musicDesc =
+    'Tune your ear to musical patterns and pitch variations, mastering melody and tone recognition';
 String getPrompt(int wordsNeeded, String wordInput) {
   /* String prompt = 
     """

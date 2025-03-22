@@ -6,6 +6,7 @@ class ChapterCardWidget extends StatefulWidget {
   final int chapterNumber;
   final String image;
   final Widget destinationPage;
+  final bool showChapterPrefix;
 
   const ChapterCardWidget({
     super.key,
@@ -13,6 +14,7 @@ class ChapterCardWidget extends StatefulWidget {
     required this.chapterNumber,
     required this.image,
     required this.destinationPage,
+    this.showChapterPrefix = true,
   });
 
   @override
@@ -78,7 +80,9 @@ class _ChapterCardWidgetState extends State<ChapterCardWidget> {
                           left: 16.0, top: 10.0, right: 16.0, bottom: 16.0),
                       alignment: Alignment.topLeft,
                       child: AutoSizeText(
-                        "Chapter ${widget.chapterNumber + 1}\n${widget.chapterName.toUpperCase()}",
+                        widget.showChapterPrefix ?
+                        "Chapter ${widget.chapterNumber + 1}\n${widget.chapterName.toUpperCase()}"
+                        :widget.chapterName.toUpperCase(),
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
