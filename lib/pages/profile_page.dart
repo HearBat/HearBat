@@ -14,6 +14,8 @@ class ProfilePageState extends State<ProfilePage> {
   bool isCaching = false;
   AudioPlayer audioPlayer = AudioPlayer();
   String selectedLanguage = 'English';
+  String selectedCorrectFeedback = 'on';
+  String selectedWrongFeedback = 'on';
 
   List<String> voiceTypes = [
     "en-US-Studio-O",
@@ -129,6 +131,40 @@ class ProfilePageState extends State<ProfilePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Feedback",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10.0),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(
+                          color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        FeedbackOptionsWidget(
+                          updatePreferenceCallback: _updatePreference,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Voice Select",
@@ -160,6 +196,100 @@ class ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+// Handles feedback settings/display
+class FeedbackOptionsWidget extends StatefulWidget {
+  final Function(String, String) updatePreferenceCallback;
+
+  FeedbackOptionsWidget({required this.updatePreferenceCallback});
+
+  @override
+  FeedbackOptionsWidgetState createState() => FeedbackOptionsWidgetState();
+}
+
+
+class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
+  String _selectedCorrectFeedback = "on";
+  String _selectedWrongFeedback = "on";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedPreference();
+  }
+
+  // Load user preferences for feedback settings
+  void _loadSavedPreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String ?savedCorrectFeedback = prefs.getString('correctFeedbackPreference');
+    String ?savedWrongFeedback = prefs.getString('wrongFeedbackPreference');
+
+    setState(() {
+      _selectedCorrectFeedback = savedCorrectFeedback ?? "on";
+      _selectedWrongFeedback = savedWrongFeedback ?? "on";
+    });
+  }
+
+  // Uses the passed feedbackKey to determine which setting the user wants to modify
+  void _handleTap(String feedbackKey) async {
+    setState(() {
+      if (feedbackKey == "correctFeedbackPreference") {
+        _selectedCorrectFeedback = (_selectedCorrectFeedback == "on") ? "off" : "on";
+        widget.updatePreferenceCallback(feedbackKey, _selectedCorrectFeedback);
+      } else if (feedbackKey == "wrongFeedbackPreference") {
+        _selectedWrongFeedback = (_selectedWrongFeedback == "on") ? "off" : "on";
+        widget.updatePreferenceCallback(feedbackKey, _selectedWrongFeedback);
+      }
+    });
+  }
+
+  Widget _buildOption(String title, String feedbackKey, String isOn) {
+    bool isSelected = isOn == "on";
+    return ListTile(
+      onTap: () => _handleTap(feedbackKey),
+      title: Text(
+        title,
+        style: TextStyle(fontSize: 14),
+      ),
+      trailing: isSelected
+          ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
+          : null,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> feedbackOptionWidgets = [];
+      // Correct Answer Chime display
+      feedbackOptionWidgets.add(
+          _buildOption("Correct Answer Chime", "correctFeedbackPreference", _selectedCorrectFeedback),
+      );
+        feedbackOptionWidgets.add(
+          Divider(
+            color: Color.fromARGB(255, 7, 45, 78),
+            thickness: 3,
+            indent: 20,
+            endIndent: 20,
+          ),
+        );
+      // Incorrect Answer Chime display
+      feedbackOptionWidgets.add(
+          _buildOption("Wrong Answer Chime", "wrongFeedbackPreference", _selectedWrongFeedback),
+      );
+        feedbackOptionWidgets.add(
+          Divider(
+            color: Color.fromARGB(255, 7, 45, 78),
+            thickness: 3,
+            indent: 20,
+            endIndent: 20,
+          ),
+        );
+
+    return Column(
+      children: feedbackOptionWidgets,
     );
   }
 }
