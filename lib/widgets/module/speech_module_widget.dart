@@ -47,8 +47,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
 
   final GoogleTTSUtil _ttsUtil = GoogleTTSUtil();
 
-  String ?selectedCorrectFeedback = 'on';
-  String ?selectedWrongFeedback = 'on';
+  String ?selectedFeedback = 'on';
 
   @override
   void initState() {
@@ -67,7 +66,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   void _loadFeedbackPreference() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      selectedCorrectFeedback = prefs.getString('correctFeedbackPreference'); // Default to 'on' if no saved value
+      selectedFeedback = prefs.getString('feedbackPreference'); // Default to 'on' if no saved value
     });
   }
 
@@ -192,7 +191,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
         _transcription = '';
       }
       if (_grade == 100 && _isCheckPressed) {
-        if (selectedCorrectFeedback == 'on') {
+        if (selectedFeedback == 'On') {
           playCorrectChime(); // Play a chime if the answer is correct
         }
       }

@@ -45,8 +45,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
   bool readyForCompletion = false;
   int currentIndex = 0;
   String language = 'English';
-  String ?selectedCorrectFeedback = 'on';
-  String ?selectedWrongFeedback = 'on';
+  String ?selectedFeedback = 'On';
 
   @override
   void initState() {
@@ -61,8 +60,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
   void _loadFeedbackPreference() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      selectedCorrectFeedback = prefs.getString('correctFeedbackPreference'); // Default to 'on' if no saved value
-      selectedWrongFeedback = prefs.getString('wrongFeedbackPreference'); // Default to 'on' if no saved value
+      selectedFeedback = prefs.getString('feedbackPreference'); // Default to 'on' if no saved value
     });
   }
 
@@ -124,7 +122,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
   void checkAnswer() {
     setState(() {
       if (selectedWord!.answer == correctWord.answer) {
-        if (selectedCorrectFeedback == 'on') {
+        if (selectedFeedback == 'On') {
           playCorrectChime(); // Play a chime if the answer is correct
         }
         print("Correct");
@@ -141,7 +139,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
           }
         });
       } else {
-        if (selectedWrongFeedback == 'on') {
+        if (selectedFeedback == 'On') {
           playWrongChime(); // Play a chime if the answer is wrong
         }
         print("Incorrect");

@@ -133,7 +133,7 @@ class ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Feedback",
+                    "Feedback Sound",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -212,8 +212,7 @@ class FeedbackOptionsWidget extends StatefulWidget {
 
 
 class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
-  String _selectedCorrectFeedback = "on";
-  String _selectedWrongFeedback = "on";
+  String _selectedFeedback = "On";
 
   @override
   void initState() {
@@ -224,72 +223,66 @@ class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
   // Load user preferences for feedback settings
   void _loadSavedPreference() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String ?savedCorrectFeedback = prefs.getString('correctFeedbackPreference');
-    String ?savedWrongFeedback = prefs.getString('wrongFeedbackPreference');
+    String? savedFeedback = prefs.getString('feedbackPreference');
 
-    setState(() {
-      _selectedCorrectFeedback = savedCorrectFeedback ?? "on";
-      _selectedWrongFeedback = savedWrongFeedback ?? "on";
-    });
+    if (savedFeedback != null) {
+      _selectedFeedback = savedFeedback;
+    }
   }
 
   // Uses the passed feedbackKey to determine which setting the user wants to modify
-  void _handleTap(String feedbackKey) async {
+  void _handleTap(String feedback) async {
     setState(() {
-      if (feedbackKey == "correctFeedbackPreference") {
-        _selectedCorrectFeedback = (_selectedCorrectFeedback == "on") ? "off" : "on";
-        widget.updatePreferenceCallback(feedbackKey, _selectedCorrectFeedback);
-      } else if (feedbackKey == "wrongFeedbackPreference") {
-        _selectedWrongFeedback = (_selectedWrongFeedback == "on") ? "off" : "on";
-        widget.updatePreferenceCallback(feedbackKey, _selectedWrongFeedback);
-      }
+        _selectedFeedback = feedback;
+        widget.updatePreferenceCallback("feedbackPreference", _selectedFeedback);
     });
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('feedbackPreference', _selectedFeedback);
   }
 
-  Widget _buildOption(String title, String feedbackKey, String isOn) {
-    bool isSelected = isOn == "on";
-    return ListTile(
-      onTap: () => _handleTap(feedbackKey),
-      title: Text(
-        title,
-        style: TextStyle(fontSize: 14),
+ Widget _buildOption(String feedback) {
+    bool isSelected = _selectedFeedback == feedback;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8.0),
+      child: InkWell(
+        onTap: () => _handleTap(feedback),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: ListTile(
+              title: Text(
+                feedback,
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+              trailing: isSelected
+                  ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
+                  : null,
+            ),
+          ),
+        ),
       ),
-      trailing: isSelected
-          ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
-          : null,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> feedbackOptionWidgets = [];
-      // Correct Answer Chime display
-      feedbackOptionWidgets.add(
-          _buildOption("Correct Answer Chime", "correctFeedbackPreference", _selectedCorrectFeedback),
-      );
-        feedbackOptionWidgets.add(
-          Divider(
-            color: Color.fromARGB(255, 7, 45, 78),
-            thickness: 3,
-            indent: 20,
-            endIndent: 20,
-          ),
-        );
-      // Incorrect Answer Chime display
-      feedbackOptionWidgets.add(
-          _buildOption("Wrong Answer Chime", "wrongFeedbackPreference", _selectedWrongFeedback),
-      );
-        feedbackOptionWidgets.add(
-          Divider(
-            color: Color.fromARGB(255, 7, 45, 78),
-            thickness: 3,
-            indent: 20,
-            endIndent: 20,
-          ),
-        );
-
     return Column(
-      children: feedbackOptionWidgets,
+      children: <Widget>[
+        _buildOption('Off'),
+        Divider(
+          color: Color.fromARGB(255, 7, 45, 78),
+          thickness: 3,
+          indent: 20,
+          endIndent: 20,
+        ),
+        _buildOption('On'),
+      ],
     );
   }
 }
