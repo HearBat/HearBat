@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/audio_util.dart';
+import 'package:hearbat/widgets/module/speech_module_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../module/module_widget.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
@@ -9,9 +10,13 @@ import 'package:hearbat/utils/background_noise_util.dart';
 class DifficultySelectionWidget extends StatefulWidget {
   final String moduleName;
   final List<AnswerGroup> answerGroups;
+  final bool isWord; //determines if TTS is used
+  final bool displayDifficulty; //determines if difficulty setting is shown
+  final List<String>? sentences; // Speech module specific
+  final String? voiceType; //Speech module specific
 
   DifficultySelectionWidget(
-      {required this.moduleName, required this.answerGroups});
+      {required this.moduleName, required this.answerGroups, required this.isWord,required this.displayDifficulty, this.sentences, this.voiceType,});
 
   @override
   DifficultySelectionWidgetState createState() =>
@@ -23,6 +28,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
   final CacheWordsUtil cacheUtil = CacheWordsUtil();
   bool isCaching = false;
   String? _voiceType;
+
 
   List<String> voiceTypes = [
     "en-US-Studio-O",
@@ -64,12 +70,9 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
 
   void _loadVoiceType() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String language = prefs.getString('languagePreference') ?? 'English';
+    // final String language = prefs.getString('languagePreference') ?? 'English';
     setState(() {
       _voiceType = prefs.getString('voicePreference') ?? "en-US-Studio-O";
-      if (language == 'Vietnamese') {
-        _voiceType = 'vi-VN-Standard-A';
-      }
     });
   }
 
@@ -110,23 +113,40 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
       },
     );
 
-    // Caching all words
-    await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
+    // Caching all words (only for word and sound modules)
+    if (widget.isWord || widget.sentences == null) {
+      await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
+    }
 
     // Check if the widget is still in the tree (mounted) after the async operation
     if (!mounted) return; // Early return if not mounted
 
-    Navigator.pop(context); // Close the loading dialog if still mounted
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ModuleWidget(
-          title: moduleName,
-          answerGroups: answerGroups,
-          isWord: true,
+    Navigator.pop(context); // Close the loading dialog if still
+
+    // Navigate to the appropriate widget based on module type
+    if (widget.sentences != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SpeechModuleWidget(
+            chapter: moduleName,
+            sentences: widget.sentences!,
+            voiceType: widget.voiceType!,
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ModuleWidget(
+            title: moduleName,
+            answerGroups: answerGroups,
+            isWord: widget.isWord,
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -141,6 +161,8 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.0),
+                //only display difficulty setting if requested
+                if (widget.displayDifficulty)...[
                 Text(
                   "Difficulty",
                   textAlign: TextAlign.left,
@@ -176,6 +198,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   ),
                 ),
                 SizedBox(height: 20.0),
+                ],
                 Text(
                   "Background Noise",
                   style: TextStyle(
@@ -271,10 +294,10 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   child: ElevatedButton(
                     onPressed: () {
                       SharedPreferences.getInstance().then((prefs) {
-                      prefs.setString('difficultyPreference', 'Normal');
-                      prefs.setString('backgroundSoundPreference', 'None');
-                      prefs.setString('audioVolumePreference', 'Low');
-                    });
+                        prefs.setString('difficultyPreference', 'Normal');
+                        prefs.setString('backgroundSoundPreference', 'None');
+                        prefs.setString('audioVolumePreference', 'Low');
+                      });
                       Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
@@ -325,6 +348,12 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
     _loadSavedPreference();
   }
 
+  @override
+  void dispose() {
+    BackgroundNoiseUtil.stopSound();
+    super.dispose();
+  }
+
   void _loadSavedPreference() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? savedSound = prefs.getString('backgroundSoundPreference');
@@ -335,11 +364,19 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
     }
   }
 
-  void _handleTap(String value) {
+  Future<void> _handleTap(String value) async {
     setState(() {
       _selectedSound = value;
       widget.updatePreferenceCallback('backgroundSoundPreference', value);
     });
+
+    //Plays the selected background noise for 3 seconds as a preview
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? selectedSound = prefs.getString('backgroundSoundPreference');
+
+    if (selectedSound != null && selectedSound != "None") {
+      BackgroundNoiseUtil.playPreview();
+    }
   }
 
   Widget _buildOption(String sound, String value) {
@@ -413,6 +450,12 @@ class VolumeOptionsWidgetState extends State<VolumeOptionsWidget> {
     _loadSavedPreference();
   }
 
+  @override
+  void dispose() {
+    BackgroundNoiseUtil.stopSound();
+    super.dispose();
+  }
+
   void _loadSavedPreference() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? savedVolume = prefs.getString('audioVolumePreference');
@@ -423,11 +466,19 @@ class VolumeOptionsWidgetState extends State<VolumeOptionsWidget> {
     }
   }
 
-  void _handleTap(String value) {
+  Future<void> _handleTap(String value) async {
     setState(() {
       _selectedVolume = value;
       widget.updatePreferenceCallback('audioVolumePreference', value);
     });
+
+    // Play the selected background noise for 3 seconds as a preview
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? selectedSound = prefs.getString('backgroundSoundPreference');
+
+    if (selectedSound != null && selectedSound != "None") {
+      BackgroundNoiseUtil.playPreview();
+    }
   }
 
   Widget _buildOption(String volume) {

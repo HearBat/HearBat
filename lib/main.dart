@@ -4,10 +4,12 @@ import 'package:provider/provider.dart';
 import 'providers/my_app_state.dart';
 import 'pages/sound_adjustment_page.dart'; 
 import 'utils/config_util.dart';
+import 'utils/data_service_util.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ConfigurationManager().fetchConfiguration();
+  await DataService().loadJson();
   runApp(MyApp());
 }
 

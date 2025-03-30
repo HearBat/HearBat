@@ -18,10 +18,7 @@ class CheckButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String check = "CHECK";
     String continueWord = 'CONTINUE';
-    if (language == 'Vietnamese') {
-      check = "Xác Nhận";
-      continueWord = "Tiếp Tục";
-    }
+
     return ElevatedButton(
       onPressed: isSelectedWordValid ? onPressed : null,
       style: ElevatedButton.styleFrom(

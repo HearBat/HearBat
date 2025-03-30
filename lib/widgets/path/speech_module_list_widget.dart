@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../module/speech_module_widget.dart';
+import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
+import '../../models/speech_chapter_model.dart';
 import 'sound_trangular_path_layout_widget.dart';
 import 'animated_button_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/utils/cache_sentences_util.dart';
 
 class SpeechModuleListWidget extends StatelessWidget {
-  final Map<String, List<String>> modules;
-
+  final Map<String, SpeechModule> modules;
   SpeechModuleListWidget({super.key, required this.modules});
 
   @override
@@ -44,13 +44,16 @@ class SpeechModuleListWidget extends StatelessWidget {
           String voiceType =
               prefs.getString('voicePreference') ?? 'en-US-Wavenet-D';
 
-          // Navigate to the SpeechModuleWidget only if the widget is still mounted
+          // Navigate to the DifficultySelectionWidget only if the widget is still mounted
           if (context.mounted) {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SpeechModuleWidget(
-                  chapter: moduleName,
+                builder: (context) => DifficultySelectionWidget(
+                  moduleName: moduleName,
+                  answerGroups: [],
+                  isWord: false,
+                  displayDifficulty: false,
                   sentences: sentences,
                   voiceType: voiceType,
                 ),
@@ -91,9 +94,9 @@ class SpeechModuleListWidget extends StatelessWidget {
                 ),
                 AnimatedButton(
                   moduleName: module.key,
-                  answerGroups: module.value,
+                  answerGroups: module.value.speechGroups,
                   onButtonPressed: (String key, List<dynamic> value) {
-                    navigate(module.key, module.value);
+                    navigate(module.key, module.value.speechGroups);
                   },
                 ),
               ],

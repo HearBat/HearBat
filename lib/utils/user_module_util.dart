@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 
 class UserModuleUtil {
   static const String _storageKey = 'userCustomModules';
@@ -54,6 +54,36 @@ class UserModuleUtil {
       // Handle JSON decoding error
       print('Error decoding JSON data: $e');
       return {};
+    }
+  }
+
+  static Future<List<AnswerGroup>> getCustomModuleAnswerGroups(String moduleName) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? modulesJson = prefs.getString(_storageKey);
+    
+    if (modulesJson == null) {
+      return []; 
+    }
+    
+    try {
+      Map<String, dynamic> modulesData = json.decode(modulesJson);
+      
+      if (!modulesData.containsKey(moduleName)) {
+        return [];
+      }
+      
+      var moduleData = modulesData[moduleName];
+      if (moduleData is List<dynamic>) {
+        return moduleData
+            .map((agData) => AnswerGroup.fromJson(Map<String, dynamic>.from(agData)))
+            .toList();
+      } else {
+        print('Unexpected data format for module: $moduleName');
+        return [];
+      }
+    } catch (e) {
+      print('Error retrieving module data: $e');
+      return [];
     }
   }
 

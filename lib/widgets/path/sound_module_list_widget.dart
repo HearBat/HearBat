@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/widgets/path/animated_button_widget.dart';
-import '../module/module_widget.dart';
+import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
 import 'sound_trangular_path_layout_widget.dart';
 
 class SoundModuleListWidget extends StatelessWidget {
-  final Map<String, List<AnswerGroup>> modules;
-
+  final Map<String, Module> modules;
   SoundModuleListWidget({super.key, required this.modules});
 
   @override
@@ -16,10 +15,11 @@ class SoundModuleListWidget extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ModuleWidget(
-            title: moduleName,
+          builder: (context) => DifficultySelectionWidget(
+            moduleName: moduleName,
             answerGroups: answerGroups,
             isWord: false,
+            displayDifficulty: false,
           ),
         ),
       );
@@ -49,7 +49,7 @@ class SoundModuleListWidget extends StatelessWidget {
                 ),
                 AnimatedButton(
                     moduleName: module.key,
-                    answerGroups: module.value,
+                    answerGroups: module.value.answerGroups,
                     onButtonPressed: (String key, List<dynamic> value) {
                       navigate(key, value.cast<AnswerGroup>());
                     }),

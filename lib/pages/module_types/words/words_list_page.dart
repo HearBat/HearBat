@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hearbat/data/answer_pair.dart';
+import 'package:hearbat/models/chapter_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../widgets/top_bar_widget.dart';
 import '../../../widgets/path/module_card_widget.dart';
 
 class WordsList extends StatefulWidget {
-  final Map<String, List<AnswerGroup>> modules;
+  final Map<String, Module> modules;
   final String chapterName;
   WordsList({super.key, required this.modules, required this.chapterName});
 
@@ -45,7 +45,7 @@ class _WordsListState extends State<WordsList> {
         padding: EdgeInsets.only(top: 10),
         itemBuilder: (context, index) {
           String moduleName = widget.modules.keys.elementAt(index);
-          List<AnswerGroup> answerGroups = widget.modules[moduleName]!;
+          List<AnswerGroup> answerGroups = widget.modules[moduleName]!.answerGroups;
           return ModuleCard(
             moduleName: moduleName,
             answerGroups: answerGroups,

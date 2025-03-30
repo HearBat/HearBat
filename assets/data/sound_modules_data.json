@@ -1,0 +1,2959 @@
+{
+  "chapters": [
+    {
+      "name": "Home Sounds",
+      "modules": [
+        {
+          "name": "Module 1",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Door Close",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                },
+                {
+                  "answer": "Kettle Whistling",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                },
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/home/cat meow.mp3",
+                  "image": "assets/visuals/home/cat meow.png"
+                },
+                {
+                  "answer": "Printer",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Toilet Flush",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                },
+                {
+                  "answer": "Wind Chimes",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                },
+                {
+                  "answer": "Telephone Ringing",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Vacuum",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Dog Bark",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Micromp3e",
+                  "path": "audio/sounds/home/micromp3e.mp3",
+                  "image": "assets/visuals/home/micromp3e.png"
+                },
+                {
+                  "answer": "Pencil Writing",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                },
+                {
+                  "answer": "Clock Ticking",
+                  "path": "audio/sounds/home/clock ticking.mp3",
+                  "image": "assets/visuals/home/clock ticking.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Alarm Clock Beep",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                },
+                {
+                  "answer": "Garbage Disposal",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Doorbell",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Washing Machine",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Computer Keyboard Clicking",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                },
+                {
+                  "answer": "Shower Curtains",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Knife Sharpen",
+                  "path": "audio/sounds/home/knife sharpen.mp3",
+                  "image": "assets/visuals/home/knife sharpening.png"
+                },
+                {
+                  "answer": "Ice Dispenser",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Electric Shaver",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                },
+                {
+                  "answer": "Cutting Paper",
+                  "path": "audio/sounds/home/cutting paper.mp3",
+                  "image": "assets/visuals/home/cutting paper emoji.png"
+                },
+                {
+                  "answer": "Book Page Flipping",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                },
+                {
+                  "answer": "Mouse Click",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Toothbrush Brushing",
+                  "path": "audio/sounds/home/toothbrush brushing.mp3",
+                  "image": "assets/visuals/home/toothbrush brushing.png"
+                },
+                {
+                  "answer": "Telephone Ringing",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Dog Bark",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Printer",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Door Close",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                },
+                {
+                  "answer": "Kettle Whistling",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                },
+                {
+                  "answer": "Alarm Clock Beep",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                },
+                {
+                  "answer": "Wind Chimes",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Micromp3e",
+                  "path": "audio/sounds/home/micromp3e.mp3",
+                  "image": "assets/visuals/home/micromp3e.png"
+                },
+                {
+                  "answer": "Vacuum",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                },
+                {
+                  "answer": "Clock Ticking",
+                  "path": "audio/sounds/home/clock ticking.mp3",
+                  "image": "assets/visuals/home/clock ticking.png"
+                },
+                {
+                  "answer": "Pencil Writing",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/home/cat meow.mp3",
+                  "image": "assets/visuals/home/cat meow.png"
+                },
+                {
+                  "answer": "Garbage Disposal",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Washing Machine",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                },
+                {
+                  "answer": "Computer Keyboard Clicking",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 2",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Toilet Flush",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                },
+                {
+                  "answer": "Ice Dispenser",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                },
+                {
+                  "answer": "Knife Sharpen",
+                  "path": "audio/sounds/home/knife sharpen.mp3",
+                  "image": "assets/visuals/home/knife sharpening.png"
+                },
+                {
+                  "answer": "Mouse Click",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Doorbell",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Electric Shaver",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                },
+                {
+                  "answer": "Wind Chimes",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                },
+                {
+                  "answer": "Shower Curtains",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Book Page Flipping",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                },
+                {
+                  "answer": "Clock Ticking",
+                  "path": "audio/sounds/home/clock ticking.mp3",
+                  "image": "assets/visuals/home/clock ticking.png"
+                },
+                {
+                  "answer": "Micromp3e",
+                  "path": "audio/sounds/home/micromp3e.mp3",
+                  "image": "assets/visuals/home/micromp3e.png"
+                },
+                {
+                  "answer": "Vacuum",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Computer Keyboard Clicking",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                },
+                {
+                  "answer": "Telephone Ringing",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Dog Bark",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Washing Machine",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Garbage Disposal",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Alarm Clock Beep",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                },
+                {
+                  "answer": "Pencil Writing",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                },
+                {
+                  "answer": "Door Close",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Printer",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                },
+                {
+                  "answer": "Kettle Whistling",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                },
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/home/cat meow.mp3",
+                  "image": "assets/visuals/home/cat meow.png"
+                },
+                {
+                  "answer": "Toothbrush Brushing",
+                  "path": "audio/sounds/home/toothbrush brushing.mp3",
+                  "image": "assets/visuals/home/toothbrush brushing.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cutting Paper",
+                  "path": "audio/sounds/home/cutting paper.mp3",
+                  "image": "assets/visuals/home/cutting paper emoji.png"
+                },
+                {
+                  "answer": "Ice Dispenser",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                },
+                {
+                  "answer": "Mouse Click",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                },
+                {
+                  "answer": "Vacuum",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Toilet Flush",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                },
+                {
+                  "answer": "Shower Curtains",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Electric Shaver",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                },
+                {
+                  "answer": "Wind Chimes",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Doorbell",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Micromp3e",
+                  "path": "audio/sounds/home/micromp3e.mp3",
+                  "image": "assets/visuals/home/micromp3e.png"
+                },
+                {
+                  "answer": "Knife Sharpen",
+                  "path": "audio/sounds/home/knife sharpen.mp3",
+                  "image": "assets/visuals/home/knife sharpening.png"
+                },
+                {
+                  "answer": "Book Page Flipping",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Dog Bark",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Telephone Ringing",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Computer Keyboard Clicking",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                },
+                {
+                  "answer": "Garbage Disposal",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 3",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Pencil Writing",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                },
+                {
+                  "answer": "Printer",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                },
+                {
+                  "answer": "Mouse Click",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                },
+                {
+                  "answer": "Computer Keyboard Clicking",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Toilet Flush",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                },
+                {
+                  "answer": "Shower Curtains",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Washing Machine",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                },
+                {
+                  "answer": "Ice Dispenser",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Door Close",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                },
+                {
+                  "answer": "Doorbell",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Telephone Ringing",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Alarm Clock Beep",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Kettle Whistling",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                },
+                {
+                  "answer": "Vacuum",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                },
+                {
+                  "answer": "Garbage Disposal",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Micromp3e",
+                  "path": "audio/sounds/home/micromp3e.mp3",
+                  "image": "assets/visuals/home/micromp3e.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Wind Chimes",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                },
+                {
+                  "answer": "Clock Ticking",
+                  "path": "audio/sounds/home/clock ticking.mp3",
+                  "image": "assets/visuals/home/clock ticking.png"
+                },
+                {
+                  "answer": "Book Page Flipping",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                },
+                {
+                  "answer": "Electric Shaver",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/home/cat meow.mp3",
+                  "image": "assets/visuals/home/cat meow.png"
+                },
+                {
+                  "answer": "Dog Bark",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Toothbrush Brushing",
+                  "path": "audio/sounds/home/toothbrush brushing.mp3",
+                  "image": "assets/visuals/home/toothbrush brushing.png"
+                },
+                {
+                  "answer": "Cutting Paper",
+                  "path": "audio/sounds/home/cutting paper.mp3",
+                  "image": "assets/visuals/home/cutting paper emoji.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Mouse Click",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                },
+                {
+                  "answer": "Computer Keyboard Clicking",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                },
+                {
+                  "answer": "Printer",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                },
+                {
+                  "answer": "Pencil Writing",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Shower Curtains",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Toilet Flush",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                },
+                {
+                  "answer": "Ice Dispenser",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                },
+                {
+                  "answer": "Washing Machine",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Telephone Ringing",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Doorbell",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Door Close",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                },
+                {
+                  "answer": "Alarm Clock Beep",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Micromp3e",
+                  "path": "audio/sounds/home/micromp3e.mp3",
+                  "image": "assets/visuals/home/micromp3e.png"
+                },
+                {
+                  "answer": "Kettle Whistling",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                },
+                {
+                  "answer": "Vacuum",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                },
+                {
+                  "answer": "Garbage Disposal",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 4",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Ice Dispenser",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                },
+                {
+                  "answer": "Wind Chimes",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                },
+                {
+                  "answer": "Electric Shaver",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                },
+                {
+                  "answer": "Toilet Flush",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Shower Curtains",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Dog Bark",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Doorbell",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Pencil Writing",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Washing Machine",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                },
+                {
+                  "answer": "Garbage Disposal",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/home/cat meow.mp3",
+                  "image": "assets/visuals/home/cat meow.png"
+                },
+                {
+                  "answer": "Mouse Click",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Printer",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                },
+                {
+                  "answer": "Vacuum",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                },
+                {
+                  "answer": "Book Page Flipping",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                },
+                {
+                  "answer": "Micromp3e",
+                  "path": "audio/sounds/home/micromp3e.mp3",
+                  "image": "assets/visuals/home/micromp3e.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Knife Sharpen",
+                  "path": "audio/sounds/home/knife sharpen.mp3",
+                  "image": "assets/visuals/home/knife sharpening.png"
+                },
+                {
+                  "answer": "Computer Keyboard Clicking",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                },
+                {
+                  "answer": "Alarm Clock Beep",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                },
+                {
+                  "answer": "Telephone Ringing",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Clock Ticking",
+                  "path": "audio/sounds/home/clock ticking.mp3",
+                  "image": "assets/visuals/home/clock ticking.png"
+                },
+                {
+                  "answer": "Cutting Paper",
+                  "path": "audio/sounds/home/cutting paper.mp3",
+                  "image": "assets/visuals/home/cutting paper emoji.png"
+                },
+                {
+                  "answer": "Door Close",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                },
+                {
+                  "answer": "Kettle Whistling",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Toothbrush Brushing",
+                  "path": "audio/sounds/home/toothbrush brushing.mp3",
+                  "image": "assets/visuals/home/toothbrush brushing.png"
+                },
+                {
+                  "answer": "Shower Curtains",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Ice Dispenser",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                },
+                {
+                  "answer": "Mouse Click",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Washing Machine",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                },
+                {
+                  "answer": "Vacuum",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                },
+                {
+                  "answer": "Garbage Disposal",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Electric Shaver",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Doorbell",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Alarm Clock Beep",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                },
+                {
+                  "answer": "Dog Bark",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Toilet Flush",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Pencil Writing",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                },
+                {
+                  "answer": "Printer",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                },
+                {
+                  "answer": "Cutting Paper",
+                  "path": "audio/sounds/home/cutting paper.mp3",
+                  "image": "assets/visuals/home/cutting paper emoji.png"
+                },
+                {
+                  "answer": "Book Page Flipping",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Music Sounds",
+      "modules": [
+        {
+          "name": "Module 1",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "Violin",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                },
+                {
+                  "answer": "Drums",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                },
+                {
+                  "answer": "Flute",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Acoustic Guitar",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Bongo Drums",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Harp",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                },
+                {
+                  "answer": "Accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                },
+                {
+                  "answer": "Electric Guitar",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                },
+                {
+                  "answer": "French Horn",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                },
+                {
+                  "answer": "Trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                },
+                {
+                  "answer": "Conga Drums",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                },
+                {
+                  "answer": "Mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Recorder",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                },
+                {
+                  "answer": "Oboe",
+                  "path": "audio/sounds/music/oboe.mp3",
+                  "image": "assets/visuals/music/oboe.png"
+                },
+                {
+                  "answer": "Harmonica",
+                  "path": "audio/sounds/music/harmonica.mp3",
+                  "image": "assets/visuals/music/harmonica.png"
+                },
+                {
+                  "answer": "Piccolo",
+                  "path": "audio/sounds/music/piccolo.mp3",
+                  "image": "assets/visuals/music/piccolo.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Flute",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Drums",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                },
+                {
+                  "answer": "Violin",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                },
+                {
+                  "answer": "Piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Harp",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                },
+                {
+                  "answer": "Saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Acoustic Guitar",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Bongo Drums",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                },
+                {
+                  "answer": "Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Electric Guitar",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Cello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                },
+                {
+                  "answer": "French Horn",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                },
+                {
+                  "answer": "Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 2",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                },
+                {
+                  "answer": "Violin",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                },
+                {
+                  "answer": "Electric Guitar",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Drums",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Harp",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                },
+                {
+                  "answer": "Bongo Drums",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Flute",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                },
+                {
+                  "answer": "Saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Cello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "Mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "French Horn",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                },
+                {
+                  "answer": "Recorder",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                },
+                {
+                  "answer": "Oboe",
+                  "path": "audio/sounds/music/oboe.mp3",
+                  "image": "assets/visuals/music/oboe.png"
+                },
+                {
+                  "answer": "Conga Drums",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Acoustic Guitar",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Harmonica",
+                  "path": "audio/sounds/music/harmonica.mp3",
+                  "image": "assets/visuals/music/harmonica.png"
+                },
+                {
+                  "answer": "Piccolo",
+                  "path": "audio/sounds/music/piccolo.mp3",
+                  "image": "assets/visuals/music/piccolo.png"
+                },
+                {
+                  "answer": "Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Violin",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                },
+                {
+                  "answer": "Drums",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                },
+                {
+                  "answer": "Accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                },
+                {
+                  "answer": "Electric Guitar",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Flute",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Bongo Drums",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Harp",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                },
+                {
+                  "answer": "Trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Cello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                },
+                {
+                  "answer": "Ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                },
+                {
+                  "answer": "Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "Recorder",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                },
+                {
+                  "answer": "Piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "French Horn",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 3",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Acoustic Guitar",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Electric Guitar",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                },
+                {
+                  "answer": "Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Drums",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                },
+                {
+                  "answer": "Bongo Drums",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Conga Drums",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                },
+                {
+                  "answer": "Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Violin",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                },
+                {
+                  "answer": "Cello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                },
+                {
+                  "answer": "Mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "Harp",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Flute",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Piccolo",
+                  "path": "audio/sounds/music/piccolo.mp3",
+                  "image": "assets/visuals/music/piccolo.png"
+                },
+                {
+                  "answer": "Recorder",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                },
+                {
+                  "answer": "Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                },
+                {
+                  "answer": "French Horn",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                },
+                {
+                  "answer": "Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "Accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                },
+                {
+                  "answer": "Harmonica",
+                  "path": "audio/sounds/music/harmonica.mp3",
+                  "image": "assets/visuals/music/harmonica.png"
+                },
+                {
+                  "answer": "Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Oboe",
+                  "path": "audio/sounds/music/oboe.mp3",
+                  "image": "assets/visuals/music/oboe.png"
+                },
+                {
+                  "answer": "Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Flute",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "Ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                },
+                {
+                  "answer": "Acoustic Guitar",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Electric Guitar",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Acoustic Guitar",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Bongo Drums",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Conga Drums",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                },
+                {
+                  "answer": "Drums",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                },
+                {
+                  "answer": "Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 4",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "Electric Guitar",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Recorder",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                },
+                {
+                  "answer": "Bongo Drums",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                },
+                {
+                  "answer": "Harp",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                },
+                {
+                  "answer": "Oboe",
+                  "path": "audio/sounds/music/oboe.mp3",
+                  "image": "assets/visuals/music/oboe.png"
+                },
+                {
+                  "answer": "Violin",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "French Horn",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Flute",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Piccolo",
+                  "path": "audio/sounds/music/piccolo.mp3",
+                  "image": "assets/visuals/music/piccolo.png"
+                },
+                {
+                  "answer": "Trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                },
+                {
+                  "answer": "Conga Drums",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                },
+                {
+                  "answer": "Accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                },
+                {
+                  "answer": "Harmonica",
+                  "path": "audio/sounds/music/harmonica.mp3",
+                  "image": "assets/visuals/music/harmonica.png"
+                },
+                {
+                  "answer": "Drums",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                },
+                {
+                  "answer": "Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Acoustic Guitar",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Flute",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "Violin",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "Electric Guitar",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Harp",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                },
+                {
+                  "answer": "Recorder",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                },
+                {
+                  "answer": "Bongo Drums",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Conga Drums",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Oboe",
+                  "path": "audio/sounds/music/oboe.mp3",
+                  "image": "assets/visuals/music/oboe.png"
+                },
+                {
+                  "answer": "French Horn",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                },
+                {
+                  "answer": "Trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                },
+                {
+                  "answer": "Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nature Sounds",
+      "modules": [
+        {
+          "name": "Module 1",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Bird",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "River Flow",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                },
+                {
+                  "answer": "Thunder",
+                  "path": "audio/sounds/nature/thunder.mp3",
+                  "image": "assets/visuals/nature/thunder.png"
+                },
+                {
+                  "answer": "Frog",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Elephant",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                },
+                {
+                  "answer": "Rock Skip",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                },
+                {
+                  "answer": "Cicadas",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Campfire",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                },
+                {
+                  "answer": "Crickets",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                },
+                {
+                  "answer": "Owl Hoot",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Duck",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Dog",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Rocks Falling",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                },
+                {
+                  "answer": "Snake",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Turkey",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Pig",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Sheep",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Wind",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                },
+                {
+                  "answer": "Walking Through Leaves",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Mosquito",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                },
+                {
+                  "answer": "Woodpecker",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Rain",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Hawk",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "River Flow",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                },
+                {
+                  "answer": "Coyote",
+                  "path": "audio/sounds/nature/coyote.mp3",
+                  "image": "assets/visuals/nature/coyote.png"
+                },
+                {
+                  "answer": "Bird",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "Elephant",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Rock Skip",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                },
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Frog",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                },
+                {
+                  "answer": "Cicadas",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Crickets",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                },
+                {
+                  "answer": "Campfire",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                },
+                {
+                  "answer": "Duck",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                },
+                {
+                  "answer": "Owl Hoot",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Dog",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Snake",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Turkey",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                },
+                {
+                  "answer": "Rocks Falling",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 2",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Sheep",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Pig",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Wind",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                },
+                {
+                  "answer": "Walking Through Leaves",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Woodpecker",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Mosquito",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                },
+                {
+                  "answer": "Rain",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Hawk",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Bird",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "Elephant",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                },
+                {
+                  "answer": "Frog",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                },
+                {
+                  "answer": "River Flow",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cicadas",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                },
+                {
+                  "answer": "Rock Skip",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                },
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Coyote",
+                  "path": "audio/sounds/nature/coyote.mp3",
+                  "image": "assets/visuals/nature/coyote.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Crickets",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                },
+                {
+                  "answer": "Duck",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                },
+                {
+                  "answer": "Owl Hoot",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Campfire",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Rocks Falling",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                },
+                {
+                  "answer": "Dog",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Turkey",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                },
+                {
+                  "answer": "Snake",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Wind",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                },
+                {
+                  "answer": "Sheep",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Pig",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Walking Through Leaves",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Mosquito",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                },
+                {
+                  "answer": "Woodpecker",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Hawk",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                },
+                {
+                  "answer": "Rain",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Elephant",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                },
+                {
+                  "answer": "Bird",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "River Flow",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                },
+                {
+                  "answer": "Frog",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Coyote",
+                  "path": "audio/sounds/nature/coyote.mp3",
+                  "image": "assets/visuals/nature/coyote.png"
+                },
+                {
+                  "answer": "Cicadas",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                },
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Rock Skip",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 3",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Owl Hoot",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Crickets",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                },
+                {
+                  "answer": "Campfire",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                },
+                {
+                  "answer": "Duck",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Snake",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Rocks Falling",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                },
+                {
+                  "answer": "Dog",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Turkey",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Walking Through Leaves",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                },
+                {
+                  "answer": "Wind",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                },
+                {
+                  "answer": "Sheep",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Pig",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Hawk",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                },
+                {
+                  "answer": "Woodpecker",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Rain",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Mosquito",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Frog",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                },
+                {
+                  "answer": "Bird",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "River Flow",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                },
+                {
+                  "answer": "Elephant",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Cicadas",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                },
+                {
+                  "answer": "Coyote",
+                  "path": "audio/sounds/nature/coyote.mp3",
+                  "image": "assets/visuals/nature/coyote.png"
+                },
+                {
+                  "answer": "Rock Skip",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Duck",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                },
+                {
+                  "answer": "Owl Hoot",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Campfire",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                },
+                {
+                  "answer": "Crickets",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Turkey",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                },
+                {
+                  "answer": "Snake",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Dog",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Rocks Falling",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Sheep",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Pig",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Wind",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                },
+                {
+                  "answer": "Walking Through Leaves",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Rain",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Hawk",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                },
+                {
+                  "answer": "Woodpecker",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Mosquito",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Module 4",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Elephant",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                },
+                {
+                  "answer": "Hawk",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                },
+                {
+                  "answer": "Cicadas",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                },
+                {
+                  "answer": "River Flow",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Woodpecker",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Rain",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Frog",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                },
+                {
+                  "answer": "Sheep",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Duck",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                },
+                {
+                  "answer": "Mosquito",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                },
+                {
+                  "answer": "Wind",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Owl Hoot",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Campfire",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                },
+                {
+                  "answer": "Thunder",
+                  "path": "audio/sounds/nature/thunder.mp3",
+                  "image": "assets/visuals/nature/thunder.png"
+                },
+                {
+                  "answer": "Rock Skip",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Crickets",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                },
+                {
+                  "answer": "Turkey",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                },
+                {
+                  "answer": "Pig",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Bird",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Snake",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Dog",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Rocks Falling",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                },
+                {
+                  "answer": "Coyote",
+                  "path": "audio/sounds/nature/coyote.mp3",
+                  "image": "assets/visuals/nature/coyote.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Walking Through Leaves",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                },
+                {
+                  "answer": "Bird",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "Elephant",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                },
+                {
+                  "answer": "Campfire",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Rain",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Owl Hoot",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Frog",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                },
+                {
+                  "answer": "Crickets",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Dog",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Cicadas",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                },
+                {
+                  "answer": "Snake",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Turkey",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Woodpecker",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Sheep",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Pig",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Mosquito",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

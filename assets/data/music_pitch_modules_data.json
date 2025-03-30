@@ -1,0 +1,168 @@
+{
+  "chapters": [
+    {
+      "name": "Pitch Resolution",
+      "modules": [
+        {
+          "name": "Module 1",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Up",
+                  "path": "audio/sounds/music_pitch/c4u11.mp3",
+                  "image": "assets/visuals/music_pitch/up_arrow.png"
+                },
+                {
+                  "answer": "Down",
+                  "path": "audio/sounds/music_pitch/c4d11.mp3",
+                  "image": "assets/visuals/music_pitch/down_arrow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Up",
+                  "path": "audio/sounds/music_pitch/c4u10.mp3",
+                  "image": "assets/visuals/music_pitch/up_arrow.png"
+                },
+                {
+                  "answer": "Down",
+                  "path": "audio/sounds/music_pitch/c4d10.mp3",
+                  "image": "assets/visuals/music_pitch/down_arrow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Up",
+                  "path": "audio/sounds/music_pitch/c4u9.mp3",
+                  "image": "assets/visuals/music_pitch/up_arrow.png"
+                },
+                {
+                  "answer": "Down",
+                  "path": "audio/sounds/music_pitch/c4d9.mp3",
+                  "image": "assets/visuals/music_pitch/down_arrow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Up",
+                  "path": "audio/sounds/music_pitch/c4u8.mp3",
+                  "image": "assets/visuals/music_pitch/up_arrow.png"
+                },
+                {
+                  "answer": "Down",
+                  "path": "audio/sounds/music_pitch/c4d8.mp3",
+                  "image": "assets/visuals/music_pitch/down_arrow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Up",
+                  "path": "audio/sounds/music_pitch/c4u7.mp3",
+                  "image": "assets/visuals/music_pitch/up_arrow.png"
+                },
+                {
+                  "answer": "Down",
+                  "path": "audio/sounds/music_pitch/c4d7.mp3",
+                  "image": "assets/visuals/music_pitch/down_arrow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Up",
+                  "path": "audio/sounds/music_pitch/c4u6.mp3",
+                  "image": "assets/visuals/music_pitch/up_arrow.png"
+                },
+                {
+                  "answer": "Down",
+                  "path": "audio/sounds/music_pitch/c4d6.mp3",
+                  "image": "assets/visuals/music_pitch/down_arrow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Up",
+                  "path": "audio/sounds/music_pitch/c4u5.mp3",
+                  "image": "assets/visuals/music_pitch/up_arrow.png"
+                },
+                {
+                  "answer": "Down",
+                  "path": "audio/sounds/music_pitch/c4d5.mp3",
+                  "image": "assets/visuals/music_pitch/down_arrow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Up",
+                  "path": "audio/sounds/music_pitch/c4u4.mp3",
+                  "image": "assets/visuals/music_pitch/up_arrow.png"
+                },
+                {
+                  "answer": "Down",
+                  "path": "audio/sounds/music_pitch/c4d4.mp3",
+                  "image": "assets/visuals/music_pitch/down_arrow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Up",
+                  "path": "audio/sounds/music_pitch/c4u3.mp3",
+                  "image": "assets/visuals/music_pitch/up_arrow.png"
+                },
+                {
+                  "answer": "Down",
+                  "path": "audio/sounds/music_pitch/c4d3.mp3",
+                  "image": "assets/visuals/music_pitch/down_arrow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Up",
+                  "path": "audio/sounds/music_pitch/c4u2.mp3",
+                  "image": "assets/visuals/music_pitch/up_arrow.png"
+                },
+                {
+                  "answer": "Down",
+                  "path": "audio/sounds/music_pitch/c4d2.mp3",
+                  "image": "assets/visuals/music_pitch/down_arrow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Up",
+                  "path": "audio/sounds/music_pitch/c4u1.mp3",
+                  "image": "assets/visuals/music_pitch/up_arrow.png"
+                },
+                {
+                  "answer": "Down",
+                  "path": "audio/sounds/music_pitch/c4d1.mp3",
+                  "image": "assets/visuals/music_pitch/down_arrow.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

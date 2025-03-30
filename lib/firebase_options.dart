@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1027895213174',
     projectId: 'hearbat-408909',
     storageBucket: 'hearbat-408909.appspot.com',
-    iosBundleId: 'com.example.hearbat',
+    iosBundleId: 'com.hearbatapp.hearbat',
   );
 }
