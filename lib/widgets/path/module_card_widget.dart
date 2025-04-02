@@ -36,11 +36,17 @@ class _ModuleCardState extends State<ModuleCard> {
     setState(() {});
   }
 
-  Future<void> _cacheAndNavigate() async {
+Future<void> _cacheAndNavigate() async {
+    // Create a BuildContext variable to store the dialog context
+    BuildContext? dialogContext;
+
+    // Show loading indicator while caching
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (BuildContext context) {
+      builder: (BuildContext ctx) {
+        // Store the dialog context
+        dialogContext = ctx;
         return AlertDialog(
           content: Row(
             children: [
@@ -55,19 +61,25 @@ class _ModuleCardState extends State<ModuleCard> {
 
     await cacheUtil.cacheModuleWords(widget.answerGroups, widget.voiceType);
 
-    if (!mounted) return;
+    if (!context.mounted) return;
 
-    Navigator.pop(context); // Close the loading dialog
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ModuleWordsPage(
-          moduleName: widget.moduleName,
-          answerGroups: widget.answerGroups,
-          voiceType: widget.voiceType,
+    if (dialogContext != null) {
+      Navigator.of(dialogContext!).pop();
+    }
+
+    if (context.mounted) {
+      // ignore: use_build_context_synchronously
+      Navigator.of(context, rootNavigator: true).push(
+        MaterialPageRoute(
+          builder: (context) => ModuleWordsPage(
+            moduleName: widget.moduleName,
+            answerGroups: widget.answerGroups,
+            voiceType: widget.voiceType,
+          ),
+          fullscreenDialog: true,
         ),
-      ),
-    );
+      );
+    }
   }
 
   @override

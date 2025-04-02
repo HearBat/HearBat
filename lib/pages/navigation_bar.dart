@@ -9,37 +9,72 @@ class MyNavBar extends StatefulWidget {
 
 class _MyNavBarState extends State<MyNavBar> {
   int selectedIndex = 0;
-  NavigationDestinationLabelBehavior labelBehavior =
-      NavigationDestinationLabelBehavior.onlyShowSelected;
-
-  // pages on bottom bar
-  final List<Widget> pages = [
-    HomePage(),
-    ProfilePage(),
+  
+  // Store navigation keys to maintain state
+  final List<GlobalKey<NavigatorState>> _navigatorKeys = [
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: pages[selectedIndex],
-      bottomNavigationBar: NavigationBar(
-        labelBehavior: labelBehavior,
-        selectedIndex: selectedIndex,
-        onDestinationSelected: (int index) {
-          setState(() {
-            selectedIndex = index;
-          });
+    return PopScope(
+      canPop: false, 
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
+        }
+        
+        final isFirstRouteInCurrentTab = 
+            !await _navigatorKeys[selectedIndex].currentState!.maybePop();
+        
+        if (isFirstRouteInCurrentTab && selectedIndex != 0) {
+            _selectTab(0);
+        }
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            _buildOffstageNavigator(0),
+            _buildOffstageNavigator(1),
+          ],
+        ),
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: selectedIndex,
+          onDestinationSelected: _selectTab,
+          destinations: const <Widget>[
+            NavigationDestination(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _selectTab(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
+  Widget _buildOffstageNavigator(int index) {
+    return Offstage(
+      offstage: selectedIndex != index,
+      child: Navigator(
+        key: _navigatorKeys[index],
+        onGenerateRoute: (routeSettings) {
+          return MaterialPageRoute(
+            builder: (context) {
+              return index == 0 ? HomePage() : ProfilePage();
+            },
+          );
         },
-        destinations: const <Widget>[
-          NavigationDestination(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.settings),
-            label: 'Setting',
-          ),
-        ],
       ),
     );
   }

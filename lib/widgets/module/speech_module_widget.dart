@@ -408,16 +408,23 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                 Icons.emoji_events,
                 color: Color.fromARGB(255, 255, 255, 255),
                 size: 30,
-              ),
-              boxDecoration: blueBoxDecoration,
-              total: 100, // editing
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 40.0, bottom: 40.0, left: 20, right: 20),
-              child: ElevatedButton(
-                onPressed: () =>
-                  Navigator.pop(context),
+            boxDecoration: blueBoxDecoration,
+            total: 100, // editing
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                top: 40.0, bottom: 40.0, left: 20, right: 20),
+            child: ElevatedButton(
+              onPressed: () {
+                // Pop this screen first
+                Navigator.pop(context);
+                // If we come from a difficulty selection screen, pop that too
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+                  
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 94, 224, 82),
                   shape: RoundedRectangleBorder(
