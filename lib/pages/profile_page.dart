@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hearbat/widgets/top_bar_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
+
+import '../utils/cache_util.dart';
 import '../utils/google_tts_util.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -193,6 +195,8 @@ class ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
+            SizedBox(height: 20.0),
+            ClearCacheWidget(),
           ],
         ),
       ),
@@ -468,6 +472,71 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
 
     return Column(
       children: voiceOptionWidgets,
+    );
+  }
+}
+
+class ClearCacheWidget extends StatefulWidget {
+  @override
+  ClearCacheWidgetState createState() => ClearCacheWidgetState();
+}
+
+class ClearCacheWidgetState extends State<ClearCacheWidget> {
+  String _sizeText = "Fetching...";
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchSize();
+  }
+
+  Future<void> _fetchSize() async {
+    const units = ["B", "KiB", "MiB", "GiB"];
+
+    // Convert size to largest unit
+    double size = (await getCacheSize()).toDouble();
+    int unit = 0;
+    while (size >= 1024 && unit < units.length - 1) {
+      size /= 1024;
+      unit++;
+    }
+
+    setState(() {
+      _sizeText = "${size.toStringAsFixed(2)} ${units[unit]}";
+    });
+  }
+
+  Future<void> _handlePress() async {
+    await clearCache();
+    await _fetchSize();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            _handlePress();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color.fromARGB(255, 7, 45, 78),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            minimumSize: Size(380, 50),
+          ),
+          child: Text(
+            "CLEAR CACHE ($_sizeText)",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
