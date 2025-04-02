@@ -417,9 +417,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                 top: 40.0, bottom: 40.0, left: 20, right: 20),
             child: ElevatedButton(
               onPressed: () {
-                // Pop this screen first
                 Navigator.pop(context);
-                // If we come from a difficulty selection screen, pop that too
                 if (Navigator.canPop(context)) {
                   Navigator.pop(context);
                 }

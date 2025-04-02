@@ -37,15 +37,13 @@ class _ModuleCardState extends State<ModuleCard> {
   }
 
 Future<void> _cacheAndNavigate() async {
-    // Create a BuildContext variable to store the dialog context
+    // need this context to be seperate than the new nav bar one
     BuildContext? dialogContext;
 
-    // Show loading indicator while caching
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext ctx) {
-        // Store the dialog context
         dialogContext = ctx;
         return AlertDialog(
           content: Row(
