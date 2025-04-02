@@ -23,9 +23,9 @@ class HomeCardWidget extends StatefulWidget {
 class _HomeCardWidgetState extends State<HomeCardWidget> {
   double elevation = 5.0;
   void _navigateToPage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => widget.destinationPage),
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => widget.destinationPage,),
     );
   }
 

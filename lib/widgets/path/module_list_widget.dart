@@ -17,11 +17,15 @@ class ModuleListWidget extends StatefulWidget {
 class ModuleListWidgetState extends State<ModuleListWidget>
     with TickerProviderStateMixin {
   void navigate(String moduleName, List<AnswerGroup> answerGroups) {
-    Navigator.push(
-      context,
+    Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
         builder: (context) => DifficultySelectionWidget(
-            moduleName: moduleName, answerGroups: answerGroups, isWord: true, displayDifficulty: true,),
+          moduleName: moduleName,
+          answerGroups: answerGroups,
+          isWord: true,
+          displayDifficulty: true,
+        ),
+        fullscreenDialog: true,
       ),
     );
   }

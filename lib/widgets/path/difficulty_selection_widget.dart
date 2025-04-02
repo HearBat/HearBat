@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/audio_util.dart';
+import 'package:hearbat/utils/cache_sentences_util.dart';
 import 'package:hearbat/widgets/module/speech_module_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../module/module_widget.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
 import 'package:hearbat/utils/background_noise_util.dart';
 
+// ignore_for_file: use_build_context_synchronously
 class DifficultySelectionWidget extends StatefulWidget {
   final String moduleName;
   final List<AnswerGroup> answerGroups;
@@ -89,42 +91,52 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
     _updatePreference('difficultyPreference', _difficulty);
   }
 
-  Future<void> _cacheAndNavigate(
-      String moduleName, List<AnswerGroup> answerGroups) async {
-    if (_voiceType == null) {
-      print("Voice type not set. Unable to cache module words.");
-      return;
-    }
+Future<void> _cacheAndNavigate(
+    String moduleName, List<AnswerGroup> answerGroups) async {
+  if (_voiceType == null) {
+    print("Voice type not set. Unable to cache module words.");
+    return;
+  }
 
-    // Show loading indicator while caching
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Row(
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(width: 10),
-              Text("Loading..."),
-            ],
-          ),
-        );
-      },
-    );
+  BuildContext? dialogContext;
+  
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext ctx) {
+      dialogContext = ctx;
+      return AlertDialog(
+        content: Row(
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(width: 10),
+            Text("Loading..."),
+          ],
+        ),
+      );
+    },
+  );
 
-    // Caching all words (only for word and sound modules)
+  try {
     if (widget.isWord || widget.sentences == null) {
       await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
     }
-
-    // Check if the widget is still in the tree (mounted) after the async operation
-    if (!mounted) return; // Early return if not mounted
-
-    Navigator.pop(context); // Close the loading dialog if still
-
-    // Navigate to the appropriate widget based on module type
+    
     if (widget.sentences != null) {
+      await CacheSentencesUtil().cacheSentences(widget.sentences!);
+    }
+  } catch (error) {
+    print('Failed to cache content: $error');
+  }
+
+  if (!context.mounted) return; 
+
+  if (dialogContext != null && Navigator.canPop(dialogContext!)) {
+    Navigator.of(dialogContext!).pop();
+  }
+
+  if (widget.sentences != null) {
+    if (context.mounted) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -135,7 +147,9 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
           ),
         ),
       );
-    } else {
+    }
+  } else {
+    if (context.mounted) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -148,6 +162,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
       );
     }
   }
+}
 
   @override
   Widget build(BuildContext context) {
