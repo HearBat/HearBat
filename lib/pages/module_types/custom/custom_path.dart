@@ -72,16 +72,16 @@ class CustomPathState extends State<CustomPath> {
     var answerGroups = modules[moduleName] ?? [];
 
     if (_voiceType != null) {
-      Navigator.push(
-        context,
+      Navigator.of(context, rootNavigator: true).push(
         MaterialPageRoute(
           builder: (context) => DifficultySelectionWidget(
-              moduleName: moduleName,
-              answerGroups: answerGroups,
-              voiceType: _voiceType!,
-              isWord: true,
-              displayDifficulty: false,
+            moduleName: moduleName,
+            answerGroups: answerGroups,
+            voiceType: _voiceType!,
+            isWord: true,
+            displayDifficulty: false,
           ),
+          fullscreenDialog: true,
         ),
       );
     } else {
