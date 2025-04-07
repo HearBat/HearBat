@@ -23,7 +23,7 @@ class SpeechChapters extends StatelessWidget {
 
     return Scaffold(
       appBar: TopBar(
-        title: "SPEECH CHAPTERS",
+        title: "SPEECH",
         leadingIcon: Icons.west,
       ),
       body: ListView(
