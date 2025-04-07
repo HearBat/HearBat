@@ -184,7 +184,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
         Expanded(
           child: SingleChildScrollView(
@@ -302,7 +302,8 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
         Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            if (isAnswerFalse)
+            if (isAnswerFalse) ...[
+              ModalBarrier(dismissible: false),
               Container(
                 width: double.infinity,
                 height: 220,
@@ -384,7 +385,9 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                   begin: Offset(0, 1),
                   duration: 300.ms,
                   curve: Curves.easeInOutQuart),
-            if (isAnswerTrue)
+            ],
+            if (isAnswerTrue) ...[
+              ModalBarrier(dismissible: false),
               Container(
                 width: double.infinity,
                 height: 100,
@@ -405,6 +408,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                   begin: Offset(0, 1),
                   duration: 300.ms,
                   curve: Curves.easeInOutQuart),
+            ],
           ],
         ),
       ],
