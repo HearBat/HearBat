@@ -19,7 +19,7 @@ class BackgroundNoiseUtil {
         stayAwake: false,
         contentType: AndroidContentType.music,
         usageType: AndroidUsageType.media,
-        audioFocus: AndroidAudioFocus.none,
+        audioFocus: AndroidAudioFocus.gain,
       ),
       iOS: AudioContextIOS(
         category: AVAudioSessionCategory.playback,
@@ -71,13 +71,13 @@ class BackgroundNoiseUtil {
   static Future<void> _adjustVolume(String? volumeLevel) async {
     switch (volumeLevel) {
       case 'Low':
-        _backgroundAudioPlayer.setVolume(0.2);
+        _backgroundAudioPlayer.setVolume(0.4);
       case 'Medium':
-        _backgroundAudioPlayer.setVolume(0.6);
+        _backgroundAudioPlayer.setVolume(0.7);  
       case 'High':
         _backgroundAudioPlayer.setVolume(1.0);
       default:
-        _backgroundAudioPlayer.setVolume(0.2);
+        _backgroundAudioPlayer.setVolume(0.4);
     }
   }
 }
