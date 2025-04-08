@@ -20,12 +20,14 @@ class EditModuleScreen extends StatefulWidget {
 
 class _EditModuleScreenState extends State<EditModuleScreen> {
   List<AnswerGroup> answerGroups = [];
+  Map<String, String> _originalTextValues = {};
   bool isLoading = true;
   bool hasEmptyFields = false;
   bool hasUnsavedChanges = false;
   Map<String, TextEditingController> controllers = {};
   final int maxGroups = 10;
   final ScrollController _scrollController = ScrollController();
+  Map<String, VoidCallback> _listenerMap = {};
 
   @override
   void initState() {
@@ -50,8 +52,14 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
     List<AnswerGroup> groups =
         await UserModuleUtil.getCustomModuleAnswerGroups(widget.moduleName);
 
+    // Store original text values by key
     for (int i = 0; i < groups.length; i++) {
       var group = groups[i];
+      _originalTextValues['group_${i}_answer_1'] = group.answer1.answer;
+      _originalTextValues['group_${i}_answer_2'] = group.answer2.answer;
+      _originalTextValues['group_${i}_answer_3'] = group.answer3.answer;
+      _originalTextValues['group_${i}_answer_4'] = group.answer4.answer;
+      
       _initControllerForAnswer(i, 1, group.answer1.answer);
       _initControllerForAnswer(i, 2, group.answer2.answer);
       _initControllerForAnswer(i, 3, group.answer3.answer);
@@ -70,9 +78,11 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
     String key = 'group_${groupIndex}_answer_$answerIndex';
     controllers[key] = TextEditingController(text: text);
 
-    controllers[key]!.addListener(() {
-      _updateModelFromController(groupIndex, answerIndex);
-    });
+  _listenerMap[key] = () {
+    _updateModelFromController(groupIndex, answerIndex);
+  };
+  
+  controllers[key]!.addListener(_listenerMap[key]!);
   }
 
   void _updateModelFromController(int groupIndex, int answerIndex) {
@@ -116,10 +126,46 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
     List<AnswerGroup> newList = List<AnswerGroup>.from(answerGroups);
     newList[groupIndex] = updatedGroup;
 
-    hasUnsavedChanges = true;
     answerGroups = newList;
 
+    _debouncedCheckHasUnsavedChanges();
     _debouncedCheckEmptyFields();
+  }
+
+  void _checkHasUnsavedChanges() {
+    if (answerGroups.length != _originalTextValues.length / 4) {
+      setState(() {
+        hasUnsavedChanges = true;
+      });
+      return;
+    }
+
+    for (int i = 0; i < answerGroups.length; i++) {
+      for (int j = 1; j <= 4; j++) {
+        String key = 'group_${i}_answer_$j';
+        if (!controllers.containsKey(key) || !_originalTextValues.containsKey(key)) {
+          setState(() {
+            hasUnsavedChanges = true;
+          });
+          return;
+        }
+        
+        String currentText = controllers[key]!.text;
+        String originalText = _originalTextValues[key]!;
+        
+        if (currentText != originalText) {
+          setState(() {
+            hasUnsavedChanges = true;
+          });
+          return;
+        }
+      }
+    }
+
+    // If we get here, no changes found
+    setState(() {
+      hasUnsavedChanges = false;
+    });
   }
 
   bool _checkScheduled = false;
@@ -134,6 +180,19 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
         _checkForEmptyFields();
         _checkScheduled = false;
       });
+    }
+  }
+  
+  bool _checkChangesScheduled = false;
+  Future<void> _debouncedCheckHasUnsavedChanges() async {
+    if (_checkChangesScheduled) return;
+    _checkChangesScheduled = true;
+
+    await Future.delayed(Duration(milliseconds: 500));
+
+    if (mounted) {
+      _checkHasUnsavedChanges();
+      _checkChangesScheduled = false;
     }
   }
 
@@ -177,11 +236,11 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
 
     setState(() {
       answerGroups.add(newGroup);
-      hasUnsavedChanges = true;
       hasEmptyFields = true;
     });
+    
+    _debouncedCheckHasUnsavedChanges();
 
-    // Scroll to the new group
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
@@ -229,8 +288,9 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
 
         setState(() {
           answerGroups = [];
-          hasUnsavedChanges = true;
         });
+        
+        _debouncedCheckHasUnsavedChanges();
 
         await UserModuleUtil.deleteCustomModule(widget.moduleName);
 
@@ -251,15 +311,18 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
         List<AnswerGroup> newList = List<AnswerGroup>.from(answerGroups);
         newList.removeAt(visualIndex);
 
+        // Update controllers for groups after the deleted one
         for (int i = visualIndex; i < newList.length; i++) {
-          _rebuildControllersForGroup(i, newList[i]);
+          _removeControllersForGroup(i + 1); // Remove old controllers
+          _rebuildControllersForGroup(i, newList[i]); // Rebuild with new index
         }
 
         setState(() {
           answerGroups = newList;
-          hasUnsavedChanges = true;
           _checkForEmptyFields();
         });
+        
+        _debouncedCheckHasUnsavedChanges();
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -308,7 +371,6 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
 
     List<AnswerGroup> finalAnswerGroups = [];
 
-    // Process each answer group
     for (int i = 0; i < answerGroups.length; i++) {
       AnswerGroup group = answerGroups[i];
 
@@ -384,6 +446,15 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
           widget.moduleName, finalAnswerGroups);
 
       if (mounted) {
+        _originalTextValues.clear();
+        for (int i = 0; i < finalAnswerGroups.length; i++) {
+          var group = finalAnswerGroups[i];
+          _originalTextValues['group_${i}_answer_1'] = group.answer1.answer;
+          _originalTextValues['group_${i}_answer_2'] = group.answer2.answer;
+          _originalTextValues['group_${i}_answer_3'] = group.answer3.answer;
+          _originalTextValues['group_${i}_answer_4'] = group.answer4.answer;
+        }
+
         setState(() {
           answerGroups = finalAnswerGroups;
           isLoading = false;
@@ -420,20 +491,16 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
   }
 
   void _updateControllerWithoutListener(
-      int groupIndex, int answerIndex, String text) {
-    String key = 'group_${groupIndex}_answer_$answerIndex';
-    if (controllers.containsKey(key)) {
-      controllers[key]!.removeListener(() {
-        _updateModelFromController(groupIndex, answerIndex);
-      });
-
-      controllers[key]!.text = text;
-
-      controllers[key]!.addListener(() {
-        _updateModelFromController(groupIndex, answerIndex);
-      });
-    }
+    int groupIndex, int answerIndex, String text) {
+  String key = 'group_${groupIndex}_answer_$answerIndex';
+  if (controllers.containsKey(key) && _listenerMap.containsKey(key)) {
+    controllers[key]!.removeListener(_listenerMap[key]!);
+    
+    controllers[key]!.text = text;
+    
+    controllers[key]!.addListener(_listenerMap[key]!);
   }
+}
 
   Future<bool> _onWillPop() async {
     if (!hasUnsavedChanges) return true;
