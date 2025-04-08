@@ -30,6 +30,23 @@ class _SoundTriangularPathLayoutState extends State<SoundTriangularPathLayout> {
     double xOffset = initialXOffset;
     double yOffset = 30;
 
+    // Special case for single module - matches first button position exactly
+    if (widget.itemCount == 1) {
+      return Stack(
+        children: [
+          Positioned(
+            left: initialXOffset,
+            top: yOffset,
+            child: SizedBox(
+              width: widget.itemSize,
+              height: widget.itemSize,
+              child: widget.itemBuilder(context, 0),
+            ),
+          ),
+        ],
+      );
+    }
+
     for (int i = 0; i < widget.itemCount; i++) {
       if (i % 2 == 0) {
         xOffset = initialXOffset;

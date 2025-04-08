@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/background_noise_util.dart';
 import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
@@ -13,11 +14,13 @@ import 'package:confetti/confetti.dart';
 class MissedAnswer {
   final int semitoneDifference;
   final String correctDirection;
+  final String incorrectDirection;
   final String audioPath;
 
   MissedAnswer({
     required this.semitoneDifference,
     required this.correctDirection,
+    required this.incorrectDirection,
     required this.audioPath,
   });
 }
@@ -117,7 +120,6 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
       if (selectedFeedback == 'On') {
         playCorrectChime();
       }
-      // Automatically move to the next question after a short delay
       Future.delayed(Duration(milliseconds: 1000), () {
         moveToNextQuestion();
       });
@@ -125,6 +127,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
       missedAnswers.add(MissedAnswer(
         semitoneDifference: semitoneDifference,
         correctDirection: currentCorrectAnswer!.answer,
+        incorrectDirection: selectedAnswer,
         audioPath: currentCorrectAnswer!.path!,
       ));
     }
@@ -150,224 +153,266 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
 
   Widget buildCompletionScreen() {
     BackgroundNoiseUtil.stopSound();
-    return Stack(
-      alignment: Alignment.topCenter,
-      children: [
-        // Confetti Animation
-        ConfettiWidget(
-          confettiController: _confettiController,
-          blastDirectionality: BlastDirectionality.explosive,
-          particleDrag: 0.05,
-          emissionFrequency: 0.1,
-          numberOfParticles: 8,
-          gravity: 0.2,
-          colors: const [
-            Colors.yellow,
-            Colors.blue,
-            Colors.pink,
-            Colors.orange,
-            Colors.green
-          ],
-        ),
-        // Completion Screen Content
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 120.0, right: 120.0, top: 60.0),
-              child: Image.asset("assets/visuals/HBCompletion.png", fit: BoxFit.contain),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
-              child: AutoSizeText(
-                'Lesson Complete!',
-                maxLines: 1,
-                style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 7, 45, 78)),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            // Score Widget for Correct Answers
-            ScoreWidget(
-              context: context,
-              type: ScoreType.score,
-              correctAnswersCount: correctAnswers.toString(),
-              subtitleText: "Score",
-              icon: Icon(
-                Icons.star,
-                color: Color.fromARGB(255, 7, 45, 78),
-                size: 30,
-              ),
-              boxDecoration: gradientBoxDecoration,
-              total: widget.answerGroups.length,
-            ),
-            // Score Widget for Highest Score
-            ScoreWidget(
-              context: context,
-              type: ScoreType.score,
-              correctAnswersCount: correctAnswers.toString(),
-              subtitleText: "Highest Score",
-              icon: Icon(
-                Icons.emoji_events,
-                color: Color.fromARGB(255, 255, 255, 255),
-                size: 30,
-              ),
-              boxDecoration: blueBoxDecoration,
-              total: widget.answerGroups.length,
-            ),
-            // Sounds Missed Section
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
-              child: Text(
-                'Sounds Missed',
-                style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 7, 45, 78)),
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                itemCount: missedAnswers.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final missedAnswer = missedAnswers[index];
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 2.0,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withAlpha((0.5 * 255).toInt()),
-                            blurRadius: 5,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
+    return Scaffold(
+      body: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          ConfettiWidget(
+            confettiController: _confettiController,
+            blastDirectionality: BlastDirectionality.explosive,
+            particleDrag: 0.05,
+            emissionFrequency: 0.1,
+            numberOfParticles: 8,
+            gravity: 0.2,
+            colors: const [
+              Colors.yellow,
+              Colors.blue,
+              Colors.pink,
+              Colors.orange,
+              Colors.green
+            ],
+          ),
+          Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 120.0, right: 120.0, top: 60.0),
+                        child: Image.asset("assets/visuals/HBCompletion.png", fit: BoxFit.contain),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Semitone Text
-                            Text(
-                              "${missedAnswer.semitoneDifference} Semitones",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 7, 45, 78)),
-                            ),
-                            // Sound Icon to Replay the Missed Tone
-                            IconButton(
-                              icon: Icon(
-                                Icons.volume_up,
-                                color: Color.fromARGB(255, 7, 45, 78),
-                                size: 30,
-                              ),
-                              onPressed: () async {
-                                // Replay the missed tone using the stored audioPath
-                                await AudioUtil.playSound(missedAnswer.audioPath);
-                                print("Playing audio file: ${missedAnswer.audioPath}"); // Debug print
-                              },
-                            ),
-                            // Red Arrow (Incorrect Guess)
-                            Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  color: Color.fromRGBO(255, 0, 0, 0.2),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Image.asset(
-                                missedAnswer.correctDirection == "Up"
-                                    ? "assets/visuals/music_pitch/down_arrow.png"
-                                    : "assets/visuals/music_pitch/up_arrow.png",
-                                width: 30,
-                                height: 30,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Text(
-                                    missedAnswer.correctDirection == "Up"
-                                        ? "Down"
-                                        : "Up",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                            // Green Arrow (Correct Answer)
-                            Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Color.fromRGBO(0, 255, 0, 0.2),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Image.asset(
-                                missedAnswer.correctDirection == "Up"
-                                    ? "assets/visuals/music_pitch/up_arrow.png"
-                                    : "assets/visuals/music_pitch/down_arrow.png",
-                                width: 30,
-                                height: 30,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Text(
-                                    missedAnswer.correctDirection,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  );
-                                },
-                              ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
+                        child: AutoSizeText(
+                          'Lesson Complete!',
+                          maxLines: 1,
+                          style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 7, 45, 78)),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      ScoreWidget(
+                        context: context,
+                        type: ScoreType.score,
+                        correctAnswersCount: correctAnswers.toString(),
+                        subtitleText: "Score",
+                        icon: Icon(
+                          Icons.star,
+                          color: Color.fromARGB(255, 7, 45, 78),
+                          size: 30,
+                        ),
+                        boxDecoration: gradientBoxDecoration,
+                        total: widget.answerGroups.length,
+                      ),
+                      ScoreWidget(
+                        context: context,
+                        type: ScoreType.score,
+                        correctAnswersCount: correctAnswers.toString(),
+                        subtitleText: "Highest Score",
+                        icon: Icon(
+                          Icons.emoji_events,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          size: 30,
+                        ),
+                        boxDecoration: blueBoxDecoration,
+                        total: widget.answerGroups.length,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: Color.fromARGB(255, 7, 45, 78),
+                            width: 9.0,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withAlpha((0.5 * 255).toInt()),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 7, 45, 78),
+                                ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Text(
+                                  'Sounds Missed',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ),
+                            ),
+                            if (missedAnswers.isEmpty)
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  'No sounds missed! Great job!',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 7, 45, 78),
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            if (missedAnswers.isNotEmpty)
+                              SizedBox(
+                                height: 200,
+                                child: ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  itemCount: missedAnswers.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    final missedAnswer = missedAnswers[index];
+                                    return Container(
+                                      margin: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: Color.fromARGB(255, 7, 45, 78),
+                                          width: 6.0,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  'You Chose',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(255, 7, 45, 78),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  padding: EdgeInsets.all(12),
+                                                  decoration: BoxDecoration(
+                                                    color: Color.fromRGBO(255, 0, 0, 0.2),
+                                                    borderRadius: BorderRadius.circular(12),
+                                                  ),
+                                                  child: Image.asset(
+                                                    missedAnswer.correctDirection == "Up"
+                                                        ? "assets/visuals/music_pitch/down_arrow.png"
+                                                        : "assets/visuals/music_pitch/up_arrow.png",
+                                                    width: 40,
+                                                    height: 40,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "${missedAnswer.semitoneDifference} Semitones",
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(255, 7, 45, 78),
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            IconButton(
+                                              icon: Icon(
+                                                Icons.volume_up,
+                                                color: Color.fromARGB(255, 7, 45, 78),
+                                                size: 40,
+                                              ),
+                                              onPressed: () async {
+                                                print("Playing missed answer audio: ${missedAnswer.audioPath}");
+                                                await AudioUtil.playSound(missedAnswer.audioPath);
+                                              },
+                                            ),
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  'Correct',
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(255, 7, 45, 78),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  padding: EdgeInsets.all(12),
+                                                  decoration: BoxDecoration(
+                                                    color: Color.fromRGBO(0, 255, 0, 0.2),
+                                                    borderRadius: BorderRadius.circular(12),
+                                                  ),
+                                                  child: Image.asset(
+                                                    missedAnswer.correctDirection == "Up"
+                                                        ? "assets/visuals/music_pitch/up_arrow.png"
+                                                        : "assets/visuals/music_pitch/down_arrow.png",
+                                                    width: 40,
+                                                    height: 40,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "${missedAnswer.semitoneDifference} Semitones",
+                                                  style: TextStyle(
+                                                    color: Color.fromARGB(255, 7, 45, 78),
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                          ],
+                        ),
                       ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 20.0, bottom: 40.0, left: 20, right: 20),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 94, 224, 82),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  );
-                },
-              ),
-            ),
-            // Continue Button
-            Padding(
-              padding: const EdgeInsets.only(top: 40.0, bottom: 40.0, left: 20, right: 20),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 94, 224, 82),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    minimumSize: Size(400, 50),
+                    elevation: 5,
                   ),
-                  minimumSize: Size(400, 50),
-                  elevation: 5,
-                ),
-                child: Text(
-                  'CONTINUE',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
+                  child: Text(
+                    'CONTINUE',
+                    style: TextStyle(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -376,10 +421,10 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
       children: [
         Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 40.0),
+                padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 20.0),
                 child: Text(
                   'Is the second note higher or lower?',
                   style: TextStyle(
@@ -389,9 +434,8 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                   ),
                 ),
               ),
-              // Sound Icon Button with Blue Background
               Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 40.0),
+                padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 20.0),
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 7, 45, 78),
@@ -411,75 +455,77 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                   label: Text(''),
                 ),
               ),
-              // Two Rectangular Buttons for Up and Down
               Padding(
-                padding: const EdgeInsets.only(bottom: 40.0),
+                padding: const EdgeInsets.only(bottom: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Up Button
-                    GestureDetector(
-                      onTap: () {
-                        checkAnswer("Up");
-                      },
-                      child: Container(
-                        width: 150,
-                        height: 300,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8), // Rounded corners
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withAlpha((0.5 * 255).toInt()),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: Offset(0, 3),
+                    // Up Button - aligned with left edge of sound button
+                    Container(
+                      margin: EdgeInsets.only(right: 27.5), // Adjusted spacing
+                      child: GestureDetector(
+                        onTap: () {
+                          checkAnswer("Up");
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 300,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withAlpha((0.5 * 255).toInt()),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Image.asset(
+                              "assets/visuals/music_pitch/up_arrow.png",
+                              width: 100,
+                              height: 100,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Text("Up");
+                              },
                             ),
-                          ],
-                        ),
-                        child: Center(
-                          child: Image.asset(
-                            "assets/visuals/music_pitch/up_arrow.png",
-                            width: 100,
-                            height: 100,
-                            errorBuilder: (context, error, stackTrace) {
-                              print("Error loading image: up_arrow.png"); // Debug print
-                              return Text("Up");
-                            },
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(width: 20),
-                    // Down Button
-                    GestureDetector(
-                      onTap: () {
-                        checkAnswer("Down");
-                      },
-                      child: Container(
-                        width: 150,
-                        height: 300,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withAlpha((0.5 * 255).toInt()),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: Offset(0, 3),
+                    // Down Button - aligned with right edge of sound button
+                    Container(
+                      margin: EdgeInsets.only(left: 27.5), // Adjusted spacing
+                      child: GestureDetector(
+                        onTap: () {
+                          checkAnswer("Down");
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 300,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withAlpha((0.5 * 255).toInt()),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Image.asset(
+                              "assets/visuals/music_pitch/down_arrow.png",
+                              width: 100,
+                              height: 100,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Text("Down");
+                              },
                             ),
-                          ],
-                        ),
-                        child: Center(
-                          child: Image.asset(
-                            "assets/visuals/music_pitch/down_arrow.png",
-                            width: 100,
-                            height: 100,
-                            errorBuilder: (context, error, stackTrace) {
-                              print("Error loading image: down_arrow.png"); // Debug print
-                              return Text("Down");
-                            },
                           ),
                         ),
                       ),
@@ -495,50 +541,158 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: Container(
+            child: isCorrect
+                ? Container(
               width: double.infinity,
-              padding: EdgeInsets.all(16),
-              color: isCorrect ? Colors.green : Colors.red,
-              child: Column(
-                children: [
-                  Text(
-                    isCorrect ? "Correct" : "Incorrect",
+              height: 100,
+              color: Colors.white,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    'Great',
                     style: TextStyle(
-                      color: Colors.white,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 7, 45, 78),
                     ),
                   ),
-                  if (isCorrect)
-                    SizedBox(height: 50),
-                  if (!isCorrect)
-                    Column(
-                      children: [
-                        SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: moveToNextQuestion,
+                ),
+              ),
+            ).animate(onPlay: (controller) => controller.forward()).slide(
+                begin: Offset(0, 1),
+                duration: 300.ms,
+                curve: Curves.easeInOutQuart)
+                : Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16),
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 30.0),
+                        child: Text(
+                          'Incorrect',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 7, 45, 78),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'Correct',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 7, 45, 78),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        width: 160,
+                        height: 60,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            print("Playing incorrect answer audio: ${currentCorrectAnswer!.path}");
+                            AudioUtil.playSound(currentCorrectAnswer!.path!);
+                          },
+                          icon: Icon(
+                            Icons.volume_up,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          label: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              "Lower",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 7, 45, 78),
+                            backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            minimumSize: Size(200, 50),
-                          ),
-                          child: Text(
-                            "Continue",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            elevation: 3,
                           ),
                         ),
-                      ],
+                      ),
+                      SizedBox(
+                        width: 160,
+                        height: 60,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            print("Playing correct answer audio: ${currentCorrectAnswer!.path}");
+                            AudioUtil.playSound(currentCorrectAnswer!.path!);
+                          },
+                          icon: Icon(
+                            Icons.volume_up,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          label: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              "Higher",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            elevation: 3,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Center(
+                    child: SizedBox(
+                      width: 350,
+                      height: 56,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 7, 45, 78),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        onPressed: moveToNextQuestion,
+                        child: Text(
+                          'Continue',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
+                  ),
                 ],
               ),
             ),
-          )
+          ),
       ],
     );
   }
