@@ -19,7 +19,7 @@ class BackgroundNoiseUtil {
         stayAwake: false,
         contentType: AndroidContentType.music,
         usageType: AndroidUsageType.media,
-        audioFocus: AndroidAudioFocus.gain,
+        audioFocus: AndroidAudioFocus.none,
       ),
       iOS: AudioContextIOS(
         category: AVAudioSessionCategory.playback,
