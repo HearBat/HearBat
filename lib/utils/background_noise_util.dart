@@ -71,13 +71,13 @@ class BackgroundNoiseUtil {
   static Future<void> _adjustVolume(String? volumeLevel) async {
     switch (volumeLevel) {
       case 'Low':
-        _backgroundAudioPlayer.setVolume(0.4);
+        _backgroundAudioPlayer.setVolume(0.3);
       case 'Medium':
         _backgroundAudioPlayer.setVolume(0.7);  
       case 'High':
         _backgroundAudioPlayer.setVolume(1.0);
       default:
-        _backgroundAudioPlayer.setVolume(0.4);
+        _backgroundAudioPlayer.setVolume(0.3);
     }
   }
 }
