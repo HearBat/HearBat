@@ -187,11 +187,6 @@ class _ModulePageState extends State<ModuleWidget> {
                 padding: const EdgeInsets.only(left: 18.0),
                 child: IconButton(
                   onPressed: () {
-                    //SharedPreferences.getInstance().then((prefs) {
-                    //  prefs.setString('difficultyPreference', 'Normal');
-                    //  prefs.setString('backgroundSoundPreference', 'None');
-                    //  prefs.setString('audioVolumePreference', 'Low');
-                    //});
                     BackgroundNoiseUtil.stopSound();
                     AudioUtil.stop();
                     Navigator.of(context).pop();
