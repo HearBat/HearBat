@@ -371,6 +371,9 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
       setState(() {
         _selectedSound = savedSound;
       });
+      if (savedSound != "None") {
+        BackgroundNoiseUtil.playPreview();
+      }
     }
   }
 
