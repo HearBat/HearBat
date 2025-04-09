@@ -118,8 +118,6 @@ Future<void> _cacheAndNavigate(
         );
       },
     );
-=======
-  BuildContext? dialogContext;
   
   showDialog(
     context: context,
@@ -314,42 +312,6 @@ Future<void> _cacheAndNavigate(
                       VolumeOptionsWidget(
                         updatePreferenceCallback: (preference, value) =>
                             _updatePreference(preference, value),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Text(
-                  "Feedback Noise",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  "Choose to hear a chime for correct answers",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10.0),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Theme
-                        .of(context)
-                        .scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(
-                        color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      FeedbackOptionsWidget(
-                        updateFeedbackCallback: (feedback) =>
-                            _updateFeedback(feedback),
                       ),
                     ],
                   ),

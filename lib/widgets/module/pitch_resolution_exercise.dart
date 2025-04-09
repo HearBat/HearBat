@@ -83,9 +83,21 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
   }
 
   void _initializeQuestion() {
+    if (currentQuestionIndex < 0 || currentQuestionIndex >= widget.answerGroups.length) {
+      showResults();
+      return;
+    }
+
     final currentGroup = widget.answerGroups[currentQuestionIndex];
+
+    if (currentGroup.answers.isEmpty) {
+      moveToNextQuestion();
+      return;
+    }
+
     final random = Random();
-    currentCorrectAnswer = currentGroup.answers[random.nextInt(2)];
+    currentCorrectAnswer = currentGroup.answers[random.nextInt(currentGroup.answers.length)];
+    print("Selected answer: ${currentCorrectAnswer?.path}");
     _playCurrentQuestionAudio();
   }
 
@@ -246,7 +258,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                               padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 7, 45, 78),
-                                ),
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 10.0),
                                 child: Text(
@@ -700,12 +712,12 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: moduleCompleted
-        ? null
-            : AppBar(
+      appBar: moduleCompleted
+          ? null
+          : AppBar(
         surfaceTintColor: Colors.transparent,
         leading: Padding(
-        padding: const EdgeInsets.only(left: 18.0),
+          padding: const EdgeInsets.only(left: 18.0),
           child: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
@@ -713,13 +725,13 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
             icon: Icon(Icons.close, size: 40),
           ),
         ),
-          titleSpacing: 0,
-          title: ModuleProgressBarWidget(
-            currentIndex: currentQuestionIndex,
-            total: widget.answerGroups.length,
-          ),
-          backgroundColor: Color.fromARGB(255, 232, 218, 255),
+        titleSpacing: 0,
+        title: ModuleProgressBarWidget(
+          currentIndex: currentQuestionIndex,
+          total: widget.answerGroups.length,
         ),
+        backgroundColor: Color.fromARGB(255, 232, 218, 255),
+      ),
       body: SafeArea(
         child: moduleCompleted ? buildCompletionScreen() : buildExerciseContent(),
       ),
