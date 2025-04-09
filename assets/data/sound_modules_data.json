@@ -62,7 +62,7 @@
                   "image": "assets/visuals/home/dog bark.png"
                 },
                 {
-                  "answer": "Micromp3e",
+                  "answer": "Microwave",
                   "path": "audio/sounds/home/microwave.mp3",
                   "image": "assets/visuals/home/microwave.png"
                 },
@@ -201,7 +201,7 @@
             {
               "answers": [
                 {
-                  "answer": "Micromp3e",
+                  "answer": "Microwave",
                   "path": "audio/sounds/home/microwave.mp3",
                   "image": "assets/visuals/home/microwave.png"
                 },
@@ -312,7 +312,7 @@
                   "image": "assets/visuals/home/clock ticking.png"
                 },
                 {
-                  "answer": "Micromp3e",
+                  "answer": "Microwave",
                   "path": "audio/sounds/home/microwave.mp3",
                   "image": "assets/visuals/home/microwave.png"
                 },
@@ -451,7 +451,7 @@
                   "image": "assets/visuals/home/doorbell emoji.png"
                 },
                 {
-                  "answer": "Micromp3e",
+                  "answer": "Microwave",
                   "path": "audio/sounds/home/microwave.mp3",
                   "image": "assets/visuals/home/microwave.png"
                 },
@@ -586,7 +586,7 @@
                   "image": "assets/visuals/home/garbage disposal.png"
                 },
                 {
-                  "answer": "Micromp3e",
+                  "answer": "Microwave",
                   "path": "audio/sounds/home/microwave.mp3",
                   "image": "assets/visuals/home/microwave.png"
                 }
@@ -715,7 +715,7 @@
             {
               "answers": [
                 {
-                  "answer": "Micromp3e",
+                  "answer": "Microwave",
                   "path": "audio/sounds/home/microwave.mp3",
                   "image": "assets/visuals/home/microwave.png"
                 },
@@ -831,7 +831,7 @@
                   "image": "assets/visuals/home/book page flipping.png"
                 },
                 {
-                  "answer": "Micromp3e",
+                  "answer": "Microwave",
                   "path": "audio/sounds/home/microwave.mp3",
                   "image": "assets/visuals/home/microwave.png"
                 }
