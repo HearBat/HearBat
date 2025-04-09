@@ -56,12 +56,12 @@ class GoogleTTSUtil {
 
   // Converts text to speech and plays the audio.
   // Downloads the MP3 file if it's not cached.
-  Future<void> speak(String text, String voicetype, {bool isQuestion = false}) async {
+  Future<void> speak(String text, String voicetype, {bool isQuestion = false, bool hardModeEnabled = true}) async {
     // Check if this is the special accent preview.
     bool isAccentPreview = (text == "Hello this is how I sound");
 
     // If hard mode is enabled and it's a question, modify the spoken text.
-    if (_isHardMode && !isAccentPreview && isQuestion) {
+    if (_isHardMode && !isAccentPreview && isQuestion && hardModeEnabled) {
       text = "Please select $text as the answer";
     }
 

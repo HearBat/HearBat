@@ -90,7 +90,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   }
 
   Future<void> _playSentence() async {
-    await _ttsUtil.speak(_sentence, voiceType);
+    await _ttsUtil.speak(_sentence, voiceType, hardModeEnabled: false);
   }
 
   List<String> shuffledSentences = [];
