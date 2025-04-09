@@ -12,6 +12,7 @@ import 'check_button_widget.dart';
 import 'package:confetti/confetti.dart';
 import 'dart:math';
 import 'score_widget.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class SpeechModuleWidget extends StatefulWidget {
   final String chapter;
@@ -46,6 +47,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
 
   final GoogleTTSUtil _ttsUtil = GoogleTTSUtil();
 
+  String ?selectedFeedback = 'on';
+
   @override
   void initState() {
     super.initState();
@@ -56,6 +59,21 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     _confettiController.play();
     setState(() {});
     BackgroundNoiseUtil.playSavedSound();
+    _loadFeedbackPreference();
+  }
+
+  // Load the saved feedback preference from SharedPreferences
+  void _loadFeedbackPreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedFeedback = prefs.getString('feedbackPreference'); // Default to 'on' if no saved value
+    });
+  }
+
+  // Plays the audio that indicates the user selected the correct answer
+  void playCorrectChime() async {
+    final player = AudioPlayer();
+    await player.play(AssetSource("audio/sounds/feedback/correct answer chime.mp3"));
   }
 
   Future<void> _init() async {
@@ -172,8 +190,15 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
         _isSubmitted = false;
         _transcription = '';
       }
+      if (_grade == 100 && _isCheckPressed) {
+        if (selectedFeedback == 'On') {
+          playCorrectChime(); // Play a chime if the answer is correct
+        }
+      }
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -383,16 +408,21 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                 Icons.emoji_events,
                 color: Color.fromARGB(255, 255, 255, 255),
                 size: 30,
-              ),
-              boxDecoration: blueBoxDecoration,
-              total: 100, // editing
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 40.0, bottom: 40.0, left: 20, right: 20),
-              child: ElevatedButton(
-                onPressed: () =>
-                  Navigator.pop(context),
+            boxDecoration: blueBoxDecoration,
+            total: 100, // editing
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                top: 40.0, bottom: 40.0, left: 20, right: 20),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+                  
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 94, 224, 82),
                   shape: RoundedRectangleBorder(

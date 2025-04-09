@@ -23,7 +23,7 @@ class SoundChapters extends StatelessWidget {
 
     return Scaffold(
       appBar: TopBar(
-        title: "SOUND CHAPTERS",
+        title: "SOUND",
         leadingIcon: Icons.west,
       ),
       body: ListView(
