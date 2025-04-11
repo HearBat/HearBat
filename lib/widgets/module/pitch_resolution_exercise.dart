@@ -94,21 +94,9 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
   }
 
   void _initializeQuestion() {
-    if (currentQuestionIndex < 0 || currentQuestionIndex >= widget.answerGroups.length) {
-      showResults();
-      return;
-    }
-
     final currentGroup = widget.answerGroups[currentQuestionIndex];
-
-    if (currentGroup.answers.isEmpty) {
-      moveToNextQuestion();
-      return;
-    }
-
     final random = Random();
-    currentCorrectAnswer = currentGroup.answers[random.nextInt(currentGroup.answers.length)];
-    print("Selected answer: ${currentCorrectAnswer?.path}");
+    currentCorrectAnswer = currentGroup.answers[random.nextInt(2)];
     _playCurrentQuestionAudio();
   }
 
