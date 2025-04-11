@@ -57,7 +57,7 @@ class _WordChaptersState extends State<WordChapters> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
-        title: "WORD CHAPTERS",
+        title: "WORD",
         leadingIcon: Icons.west,
       ),
       body: ListView(

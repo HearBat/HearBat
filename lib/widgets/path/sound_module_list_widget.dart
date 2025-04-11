@@ -14,8 +14,7 @@ class SoundModuleListWidget extends StatelessWidget {
     var moduleList = modules.entries.toList();
     void navigate(String moduleName, List<AnswerGroup> answerGroups) {
       print("Navigating to chapter: $chapter");
-      Navigator.push(
-        context,
+      Navigator.of(context, rootNavigator: true).push(
         MaterialPageRoute(
           builder: (context) => DifficultySelectionWidget(
             moduleName: moduleName,
@@ -24,6 +23,7 @@ class SoundModuleListWidget extends StatelessWidget {
             isWord: false,
             displayDifficulty: false,
           ),
+          fullscreenDialog: true,
         ),
       );
     }

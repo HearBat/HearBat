@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/audio_util.dart';
+import 'package:hearbat/utils/cache_sentences_util.dart';
 import 'package:hearbat/widgets/module/speech_module_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../module/module_widget.dart';
@@ -8,6 +9,7 @@ import '../module/pitch_resolution_exercise.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
 import 'package:hearbat/utils/background_noise_util.dart';
 
+// ignore_for_file: use_build_context_synchronously
 class DifficultySelectionWidget extends StatefulWidget {
   final String moduleName;
   final String? chapter;
@@ -27,7 +29,6 @@ class DifficultySelectionWidget extends StatefulWidget {
 
 class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
   String _difficulty = 'Normal';
-  String _feedback = 'On';
   final CacheWordsUtil cacheUtil = CacheWordsUtil();
   bool isCaching = false;
   String? _voiceType;
@@ -68,7 +69,6 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _difficulty = prefs.getString('difficultyPreference') ?? 'Normal';
-      _feedback = prefs.getString('feedbackPreference') ?? 'On';
     });
   }
 
@@ -93,25 +93,20 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
     _updatePreference('difficultyPreference', _difficulty);
   }
 
-  void _updateFeedback(String? value) {
-    setState(() {
-      _feedback = value!;
-    });
-    _updatePreference('feedbackPreference', _feedback);
-  }
-
-  Future<void> _cacheAndNavigate(String moduleName,
-      List<AnswerGroup> answerGroups) async {
+  Future<void> _cacheAndNavigate(
+      String moduleName, List<AnswerGroup> answerGroups) async {
     if (_voiceType == null) {
       print("Voice type not set. Unable to cache module words.");
       return;
     }
 
-    // Show loading indicator while caching
+    BuildContext? dialogContext;
+
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (BuildContext context) {
+      builder: (BuildContext ctx) {
+        dialogContext = ctx;
         return AlertDialog(
           content: Row(
             children: [
@@ -124,47 +119,55 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
       },
     );
 
-    // Caching all words (only for word and sound modules)
-    if (widget.isWord || widget.sentences == null) {
-      await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
+    try {
+      if (widget.isWord || widget.sentences == null) {
+        await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
+      }
+
+      if (widget.sentences != null) {
+        await CacheSentencesUtil().cacheSentences(widget.sentences!);
+      }
+    } catch (error) {
+      print('Failed to cache content: $error');
     }
 
-    // Check if the widget is still in the tree (mounted) after the async operation
-    if (!mounted) return; // Early return if not mounted
+    if (!context.mounted) return;
 
-    Navigator.pop(context); // Close the loading dialog if still
+    if (dialogContext != null && Navigator.canPop(dialogContext!)) {
+      Navigator.of(dialogContext!).pop();
+    }
 
-    // Navigate to the appropriate widget based on module type
-    if (widget.sentences != null) {
+    if (widget.chapter == "Pitch Resolution") {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              SpeechModuleWidget(
-                chapter: moduleName,
-                sentences: widget.sentences!,
-                voiceType: widget.voiceType!,
-              ),
+          builder: (context) => PitchResolutionExercise(answerGroups: answerGroups),
         ),
       );
-    } else if (widget.chapter == "Pitch Resolution") {
+    }
+    else if (widget.sentences != null) {
+      // Speech module
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              PitchResolutionExercise(answerGroups: answerGroups),
+          builder: (context) => SpeechModuleWidget(
+            chapter: moduleName,
+            sentences: widget.sentences!,
+            voiceType: widget.voiceType!,
+          ),
         ),
       );
-    } else {
+    }
+    else {
+      // Default module
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              ModuleWidget(
-                title: moduleName,
-                answerGroups: answerGroups,
-                isWord: widget.isWord,
-              ),
+          builder: (context) => ModuleWidget(
+            title: moduleName,
+            answerGroups: answerGroups,
+            isWord: widget.isWord,
+          ),
         ),
       );
     }
@@ -289,42 +292,6 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                       VolumeOptionsWidget(
                         updatePreferenceCallback: (preference, value) =>
                             _updatePreference(preference, value),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Text(
-                  "Feedback Noise",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  "Choose to hear a chime for correct answers",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10.0),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Theme
-                        .of(context)
-                        .scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(
-                        color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      FeedbackOptionsWidget(
-                        updateFeedbackCallback: (feedback) =>
-                            _updateFeedback(feedback),
                       ),
                     ],
                   ),
@@ -673,89 +640,6 @@ class DifficultyOptionsWidgetState extends State<DifficultyOptionsWidget> {
           endIndent: 20,
         ),
         _buildOption('Hard'),
-      ],
-    );
-  }
-}
-//test vvv
-class FeedbackOptionsWidget extends StatefulWidget {
-  final Function(String) updateFeedbackCallback;
-
-  FeedbackOptionsWidget({required this.updateFeedbackCallback});
-
-  @override
-  FeedbackOptionsWidgetState createState() => FeedbackOptionsWidgetState();
-}
-
-class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
-  String _selectedFeedback = 'On';
-
-  @override
-  void initState() {
-    super.initState();
-    _loadSavedPreference();
-  }
-
-  void _loadSavedPreference() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? savedFeedback = prefs.getString('feedbackPreference');
-    if (savedFeedback != null) {
-      _selectedFeedback = savedFeedback;
-    }
-  }
-
-  void _handleTap(String feedback) async{
-    setState(() {
-      _selectedFeedback = feedback;
-      widget.updateFeedbackCallback(feedback);
-    });
-
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('feedbackPreference', _selectedFeedback);  // Save the selected feedback
-
-  }
-
-  Widget _buildOption(String feedback) {
-    bool isSelected = _selectedFeedback == feedback;
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8.0),
-      child: InkWell(
-        onTap: () => _handleTap(feedback),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5.0),
-            child: ListTile(
-              title: Text(
-                feedback,
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-              trailing: isSelected
-                  ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
-                  : null,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        _buildOption('Off'),
-        Divider(
-          color: Color.fromARGB(255, 7, 45, 78),
-          thickness: 3,
-          indent: 20,
-          endIndent: 20,
-        ),
-        _buildOption('On'),
       ],
     );
   }

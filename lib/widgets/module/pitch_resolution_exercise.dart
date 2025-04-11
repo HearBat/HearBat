@@ -43,6 +43,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
   bool isCorrect = false;
   bool moduleCompleted = false;
   String selectedFeedback = 'On';
+  String? _selectedDirection;
   Answer? currentCorrectAnswer;
   ConfettiController _confettiController = ConfettiController(duration: const Duration(seconds: 3));
 
@@ -53,8 +54,10 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
     _initializeQuestion();
     _confettiController = ConfettiController(duration: const Duration(seconds: 3));
     _confettiController.play();
-    _initializeBackgroundNoise();
     AudioUtil.initialize();
+    BackgroundNoiseUtil.initialize().then((_) {
+      BackgroundNoiseUtil.playSavedSound();
+    });
   }
 
   @override
@@ -62,12 +65,14 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
     BackgroundNoiseUtil.stopSound();
     AudioUtil.stop();
     _confettiController.dispose();
-    super.dispose();
-  }
 
-  // Initialize and play background noise
-  void _initializeBackgroundNoise() async {
-    await BackgroundNoiseUtil.playSavedSound();
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setString('difficultyPreference', 'Normal');
+      prefs.setString('backgroundSoundPreference', 'None');
+      prefs.setString('audioVolumePreference', 'Low');
+    });
+
+    super.dispose();
   }
 
   void _loadFeedbackPreference() async {
@@ -80,6 +85,12 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
   void playCorrectChime() async {
     final player = AudioPlayer();
     await player.play(AssetSource("audio/sounds/feedback/correct answer chime.mp3"));
+  }
+
+  // Plays the audio that indicates the user selected the wrong answer
+  void playWrongChime() async {
+    final player = AudioPlayer();
+    await player.play(AssetSource("audio/sounds/feedback/wrong answer chime.mp3"));
   }
 
   void _initializeQuestion() {
@@ -106,22 +117,26 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
   }
 
   void checkAnswer(String selectedAnswer) {
-    if (currentCorrectAnswer == null) return;
+    if (currentCorrectAnswer == null || _selectedDirection != null) return;
 
     final semitoneDifference = extractSemitoneDifference(currentCorrectAnswer!.path!);
+    final isAnswerCorrect = selectedAnswer == currentCorrectAnswer!.answer;
 
     setState(() {
+      _selectedDirection = selectedAnswer;
       showFeedback = true;
-      isCorrect = selectedAnswer == currentCorrectAnswer!.answer;
+      isCorrect = isAnswerCorrect;
     });
 
-    if (isCorrect) {
+    if (isAnswerCorrect) {
       correctAnswers++;
       if (selectedFeedback == 'On') {
         playCorrectChime();
       }
       Future.delayed(Duration(milliseconds: 1000), () {
-        moveToNextQuestion();
+        if (mounted) {
+          moveToNextQuestion();
+        }
       });
     } else {
       missedAnswers.add(MissedAnswer(
@@ -130,18 +145,26 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
         incorrectDirection: selectedAnswer,
         audioPath: currentCorrectAnswer!.path!,
       ));
+      if (selectedFeedback == 'On') {
+        playWrongChime();
+      }
     }
   }
 
   void moveToNextQuestion() {
+    setState(() {
+      _selectedDirection = null;
+      showFeedback = false;
+      isCorrect = false;
+    });
+
     if (currentQuestionIndex < widget.answerGroups.length - 1) {
       setState(() {
         currentQuestionIndex++;
-        showFeedback = false;
       });
       _initializeQuestion();
     } else {
-      showResults(); // Show results if all questions are answered
+      showResults();
     }
   }
 
@@ -246,7 +269,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                               padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 7, 45, 78),
-                                ),
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 10.0),
                                 child: Text(
@@ -389,7 +412,6 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
-                    Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 94, 224, 82),
@@ -444,9 +466,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                     ),
                     minimumSize: Size(355, 90),
                   ),
-                  onPressed: () {
-                    _playCurrentQuestionAudio();
-                  },
+                  onPressed: _playCurrentQuestionAudio,
                   icon: Icon(
                     Icons.volume_up,
                     color: Colors.white,
@@ -460,19 +480,22 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Up Button - aligned with left edge of sound button
+                    // Up Button
                     Container(
-                      margin: EdgeInsets.only(right: 27.5), // Adjusted spacing
+                      margin: EdgeInsets.only(right: 27.5),
                       child: GestureDetector(
-                        onTap: () {
-                          checkAnswer("Up");
-                        },
+                        onTap: _selectedDirection == null ? () => checkAnswer("Up") : null,
                         child: Container(
                           width: 150,
                           height: 300,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(8),
+                            border: _selectedDirection == "Up"
+                                ? Border.all(
+                                color: isCorrect ? Colors.green : Colors.red,
+                                width: 4)
+                                : null,
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withAlpha((0.5 * 255).toInt()),
@@ -483,31 +506,40 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                             ],
                           ),
                           child: Center(
-                            child: Image.asset(
-                              "assets/visuals/music_pitch/up_arrow.png",
-                              width: 100,
-                              height: 100,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Text("Up");
-                              },
+                            child: Opacity(
+                              opacity: _selectedDirection != null && _selectedDirection != "Up" ? 0.5 : 1.0,
+                              child: Image.asset(
+                                "assets/visuals/music_pitch/up_arrow.png",
+                                width: 100,
+                                height: 100,
+                                color: _selectedDirection == "Up"
+                                    ? (isCorrect ? Colors.green : Colors.red)
+                                    : null,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Text("Up");
+                                },
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                    // Down Button - aligned with right edge of sound button
+                    // Down Button
                     Container(
-                      margin: EdgeInsets.only(left: 27.5), // Adjusted spacing
+                      margin: EdgeInsets.only(left: 27.5),
                       child: GestureDetector(
-                        onTap: () {
-                          checkAnswer("Down");
-                        },
+                        onTap: _selectedDirection == null ? () => checkAnswer("Down") : null,
                         child: Container(
                           width: 150,
                           height: 300,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(8),
+                            border: _selectedDirection == "Down"
+                                ? Border.all(
+                                color: isCorrect ? Colors.green : Colors.red,
+                                width: 4)
+                                : null,
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withAlpha((0.5 * 255).toInt()),
@@ -518,13 +550,19 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                             ],
                           ),
                           child: Center(
-                            child: Image.asset(
-                              "assets/visuals/music_pitch/down_arrow.png",
-                              width: 100,
-                              height: 100,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Text("Down");
-                              },
+                            child: Opacity(
+                              opacity: _selectedDirection != null && _selectedDirection != "Down" ? 0.5 : 1.0,
+                              child: Image.asset(
+                                "assets/visuals/music_pitch/down_arrow.png",
+                                width: 100,
+                                height: 100,
+                                color: _selectedDirection == "Down"
+                                    ? (isCorrect ? Colors.green : Colors.red)
+                                    : null,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Text("Down");
+                                },
+                              ),
                             ),
                           ),
                         ),
@@ -700,12 +738,12 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: moduleCompleted
-        ? null
-            : AppBar(
+      appBar: moduleCompleted
+          ? null
+          : AppBar(
         surfaceTintColor: Colors.transparent,
         leading: Padding(
-        padding: const EdgeInsets.only(left: 18.0),
+          padding: const EdgeInsets.only(left: 18.0),
           child: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
@@ -713,13 +751,13 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
             icon: Icon(Icons.close, size: 40),
           ),
         ),
-          titleSpacing: 0,
-          title: ModuleProgressBarWidget(
-            currentIndex: currentQuestionIndex,
-            total: widget.answerGroups.length,
-          ),
-          backgroundColor: Color.fromARGB(255, 232, 218, 255),
+        titleSpacing: 0,
+        title: ModuleProgressBarWidget(
+          currentIndex: currentQuestionIndex,
+          total: widget.answerGroups.length,
         ),
+        backgroundColor: Color.fromARGB(255, 232, 218, 255),
+      ),
       body: SafeArea(
         child: moduleCompleted ? buildCompletionScreen() : buildExerciseContent(),
       ),

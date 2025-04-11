@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hearbat/widgets/top_bar_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
+
+import '../utils/cache_util.dart';
 import '../utils/google_tts_util.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -14,6 +16,8 @@ class ProfilePageState extends State<ProfilePage> {
   bool isCaching = false;
   AudioPlayer audioPlayer = AudioPlayer();
   String selectedLanguage = 'English';
+  String selectedCorrectFeedback = 'on';
+  String selectedWrongFeedback = 'on';
 
   List<String> voiceTypes = [
     "en-US-Studio-O",
@@ -129,6 +133,40 @@ class ProfilePageState extends State<ProfilePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Feedback Sound",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10.0),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(
+                          color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        FeedbackOptionsWidget(
+                          updatePreferenceCallback: _updatePreference,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Voice Select",
@@ -157,9 +195,98 @@ class ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
+            SizedBox(height: 20.0),
+            ClearCacheWidget(),
           ],
         ),
       ),
+    );
+  }
+}
+
+// Handles feedback settings/display
+class FeedbackOptionsWidget extends StatefulWidget {
+  final Function(String, String) updatePreferenceCallback;
+
+  FeedbackOptionsWidget({required this.updatePreferenceCallback});
+
+  @override
+  FeedbackOptionsWidgetState createState() => FeedbackOptionsWidgetState();
+}
+
+
+class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
+  String _selectedFeedback = "On";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedPreference();
+  }
+
+  // Load user preferences for feedback settings
+  void _loadSavedPreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? savedFeedback = prefs.getString('feedbackPreference');
+
+    if (savedFeedback != null) {
+      _selectedFeedback = savedFeedback;
+    }
+  }
+
+  // Uses the passed feedbackKey to determine which setting the user wants to modify
+  void _handleTap(String feedback) async {
+    setState(() {
+        _selectedFeedback = feedback;
+        widget.updatePreferenceCallback("feedbackPreference", _selectedFeedback);
+    });
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('feedbackPreference', _selectedFeedback);
+  }
+
+ Widget _buildOption(String feedback) {
+    bool isSelected = _selectedFeedback == feedback;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8.0),
+      child: InkWell(
+        onTap: () => _handleTap(feedback),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: ListTile(
+              title: Text(
+                feedback,
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+              trailing: isSelected
+                  ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
+                  : null,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        _buildOption('Off'),
+        Divider(
+          color: Color.fromARGB(255, 7, 45, 78),
+          thickness: 3,
+          indent: 20,
+          endIndent: 20,
+        ),
+        _buildOption('On'),
+      ],
     );
   }
 }
@@ -345,6 +472,71 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
 
     return Column(
       children: voiceOptionWidgets,
+    );
+  }
+}
+
+class ClearCacheWidget extends StatefulWidget {
+  @override
+  ClearCacheWidgetState createState() => ClearCacheWidgetState();
+}
+
+class ClearCacheWidgetState extends State<ClearCacheWidget> {
+  String _sizeText = "Fetching...";
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchSize();
+  }
+
+  Future<void> _fetchSize() async {
+    const units = ["B", "KiB", "MiB", "GiB"];
+
+    // Convert size to largest unit
+    double size = (await getCacheSize()).toDouble();
+    int unit = 0;
+    while (size >= 1024 && unit < units.length - 1) {
+      size /= 1024;
+      unit++;
+    }
+
+    setState(() {
+      _sizeText = "${size.toStringAsFixed(2)} ${units[unit]}";
+    });
+  }
+
+  Future<void> _handlePress() async {
+    await clearCache();
+    await _fetchSize();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            _handlePress();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color.fromARGB(255, 7, 45, 78),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            minimumSize: Size(380, 50),
+          ),
+          child: Text(
+            "CLEAR CACHE ($_sizeText)",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

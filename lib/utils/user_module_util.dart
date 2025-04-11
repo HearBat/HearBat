@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/models/chapter_model.dart';
+import 'package:hearbat/utils/cache_util.dart';
 
 class UserModuleUtil {
   static const String _storageKey = 'userCustomModules';
@@ -93,9 +94,31 @@ class UserModuleUtil {
     final String? modulesJson = prefs.getString(_storageKey);
     if (modulesJson != null) {
       Map<String, dynamic> modules = json.decode(modulesJson);
-      modules.remove(moduleName); // Remove the module
+
+      // Check if module data is valid
+      var moduleData = modules[moduleName];
+      if (moduleData is! List<dynamic>) {
+        return;
+      }
+
+      // Convert module data to list of AnswerGroups
+      final module = moduleData
+          .map((agData) => AnswerGroup.fromJson(Map<String, dynamic>.from(agData)))
+          .toList();
+
+      // Delete cached files
+      for (AnswerGroup ag in module) {
+        for (Answer ans in ag.answers) {
+          await clearCacheWord(ans.answer);
+        }
+      }
+
+      // Remove the module
+      modules.remove(moduleName);
+
+      // Save the updated modules data
       await prefs.setString(
-          _storageKey, json.encode(modules)); // Save the updated modules
+          _storageKey, json.encode(modules));
     }
   }
 }

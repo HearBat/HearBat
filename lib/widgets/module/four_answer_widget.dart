@@ -45,7 +45,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
   bool readyForCompletion = false;
   int currentIndex = 0;
   String language = 'English';
-  String selectedFeedback = 'On';
+  String ?selectedFeedback = 'On';
 
   @override
   void initState() {
@@ -60,8 +60,20 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
   void _loadFeedbackPreference() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      selectedFeedback = prefs.getString('feedbackPreference') ?? 'On'; // Default to 'On' if no saved value
+      selectedFeedback = prefs.getString('feedbackPreference'); // Default to 'on' if no saved value
     });
+  }
+
+  // Plays the audio that indicates the user selected the correct answer
+  void playCorrectChime() async {
+    final player = AudioPlayer();
+    await player.play(AssetSource("audio/sounds/feedback/correct answer chime.mp3"));
+  }
+
+  // Plays the audio that indicates the user selected the wrong answer
+  void playWrongChime() async {
+    final player = AudioPlayer();
+    await player.play(AssetSource("audio/sounds/feedback/wrong answer chime.mp3"));
   }
 
   // Loads the language preference from SharedPreferences.
@@ -111,7 +123,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
     setState(() {
       if (selectedWord!.answer == correctWord.answer) {
         if (selectedFeedback == 'On') {
-          playCorrectChime(); // Play a tune if the answer is correct
+          playCorrectChime(); // Play a chime if the answer is correct
         }
         print("Correct");
         widget.onCorrectAnswer();
@@ -127,6 +139,9 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
           }
         });
       } else {
+        if (selectedFeedback == 'On') {
+          playWrongChime(); // Play a chime if the answer is wrong
+        }
         print("Incorrect");
         widget.onIncorrectAnswer(selectedWord!, correctWord);
         incorrectWord = selectedWord;
@@ -160,11 +175,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
     }
   }
 
-  // Plays the audio that indicates the user selected the correct answer
-  void playCorrectChime() async {
-    final player = AudioPlayer();
-    await player.play(AssetSource("audio/sounds/feedback/correct answer chime.mp3"));
-  }
+
 
   // Updates the progress bar in the parent widget.
   void indexChange() {
@@ -173,7 +184,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
         Expanded(
           child: SingleChildScrollView(
@@ -269,7 +280,8 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
         Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            if (isAnswerFalse)
+            if (isAnswerFalse) ...[
+              ModalBarrier(dismissible: false),
               Container(
                 width: double.infinity,
                 height: 220,
@@ -351,7 +363,9 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                   begin: Offset(0, 1),
                   duration: 300.ms,
                   curve: Curves.easeInOutQuart),
-            if (isAnswerTrue)
+            ],
+            if (isAnswerTrue) ...[
+              ModalBarrier(dismissible: false),
               Container(
                 width: double.infinity,
                 height: 100,
@@ -372,6 +386,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                   begin: Offset(0, 1),
                   duration: 300.ms,
                   curve: Curves.easeInOutQuart),
+            ],
           ],
         ),
       ],
