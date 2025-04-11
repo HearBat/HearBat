@@ -93,20 +93,20 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
     _updatePreference('difficultyPreference', _difficulty);
   }
 
-Future<void> _cacheAndNavigate(
-    String moduleName, List<AnswerGroup> answerGroups) async {
-  if (_voiceType == null) {
-    print("Voice type not set. Unable to cache module words.");
-    return;
-  }
-  
-  BuildContext? dialogContext;
-    
-  // Show loading indicator while caching
+  Future<void> _cacheAndNavigate(
+      String moduleName, List<AnswerGroup> answerGroups) async {
+    if (_voiceType == null) {
+      print("Voice type not set. Unable to cache module words.");
+      return;
+    }
+
+    BuildContext? dialogContext;
+
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (BuildContext context) {
+      builder: (BuildContext ctx) {
+        dialogContext = ctx;
         return AlertDialog(
           content: Row(
             children: [
@@ -118,80 +118,60 @@ Future<void> _cacheAndNavigate(
         );
       },
     );
-  
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext ctx) {
-      dialogContext = ctx;
-      return AlertDialog(
-        content: Row(
-          children: [
-            CircularProgressIndicator(),
-            SizedBox(width: 10),
-            Text("Loading..."),
-          ],
-        ),
-      );
-    },
-  );
-  
-  try {
-    if (widget.isWord || widget.sentences == null) {
-      await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
+
+    try {
+      if (widget.isWord || widget.sentences == null) {
+        await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
+      }
+
+      if (widget.sentences != null) {
+        await CacheSentencesUtil().cacheSentences(widget.sentences!);
+      }
+    } catch (error) {
+      print('Failed to cache content: $error');
     }
-    
-    if (widget.sentences != null) {
-      await CacheSentencesUtil().cacheSentences(widget.sentences!);
+
+    if (!context.mounted) return;
+
+    if (dialogContext != null && Navigator.canPop(dialogContext!)) {
+      Navigator.of(dialogContext!).pop();
     }
-  } catch (error) {
-    print('Failed to cache content: $error');
-  }
 
-  if (!context.mounted) return; 
-
-  if (dialogContext != null && Navigator.canPop(dialogContext!)) {
-    Navigator.of(dialogContext!).pop();
-  }
-
-  if (widget.sentences != null) {
-    if (context.mounted) {
+    if (widget.chapter == "Pitch Resolution") {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              SpeechModuleWidget(
-                chapter: moduleName,
-                sentences: widget.sentences!,
-                voiceType: widget.voiceType!,
-              ),
-        ),
-      );
-    } else if (widget.chapter == "Pitch Resolution") {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) =>
-              PitchResolutionExercise(answerGroups: answerGroups),
+          builder: (context) => PitchResolutionExercise(answerGroups: answerGroups),
         ),
       );
     }
-  } else {
-    if (context.mounted) {
+    else if (widget.sentences != null) {
+      // Speech module
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              ModuleWidget(
-                title: moduleName,
-                answerGroups: answerGroups,
-                isWord: widget.isWord,
-              ),
+          builder: (context) => SpeechModuleWidget(
+            chapter: moduleName,
+            sentences: widget.sentences!,
+            voiceType: widget.voiceType!,
+          ),
+        ),
+      );
+    }
+    else {
+      // Default module
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ModuleWidget(
+            title: moduleName,
+            answerGroups: answerGroups,
+            isWord: widget.isWord,
+          ),
         ),
       );
     }
   }
-}
 
   @override
   Widget build(BuildContext context) {
