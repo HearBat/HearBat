@@ -412,6 +412,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 94, 224, 82),
@@ -638,17 +639,17 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                       SizedBox(
                         width: 160,
                         height: 60,
-                        child: ElevatedButton.icon(
-                          onPressed: () {
-                            print("Playing incorrect answer audio: ${currentCorrectAnswer!.path}");
-                            AudioUtil.playSound(currentCorrectAnswer!.path!);
-                          },
-                          icon: Icon(
-                            Icons.volume_up,
-                            color: Colors.white,
-                            size: 30,
+                        child: ElevatedButton(
+                          onPressed: null,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                            disabledBackgroundColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            elevation: 3,
                           ),
-                          label: FittedBox(
+                          child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
                               "Lower",
@@ -658,13 +659,6 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            elevation: 3,
                           ),
                         ),
                       ),
