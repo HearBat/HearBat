@@ -40,6 +40,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   bool _isSubmitted = false;
   bool _isCompleted = false;
   int currentSentenceIndex = 0;
+  int numberOfExercises = 8;
   String language = 'English';
   bool _isCheckPressed = false;
   ConfettiController _confettiController =
@@ -185,7 +186,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
       _isCheckPressed = !_isCheckPressed;
       if (_isCheckPressed == false) {
         currentSentenceIndex++;
-        if (currentSentenceIndex < widget.sentences.length) {
+        if (currentSentenceIndex < numberOfExercises) {
           _sentence = _getRandomSentence();
           _playSentence();
         } else {
@@ -221,7 +222,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
               titleSpacing: 0,
               title: ModuleProgressBarWidget(
                 currentIndex: currentSentenceIndex,
-                total: widget.sentences.length,
+                total: numberOfExercises,
               ),
               backgroundColor: Color.fromARGB(255, 232, 218, 255),
             ),
