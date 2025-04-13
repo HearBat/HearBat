@@ -121,4 +121,10 @@ class UserModuleUtil {
           _storageKey, json.encode(modules));
     }
   }
+
+  // Detects any duplicate module names
+  static Future<bool> doesModuleExist(String moduleName) async {
+    final modules = await getAllCustomModules();
+    return modules.containsKey(moduleName);
+  }
 }
