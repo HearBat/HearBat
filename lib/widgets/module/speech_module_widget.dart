@@ -40,6 +40,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   bool _isSubmitted = false;
   bool _isCompleted = false;
   int currentSentenceIndex = 0;
+  int numberOfExercises = 8;
   String language = 'English';
   bool _isCheckPressed = false;
   ConfettiController _confettiController =
@@ -47,7 +48,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
 
   final GoogleTTSUtil _ttsUtil = GoogleTTSUtil();
 
-  String ?selectedFeedback = 'on';
+  String? selectedFeedback = 'on';
 
   @override
   void initState() {
@@ -66,14 +67,16 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   void _loadFeedbackPreference() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      selectedFeedback = prefs.getString('feedbackPreference'); // Default to 'on' if no saved value
+      selectedFeedback = prefs
+          .getString('feedbackPreference'); // Default to 'on' if no saved value
     });
   }
 
   // Plays the audio that indicates the user selected the correct answer
   void playCorrectChime() async {
     final player = AudioPlayer();
-    await player.play(AssetSource("audio/sounds/feedback/correct answer chime.mp3"));
+    await player
+        .play(AssetSource("audio/sounds/feedback/correct answer chime.mp3"));
   }
 
   Future<void> _init() async {
@@ -182,7 +185,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
       _isCheckPressed = !_isCheckPressed;
       if (_isCheckPressed == false) {
         currentSentenceIndex++;
-        if (currentSentenceIndex < widget.sentences.length) {
+        if (currentSentenceIndex < numberOfExercises) {
           _sentence = _getRandomSentence();
         } else {
           _isCompleted = true;
@@ -197,8 +200,6 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
       }
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -219,7 +220,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
               titleSpacing: 0,
               title: ModuleProgressBarWidget(
                 currentIndex: currentSentenceIndex,
-                total: widget.sentences.length,
+                total: numberOfExercises,
               ),
               backgroundColor: Color.fromARGB(255, 232, 218, 255),
             ),
@@ -365,49 +366,48 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
             Colors.green
           ],
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding:
+        Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Padding(
+            padding:
                 const EdgeInsets.only(left: 120.0, right: 120.0, top: 60.0),
-              child: Image.asset("assets/visuals/HBCompletion.png", fit: BoxFit.contain),
+            child: Image.asset("assets/visuals/HBCompletion.png",
+                fit: BoxFit.contain),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
+            child: AutoSizeText(
+              'Lesson Complete!',
+              maxLines: 1,
+              style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 7, 45, 78)),
+              textAlign: TextAlign.center,
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
-              child: AutoSizeText(
-                'Lesson Complete!',
-                maxLines: 1,
-                style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 7, 45, 78)),
-                textAlign: TextAlign.center,
-              ),
+          ),
+          // Today's score
+          ScoreWidget(
+            context: context,
+            type: ScoreType.average,
+            correctAnswersCount: (_gradeSum / _attempts).toStringAsFixed(2),
+            subtitleText: "Average Accuracy",
+            icon: Icon(
+              Icons.star,
+              color: Color.fromARGB(255, 7, 45, 78),
+              size: 30,
             ),
-            // Today's score
-            ScoreWidget(
-              context: context,
-              type: ScoreType.average,
-              correctAnswersCount: (_gradeSum / _attempts).toStringAsFixed(2),
-              subtitleText: "Average Accuracy",
-              icon: Icon(
-                Icons.star,
-                color: Color.fromARGB(255, 7, 45, 78),
-                size: 30,
-              ),
-              boxDecoration: gradientBoxDecoration,
-              total: 100, // editing
-            ),
-            ScoreWidget(
-              context: context,
-              type: ScoreType.average,
-              correctAnswersCount: (_gradeSum / _attempts).toStringAsFixed(2),
-              subtitleText: "Highest Average Accuracy",
-              icon: Icon(
-                Icons.emoji_events,
-                color: Color.fromARGB(255, 255, 255, 255),
-                size: 30,
+            boxDecoration: gradientBoxDecoration,
+            total: 100, // editing
+          ),
+          ScoreWidget(
+            context: context,
+            type: ScoreType.average,
+            correctAnswersCount: (_gradeSum / _attempts).toStringAsFixed(2),
+            subtitleText: "Highest Average Accuracy",
+            icon: Icon(
+              Icons.emoji_events,
+              color: Color.fromARGB(255, 255, 255, 255),
+              size: 30,
             ),
             boxDecoration: blueBoxDecoration,
             total: 100, // editing
@@ -422,27 +422,25 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                   Navigator.pop(context);
                 }
               },
-                  
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 94, 224, 82),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  minimumSize: Size(400, 50),
-                  elevation: 5,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 94, 224, 82),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(
-                  'CONTINUE',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
+                minimumSize: Size(400, 50),
+                elevation: 5,
+              ),
+              child: Text(
+                'CONTINUE',
+                style: TextStyle(
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-          ]
-        )
+          ),
+        ])
       ],
     );
   }
