@@ -108,7 +108,7 @@ class UserModuleUtil {
 
       // Delete cached files
       for (AnswerGroup ag in module) {
-        for (Answer ans in [ag.answer1, ag.answer2, ag.answer3, ag.answer4]) {
+        for (Answer ans in ag.answers) {
           await clearCacheWord(ans.answer);
         }
       }

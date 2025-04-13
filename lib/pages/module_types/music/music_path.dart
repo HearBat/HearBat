@@ -4,19 +4,20 @@ import 'package:hearbat/widgets/path/sound_module_list_widget.dart';
 import '../../../utils/data_service_util.dart';
 import '../../../widgets/top_bar_widget.dart';
 
-class SoundPath extends StatefulWidget {
+class MusicPath extends StatefulWidget {
   final String chapter;
 
-  SoundPath({super.key, required this.chapter});
+  MusicPath({super.key, required this.chapter});
 
   @override
-  State<SoundPath> createState() => _SoundPathState();
+  State<MusicPath> createState() => _MusicPathState();
 }
 
-class _SoundPathState extends State<SoundPath> {
+class _MusicPathState extends State<MusicPath> {
   @override
   Widget build(BuildContext context) {
-    Map<String, Module> modules = DataService().getSoundChapter(widget.chapter).modules;
+    Map<String, Module> modules = DataService().getMusicChapter(widget.chapter).modules;
+    print("Fetched modules for chapter '${widget.chapter}': $modules"); // Debug print
     return Scaffold(
       appBar: TopBar(
         title: widget.chapter.toUpperCase(),
