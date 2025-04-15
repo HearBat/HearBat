@@ -62,9 +62,9 @@
                   "image": "assets/visuals/home/dog bark.png"
                 },
                 {
-                  "answer": "Micromp3e",
-                  "path": "audio/sounds/home/micromp3e.mp3",
-                  "image": "assets/visuals/home/micromp3e.png"
+                  "answer": "Microwave",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
                 },
                 {
                   "answer": "Pencil Writing",
@@ -201,9 +201,9 @@
             {
               "answers": [
                 {
-                  "answer": "Micromp3e",
-                  "path": "audio/sounds/home/micromp3e.mp3",
-                  "image": "assets/visuals/home/micromp3e.png"
+                  "answer": "Microwave",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
                 },
                 {
                   "answer": "Vacuum",
@@ -312,9 +312,9 @@
                   "image": "assets/visuals/home/clock ticking.png"
                 },
                 {
-                  "answer": "Micromp3e",
-                  "path": "audio/sounds/home/micromp3e.mp3",
-                  "image": "assets/visuals/home/micromp3e.png"
+                  "answer": "Microwave",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
                 },
                 {
                   "answer": "Vacuum",
@@ -451,9 +451,9 @@
                   "image": "assets/visuals/home/doorbell emoji.png"
                 },
                 {
-                  "answer": "Micromp3e",
-                  "path": "audio/sounds/home/micromp3e.mp3",
-                  "image": "assets/visuals/home/micromp3e.png"
+                  "answer": "Microwave",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
                 },
                 {
                   "answer": "Knife Sharpen",
@@ -586,9 +586,9 @@
                   "image": "assets/visuals/home/garbage disposal.png"
                 },
                 {
-                  "answer": "Micromp3e",
-                  "path": "audio/sounds/home/micromp3e.mp3",
-                  "image": "assets/visuals/home/micromp3e.png"
+                  "answer": "Microwave",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
                 }
               ]
             },
@@ -715,9 +715,9 @@
             {
               "answers": [
                 {
-                  "answer": "Micromp3e",
-                  "path": "audio/sounds/home/micromp3e.mp3",
-                  "image": "assets/visuals/home/micromp3e.png"
+                  "answer": "Microwave",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
                 },
                 {
                   "answer": "Kettle Whistling",
@@ -831,9 +831,9 @@
                   "image": "assets/visuals/home/book page flipping.png"
                 },
                 {
-                  "answer": "Micromp3e",
-                  "path": "audio/sounds/home/micromp3e.mp3",
-                  "image": "assets/visuals/home/micromp3e.png"
+                  "answer": "Microwave",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
                 }
               ]
             },

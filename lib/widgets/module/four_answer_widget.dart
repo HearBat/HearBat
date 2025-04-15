@@ -184,7 +184,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
         Expanded(
           child: SingleChildScrollView(
@@ -241,19 +241,8 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                           itemCount: 4,
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            Answer word;
-                            switch (index) {
-                              case 0:
-                                word = currentGroup.answer1;
-                              case 1:
-                                word = currentGroup.answer2;
-                              case 2:
-                                word = currentGroup.answer3;
-                              case 3:
-                                word = currentGroup.answer4;
-                              default:
-                                word = currentGroup.answer1;
-                            }
+                            Answer word = currentGroup.answers[index];
+
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 20.0),
                               child: WordButton(
@@ -270,19 +259,8 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                           itemCount: 4,
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            Answer word;
-                            switch (index) {
-                              case 0:
-                                word = currentGroup.answer1;
-                              case 1:
-                                word = currentGroup.answer2;
-                              case 2:
-                                word = currentGroup.answer3;
-                              case 3:
-                                word = currentGroup.answer4;
-                              default:
-                                word = currentGroup.answer1;
-                            }
+                            Answer word = currentGroup.answers[index];
+
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 20.0),
                               child: WordButton(
@@ -302,7 +280,8 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
         Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            if (isAnswerFalse)
+            if (isAnswerFalse) ...[
+              ModalBarrier(dismissible: false),
               Container(
                 width: double.infinity,
                 height: 220,
@@ -384,7 +363,9 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                   begin: Offset(0, 1),
                   duration: 300.ms,
                   curve: Curves.easeInOutQuart),
-            if (isAnswerTrue)
+            ],
+            if (isAnswerTrue) ...[
+              ModalBarrier(dismissible: false),
               Container(
                 width: double.infinity,
                 height: 100,
@@ -405,6 +386,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                   begin: Offset(0, 1),
                   duration: 300.ms,
                   curve: Curves.easeInOutQuart),
+            ],
           ],
         ),
       ],
