@@ -9,6 +9,7 @@ class MyNavBar extends StatefulWidget {
 
 class _MyNavBarState extends State<MyNavBar> {
   int selectedIndex = 0;
+  Key _profilePageKey = UniqueKey();
   
   // Store navigation keys to maintain state
   final List<GlobalKey<NavigatorState>> _navigatorKeys = [
@@ -59,6 +60,10 @@ class _MyNavBarState extends State<MyNavBar> {
 
   void _selectTab(int index) {
     setState(() {
+      if (index == 1 && selectedIndex != 1) {
+        // Rebuild profile page
+        _profilePageKey = UniqueKey();
+      }
       selectedIndex = index;
     });
   }
@@ -71,7 +76,9 @@ class _MyNavBarState extends State<MyNavBar> {
         onGenerateRoute: (routeSettings) {
           return MaterialPageRoute(
             builder: (context) {
-              return index == 0 ? HomePage() : ProfilePage();
+              return index == 0 ?
+                HomePage() :
+                ProfilePage(key: _profilePageKey);
             },
           );
         },
