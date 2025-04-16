@@ -7,6 +7,7 @@ import 'module_types/custom/custom_path.dart';
 import 'module_types/music/music_chapters.dart';
 import '../widgets/home_card_widget.dart';
 import '../utils/text_util.dart';
+import '../utils/translations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -57,13 +58,13 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               HomeCardWidget(
-                cardText: 'Train Words',
+                cardText: AppLocale.homePageTrainWords.getString(context),
                 description: wordDesc,
                 destinationPage: WordChapters(),
                 image: "assets/visuals/HB_Word.png",
               ),
               HomeCardWidget(
-                cardText: 'Train Sounds',
+                cardText: AppLocale.homePageTrainSounds.getString(context),
                 description: soundDesc,
                 destinationPage: SoundChapters(),
                 image: "assets/visuals/HB_Music.png",
