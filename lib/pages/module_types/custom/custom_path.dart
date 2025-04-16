@@ -80,6 +80,7 @@ class CustomPathState extends State<CustomPath> {
             voiceType: _voiceType!,
             isWord: true,
             displayDifficulty: false,
+            displayVoice: true,
           ),
           fullscreenDialog: true,
         ),

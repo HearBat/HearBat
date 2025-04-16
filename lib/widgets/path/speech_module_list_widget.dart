@@ -26,6 +26,7 @@ class SpeechModuleListWidget extends StatelessWidget {
                 answerGroups: [],
                 isWord: false,
                 displayDifficulty: false,
+                displayVoice: true,
                 sentences: sentences,
                 voiceType: voiceType,
               ),

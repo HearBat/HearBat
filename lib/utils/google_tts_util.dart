@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -14,6 +15,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 class GoogleTTSUtil {
   final AudioPlayer audioPlayer = AudioPlayer();
   final Map<String, String> cache = {};
+  final Map<String, List<String>> voiceMap = {
+    "en-US-Studio-O": ["en-US-Studio-O", "en-US-Studio-Q"],
+    "en-US-Studio-Q": ["en-US-Studio-O", "en-US-Studio-Q"],
+    "en-GB-Neural2-C": ["en-GB-Neural2-C", "en-GB-Neural2-B"],
+    "en-GB-Neural2-B": ["en-GB-Neural2-C", "en-GB-Neural2-B"],
+    "en-IN-Neural2-A": ["en-IN-Neural2-A", "en-IN-Neural2-B"],
+    "en-IN-Neural2-B": ["en-IN-Neural2-A", "en-IN-Neural2-B"],
+    "en-AU-Neural2-C": ["en-AU-Neural2-C", "en-AU-Neural2-B"],
+    "en-AU-Neural2-B": ["en-AU-Neural2-C", "en-AU-Neural2-B"]
+  };
+
 
   bool _isHardMode = false;
 
@@ -56,13 +68,19 @@ class GoogleTTSUtil {
 
   // Converts text to speech and plays the audio.
   // Downloads the MP3 file if it's not cached.
-  Future<void> speak(String text, String voicetype, {bool isQuestion = false, bool hardModeEnabled = true}) async {
+  Future<void> speak(String text, String voicetype, {bool isQuestion = false, bool hardModeEnabled = true, bool isRandom = false}) async {
     // Check if this is the special accent preview.
     bool isAccentPreview = (text == "Hello this is how I sound");
 
     // If hard mode is enabled and it's a question, modify the spoken text.
     if (_isHardMode && !isAccentPreview && isQuestion && hardModeEnabled) {
       text = "Please select $text as the answer";
+    }
+
+    // If random voice type, randomly select male or female
+    if (isRandom) {
+      List<String> voiceOptions = voiceMap[voicetype] ?? ["en-US-Studio-O", "en-US-Studio-Q"];
+      voicetype = voiceOptions[Random().nextInt(2)];
     }
 
     // Format filename based on context
