@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
 import '../../models/speech_chapter_model.dart';
-import 'sound_trangular_path_layout_widget.dart';
+import 'sound_alternating_path_layout_widget.dart';
 import 'animated_button_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,7 +39,7 @@ class SpeechModuleListWidget extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
-        child: SoundTriangularPathLayout(
+        child: SoundAlternatingPathLayout(
           itemCount: moduleList.length,
           itemBuilder: (context, index) {
             final module = moduleList[index];
