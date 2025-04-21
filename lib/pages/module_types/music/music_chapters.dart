@@ -14,7 +14,7 @@ class MusicChapters extends StatelessWidget {
 
     return Scaffold(
       appBar: TopBar(
-        title: "MUSIC CHAPTERS",
+        title: "MUSIC",
         leadingIcon: Icons.west,
       ),
       body: ListView(
@@ -26,7 +26,6 @@ class MusicChapters extends StatelessWidget {
               chapterNumber: index,
               image: chapters[index]["image"]!,
               destinationPage: MusicPath(chapter: chapters[index]["name"]!),
-              showChapterPrefix: false,
             );
           }),
           SizedBox(height: 10.0),
