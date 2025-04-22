@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
 import 'package:hearbat/models/chapter_model.dart';
-import 'trangular_path_layout_widget.dart';
+import 'alternating_path_layout_widget.dart';
 import 'animated_button_widget.dart';
 
 class ModuleListWidget extends StatefulWidget {
@@ -37,7 +37,7 @@ class ModuleListWidgetState extends State<ModuleListWidget>
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
-        child: TriangularPathLayout(
+        child: AlternatingPathLayout(
           itemCount: moduleList.length,
           itemBuilder: (context, index) {
             final module = moduleList[index];
