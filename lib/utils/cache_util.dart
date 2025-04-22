@@ -11,7 +11,7 @@ Future<int> getCacheSize() async {
   int totalSize = 0;
   for (FileSystemEntity entity in dirList) {
     if (entity is File) {
-      totalSize += entity.lengthSync();
+      totalSize += await entity.length();
     }
   }
   return totalSize;
@@ -21,8 +21,13 @@ Future<int> getCacheSize() async {
 Future<void> clearCache() async {
   final dirPath = (await getTemporaryDirectory()).path;
   final dir = Directory(dirPath);
+  final files = dir.listSync();
 
-  dir.deleteSync(recursive: true);
+  for (final file in files) {
+    if (file is File) {
+      await file.delete();
+    }
+  }
 }
 
 // Delete cached file by associated word
@@ -32,10 +37,10 @@ Future<void> clearCacheWord(String word) async {
   final dirList = dir.listSync(followLinks: false);
 
   // Search for matching file
-  for (FileSystemEntity entity in dirList) {
-    final filename = entity.path.split('/').last;
+  for (FileSystemEntity file in dirList) {
+    final filename = file.path.split('/').last;
     if (filename.startsWith("${word}_")) {
-      entity.deleteSync();
+      await file.delete();
       break;
     }
   }
