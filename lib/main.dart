@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hearbat/stats/stats_db.dart';
 import 'package:provider/provider.dart';
 import 'providers/my_app_state.dart';
 import 'pages/sound_adjustment_page.dart'; 
@@ -14,6 +15,7 @@ Future<void> main() async {
   await FlutterLocalization.instance.ensureInitialized();
   await ConfigurationManager().fetchConfiguration();
   await DataService().loadJson();
+  await StatsDatabase().init();
   runApp(const MyApp());
 }
 
