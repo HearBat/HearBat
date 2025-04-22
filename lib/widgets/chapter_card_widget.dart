@@ -3,18 +3,16 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 class ChapterCardWidget extends StatefulWidget {
   final String chapterName;
-  final int chapterNumber;
   final String image;
+  final int chapterNumber;
   final Widget destinationPage;
-  final bool showChapterPrefix;
 
   const ChapterCardWidget({
     super.key,
     required this.chapterName,
-    required this.chapterNumber,
     required this.image,
+    required this.chapterNumber,
     required this.destinationPage,
-    this.showChapterPrefix = true,
   });
 
   @override
@@ -80,9 +78,7 @@ class _ChapterCardWidgetState extends State<ChapterCardWidget> {
                           left: 16.0, top: 10.0, right: 16.0, bottom: 16.0),
                       alignment: Alignment.center,
                       child: AutoSizeText(
-                        widget.showChapterPrefix ?
-                        "Chapter ${widget.chapterNumber + 1}\n${widget.chapterName.toUpperCase()}"
-                        :widget.chapterName.toUpperCase(),
+                        widget.chapterName.toUpperCase(),
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
