@@ -286,10 +286,10 @@ Widget _buildCalendar() {
                                   ),
                                   SizedBox(height: 4),
                                   Text(
-                                    'Accuracy',
+                                    'Speech Accuracy',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 15,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -325,7 +325,7 @@ Widget _buildCalendar() {
                                     'Noise Challenge',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 15,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -336,70 +336,71 @@ Widget _buildCalendar() {
                         ]
                       ),
                           // View Most Missed Words Box
-                          SizedBox(height: 16), // Space between the rows and the button
-
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => MissedWordsPage()),
-                              );
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.symmetric(vertical: 16),
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 7, 45, 78),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'View Most Missed Words',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          SizedBox(height: 16), // Space between the rows and the button
-
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => MissedSoundsPage()),
-                              );
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.symmetric(vertical: 16),
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 7, 45, 78),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'View Most Missed Sounds',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                        
+                        
+                          
                     ]
                   ),
                 )
               ],
             ),
           ),
-        
+            const SizedBox(height: 16), 
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MissedWordsPage()),
+                );
+              },
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 7, 45, 78),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: Text(
+                    'View Most Missed Words',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 16), // Space between the rows and the button
+
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MissedSoundsPage()),
+                );
+              },
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 7, 45, 78),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: Text(
+                    'View Most Missed Sounds',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ),
         // Speech Overtime Box
         const SizedBox(height: 16), // Space in between boxes
         Container(            
