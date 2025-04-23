@@ -227,6 +227,37 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   ),
                   SizedBox(height: 20.0),
                 ],
+                if (widget.displayVoice)...[
+                  Text(
+                    "Voice",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10.0),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Theme
+                          .of(context)
+                          .scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(
+                          color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        VoiceOptionsWidget(
+                          updatePreferenceCallback: (preference, value) =>
+                              _updatePreference(preference, value),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                ],
                 Text(
                   "Background Noise",
                   style: TextStyle(
@@ -375,6 +406,7 @@ class VoiceOptionsWidget extends StatefulWidget {
 
 class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
   String? _selectedVoicePreference;
+  String? _randomVoiceSelectionPreference;
   final GoogleTTSUtil _googleTTSUtil = GoogleTTSUtil();
   List<String> voiceOptions = ["en-US-Studio-O", "en-US-Studio-Q"];
 
@@ -414,28 +446,36 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
 
     setState(() {
       _selectedVoicePreference = savedVoice;
+      _randomVoiceSelectionPreference = "notRandom";
     });
   }
 
   void _handleTap(String value) {
     setState(() {
-      //if (value == 'random') {
-      //  String randomValue = voiceOptions[Random().nextInt(2)];
-      //  _selectedVoicePreference = randomValue;
-      //  widget.updatePreferenceCallback('voicePreference', randomValue);
-      //} else {
-      //}
-      _selectedVoicePreference = value;
-      widget.updatePreferenceCallback('voicePreference', value);
-      if (_selectedVoicePreference != null && _selectedVoicePreference != 'random') {
-        _googleTTSUtil.speak(
-            "Hello this is how I sound", _selectedVoicePreference!);
+      if (value == 'isRandom') {
+        _randomVoiceSelectionPreference = 'isRandom';
+        widget.updatePreferenceCallback('randomVoiceSelectionPreference', value);
+      } else {
+        _randomVoiceSelectionPreference = 'notRandom';
+        widget.updatePreferenceCallback('randomVoiceSelectionPreference', 'notRandom');
+        _selectedVoicePreference = value;
+        widget.updatePreferenceCallback('voicePreference', value);
+        if (_selectedVoicePreference != null &&
+            _selectedVoicePreference != 'random') {
+          _googleTTSUtil.speak(
+              "Hello this is how I sound", _selectedVoicePreference!);
+        }
       }
     });
   }
 
   Widget _buildOption(String sound, String value) {
-    bool isSelected = _selectedVoicePreference == value;
+    bool isSelected = false;
+    if(value == 'isRandom') {
+      isSelected = _randomVoiceSelectionPreference == value;
+    } else if(_randomVoiceSelectionPreference != 'isRandom') {
+      isSelected = _selectedVoicePreference == value;
+    }
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.0),
       child: InkWell(
@@ -481,7 +521,7 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
           indent: 20,
           endIndent: 20,
         ),
-        _buildOption('Random', 'random'),
+        _buildOption('Random', 'isRandom'),
       ],
     );
   }

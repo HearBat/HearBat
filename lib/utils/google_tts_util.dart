@@ -28,9 +28,10 @@ class GoogleTTSUtil {
 
 
   bool _isHardMode = false;
+  bool _isRandom = false;
 
   GoogleTTSUtil() {
-    _loadDifficultyPreference();
+    _loadPreferences();
     initialize();
   }
 
@@ -55,10 +56,12 @@ class GoogleTTSUtil {
   }
 
   // Loads the difficulty preference to determine whether we are in Hard Mode.
-  Future<void> _loadDifficultyPreference() async {
+  Future<void> _loadPreferences() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     _isHardMode = prefs.getString('difficultyPreference') == 'Hard';
+    _isRandom = prefs.getString('randomVoiceSelectionPreference') == 'isRandom';
   }
+
 
   // Loads the Google Cloud API key from the configuration manager.
   Future<String> _loadCredentials() async {
@@ -68,7 +71,7 @@ class GoogleTTSUtil {
 
   // Converts text to speech and plays the audio.
   // Downloads the MP3 file if it's not cached.
-  Future<void> speak(String text, String voicetype, {bool isQuestion = false, bool hardModeEnabled = true, bool isRandom = false}) async {
+  Future<void> speak(String text, String voicetype, {bool isQuestion = false, bool hardModeEnabled = true}) async {
     // Check if this is the special accent preview.
     bool isAccentPreview = (text == "Hello this is how I sound");
 
@@ -78,7 +81,7 @@ class GoogleTTSUtil {
     }
 
     // If random voice type, randomly select male or female
-    if (isRandom) {
+    if (_isRandom && !isAccentPreview) {
       List<String> voiceOptions = voiceMap[voicetype] ?? ["en-US-Studio-O", "en-US-Studio-Q"];
       voicetype = voiceOptions[Random().nextInt(2)];
     }
