@@ -81,7 +81,7 @@ class GoogleTTSUtil {
     }
 
     // If random voice type, randomly select male or female
-    if (_isRandom && !isAccentPreview) {
+    if (_isRandom && !isAccentPreview && isQuestion) {
       List<String> voiceOptions = voiceMap[voicetype] ?? ["en-US-Studio-O", "en-US-Studio-Q"];
       voicetype = voiceOptions[Random().nextInt(2)];
     }
