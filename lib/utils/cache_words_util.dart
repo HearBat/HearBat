@@ -27,12 +27,7 @@ class CacheWordsUtil {
     List<Future> downloadFutures = [];
 
     for (var group in module) {
-      List<Answer> answers = [
-        group.answer1,
-        group.answer2,
-        group.answer3,
-        group.answer4
-      ];
+      List<Answer> answers = group.answers.map((answer) => answer).toList();
       for (var answer in answers) {
         String textToCache = answer.answer;
 

@@ -61,12 +61,12 @@ class CustomUtilState extends State<CustomUtil> {
           answer3.isNotEmpty &&
           answer4.isNotEmpty) {
         // Creates a complete answer group.
-        AnswerGroup group = AnswerGroup(
+        AnswerGroup group = AnswerGroup([
           Answer(answer1, "", ""),
           Answer(answer2, "", ""),
           Answer(answer3, "", ""),
           Answer(answer4, "", ""),
-        );
+        ]);
         answerGroups.add(group);
       } else if (answer1.isNotEmpty ||
           answer2.isNotEmpty ||
@@ -100,12 +100,12 @@ class CustomUtilState extends State<CustomUtil> {
 
         // Ensures we have a complete set of four words.
         if (wordsToBeCompared.length == 4) {
-          AnswerGroup group = AnswerGroup(
+          AnswerGroup group = AnswerGroup([
             Answer(wordsToBeCompared[0], "", ""),
             Answer(wordsToBeCompared[1], "", ""),
             Answer(wordsToBeCompared[2], "", ""),
             Answer(wordsToBeCompared[3], "", ""),
-          );
+          ]);
           answerGroups.add(group);
         } else {
           print("Not enough words");
@@ -113,9 +113,82 @@ class CustomUtilState extends State<CustomUtil> {
       }
     }
 
+    // Checks for duplicate module names and gives user options on how to proceed if found
     // Saves the module if the name and answer groups are valid.
     String moduleName = _moduleNameController.text.trim();
     if (moduleName.isNotEmpty && answerGroups.isNotEmpty) {
+      bool moduleExists = await UserModuleUtil.doesModuleExist(moduleName);
+      if (moduleExists) {
+        if (!mounted) return;
+        bool shouldOverwrite = await showDialog<bool>(
+          context: context,
+          builder: (context) => Dialog(
+            insetPadding: EdgeInsets.all(20),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width * 0.7),
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Module Already Exists",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      "A module with this name already exists. Would you like to overwrite it?",
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 154, 107, 187),
+                            minimumSize: Size(120, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                          onPressed: () => Navigator.pop(context, false),
+                          child: Text(
+                            "Return to Module",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                            minimumSize: Size(120, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                          onPressed: () => Navigator.pop(context, true),
+                          child: Text(
+                            "Overwrite",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ) ?? false;
+
+        if (!shouldOverwrite) {
+          return;
+        }
+      }
+
       try {
         await UserModuleUtil.saveCustomModule(moduleName, answerGroups);
         if (!mounted) return;

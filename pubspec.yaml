@@ -36,6 +36,7 @@ dependencies:
   permission_handler: ^11.3.1
   confetti: ^0.8.0
   firebase_vertexai: ^1.3.0
+  flutter_localization: ^0.3.2
 
 dev_dependencies:
   flutter_test:
@@ -83,13 +84,16 @@ flutter:
     - assets/audio/sounds/music/
     - assets/audio/sounds/nature/
     - assets/audio/background/
+    - assets/audio/sounds/music_pitch/
     - assets/visuals/
     - assets/visuals/home/
     - assets/visuals/music/
     - assets/visuals/nature/
+    - assets/visuals/music_pitch/
     - assets/data/sound_modules_data.json
     - assets/data/speech_modules_data.json
     - assets/data/word_modules_data.json
+    - assets/data/music_pitch_modules_data.json
     - assets/audio/sounds/feedback/correct answer chime.mp3
     - assets/audio/sounds/feedback/wrong answer chime.mp3
 

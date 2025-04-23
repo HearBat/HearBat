@@ -15,6 +15,7 @@ class DataService {
   Map<String, Chapter> _soundChapters = {};
   Map<String, Chapter> _wordChapters = {};
   Map<String, SpeechChapter> _speechChapters = {};
+  Map<String, Chapter> _musicChapters = {};
 
   Future<void> loadJson() async {
     try {
@@ -48,6 +49,16 @@ class DataService {
         };
       }
 
+      if (_musicChapters.isEmpty) {
+        String jsonString = await rootBundle.loadString(
+            'assets/data/music_pitch_modules_data.json');
+        Map<String, dynamic> jsonData = json.decode(jsonString);
+        _musicChapters = {
+          for (var chapter in jsonData['chapters']) chapter['name']: Chapter
+              .fromJson(chapter)
+        };
+      }
+
     } catch (e) {
       print('Error decoding JSON data: $e');
     }
@@ -55,6 +66,7 @@ class DataService {
 
   Chapter getSoundChapter(String chapter) => _soundChapters[chapter] ?? Chapter.empty();
   Chapter getWordChapter(String chapter) => _wordChapters[chapter] ?? Chapter.empty();
+  Chapter getMusicChapter(String chapter) => _musicChapters[chapter] ?? Chapter.empty();
   SpeechChapter getSpeechChapter(String chapter) => _speechChapters[chapter] ?? SpeechChapter.empty();
 
 }
