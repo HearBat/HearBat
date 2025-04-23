@@ -11,9 +11,6 @@ class CacheSentencesUtil {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String voiceType = prefs.getString('voicePreference') ?? 'en-US-Wavenet-D';
 
-    // Ensure that Hard Mode does NOT affect the speech module
-    await prefs.setString('difficultyPreference', 'Normal');
-
     // Create a list to hold all the futures for concurrent downloads
     List<Future> downloadFutures = [];
 
