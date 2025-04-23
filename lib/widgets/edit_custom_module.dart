@@ -25,6 +25,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
   bool hasEmptyFields = false;
   bool hasUnsavedChanges = false;
   Map<String, TextEditingController> controllers = {};
+  final Map<String, FocusNode> focusNodes = {};
   final int maxGroups = 10;
   final ScrollController _scrollController = ScrollController();
   Map<String, VoidCallback> _listenerMap = {};
@@ -59,7 +60,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
       _originalTextValues['group_${i}_answer_2'] = group.answers[1].answer;
       _originalTextValues['group_${i}_answer_3'] = group.answers[2].answer;
       _originalTextValues['group_${i}_answer_4'] = group.answers[3].answer;
-      
+
       _initControllerForAnswer(i, 1, group.answers[0].answer);
       _initControllerForAnswer(i, 2, group.answers[1].answer);
       _initControllerForAnswer(i, 3, group.answers[2].answer);
@@ -78,11 +79,17 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
     String key = 'group_${groupIndex}_answer_$answerIndex';
     controllers[key] = TextEditingController(text: text);
 
-  _listenerMap[key] = () {
-    _updateModelFromController(groupIndex, answerIndex);
-  };
-  
-  controllers[key]!.addListener(_listenerMap[key]!);
+    focusNodes[key] = FocusNode()
+      ..addListener(() {
+        setState(
+            () {}); // literally only for the circles + icons to disappear when you select focus
+      });
+
+    _listenerMap[key] = () {
+      _updateModelFromController(groupIndex, answerIndex);
+    };
+
+    controllers[key]!.addListener(_listenerMap[key]!);
   }
 
   void _updateModelFromController(int groupIndex, int answerIndex) {
@@ -130,16 +137,17 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
     for (int i = 0; i < answerGroups.length; i++) {
       for (int j = 1; j <= 4; j++) {
         String key = 'group_${i}_answer_$j';
-        if (!controllers.containsKey(key) || !_originalTextValues.containsKey(key)) {
+        if (!controllers.containsKey(key) ||
+            !_originalTextValues.containsKey(key)) {
           setState(() {
             hasUnsavedChanges = true;
           });
           return;
         }
-        
+
         String currentText = controllers[key]!.text;
         String originalText = _originalTextValues[key]!;
-        
+
         if (currentText != originalText) {
           setState(() {
             hasUnsavedChanges = true;
@@ -169,7 +177,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
       });
     }
   }
-  
+
   bool _checkChangesScheduled = false;
   Future<void> _debouncedCheckHasUnsavedChanges() async {
     if (_checkChangesScheduled) return;
@@ -209,7 +217,6 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
       return;
     }
 
-
     List<Answer> emptyAnswers = List.generate(4, (index) => Answer("", "", ""));
     AnswerGroup newGroup = AnswerGroup(emptyAnswers);
 
@@ -223,7 +230,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
       answerGroups.add(newGroup);
       hasEmptyFields = true;
     });
-    
+
     _debouncedCheckHasUnsavedChanges();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -273,7 +280,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
         setState(() {
           answerGroups = [];
         });
-        
+
         _debouncedCheckHasUnsavedChanges();
 
         await UserModuleUtil.deleteCustomModule(widget.moduleName);
@@ -295,17 +302,16 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
         List<AnswerGroup> newList = List<AnswerGroup>.from(answerGroups);
         newList.removeAt(visualIndex);
 
-        // Update controllers for groups after the deleted one
         for (int i = visualIndex; i < newList.length; i++) {
-          _removeControllersForGroup(i + 1); // Remove old controllers
-          _rebuildControllersForGroup(i, newList[i]); // Rebuild with new index
+          _removeControllersForGroup(i + 1);
+          _rebuildControllersForGroup(i, newList[i]);
         }
 
         setState(() {
           answerGroups = newList;
           _checkForEmptyFields();
         });
-        
+
         _debouncedCheckHasUnsavedChanges();
 
         if (mounted) {
@@ -358,14 +364,14 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
     for (int i = 0; i < answerGroups.length; i++) {
       AnswerGroup group = answerGroups[i];
 
-      List<String> answers = group.answers.map((answer) => answer.answer.trim()).toList();
+      List<String> answers =
+          group.answers.map((answer) => answer.answer.trim()).toList();
 
-      // Check if all answers are non-empty
       if (answers.every((answer) => answer.isNotEmpty)) {
         finalAnswerGroups.add(group);
       } else if (answers.any((answer) => answer.isNotEmpty)) {
-        // If some answers are non-empty, generate missing words
-        List<String> existingWords = answers.where((answer) => answer.isNotEmpty).toList();
+        List<String> existingWords =
+            answers.where((answer) => answer.isNotEmpty).toList();
 
         try {
           String llmOutput = await GeminiUtil.generateContent(existingWords);
@@ -461,52 +467,176 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
   }
 
   void _updateControllerWithoutListener(
-    int groupIndex, int answerIndex, String text) {
-  String key = 'group_${groupIndex}_answer_$answerIndex';
-  if (controllers.containsKey(key) && _listenerMap.containsKey(key)) {
-    controllers[key]!.removeListener(_listenerMap[key]!);
-    
-    controllers[key]!.text = text;
-    
-    controllers[key]!.addListener(_listenerMap[key]!);
+      int groupIndex, int answerIndex, String text) {
+    String key = 'group_${groupIndex}_answer_$answerIndex';
+    if (controllers.containsKey(key) && _listenerMap.containsKey(key)) {
+      controllers[key]!.removeListener(_listenerMap[key]!);
+
+      controllers[key]!.text = text;
+
+      controllers[key]!.addListener(_listenerMap[key]!);
+    }
   }
-}
 
   Future<bool> _onWillPop() async {
     if (!hasUnsavedChanges) return true;
     if (!mounted) return false;
 
-    final BuildContext currentContext = context;
-
     final result = await showDialog<bool>(
-      context: currentContext,
-      builder: (dialogContext) => AlertDialog(
-        title: Text('Discard changes?'),
-        content:
-            Text('You have unsaved changes. Are you sure you want to exit?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: Text('Cancel'),
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: Container(
+            padding: EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Discard Changes?',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
+                      color: Color.fromARGB(255, 7, 45, 78),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'You have unsaved changes.\nAre you sure you want to exit?',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                      color: Color.fromARGB(255, 7, 45, 78),
+                    ),
+                  ),
+                  SizedBox(height: 24),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () =>
+                              Navigator.of(dialogContext).pop(false),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 123, 225, 114),
+                            padding: EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: Text(
+                            'KEEP EDITING',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 12),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () =>
+                              Navigator.of(dialogContext).pop(true),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF0A2140), // dark blue
+                            padding: EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: Text(
+                            'DISCARD',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(true),
-            child: Text('Discard'),
-          ),
-          TextButton(
-            onPressed: () async {
-              await _saveModule();
-              if (dialogContext.mounted) {
-                Navigator.of(dialogContext).pop(true);
+        );
+      },
+    );
+
+    return result ?? false;
+  }
+
+  Widget _buildAnswerTile(int groupIndex, int answerIndex) {
+    final key = 'group_${groupIndex}_answer_$answerIndex';
+    final controller = controllers[key]!;
+    final focusNode = focusNodes[key]!; // never null after init
+
+    final showCircle = controller.text.isEmpty && !focusNode.hasFocus;
+
+    return Container(
+      width: (MediaQuery.of(context).size.width - 32 - 12) / 2,
+      height: 72,
+      margin: EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(color: Colors.black12, offset: Offset(0, 2), blurRadius: 4),
+        ],
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          if (showCircle)
+            Container(
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 7, 45, 78),
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: Icon(Icons.add, color: Colors.white, size: 18),
+              ),
+            ),
+          TextFormField(
+            controller: controller,
+            focusNode: focusNode,
+            textAlign: TextAlign.center,
+            textAlignVertical: TextAlignVertical.center,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              isDense: true,
+              contentPadding: EdgeInsets.zero,
+            ),
+            onChanged: (val) {
+              final capped = capitalizeWord(val);
+              if (controller.text != capped) {
+                controller.value = controller.value.copyWith(
+                  text: capped,
+                  selection: TextSelection.collapsed(offset: capped.length),
+                );
               }
+              _updateModelFromController(groupIndex, answerIndex);
             },
-            child: Text('Save and Exit'),
           ),
         ],
       ),
     );
-
-    return result ?? false;
   }
 
   @override
@@ -515,7 +645,6 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
       canPop: !hasUnsavedChanges,
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
-
         final bool shouldPop = await _onWillPop();
         if (shouldPop && context.mounted) {
           Navigator.of(context).pop();
@@ -524,132 +653,126 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.moduleName),
-          actions: [
-            if (hasUnsavedChanges)
-              Padding(
-                padding: EdgeInsets.only(right: 8),
-                child: Center(
-                  child: Text(
-                    'Unsaved changes',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            IconButton(
-              icon: Icon(Icons.save),
-              onPressed: _saveModule,
-            ),
-          ],
+          actions: [],
         ),
         body: isLoading
             ? Center(child: CircularProgressIndicator())
             : answerGroups.isEmpty
                 ? Center(child: Text('No answer groups found for this module'))
-                : Column(
-                    children: [
-                      Expanded(
-                          child: ListView.builder(
-                        controller: _scrollController,
-                        itemCount: answerGroups.length,
-                        itemBuilder: (context, index) {
-                          final uniqueId = 'group_$index';
-                          return _buildAnswerGroupCard(index,
-                              key: ValueKey(uniqueId));
-                        },
-                      )),
-                      if (answerGroups.length < maxGroups)
-                        Padding(
-                          padding: EdgeInsets.all(16),
-                          child: ElevatedButton.icon(
-                            onPressed: _addAnswerGroup,
-                            icon: Icon(Icons.add, color: Colors.white),
-                            label: Text(
-                              'Add Set',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
+                : ListView.builder(
+                    controller: _scrollController,
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    itemCount: answerGroups.length +
+                        (answerGroups.length < maxGroups ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index == answerGroups.length) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          child: Center(
+                            child: SizedBox(
+                              width: 140,
+                              child: ElevatedButton.icon(
+                                onPressed: _addAnswerGroup,
+                                icon: Icon(Icons.add, color: Colors.white),
+                                label: Text('Add Set',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white)),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16)),
+                                  padding: EdgeInsets.symmetric(vertical: 12),
+                                ),
                               ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromARGB(255, 94, 224, 82),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 12),
                             ),
                           ),
-                        ),
-                    ],
+                        );
+                      }
+
+                      return _buildAnswerGroupCard(index,
+                          key: ValueKey('group_$index'));
+                    },
                   ),
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: ElevatedButton(
+            onPressed: (hasUnsavedChanges) ? _saveModule : null,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 94, 224, 82),
+              disabledBackgroundColor: Colors.grey.shade400,
+              disabledForegroundColor: Colors.white70,
+              padding: EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
+            ),
+            child: Text(
+              'SAVE',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
 
   Widget _buildAnswerGroupCard(int groupIndex, {Key? key}) {
-    return Card(
+    return Container(
       key: key,
       margin: EdgeInsets.all(8),
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
               children: [
                 Text(
-                  'Answer Group ${groupIndex + 1}',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  'Set ${groupIndex + 1}:',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                IconButton(
-                  icon: Icon(Icons.delete, color: Colors.red),
-                  onPressed: () => _deleteAnswerGroup(groupIndex),
-                  tooltip: 'Delete this group',
+                Spacer(),
+                Container(
+                  width: 28, // narrower rectangle
+                  height: 20, // shorter height
+                  decoration: BoxDecoration(
+                    color: Color(0xFF072D4E), // your blue
+                    borderRadius: BorderRadius.circular(4), // slight rounding
+                  ),
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    constraints: BoxConstraints(),
+                    iconSize: 16, // smaller icon
+                    icon: Icon(Icons.delete, color: Colors.white),
+                    onPressed: () => _deleteAnswerGroup(groupIndex),
+                  ),
                 ),
               ],
             ),
-            SizedBox(height: 16),
-            _buildAnswerField(groupIndex, 1),
-            _buildAnswerField(groupIndex, 2),
-            _buildAnswerField(groupIndex, 3),
-            _buildAnswerField(groupIndex, 4),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAnswerField(int groupIndex, int answerIndex) {
-    String controllerKey = 'group_${groupIndex}_answer_$answerIndex';
-
-    if (!controllers.containsKey(controllerKey)) {
-      String initialValue = "";
-      if (groupIndex < answerGroups.length) {
-        AnswerGroup group = answerGroups[groupIndex];
-        if (answerIndex >= 1 && answerIndex <= group.answers.length) {
-          initialValue = group.answers[answerIndex - 1].answer;
-        }
-      }
-      _initControllerForAnswer(groupIndex, answerIndex, initialValue);
-    }
-
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
-      child: TextFormField(
-        key: ValueKey(controllerKey),
-        controller: controllers[controllerKey],
-        decoration: InputDecoration(
-          labelText: 'Answer $answerIndex',
-          border: OutlineInputBorder(),
-        ),
+          ),
+          SizedBox(height: 8),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 3,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children: List.generate(
+                4,
+                (i) => _buildAnswerTile(groupIndex, i + 1),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
