@@ -229,11 +229,19 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                 ],
                 if (widget.displayVoice)...[
                   Text(
-                    "Voice",
+                    "Voice Type",
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "Random swaps between male and female",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                   Container(
@@ -356,11 +364,6 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      SharedPreferences.getInstance().then((prefs) {
-                        prefs.setString('difficultyPreference', 'Normal');
-                        prefs.setString('backgroundSoundPreference', 'None');
-                        prefs.setString('audioVolumePreference', 'Low');
-                      });
                       Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(

@@ -31,7 +31,7 @@ class GoogleTTSUtil {
   bool _isRandom = false;
 
   GoogleTTSUtil() {
-    _loadPreferences();
+    _loadSavedPreferences();
     initialize();
   }
 
@@ -56,7 +56,7 @@ class GoogleTTSUtil {
   }
 
   // Loads the difficulty preference to determine whether we are in Hard Mode.
-  Future<void> _loadPreferences() async {
+  Future<void> _loadSavedPreferences() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     _isHardMode = prefs.getString('difficultyPreference') == 'Hard';
     _isRandom = prefs.getString('randomVoiceSelectionPreference') == 'isRandom';
