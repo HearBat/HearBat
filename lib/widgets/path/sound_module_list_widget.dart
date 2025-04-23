@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/widgets/path/animated_button_widget.dart';
 import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
-import 'sound_trangular_path_layout_widget.dart';
+import 'sound_alternating_path_layout_widget.dart';
 
 class SoundModuleListWidget extends StatelessWidget {
   final Map<String, Module> modules;
   final String chapter;
-  SoundModuleListWidget({super.key, required this.modules, required this.chapter});
+  SoundModuleListWidget(
+      {super.key, required this.modules, required this.chapter});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class SoundModuleListWidget extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
-        child: SoundTriangularPathLayout(
+        child: SoundAlternatingPathLayout(
           itemCount: moduleList.length,
           itemBuilder: (context, index) {
             final module = moduleList[index];

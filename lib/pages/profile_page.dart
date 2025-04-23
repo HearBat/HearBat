@@ -7,6 +7,8 @@ import '../utils/cache_util.dart';
 import '../utils/google_tts_util.dart';
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
   ProfilePageState createState() => ProfilePageState();
 }
