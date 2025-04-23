@@ -1,4 +1,3 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:hearbat/widgets/edit_custom_module.dart';
 import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
@@ -93,37 +92,46 @@ class CustomPathState extends State<CustomPath> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
-        title: "Custom Modules",
+        title: "Custom Module Builder",
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-                child: DottedBorder(
-                  dashPattern: [6, 6],
-                  borderType: BorderType.RRect,
-                  radius: Radius.circular(8),
-                  color: Color.fromARGB(255, 35, 102, 29),
-                  strokeWidth: 2,
-                  child: ElevatedButton(
-                      onPressed: _navigateToCreateModule,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 94, 224, 82),
-                        padding: EdgeInsets.symmetric(
-                          vertical: 20.0,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        textStyle: TextStyle(fontSize: 24.0),
-                        minimumSize: Size(double.infinity, 40),
-                      ),
-                      child: Text("Create New Module",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 255, 255, 255)))),
-                )),
+              padding: const EdgeInsets.all(20.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.4), // 10% opacity black
+                      offset: Offset(0, 4), // just 2px down
+                      blurRadius: 4, // softer blur
+                    ),
+                  ],
+                ),
+                child: ElevatedButton(
+                  onPressed: _navigateToCreateModule,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 123, 225, 114),
+                    padding: EdgeInsets.symmetric(vertical: 22.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    textStyle: TextStyle(fontSize: 22.0),
+                    minimumSize: Size(double.infinity, 40),
+                    elevation: 0, // remove the default material shadow
+                  ),
+                  child: Text(
+                    "Create Module",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: GridView.builder(
