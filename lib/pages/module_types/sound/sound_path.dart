@@ -124,7 +124,7 @@ class _SoundPathState extends State<SoundPath> {
             Column(
               children: [
                 Expanded(
-                  child: SoundModuleListWidget(modules: modules),
+                  child: SoundModuleListWidget(modules: modules, chapter: widget.chapter,),
                 ),
               ],
             ),

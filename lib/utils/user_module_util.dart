@@ -108,7 +108,7 @@ class UserModuleUtil {
 
       // Delete cached files
       for (AnswerGroup ag in module) {
-        for (Answer ans in [ag.answer1, ag.answer2, ag.answer3, ag.answer4]) {
+        for (Answer ans in ag.answers) {
           await clearCacheWord(ans.answer);
         }
       }
@@ -120,5 +120,11 @@ class UserModuleUtil {
       await prefs.setString(
           _storageKey, json.encode(modules));
     }
+  }
+
+  // Detects any duplicate module names
+  static Future<bool> doesModuleExist(String moduleName) async {
+    final modules = await getAllCustomModules();
+    return modules.containsKey(moduleName);
   }
 }

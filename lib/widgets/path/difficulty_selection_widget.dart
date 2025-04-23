@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/audio_util.dart';
@@ -8,12 +6,14 @@ import 'package:hearbat/widgets/module/speech_module_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/google_tts_util.dart';
 import '../module/module_widget.dart';
+import '../module/pitch_resolution_exercise.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
 import 'package:hearbat/utils/background_noise_util.dart';
 
 // ignore_for_file: use_build_context_synchronously
 class DifficultySelectionWidget extends StatefulWidget {
   final String moduleName;
+  final String? chapter;
   final List<AnswerGroup> answerGroups;
   final bool isWord; //determines if TTS is used
   final bool displayDifficulty; //determines if difficulty setting is shown
@@ -22,7 +22,7 @@ class DifficultySelectionWidget extends StatefulWidget {
   final String? voiceType; //Speech module specific
 
   DifficultySelectionWidget(
-      {required this.moduleName, required this.answerGroups, required this.isWord,required this.displayDifficulty, required this.displayVoice, this.sentences, this.voiceType,});
+      {required this.moduleName, this.chapter, required this.answerGroups, required this.isWord,required this.displayDifficulty, required this.displayVoice, this.sentences, this.voiceType,});
 
   @override
   DifficultySelectionWidgetState createState() =>
@@ -95,52 +95,60 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
     _updatePreference('difficultyPreference', _difficulty);
   }
 
-Future<void> _cacheAndNavigate(
-    String moduleName, List<AnswerGroup> answerGroups) async {
-  if (_voiceType == null) {
-    print("Voice type not set. Unable to cache module words.");
-    return;
-  }
+  Future<void> _cacheAndNavigate(
+      String moduleName, List<AnswerGroup> answerGroups) async {
+    if (_voiceType == null) {
+      print("Voice type not set. Unable to cache module words.");
+      return;
+    }
 
-  BuildContext? dialogContext;
-  
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext ctx) {
-      dialogContext = ctx;
-      return AlertDialog(
-        content: Row(
-          children: [
-            CircularProgressIndicator(),
-            SizedBox(width: 10),
-            Text("Loading..."),
-          ],
+    BuildContext? dialogContext;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext ctx) {
+        dialogContext = ctx;
+        return AlertDialog(
+          content: Row(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(width: 10),
+              Text("Loading..."),
+            ],
+          ),
+        );
+      },
+    );
+
+    try {
+      if (widget.isWord || widget.sentences == null) {
+        await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
+      }
+
+      if (widget.sentences != null) {
+        await CacheSentencesUtil().cacheSentences(widget.sentences!);
+      }
+    } catch (error) {
+      print('Failed to cache content: $error');
+    }
+
+    if (!context.mounted) return;
+
+    if (dialogContext != null && Navigator.canPop(dialogContext!)) {
+      Navigator.of(dialogContext!).pop();
+    }
+
+    if (widget.chapter == "Pitch Resolution") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PitchResolutionExercise(answerGroups: answerGroups),
         ),
       );
-    },
-  );
-
-  try {
-    if (widget.isWord || widget.sentences == null) {
-      await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
     }
-    
-    if (widget.sentences != null) {
-      await CacheSentencesUtil().cacheSentences(widget.sentences!);
-    }
-  } catch (error) {
-    print('Failed to cache content: $error');
-  }
-
-  if (!context.mounted) return; 
-
-  if (dialogContext != null && Navigator.canPop(dialogContext!)) {
-    Navigator.of(dialogContext!).pop();
-  }
-
-  if (widget.sentences != null) {
-    if (context.mounted) {
+    else if (widget.sentences != null) {
+      // Speech module
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -152,8 +160,8 @@ Future<void> _cacheAndNavigate(
         ),
       );
     }
-  } else {
-    if (context.mounted) {
+    else {
+      // Default module
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -166,7 +174,6 @@ Future<void> _cacheAndNavigate(
       );
     }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -182,70 +189,43 @@ Future<void> _cacheAndNavigate(
                 SizedBox(height: 20.0),
                 //only display difficulty setting if requested
                 if (widget.displayDifficulty)...[
-                Text(
-                  "Difficulty",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    "Difficulty",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  "By completing modules, you can unlock difficulty levels",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.normal,
+                  Text(
+                    "By completing modules, you can unlock difficulty levels",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10.0),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(
-                        color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10.0),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Theme
+                          .of(context)
+                          .scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(
+                          color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        DifficultyOptionsWidget(
+                          updateDifficultyCallback: (difficulty) =>
+                              _updateDifficulty(difficulty),
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Column(
-                    children: <Widget>[
-                      DifficultyOptionsWidget(
-                        updateDifficultyCallback: (difficulty) =>
-                            _updateDifficulty(difficulty),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                ],
-                if (widget.displayVoice)...[
-                Text(
-                  "Voice",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10.0),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(
-                        color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      VoiceOptionsWidget(
-                        updatePreferenceCallback: (preference, value) =>
-                            _updatePreference(preference, value),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20.0),
+                  SizedBox(height: 20.0),
                 ],
                 Text(
                   "Background Noise",
@@ -266,7 +246,9 @@ Future<void> _cacheAndNavigate(
                   margin: const EdgeInsets.only(top: 10.0),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Theme
+                        .of(context)
+                        .scaffoldBackgroundColor,
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(
                         color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
@@ -300,7 +282,9 @@ Future<void> _cacheAndNavigate(
                   margin: const EdgeInsets.only(top: 10.0),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Theme
+                        .of(context)
+                        .scaffoldBackgroundColor,
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(
                         color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
@@ -341,11 +325,18 @@ Future<void> _cacheAndNavigate(
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
+                      SharedPreferences.getInstance().then((prefs) {
+                        prefs.setString('difficultyPreference', 'Normal');
+                        prefs.setString('backgroundSoundPreference', 'None');
+                        prefs.setString('audioVolumePreference', 'Low');
+                      });
                       Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
-                          Theme.of(context).scaffoldBackgroundColor,
+                      Theme
+                          .of(context)
+                          .scaffoldBackgroundColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                           side: BorderSide(
