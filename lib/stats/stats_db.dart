@@ -29,7 +29,7 @@ class StatsDatabase {
         await db.execute('''
           CREATE TABLE IF NOT EXISTS exercise (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT UNIQUE NOT NULL
+            type TEXT UNIQUE NOT NULL
           );
           CREATE TABLE IF NOT EXISTS answer (
             exercise_id INTEGER PRIMARY KEY,
@@ -63,14 +63,14 @@ class StatsDatabase {
         ''');
 
         // Fill exercise table
-        const exerciseNames = [
+        const exerciseTypes = [
           "words",
           "sounds",
           "speech",
           "music"
         ];
-        for (final name in exerciseNames) {
-          Exercise.insert(Exercise(name: name));
+        for (final type in exerciseTypes) {
+          Exercise.insert(Exercise(type: type));
         }
       }
     );
