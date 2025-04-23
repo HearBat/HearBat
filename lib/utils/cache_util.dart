@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 Future<int> getCacheSize() async {
   final dirPath = (await getTemporaryDirectory()).path;
   final dir = Directory(dirPath);
-  final dirList = dir.listSync(recursive: true, followLinks: false);
+  final dirList = dir.listSync();
 
   int totalSize = 0;
   for (FileSystemEntity entity in dirList) {
