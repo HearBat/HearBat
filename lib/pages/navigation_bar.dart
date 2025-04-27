@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
+import 'insights_page.dart';
 
 class MyNavBar extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class _MyNavBarState extends State<MyNavBar> {
   
   // Store navigation keys to maintain state
   final List<GlobalKey<NavigatorState>> _navigatorKeys = [
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
   ];
@@ -38,6 +41,7 @@ class _MyNavBarState extends State<MyNavBar> {
           children: [
             _buildOffstageNavigator(0),
             _buildOffstageNavigator(1),
+            _buildOffstageNavigator(2),
           ],
         ),
         bottomNavigationBar: NavigationBar(
@@ -47,6 +51,10 @@ class _MyNavBarState extends State<MyNavBar> {
             NavigationDestination(
               icon: Icon(Icons.home),
               label: 'Home',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.query_stats),
+              label: 'Insights',
             ),
             NavigationDestination(
               icon: Icon(Icons.person),
@@ -76,9 +84,8 @@ class _MyNavBarState extends State<MyNavBar> {
         onGenerateRoute: (routeSettings) {
           return MaterialPageRoute(
             builder: (context) {
-              return index == 0 ?
-                HomePage() :
-                ProfilePage(key: _profilePageKey);
+              final pages = [HomePage(), InsightsPage(), ProfilePage(key: _profilePageKey)];
+              return pages[index];
             },
           );
         },
