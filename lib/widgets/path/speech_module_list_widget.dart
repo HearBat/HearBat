@@ -15,8 +15,6 @@ class SpeechModuleListWidget extends StatelessWidget {
 
     void navigate(String moduleName, List<String> sentences) {
       SharedPreferences.getInstance().then((prefs) {
-        String voiceType =
-            prefs.getString('voicePreference') ?? 'en-US-Wavenet-D';
 
         if (context.mounted) {
           Navigator.of(context, rootNavigator: true).push(
@@ -28,7 +26,6 @@ class SpeechModuleListWidget extends StatelessWidget {
                 displayDifficulty: false,
                 displayVoice: true,
                 sentences: sentences,
-                voiceType: voiceType,
               ),
               fullscreenDialog: true,
             ),

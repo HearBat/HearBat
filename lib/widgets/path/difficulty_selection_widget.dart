@@ -19,10 +19,9 @@ class DifficultySelectionWidget extends StatefulWidget {
   final bool displayDifficulty; //determines if difficulty setting is shown
   final bool displayVoice;
   final List<String>? sentences; // Speech module specific
-  final String? voiceType; //Speech module specific
 
   DifficultySelectionWidget(
-      {required this.moduleName, this.chapter, required this.answerGroups, required this.isWord,required this.displayDifficulty, required this.displayVoice, this.sentences, this.voiceType,});
+      {required this.moduleName, this.chapter, required this.answerGroups, required this.isWord,required this.displayDifficulty, required this.displayVoice, this.sentences});
 
   @override
   DifficultySelectionWidgetState createState() =>
@@ -86,6 +85,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
     _loadPreferences();
+    _loadVoiceType();
   }
 
   void _updateDifficulty(String? value) {
@@ -155,7 +155,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
           builder: (context) => SpeechModuleWidget(
             chapter: moduleName,
             sentences: widget.sentences!,
-            voiceType: widget.voiceType!,
+            voiceType: _voiceType!,
           ),
         ),
       );
@@ -458,11 +458,14 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
       if (value == 'isRandom') {
         _randomVoiceSelectionPreference = 'isRandom';
         widget.updatePreferenceCallback('randomVoiceSelectionPreference', value);
+
       } else {
         _randomVoiceSelectionPreference = 'notRandom';
         widget.updatePreferenceCallback('randomVoiceSelectionPreference', 'notRandom');
+
         _selectedVoicePreference = value;
         widget.updatePreferenceCallback('voicePreference', value);
+
         if (_selectedVoicePreference != null &&
             _selectedVoicePreference != 'random') {
           _googleTTSUtil.speak(
