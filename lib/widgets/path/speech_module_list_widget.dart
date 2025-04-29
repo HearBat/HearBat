@@ -14,26 +14,19 @@ class SpeechModuleListWidget extends StatelessWidget {
     var moduleList = modules.entries.toList();
 
     void navigate(String moduleName, List<String> sentences) {
-      SharedPreferences.getInstance().then((prefs) {
-        String voiceType =
-            prefs.getString('voicePreference') ?? 'en-US-Wavenet-D';
-
-        if (context.mounted) {
-          Navigator.of(context, rootNavigator: true).push(
-            MaterialPageRoute(
-              builder: (context) => DifficultySelectionWidget(
-                moduleName: moduleName,
-                answerGroups: [],
-                isWord: false,
-                displayDifficulty: false,
-                sentences: sentences,
-                voiceType: voiceType,
-              ),
-              fullscreenDialog: true,
-            ),
-          );
-        }
-      });
+      Navigator.of(context, rootNavigator: true).push(
+        MaterialPageRoute(
+          builder: (context) => DifficultySelectionWidget(
+            moduleName: moduleName,
+            answerGroups: [],
+            isWord: false,
+            displayDifficulty: false,
+            displayVoice: true,
+            sentences: sentences,
+          ),
+          fullscreenDialog: true,
+        ),
+      );
     }
 
     return Scaffold(

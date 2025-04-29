@@ -76,9 +76,9 @@ class CustomPathState extends State<CustomPath> {
           builder: (context) => DifficultySelectionWidget(
             moduleName: moduleName,
             answerGroups: answerGroups,
-            voiceType: _voiceType!,
             isWord: true,
             displayDifficulty: false,
+            displayVoice: true,
           ),
           fullscreenDialog: true,
         ),

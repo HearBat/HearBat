@@ -4,6 +4,7 @@ import 'package:hearbat/utils/audio_util.dart';
 import 'package:hearbat/utils/cache_sentences_util.dart';
 import 'package:hearbat/widgets/module/speech_module_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../utils/google_tts_util.dart';
 import '../module/module_widget.dart';
 import '../module/pitch_resolution_exercise.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
@@ -16,11 +17,11 @@ class DifficultySelectionWidget extends StatefulWidget {
   final List<AnswerGroup> answerGroups;
   final bool isWord; //determines if TTS is used
   final bool displayDifficulty; //determines if difficulty setting is shown
+  final bool displayVoice;
   final List<String>? sentences; // Speech module specific
-  final String? voiceType; //Speech module specific
 
   DifficultySelectionWidget(
-      {required this.moduleName, this.chapter, required this.answerGroups, required this.isWord,required this.displayDifficulty, this.sentences, this.voiceType,});
+      {required this.moduleName, this.chapter, required this.answerGroups, required this.isWord,required this.displayDifficulty, required this.displayVoice, this.sentences});
 
   @override
   DifficultySelectionWidgetState createState() =>
@@ -84,6 +85,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
     _loadPreferences();
+    _loadVoiceType();
   }
 
   void _updateDifficulty(String? value) {
@@ -153,7 +155,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
           builder: (context) => SpeechModuleWidget(
             chapter: moduleName,
             sentences: widget.sentences!,
-            voiceType: widget.voiceType!,
+            voiceType: _voiceType!,
           ),
         ),
       );
@@ -219,6 +221,45 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                         DifficultyOptionsWidget(
                           updateDifficultyCallback: (difficulty) =>
                               _updateDifficulty(difficulty),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                ],
+                if (widget.displayVoice)...[
+                  Text(
+                    "Voice Type",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "Random swaps between male and female",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10.0),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Theme
+                          .of(context)
+                          .scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(
+                          color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        VoiceOptionsWidget(
+                          updatePreferenceCallback: (preference, value) =>
+                              _updatePreference(preference, value),
                         ),
                       ],
                     ),
@@ -353,6 +394,141 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class VoiceOptionsWidget extends StatefulWidget {
+  final Function(String, String) updatePreferenceCallback;
+
+  VoiceOptionsWidget({required this.updatePreferenceCallback});
+
+  @override
+  VoiceOptionsWidgetState createState() => VoiceOptionsWidgetState();
+}
+
+class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
+  String? _selectedVoicePreference;
+  String? _randomVoiceSelectionPreference;
+  final GoogleTTSUtil _googleTTSUtil = GoogleTTSUtil();
+  List<String> voiceOptions = ["en-US-Studio-O", "en-US-Studio-Q"];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedPreference();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  void _loadSavedPreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? savedVoice = prefs.getString('voicePreference');
+    if (savedVoice == null || savedVoice.isEmpty) {
+      savedVoice = 'en-US-Studio-O';
+      await prefs.setString('voicePreference', savedVoice);
+    }
+
+    switch (savedVoice) {
+      case "en-US-Studio-O":
+      case "en-US-Studio-Q":
+        voiceOptions = ["en-US-Studio-O", "en-US-Studio-Q"];
+      case "en-GB-Neural2-C":
+      case "en-GB-Neural2-B":
+        voiceOptions = ["en-GB-Neural2-C", "en-GB-Neural2-B"];
+      case "en-IN-Neural2-A":
+      case "en-IN-Neural2-B":
+        voiceOptions = ["en-IN-Neural2-A", "en-IN-Neural2-B"];
+      case "en-AU-Neural2-C":
+      case "en-AU-Neural2-B":
+        voiceOptions = ["en-AU-Neural2-C", "en-AU-Neural2-B"];
+    }
+
+    setState(() {
+      _selectedVoicePreference = savedVoice;
+      _randomVoiceSelectionPreference = "notRandom";
+    });
+  }
+
+  void _handleTap(String value) {
+    setState(() {
+      if (value == 'isRandom') {
+        _randomVoiceSelectionPreference = 'isRandom';
+        widget.updatePreferenceCallback('randomVoiceSelectionPreference', value);
+
+      } else {
+        _randomVoiceSelectionPreference = 'notRandom';
+        widget.updatePreferenceCallback('randomVoiceSelectionPreference', 'notRandom');
+
+        _selectedVoicePreference = value;
+        widget.updatePreferenceCallback('voicePreference', value);
+
+        if (_selectedVoicePreference != null &&
+            _selectedVoicePreference != 'random') {
+          _googleTTSUtil.speak(
+              "Hello this is how I sound", _selectedVoicePreference!);
+        }
+      }
+    });
+  }
+
+  Widget _buildOption(String sound, String value) {
+    bool isSelected = false;
+    if(value == 'isRandom') {
+      isSelected = _randomVoiceSelectionPreference == value;
+    } else if(_randomVoiceSelectionPreference != 'isRandom') {
+      isSelected = _selectedVoicePreference == value;
+    }
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8.0),
+      child: InkWell(
+        onTap: () => _handleTap(value),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: ListTile(
+              title: Text(
+                sound,
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+              trailing: isSelected
+                  ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
+                  : null,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        _buildOption('Female', voiceOptions[0]),
+        Divider(
+          color: Color.fromARGB(255, 7, 45, 78),
+          thickness: 3,
+          indent: 20,
+          endIndent: 20,
+        ),
+        _buildOption('Male', voiceOptions[1]),
+        Divider(
+          color: Color.fromARGB(255, 7, 45, 78),
+          thickness: 3,
+          indent: 20,
+          endIndent: 20,
+        ),
+        _buildOption('Random', 'isRandom'),
+      ],
     );
   }
 }

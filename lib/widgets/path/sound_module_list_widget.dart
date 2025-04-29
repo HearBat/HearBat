@@ -23,6 +23,7 @@ class SoundModuleListWidget extends StatelessWidget {
             answerGroups: answerGroups,
             isWord: false,
             displayDifficulty: false,
+            displayVoice: false,
           ),
           fullscreenDialog: true,
         ),
