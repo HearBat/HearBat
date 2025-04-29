@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import '../utils/translations.dart';
 import 'navigation_bar.dart';
 
 class SoundAdjustmentPage extends StatefulWidget {
@@ -45,7 +46,7 @@ class SoundAdjustmentPageState extends State<SoundAdjustmentPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Please adjust your \nsound settings',
+                  AppLocale.soundAdjustPagePleaseAdjust.getString(context),
                   style: TextStyle(
                     fontSize: 24,
                   ),
@@ -65,7 +66,7 @@ class SoundAdjustmentPageState extends State<SoundAdjustmentPage> {
                         borderRadius: BorderRadius.circular(8),
                       )),
                   child: Text(
-                    'Ready',
+                    AppLocale.soundAdjustPageReady.getString(context),
                     style: TextStyle(fontSize: 24),
                   ),
                 ),
