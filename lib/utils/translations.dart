@@ -78,6 +78,19 @@ mixin AppLocale {
 
   static const String selectionPageStart = 'selectionPageStart';
 
+  // Insights Page
+  static const String insightsPageTitle = 'insightsPageTitle';
+  static const String insightsPageToday = 'insightsPageToday';
+  static const String insightsPageTimePracticed = 'insightsPageTimePracticed';
+  static const String insightsPageMinuteAbbr = 'insightsPageMinuteAbbr';
+  static const String insightsPageDailyGoal = 'insightsPageDailyGoal';
+  static const String insightsPageSpeechAccuracy = 'insightsPageSpeechAccuracy';
+  static const String insightsPageNoiseChallenge = 'insightsPageNoiseChallenge';
+  static const String insightsPageMissedWords = 'insightsPageMissedWords';
+  static const String insightsPageMissedSounds = 'insightsPageMissedSounds';
+  static const String insightsPageSpeechOvertime = 'insightsPageSpeechOvertime';
+
+
   // General (Multi-Page) Translations
   static const String generalAccentPreview = 'generalAccentPreview';
   static const String generalCancel = 'generalCancel';
@@ -149,6 +162,18 @@ mixin AppLocale {
     selectionPageIntensityHigh: 'High',
 
     selectionPageStart: 'START EXERCISE',
+
+    // Insights Page
+    insightsPageTitle: 'INSIGHTS',
+    insightsPageToday: 'Today',
+    insightsPageTimePracticed: 'Time practiced',
+    insightsPageMinuteAbbr: 'm',
+    insightsPageDailyGoal: 'of daily goal achieved',
+    insightsPageSpeechAccuracy: 'Speech Accuracy',
+    insightsPageNoiseChallenge: 'Noise Challenge',
+    insightsPageMissedWords: 'View Most Missed Words',
+    insightsPageMissedSounds: 'View Most Missed Sounds',
+    insightsPageSpeechOvertime: 'Speech Overtime',
 
     // General (Multi-Page)
     generalAccentPreview: 'Hello this is how I sound',
