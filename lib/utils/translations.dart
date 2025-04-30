@@ -52,8 +52,36 @@ mixin AppLocale {
 
   static const String settingsPageClearCache = 'settingsPageClearCache';
 
+  // Difficulty Selection Page
+  static const String selectionPageDifficultyTitle = 'selectionPageDifficultyTitle';
+  static const String selectionPageDifficultySubtitle = 'selectionPageDifficultySubtitle';
+  static const String selectionPageDifficultyNormal = 'selectionPageDifficultyNormal';
+  static const String selectionPageDifficultyHard = 'selectionPageDifficulty';
+
+  static const String selectionPageVoiceTitle = 'selectionPageVoiceTitle';
+  static const String selectionPageVoiceSubtitle = 'selectionPageVoiceSubtitle';
+  static const String selectionPageVoiceMale = 'selectionPageVoiceMale';
+  static const String selectionPageVoiceFemale = 'selectionPageVoiceFemale';
+  static const String selectionPageVoiceRandom = 'selectionPageVoiceRandom';
+
+  static const String selectionPageBackgroundTitle = 'selectionPageBackgroundTitle';
+  static const String selectionPageBackgroundSubtitle = 'selectionPageBackgroundSubtitle';
+  static const String selectionPageBackgroundNone = 'selectionPageBackgroundNone';
+  static const String selectionPageBackgroundRain = 'selectionPageBackgroundRain';
+  static const String selectionPageBackgroundCoffee = 'selectionPageBackgroundCoffee';
+
+  static const String selectionPageIntensityTitle = 'selectionPageIntensityTitle';
+  static const String selectionPageIntensitySubtitle = 'selectionPageIntensitySubtitle';
+  static const String selectionPageIntensityLow = 'selectionPageIntensityLow';
+  static const String selectionPageIntensityMedium = 'selectionPageIntensityMedium';
+  static const String selectionPageIntensityHigh = 'selectionPageIntensityHigh';
+
+  static const String selectionPageStart = 'selectionPageStart';
+
   // General (Multi-Page) Translations
   static const String generalAccentPreview = 'generalAccentPreview';
+  static const String generalCancel = 'generalCancel';
+  static const String generalLoading = 'generalLoading';
 
   static const Map<String, dynamic> EN = {
     // Home Page
@@ -95,8 +123,37 @@ mixin AppLocale {
     settingsPageVoiceAUMale: 'Australian Male',
 
     settingsPageClearCache: 'CLEAR CACHE',
-    //. General (Multi-Page)
-    generalAccentPreview: 'Hello this is how I sound'
+
+    // Difficulty Selection Page
+    selectionPageDifficultyTitle: 'Difficulty',
+    selectionPageDifficultySubtitle: 'By completing modules, you can unlock difficulty levels',
+    selectionPageDifficultyNormal: 'Normal',
+    selectionPageDifficultyHard: 'Hard',
+
+    selectionPageVoiceTitle: 'Voice Type',
+    selectionPageVoiceSubtitle: 'Random swaps between male and female',
+    selectionPageVoiceFemale: 'Female',
+    selectionPageVoiceMale: 'Male',
+    selectionPageVoiceRandom: 'Random',
+
+    selectionPageBackgroundTitle: 'Background Noise',
+    selectionPageBackgroundSubtitle: 'Background noises to add an extra challenge',
+    selectionPageBackgroundNone: 'None',
+    selectionPageBackgroundRain: 'Rain',
+    selectionPageBackgroundCoffee: 'Coffee Shop',
+
+    selectionPageIntensityTitle: 'Noise Intensity',
+    selectionPageIntensitySubtitle: 'Choose the intensity of background noises',
+    selectionPageIntensityLow: 'Low',
+    selectionPageIntensityMedium: 'Medium',
+    selectionPageIntensityHigh: 'High',
+
+    selectionPageStart: 'START EXERCISE',
+
+    // General (Multi-Page)
+    generalAccentPreview: 'Hello this is how I sound',
+    generalCancel: 'CANCEL',
+    generalLoading: 'Loading...'
   };
 
 
