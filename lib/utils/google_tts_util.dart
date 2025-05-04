@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -14,11 +15,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 class GoogleTTSUtil {
   final AudioPlayer audioPlayer = AudioPlayer();
   final Map<String, String> cache = {};
+  final Map<String, List<String>> voiceMap = {
+    "en-US-Studio-O": ["en-US-Studio-O", "en-US-Studio-Q"],
+    "en-US-Studio-Q": ["en-US-Studio-O", "en-US-Studio-Q"],
+    "en-GB-Neural2-C": ["en-GB-Neural2-C", "en-GB-Neural2-B"],
+    "en-GB-Neural2-B": ["en-GB-Neural2-C", "en-GB-Neural2-B"],
+    "en-IN-Neural2-A": ["en-IN-Neural2-A", "en-IN-Neural2-B"],
+    "en-IN-Neural2-B": ["en-IN-Neural2-A", "en-IN-Neural2-B"],
+    "en-AU-Neural2-C": ["en-AU-Neural2-C", "en-AU-Neural2-B"],
+    "en-AU-Neural2-B": ["en-AU-Neural2-C", "en-AU-Neural2-B"]
+  };
+
 
   bool _isHardMode = false;
+  bool _isRandom = false;
 
   GoogleTTSUtil() {
-    _loadDifficultyPreference();
+    _loadSavedPreferences();
     initialize();
   }
 
@@ -43,10 +56,12 @@ class GoogleTTSUtil {
   }
 
   // Loads the difficulty preference to determine whether we are in Hard Mode.
-  Future<void> _loadDifficultyPreference() async {
+  Future<void> _loadSavedPreferences() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     _isHardMode = prefs.getString('difficultyPreference') == 'Hard';
+    _isRandom = prefs.getString('randomVoiceSelectionPreference') == 'isRandom';
   }
+
 
   // Loads the Google Cloud API key from the configuration manager.
   Future<String> _loadCredentials() async {
@@ -63,6 +78,12 @@ class GoogleTTSUtil {
     // If hard mode is enabled and it's a question, modify the spoken text.
     if (_isHardMode && !isAccentPreview && isQuestion && hardModeEnabled) {
       text = "Please select $text as the answer";
+    }
+
+    // If random voice type, randomly select male or female
+    if (_isRandom && !isAccentPreview) {
+      List<String> voiceOptions = voiceMap[voicetype] ?? ["en-US-Studio-O", "en-US-Studio-Q"];
+      voicetype = voiceOptions[Random().nextInt(2)];
     }
 
     // Format filename based on context

@@ -32,6 +32,7 @@ class ModuleListWidgetState extends State<ModuleListWidget>
           answerGroups: answerGroups,
           isWord: true,
           displayDifficulty: true,
+          displayVoice: true,
         ),
         fullscreenDialog: true,
       ),
