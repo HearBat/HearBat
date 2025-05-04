@@ -1,29 +1,32 @@
+import 'dart:math';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:hearbat/utils/background_noise_util.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../../utils/google_stt_util.dart';
-import '../../utils/google_tts_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../utils/translations.dart';
-import 'module_progress_bar_widget.dart';
-import 'check_button_widget.dart';
-import 'package:confetti/confetti.dart';
-import 'dart:math';
-import 'score_widget.dart';
-import 'package:audioplayers/audioplayers.dart';
+
+import 'package:hearbat/stats/exercise_score_model.dart';
+import 'package:hearbat/stats/module_model.dart';
+import 'package:hearbat/utils/background_noise_util.dart';
+import 'package:hearbat/utils/google_stt_util.dart';
+import 'package:hearbat/utils/google_tts_util.dart';
+import 'package:hearbat/utils/translations.dart';
+import 'package:hearbat/widgets/module/score_widget.dart';
+import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
+import 'package:hearbat/widgets/module/check_button_widget.dart';
 
 class SpeechModuleWidget extends StatefulWidget {
-  final String chapter;
+  final String title;
   final List<String> sentences;
   final String voiceType;
 
-  SpeechModuleWidget(
-      {required this.chapter,
-      required this.sentences,
-      required this.voiceType});
+  SpeechModuleWidget({
+    required this.title,
+    required this.sentences,
+    required this.voiceType});
 
   @override
   SpeechModuleWidgetState createState() => SpeechModuleWidgetState();
@@ -192,6 +195,9 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
           _playSentence();
         } else {
           _isCompleted = true;
+
+          // TODO: SAVE SCORE TO DATABASE
+          // ...
         }
         _isSubmitted = false;
         _transcription = '';

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+
+import 'package:hearbat/models/speech_chapter_model.dart';
+import 'package:hearbat/widgets/path/animated_button_widget.dart';
 import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
-import '../../models/speech_chapter_model.dart';
-import 'sound_alternating_path_layout_widget.dart';
-import 'animated_button_widget.dart';
+import 'package:hearbat/widgets/path/sound_alternating_path_layout_widget.dart';
 
 class SpeechModuleListWidget extends StatelessWidget {
+  final String chapter;
   final Map<String, SpeechModule> modules;
-  SpeechModuleListWidget({super.key, required this.modules});
+
+  SpeechModuleListWidget({
+    super.key,
+    required this.chapter,
+    required this.modules});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +23,13 @@ class SpeechModuleListWidget extends StatelessWidget {
         MaterialPageRoute(
           builder: (context) => DifficultySelectionWidget(
             moduleName: moduleName,
+            chapter: chapter,
+            exerciseType: "speech",
             answerGroups: [],
             isWord: false,
             displayDifficulty: false,
-            displayVoice: true,
             sentences: sentences,
+            displayVoice: true,
           ),
           fullscreenDialog: true,
         ),
