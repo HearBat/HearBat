@@ -7,8 +7,14 @@ import 'animated_button_widget.dart';
 class ModuleListWidget extends StatefulWidget {
   final Map<String, Module> modules;
   final String chapter;
+  final String exerciseType;
 
-  ModuleListWidget({super.key, required this.modules, required this.chapter});
+  ModuleListWidget({
+    super.key,
+    required this.modules,
+    required this.chapter,
+    required this.exerciseType
+  });
 
   @override
   ModuleListWidgetState createState() => ModuleListWidgetState();
@@ -21,6 +27,8 @@ class ModuleListWidgetState extends State<ModuleListWidget>
       MaterialPageRoute(
         builder: (context) => DifficultySelectionWidget(
           moduleName: moduleName,
+          chapter: widget.chapter,
+          exerciseType: widget.exerciseType,
           answerGroups: answerGroups,
           isWord: true,
           displayDifficulty: true,

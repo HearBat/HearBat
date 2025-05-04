@@ -124,7 +124,9 @@ class _SpeechPathState extends State<SpeechPath> {
             Column(
               children: [
                 Expanded(
-                  child: SpeechModuleListWidget(modules: modules),
+                  child: SpeechModuleListWidget(
+                    chapter: widget.chapter,
+                    modules: modules),
                 ),
               ],
             ),

@@ -127,7 +127,10 @@ class _WordPathState extends State<WordPath> {
               children: [
                 Expanded(
                   child: ModuleListWidget(
-                      modules: modules, chapter: widget.chapter),
+                      modules: modules,
+                      chapter: widget.chapter,
+                      exerciseType: "words",
+                  ),
                 ),
               ],
             ),
