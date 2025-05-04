@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:hearbat/models/speech_chapter_model.dart';
 import 'package:hearbat/widgets/path/animated_button_widget.dart';

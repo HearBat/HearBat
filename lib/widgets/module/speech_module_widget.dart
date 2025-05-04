@@ -8,8 +8,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:hearbat/stats/exercise_score_model.dart';
-import 'package:hearbat/stats/module_model.dart';
 import 'package:hearbat/utils/background_noise_util.dart';
 import 'package:hearbat/utils/google_stt_util.dart';
 import 'package:hearbat/utils/google_tts_util.dart';
