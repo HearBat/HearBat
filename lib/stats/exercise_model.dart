@@ -32,7 +32,7 @@ class Exercise {
     final result = await db.rawQuery('''
       SELECT *
       FROM $_table
-      WHERE type = ?''', [type]);
+      WHERE type=?''', [type]);
     if (result.isEmpty) {
       return null;
     }

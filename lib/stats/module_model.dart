@@ -44,7 +44,7 @@ class Module {
     final result = await db.rawQuery('''
       SELECT *
       FROM $_table
-      WHERE name = ?''', [name]);
+      WHERE name=?''', [name]);
     if (result.isEmpty) {
       return null;
     }
@@ -73,7 +73,7 @@ class Module {
       SET
         high_score = MAX(high_score, ?),
         times_completed = times_completed + 1
-      WHERE exercise_id = ? AND name = ?''',
+      WHERE exercise_id=? AND name=?''',
       [score, exerciseId, name]);
   }
 }
