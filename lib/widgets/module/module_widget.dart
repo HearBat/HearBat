@@ -218,6 +218,7 @@ class _ModulePageState extends State<ModuleWidget> {
     return Container(
       color: Color.fromARGB(255, 232, 218, 255),
       child: FourAnswerWidget(
+        exerciseType: widget.type,
         answerGroups: widget.answerGroups,
         onCompletion: () {
           // Save stats

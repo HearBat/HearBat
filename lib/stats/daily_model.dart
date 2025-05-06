@@ -50,7 +50,7 @@ class Daily {
     final result = await db.rawQuery('''
       SELECT *
       FROM $_table
-      WHERE date = ?''', [_formatDate(date)]);
+      WHERE date=?''', [_formatDate(date)]);
     if (result.isEmpty) {
       return null;
     }
