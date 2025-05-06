@@ -75,6 +75,7 @@ class CustomPathState extends State<CustomPath> {
         MaterialPageRoute(
           builder: (context) => DifficultySelectionWidget(
             moduleName: moduleName,
+            exerciseType: "words",
             answerGroups: answerGroups,
             isWord: true,
             displayDifficulty: false,

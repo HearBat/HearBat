@@ -66,6 +66,7 @@ class CustomModuleState extends State<CustomModule> {
     // Once caching is done, show the WordModuleWidget
     return ModuleWidget(
       title: widget.moduleName,
+      type: "words",
       answerGroups: widget.answerGroups,
       isWord: true,
     );
