@@ -5,6 +5,7 @@ import 'package:audioplayers/audioplayers.dart';
 
 import '../utils/cache_util.dart';
 import '../utils/google_tts_util.dart';
+import '../utils/translations.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -34,19 +35,6 @@ class ProfilePageState extends State<ProfilePage> {
     "en-AU-Neural2-B",
   ];
 
-  Map<String, String> voiceTypeTitles = {
-    "en-US-Studio-O": "US Female",
-    //"en-US-Neural2-C": "US2 Female",
-    "en-GB-Neural2-C": "UK Female",
-    "en-IN-Neural2-A": "IN Female",
-    "en-AU-Neural2-C": "AU Female",
-    "en-US-Studio-Q": "US Male",
-    // "en-US-Neural2-D": "US2 Male",
-    "en-GB-Neural2-B": "UK Male",
-    "en-IN-Neural2-B": "IN Male",
-    "en-AU-Neural2-B": "AU Male",
-  };
-
   @override
   void initState() {
     super.initState();
@@ -72,7 +60,7 @@ class ProfilePageState extends State<ProfilePage> {
     setState(() {
       isCaching = true;
     });
-    String phraseToCache = "Hello this is how I sound";
+    String phraseToCache = AppLocale.generalAccentPreview.getString(context);
     List<Future> downloadFutures = [];
     for (String voiceType in voiceTypes) {
       downloadFutures.add(_googleTTSUtil
@@ -89,7 +77,7 @@ class ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
-        title: 'SETTINGS',
+        title: AppLocale.settingsPageTitle.getString(context),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -103,7 +91,7 @@ class ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Language",
+                    AppLocale.settingsPageLanguageTitle.getString(context),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -137,7 +125,7 @@ class ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Feedback Sound",
+                    AppLocale.settingsPageFeedbackTitle.getString(context),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -171,7 +159,7 @@ class ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Voice Select",
+                    AppLocale.settingsPageVoiceTitle.getString(context),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -247,12 +235,12 @@ class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
     prefs.setString('feedbackPreference', _selectedFeedback);
   }
 
- Widget _buildOption(String feedback) {
-    bool isSelected = _selectedFeedback == feedback;
+ Widget _buildOption(String display, String value) {
+    bool isSelected = _selectedFeedback == value;
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.0),
       child: InkWell(
-        onTap: () => _handleTap(feedback),
+        onTap: () => _handleTap(value),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.transparent,
@@ -261,7 +249,7 @@ class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
             padding: const EdgeInsets.only(left: 5.0),
             child: ListTile(
               title: Text(
-                feedback,
+                display,
                 style: TextStyle(
                   fontSize: 14,
                 ),
@@ -280,14 +268,14 @@ class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _buildOption('Off'),
+        _buildOption(AppLocale.settingsPageFeedbackOff.getString(context), 'Off'),
         Divider(
           color: Color.fromARGB(255, 7, 45, 78),
           thickness: 3,
           indent: 20,
           endIndent: 20,
         ),
-        _buildOption('On'),
+        _buildOption(AppLocale.settingsPageFeedbackOn.getString(context), 'On'),
       ],
     );
   }
@@ -365,7 +353,7 @@ class LanguageOptionsWidgetState extends State<LanguageOptionsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _buildOption('English', 'English', 'assets/visuals/us_flag.png'),
+        _buildOption(AppLocale.settingsPageLanguageEnglish.getString(context), 'English', 'assets/visuals/us_flag.png'),
         // Divider(
         //   color: Color.fromARGB(255, 7, 45, 78),
         //   thickness: 3,
@@ -402,16 +390,7 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
     "en-AU-Neural2-B", // AU Male
   ];
 
-  Map<String, String> voiceTypeTitles = {
-    "en-US-Studio-O": "American Female",
-    "en-US-Studio-Q": "American Male",
-    "en-GB-Neural2-C": "English Female",
-    "en-GB-Neural2-B": "English Male",
-    "en-IN-Neural2-A": "Indian Female",
-    "en-IN-Neural2-B": "Indian Male",
-    "en-AU-Neural2-C": "Australian Female",
-    "en-AU-Neural2-B": "Australian Male",
-  };
+  late Map<String, String> voiceTypeTitles;
 
   @override
   void initState() {
@@ -431,13 +410,26 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
     });
   }
 
+  void loadTranslation() {
+    voiceTypeTitles = {
+      "en-US-Studio-O": AppLocale.settingsPageVoiceUSFemale.getString(context),
+      "en-US-Studio-Q": AppLocale.settingsPageVoiceUSMale.getString(context),
+      "en-GB-Neural2-C": AppLocale.settingsPageVoiceUKFemale.getString(context),
+      "en-GB-Neural2-B": AppLocale.settingsPageVoiceUKMale.getString(context),
+      "en-IN-Neural2-A": AppLocale.settingsPageVoiceINFemale.getString(context),
+      "en-IN-Neural2-B": AppLocale.settingsPageVoiceINMale.getString(context),
+      "en-AU-Neural2-C": AppLocale.settingsPageVoiceAUFemale.getString(context),
+      "en-AU-Neural2-B": AppLocale.settingsPageVoiceAUMale.getString(context),
+    };
+  }
+
   void _handleTap(String value) {
     setState(() {
       _selectedVoicePreference = value;
       widget.updatePreferenceCallback('voicePreference', value);
       if (_selectedVoicePreference != null) {
         _googleTTSUtil.speak(
-            "Hello this is how I sound", _selectedVoicePreference!);
+            AppLocale.generalAccentPreview.getString(context), _selectedVoicePreference!);
       }
     });
   }
@@ -458,6 +450,7 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    loadTranslation();
     List<Widget> voiceOptionWidgets = [];
     for (int i = 0; i < voiceTypes.length; i++) {
       voiceOptionWidgets.add(
@@ -530,7 +523,7 @@ class ClearCacheWidgetState extends State<ClearCacheWidget> {
             minimumSize: Size(380, 50),
           ),
           child: Text(
-            "CLEAR CACHE ($_sizeText)",
+            "${AppLocale.settingsPageClearCache.getString(context)} ($_sizeText)",
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,

@@ -10,6 +10,7 @@ class ScoreWidget extends StatelessWidget {
         required this.type,
         required this.correctAnswersCount,
         required this.subtitleText,
+        required this.isHighest,
         required this.icon,
         required this.boxDecoration,
         required this.total});
@@ -18,6 +19,7 @@ class ScoreWidget extends StatelessWidget {
   final ScoreType type;
   final String correctAnswersCount;
   final String subtitleText;
+  final bool isHighest;
   final Icon icon;
   final BoxDecoration boxDecoration;
   final int total;
@@ -45,18 +47,20 @@ class ScoreWidget extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w900,
-                      color: subtitleText.contains("Highest")
+                      color: isHighest
                           ? Colors.white
-                          : Color.fromARGB(255, 7, 45, 78)),
+                          : Color.fromARGB(255, 7, 45, 78)
+                  ),
                 ),
                 AutoSizeText(
                   subtitleText,
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w900,
-                      color: subtitleText.contains("Highest")
+                      color: isHighest
                           ? Colors.white
-                          : Color.fromARGB(255, 7, 45, 78)),
+                          : Color.fromARGB(255, 7, 45, 78)
+                  ),
                 ),
               ],
             ),

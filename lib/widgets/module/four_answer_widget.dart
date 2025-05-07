@@ -1,6 +1,7 @@
 import "dart:math";
 import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
+import '../../utils/translations.dart';
 import 'word_button_widget.dart';
 import 'incorrect_card_widget.dart';
 import '../../utils/google_tts_util.dart';
@@ -196,7 +197,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "What do you hear?",
+                      AppLocale.fourAnswerWidgetPrompt.getString(context),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 28,
@@ -309,7 +310,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                           Padding(
                             padding: const EdgeInsets.only(right: 30.0),
                             child: Text(
-                              'Incorrect',
+                              AppLocale.generalIncorrect.getString(context),
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -318,7 +319,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                             ),
                           ),
                           Text(
-                            'Correct',
+                            AppLocale.generalCorrect.getString(context),
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -346,7 +347,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                             ),
                             onPressed: proceedToNext,
                             child: Text(
-                              'Continue',
+                              AppLocale.generalContinue.getString(context),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -374,7 +375,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      'Great',
+                      AppLocale.generalGreat.getString(context),
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,

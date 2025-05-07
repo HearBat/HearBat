@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/widgets/top_bar_widget.dart';
 import 'package:table_calendar/table_calendar.dart';
+import '../utils/translations.dart';
 import 'missed_words_page.dart';
 import 'missed_sounds_page.dart';
 
@@ -51,13 +52,13 @@ class InsightsPageState extends State<InsightsPage> {
       }
     }
 
-    return 'Today, ${monthNames[date.month - 1]} ${date.day}${suffix(date.day)}';
+    return '${AppLocale.insightsPageToday.getString(context)}, ${monthNames[date.month - 1]} ${date.day}${suffix(date.day)}';
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopBar(title: 'INSIGHTS'),
+      appBar: TopBar(title: AppLocale.insightsPageTitle.getString(context)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
@@ -222,7 +223,7 @@ Widget _buildCalendar() {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Time practiced',
+                        AppLocale.insightsPageTimePracticed.getString(context),
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -230,7 +231,7 @@ Widget _buildCalendar() {
                         ),
                       ),
                       Text(
-                        '${timePracticed}m',
+                        '$timePracticed${AppLocale.insightsPageMinuteAbbr.getString(context)}',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -256,7 +257,7 @@ Widget _buildCalendar() {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '${(progressBarValue * 100).toInt()}% of daily goal achieved',
+                    '${(progressBarValue * 100).toInt()}% ${AppLocale.insightsPageDailyGoal.getString(context)}',
                     style: TextStyle(fontSize: 12, color: Colors.black87),
                   ),
 
@@ -287,7 +288,7 @@ Widget _buildCalendar() {
                             ),
                             SizedBox(height: 4),
                             Text(
-                              'Speech Accuracy',
+                              AppLocale.insightsPageSpeechAccuracy.getString(context),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -323,7 +324,7 @@ Widget _buildCalendar() {
                             ),
                             SizedBox(height: 4),
                             Text(
-                              'Noise Challenge',
+                              AppLocale.insightsPageNoiseChallenge.getString(context),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -362,7 +363,7 @@ Widget _buildCalendar() {
         ),
         child: Center(
           child: Text(
-            'View Most Missed Words',
+            AppLocale.insightsPageMissedWords.getString(context),
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -392,7 +393,7 @@ Widget _buildCalendar() {
         ),
         child: Center(
           child: Text(
-            'View Most Missed Sounds',
+            AppLocale.insightsPageMissedSounds.getString(context),
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -432,7 +433,7 @@ Widget _buildCalendar() {
             child: 
             Center(
               child: Text(
-              'Speech Overtime',
+              AppLocale.insightsPageSpeechOvertime.getString(context),
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/translations.dart';
+
 class CustomModuleCard extends StatelessWidget {
   final String moduleName;
   final VoidCallback onStart;
@@ -63,8 +65,8 @@ class CustomModuleCard extends StatelessWidget {
                       ),
                       padding: EdgeInsets.zero,
                     ),
-                    child: const Text(
-                      'START',
+                    child: Text(
+                      AppLocale.customModulesPageStart.getString(context),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
