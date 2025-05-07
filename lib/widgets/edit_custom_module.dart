@@ -3,6 +3,7 @@ import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/gemini_util.dart';
 import 'package:hearbat/utils/user_module_util.dart';
 import '../utils/text_util.dart';
+import '../utils/translations.dart';
 
 class EditModuleScreen extends StatefulWidget {
   final String moduleName;
@@ -212,7 +213,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
   void _addAnswerGroup() {
     if (answerGroups.length >= maxGroups) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Maximum of $maxGroups groups allowed')),
+        SnackBar(content: Text('${AppLocale.editCustomModuleMaximumOf.getString(context)} $maxGroups ${AppLocale.editCustomModuleGroupsAllowed.getString(context)}')),
       );
       return;
     }
@@ -266,8 +267,9 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
     }
 
     if (answerGroups.length == 1) {
-      bool confirmed = await _showDeleteConfirmationDialog("Delete Module",
-          "This is the last answer group. Deleting it will remove the entire module. Continue?");
+      bool confirmed = await _showDeleteConfirmationDialog(
+          AppLocale.editCustomModuleDeleteModule.getString(context), AppLocale.editCustomModuleDeleteModule.getString(context));
+
 
       if (confirmed && mounted) {
         setState(() {
@@ -294,7 +296,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
       }
     } else {
       bool confirmed = await _showDeleteConfirmationDialog(
-          "Delete Group", "Are you sure you want to delete this answer group?");
+          AppLocale.editCustomModuleDeleteGroup.getString(context), AppLocale.editCustomModuleDeleteGroupWarning.getString(context));
 
       if (confirmed && mounted) {
         _removeControllersForGroup(visualIndex);
@@ -316,7 +318,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Group deleted (unsaved)')),
+            SnackBar(content: Text(AppLocale.editCustomModuleGroupDeleted.getString(context))),
           );
         }
       }
@@ -333,7 +335,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
               content: Text(message),
               actions: <Widget>[
                 TextButton(
-                  child: Text('Cancel'),
+                  child: Text(AppLocale.animatedButtonWidgetCancel.getString(context)),
                   onPressed: () {
                     Navigator.of(context).pop(false);
                   },
@@ -345,7 +347,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.red,
                   ),
-                  child: Text('Delete'),
+                  child: Text(AppLocale.editCustomModuleDelete.getString(context)),
                 ),
               ],
             );
@@ -399,7 +401,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                      'Could not generate enough related words for group ${i + 1}'),
+                      '${AppLocale.editCustomModuleGenerationFailed.getString(context)} ${i + 1}'),
                   backgroundColor: Colors.red,
                 ),
               );
@@ -409,7 +411,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('Error generating words for group ${i + 1}: $e'),
+                content: Text('${AppLocale.editCustomModuleGenerationError.getString(context)} ${i + 1}: $e'),
                 backgroundColor: Colors.red,
               ),
             );
@@ -446,7 +448,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
         }
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Module saved successfully')),
+          SnackBar(content: Text(AppLocale.editCustomModuleSavedSuccessfully.getString(context))),
         );
       }
     } else {
@@ -458,7 +460,8 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-                'No valid answer groups to save. Please add at least one word.'),
+                AppLocale.editCustomModuleNoValidGroups.getString(context),
+            ),
             backgroundColor: Colors.red,
           ),
         );
@@ -503,7 +506,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Discard Changes?',
+                    AppLocale.editCustomModuleDiscardChanges.getString(context),
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
@@ -512,7 +515,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'You have unsaved changes.\nAre you sure you want to exit?',
+                    AppLocale.editCustomModuleUnsavedChangesWarning.getString(context),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,
@@ -535,7 +538,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
                             ),
                           ),
                           child: Text(
-                            'KEEP EDITING',
+                            AppLocale.editCustomModuleKeepEditing.getString(context),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -557,7 +560,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
                             ),
                           ),
                           child: Text(
-                            'DISCARD',
+                            AppLocale.editCustomModuleDiscard.getString(context),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -658,7 +661,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
         body: isLoading
             ? Center(child: CircularProgressIndicator())
             : answerGroups.isEmpty
-                ? Center(child: Text('No answer groups found for this module'))
+                ? Center(child: Text(AppLocale.editCustomModuleNoGroupsFound.getString(context),))
                 : ListView.builder(
                     controller: _scrollController,
                     padding: EdgeInsets.symmetric(vertical: 8),
@@ -674,7 +677,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
                               child: ElevatedButton.icon(
                                 onPressed: _addAnswerGroup,
                                 icon: Icon(Icons.add, color: Colors.white),
-                                label: Text('Add Set',
+                                label: Text(AppLocale.editCustomModuleAddSet.getString(context),
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,
@@ -709,7 +712,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
                   borderRadius: BorderRadius.circular(16)),
             ),
             child: Text(
-              'SAVE',
+              AppLocale.editCustomModuleSave.getString(context),
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -734,7 +737,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
             child: Row(
               children: [
                 Text(
-                  'Set ${groupIndex + 1}:',
+                  '${AppLocale.editCustomModuleSet.getString(context)} ${groupIndex + 1}:',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Spacer(),

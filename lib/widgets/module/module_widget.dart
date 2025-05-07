@@ -4,6 +4,7 @@ import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/background_noise_util.dart';
 import 'package:hearbat/utils/audio_util.dart';
 import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
+import '../../utils/translations.dart';
 import 'four_answer_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/utils/google_tts_util.dart';
@@ -122,7 +123,7 @@ class _ModulePageState extends State<ModuleWidget> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Text(
-                    'Words Missed',
+                    AppLocale.moduleWidgetWordsMissed.getString(context),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -153,7 +154,7 @@ class _ModulePageState extends State<ModuleWidget> {
                             answer: incorrectAnswerPairs[index][0].answer,
                             onPressed: () =>
                                 playAnswer(incorrectAnswerPairs[index][0]),
-                            headerText: 'You Chose',
+                            headerText: AppLocale.generalYouChose.getString(context),
                             color: Color.fromARGB(255, 195, 74, 74),
                           ),
                           SizedBox(width: 8),
@@ -161,7 +162,7 @@ class _ModulePageState extends State<ModuleWidget> {
                               answer: incorrectAnswerPairs[index][1].answer,
                               onPressed: () =>
                                   playAnswer(incorrectAnswerPairs[index][1]),
-                              headerText: 'Correct Answer',
+                              headerText: AppLocale.generalCorrectAnswer.getString(context),
                               color: Color.fromARGB(255, 129, 221, 121)),
                         ],
                       ),
@@ -263,7 +264,7 @@ class _ModulePageState extends State<ModuleWidget> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
               child: AutoSizeText(
-                'Lesson Complete!',
+                AppLocale.generalLessonComplete.getString(context),
                 maxLines: 1,
                 style: TextStyle(
                     fontSize: 32,
@@ -277,7 +278,8 @@ class _ModulePageState extends State<ModuleWidget> {
               context: context,
               type: ScoreType.score,
               correctAnswersCount: correctAnswersCount.toString(),
-              subtitleText: "Score",
+              subtitleText: AppLocale.generalScore.getString(context),
+              isHighest: false,
               icon: Icon(
                 Icons.star,
                 color: Color.fromARGB(255, 7, 45, 78),
@@ -290,7 +292,8 @@ class _ModulePageState extends State<ModuleWidget> {
               context: context,
               type: ScoreType.score,
               correctAnswersCount: correctAnswersCount.toString(),
-              subtitleText: "Highest Score",
+              subtitleText: AppLocale.generalHighestScore.getString(context),
+              isHighest: true,
               icon: Icon(
                 Icons.emoji_events,
                 color: Color.fromARGB(255, 255, 255, 255),
@@ -320,7 +323,7 @@ class _ModulePageState extends State<ModuleWidget> {
                   elevation: 5,
                 ),
                 child: Text(
-                  'CONTINUE',
+                  AppLocale.generalContinue.getString(context),
                   style: TextStyle(
                     color: const Color.fromARGB(255, 255, 255, 255),
                     fontSize: 20,

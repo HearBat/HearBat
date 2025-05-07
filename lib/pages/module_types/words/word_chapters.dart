@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../utils/translations.dart';
 import 'word_path.dart';
 import '../../../widgets/top_bar_widget.dart';
 import '../../../widgets/chapter_card_widget.dart';
@@ -57,7 +58,7 @@ class _WordChaptersState extends State<WordChapters> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
-        title: "WORD",
+        title: AppLocale.wordChaptersPageTitle.getString(context),
         leadingIcon: Icons.west,
       ),
       body: ListView(

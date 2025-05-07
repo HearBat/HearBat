@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/translations.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
 import 'insights_page.dart';
@@ -11,7 +12,7 @@ class MyNavBar extends StatefulWidget {
 class _MyNavBarState extends State<MyNavBar> {
   int selectedIndex = 0;
   Key _profilePageKey = UniqueKey();
-  
+
   // Store navigation keys to maintain state
   final List<GlobalKey<NavigatorState>> _navigatorKeys = [
     GlobalKey<NavigatorState>(),
@@ -47,18 +48,18 @@ class _MyNavBarState extends State<MyNavBar> {
         bottomNavigationBar: NavigationBar(
           selectedIndex: selectedIndex,
           onDestinationSelected: _selectTab,
-          destinations: const <Widget>[
+          destinations: <Widget>[
             NavigationDestination(
               icon: Icon(Icons.home),
-              label: 'Home',
+              label: AppLocale.navBarHome.getString(context),
             ),
             NavigationDestination(
               icon: Icon(Icons.query_stats),
-              label: 'Insights',
+              label: AppLocale.navBarInsights.getString(context),
             ),
             NavigationDestination(
               icon: Icon(Icons.person),
-              label: 'Profile',
+              label: AppLocale.navBarProfile.getString(context),
             ),
           ],
         ),

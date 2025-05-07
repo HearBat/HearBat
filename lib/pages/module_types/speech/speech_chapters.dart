@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../utils/translations.dart';
 import '../../../widgets/top_bar_widget.dart';
 import '../../../widgets/chapter_card_widget.dart';
 import 'speech_path.dart';
@@ -23,7 +24,7 @@ class SpeechChapters extends StatelessWidget {
 
     return Scaffold(
       appBar: TopBar(
-        title: "SPEECH",
+        title: AppLocale.speechChaptersPageTitle.getString(context),
         leadingIcon: Icons.west,
       ),
       body: ListView(
