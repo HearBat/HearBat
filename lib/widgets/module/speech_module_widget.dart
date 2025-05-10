@@ -8,6 +8,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:hearbat/stats/exercise_score_model.dart';
+import 'package:hearbat/stats/module_model.dart';
 import 'package:hearbat/utils/background_noise_util.dart';
 import 'package:hearbat/utils/google_stt_util.dart';
 import 'package:hearbat/utils/google_tts_util.dart';
@@ -181,9 +183,9 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     });
   }
 
-  void _submitRecording() {
+  void _submitRecording() async {
     setState(() {
-      _gradeSum += _grade;
+      _gradeSum += _grade; // This is being called twice...
       _attempts++;
       _isCheckPressed = !_isCheckPressed;
       if (_isCheckPressed == false) {
@@ -193,9 +195,6 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
           _playSentence();
         } else {
           _isCompleted = true;
-
-          // TODO: SAVE SCORE TO DATABASE
-          // ...
         }
         _isSubmitted = false;
         _transcription = '';
@@ -206,6 +205,21 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
         }
       }
     });
+
+    // Make sure this is being executed when _isCompleted is true
+    if (_isCompleted) {
+      const maxScore = 100;
+      final score = (_gradeSum / 2 / numberOfExercises).ceil(); // Average out of 100
+      await ExerciseScore.insert(
+        "speech",
+        DateTime.now(),
+        score,
+        maxScore);
+      await Module.updateStats(
+        "speech",
+        widget.title,
+        score);
+    }
   }
 
   @override
