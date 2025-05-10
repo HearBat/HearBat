@@ -22,7 +22,7 @@ class Exercise {
     );
   }
 
-  static Future<int> insert(Exercise exercise) async {
+  static Future<int?> insert(Exercise exercise) async {
     final db = await StatsDatabase().database;
     return await db.insert(_table, exercise.toMap());
   }
