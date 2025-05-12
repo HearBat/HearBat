@@ -223,7 +223,7 @@ mixin AppLocale {
     settingsPageTitle: 'SETTINGS',
     settingsPageLanguageTitle: 'Language',
     settingsPageLanguageEnglish: 'English',
-    settingsPageLanguageVietnamese: 'Vietnamese',
+    settingsPageLanguageVietnamese: 'Test Language Switch (off)',
 
     settingsPageFeedbackTitle: 'Feedback Sound',
     settingsPageFeedbackOn: 'On',
@@ -408,7 +408,7 @@ mixin AppLocale {
     settingsPageTitle: 'SETTINGS',
     settingsPageLanguageTitle: 'Language',
     settingsPageLanguageEnglish: 'English',
-    settingsPageLanguageVietnamese: 'Vietnamese',
+    settingsPageLanguageVietnamese: 'Test Language Switched (on)',
 
     settingsPageFeedbackTitle: 'Feedback Sound',
     settingsPageFeedbackOn: 'On',

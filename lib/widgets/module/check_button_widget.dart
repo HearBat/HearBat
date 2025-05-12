@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../utils/translations.dart';
 
 class CheckButtonWidget extends StatelessWidget {

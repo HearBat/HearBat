@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import '../../pages/module_types/words/module_words_page.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
-
 import '../../utils/translations.dart';
 
 class ModuleCard extends StatefulWidget {

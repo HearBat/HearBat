@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/widgets/top_bar_widget.dart';
-
 import '../utils/translations.dart';
 
 // Most Missed Sounds pop up page

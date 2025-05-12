@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/utils/audio_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:confetti/confetti.dart';
-
 import '../../utils/translations.dart';
 
 class MissedAnswer {

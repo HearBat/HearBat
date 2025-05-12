@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
-
 import '../../utils/translations.dart';
 
 class AnimatedButton extends StatefulWidget {
