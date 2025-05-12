@@ -181,6 +181,17 @@ mixin AppLocale {
   static const String editCustomModuleAddSet = 'editCustomModuleAddSet';
   static const String editCustomModuleSave = 'editCustomModuleSave';
   static const String editCustomModuleSet = 'editCustomModuleSet';
+
+  static const String customUtilAlreadyExists = 'customUtilAlreadyExists';
+  static const String customUtilOverwritePrompt = 'customUtilOverwritePrompt';
+  static const String customUtilReturnToModule = 'customUtilReturnToModule';
+  static const String customUtilOverwrite = 'customUtilOverwrite';
+  static const String customUtilTitle = 'customUtilTitle';
+  static const String customUtilEntryPrompt = 'customUtilEntryPrompt';
+  static const String customUtilFillTheRest = 'customUtilFillTheRest';
+  static const String customUtilModuleName = 'customUtilModuleName';
+  static const String customUtilSaveModule = 'customUtilSaveModule';
+
   // General (Multi-Page) Translations
   static const String generalAccentPreview = 'generalAccentPreview';
   static const String generalCancel = 'generalCancel';
@@ -364,6 +375,16 @@ mixin AppLocale {
     editCustomModuleAddSet: 'Add Set',
     editCustomModuleSave: 'SAVE',
     editCustomModuleSet: 'Set',
+
+    customUtilAlreadyExists: 'Modules Already Exists',
+    customUtilOverwritePrompt:  'A module with this name already exists. Would you like to overwrite it?',
+    customUtilReturnToModule: 'Return to Module',
+    customUtilOverwrite: 'Overwrite',
+    customUtilTitle: 'Module Creator',
+    customUtilEntryPrompt: 'Enter your desired words!',
+    customUtilFillTheRest:  'We\'ll fill in the rest of your set if\nyou enter less than four words',
+    customUtilModuleName: 'Module Name',
+    customUtilSaveModule: 'Save Module',
 
     // General (Multi-Page)
     generalAccentPreview: 'Hello this is how I sound',

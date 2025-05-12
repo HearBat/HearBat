@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hearbat/utils/translations.dart';
 import 'package:hearbat/utils/user_module_util.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/widgets/top_bar_widget.dart';
@@ -70,7 +71,7 @@ class CustomUtilState extends State<CustomUtil> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Discard Changes?',
+                  AppLocale.editCustomModuleDiscardChanges.getString(context),
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w800,
@@ -79,7 +80,7 @@ class CustomUtilState extends State<CustomUtil> {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'You have unsaved changes.\nAre you sure you want to exit?',
+                  AppLocale.editCustomModuleUnsavedChangesWarning.getString(context),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
@@ -101,7 +102,7 @@ class CustomUtilState extends State<CustomUtil> {
                           ),
                         ),
                         child: Text(
-                          'KEEP EDITING',
+                          AppLocale.editCustomModuleKeepEditing.getString(context),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -245,13 +246,13 @@ class CustomUtilState extends State<CustomUtil> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Module Already Exists",
+                        AppLocale.customUtilAlreadyExists.getString(context),
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 16),
                       Text(
-                        "A module with this name already exists. Would you like to overwrite it?",
+                        AppLocale.customUtilOverwritePrompt.getString(context),
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 24),
@@ -269,7 +270,7 @@ class CustomUtilState extends State<CustomUtil> {
                             ),
                             onPressed: () => Navigator.pop(context, false),
                             child: Text(
-                              "Return to Module",
+                              AppLocale.customUtilReturnToModule.getString(context),
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -283,7 +284,7 @@ class CustomUtilState extends State<CustomUtil> {
                             ),
                             onPressed: () => Navigator.pop(context, true),
                             child: Text(
-                              "Overwrite",
+                              AppLocale.customUtilOverwrite.getString(context),
                               style: TextStyle(color: Colors.black),
                             ),
                           ),
@@ -326,12 +327,12 @@ class CustomUtilState extends State<CustomUtil> {
         }
       },
       child: Scaffold(
-        appBar: TopBar(title: "Module Creator"),
+        appBar: TopBar(title: AppLocale.customUtilTitle.getString(context)),
         body: ListView(
           children: <Widget>[
             SizedBox(height: 30),
             Text(
-              "Enter your desired words!",
+              AppLocale.customUtilEntryPrompt.getString(context),
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -342,7 +343,7 @@ class CustomUtilState extends State<CustomUtil> {
             ),
             SizedBox(height: 20),
             Text(
-              "We'll fill in the rest of your set if\nyou enter less than four words",
+              AppLocale.customUtilFillTheRest.getString(context),
               style: TextStyle(
                 fontSize: 19,
                 fontWeight: FontWeight.bold,
@@ -357,7 +358,7 @@ class CustomUtilState extends State<CustomUtil> {
               child: TextField(
                 controller: _moduleNameController,
                 decoration: InputDecoration(
-                  labelText: "Module Name",
+                  labelText: AppLocale.customUtilModuleName.getString(context),
                   filled: true,
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(
@@ -386,7 +387,7 @@ class CustomUtilState extends State<CustomUtil> {
                       children: [
                         Expanded(
                           child: Text(
-                            'Set ${index + 1}',
+                            '${AppLocale.editCustomModuleSet.getString(context)} ${index + 1}',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -513,7 +514,7 @@ class CustomUtilState extends State<CustomUtil> {
                     color: Colors.white,
                   ),
                   label: Text(
-                    'Add Set',
+                    AppLocale.editCustomModuleAddSet.getString(context),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -541,7 +542,7 @@ class CustomUtilState extends State<CustomUtil> {
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 ),
                 child: Text(
-                  "Save Module",
+                  AppLocale.customUtilSaveModule.getString(context),
                   style: TextStyle(
                     color: const Color.fromARGB(255, 255, 255, 255),
                     fontSize: 20,
