@@ -27,7 +27,7 @@ import UserNotifications
   
   // MARK: - Push Notification Handling
   
-  // For iOS 10+ devices, this will handle notifications in the foreground
+  // iOS 10+ devices, this will handle notifications in the foreground
   func userNotificationCenter(_ center: UNUserNotificationCenter, 
                                willPresent notification: UNNotification, 
                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -48,7 +48,7 @@ import UserNotifications
   func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
     if let token = fcmToken {
       print("FCM Token: \(token)")
-      // You can send the token to your backend if needed
+      // send the token to backend if needed
     }
   }
 
