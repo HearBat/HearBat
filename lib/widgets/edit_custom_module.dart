@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/gemini_util.dart';
 import 'package:hearbat/utils/user_module_util.dart';
+import 'package:hearbat/widgets/top_bar_widget.dart';
 import '../utils/text_util.dart';
 import '../utils/translations.dart';
 
@@ -654,10 +655,7 @@ class _EditModuleScreenState extends State<EditModuleScreen> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.moduleName),
-          actions: [],
-        ),
+        appBar: TopBar(title: widget.moduleName),
         body: isLoading
             ? Center(child: CircularProgressIndicator())
             : answerGroups.isEmpty
