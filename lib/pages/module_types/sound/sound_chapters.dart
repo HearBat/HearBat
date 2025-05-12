@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../utils/data_service_util.dart';
 import '../../../utils/translations.dart';
 import 'sound_path.dart';
 import '../../../widgets/top_bar_widget.dart';
@@ -7,20 +8,7 @@ import '../../../widgets/chapter_card_widget.dart';
 class SoundChapters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Map<String, String>> chapters = [
-      { "name": "Home Sounds",
-        "image": "assets/visuals/HBSoundChapterOne.png",
-      },
-
-      { "name": "Music Sounds",
-        "image": "assets/visuals/HBSoundChapterTwo.png",
-      },
-
-      {
-        "name": "Nature Sounds",
-        "image": "assets/visuals/HBSoundChapterThree.png",
-      },
-    ];
+    List<Map<String, String>> chapters = DataService().getSoundChapters();
 
     return Scaffold(
       appBar: TopBar(

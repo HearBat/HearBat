@@ -40,6 +40,7 @@ mixin AppLocale {
   static const String settingsPageTitle = 'settingsPageTitle';
   static const String settingsPageLanguageTitle = 'settingsPageLanguageTitle';
   static const String settingsPageLanguageEnglish = 'settingsPageLanguageEnglish';
+  static const String settingsPageLanguageVietnamese = 'settingsPageLanguageVietnamese';
 
   static const String settingsPageFeedbackTitle = 'settingsPageFeedbackTitle';
   static const String settingsPageFeedbackOn = 'settingsPageFeedbackOn';
@@ -222,6 +223,7 @@ mixin AppLocale {
     settingsPageTitle: 'SETTINGS',
     settingsPageLanguageTitle: 'Language',
     settingsPageLanguageEnglish: 'English',
+    settingsPageLanguageVietnamese: 'Vietnamese',
 
     settingsPageFeedbackTitle: 'Feedback Sound',
     settingsPageFeedbackOn: 'On',
@@ -378,6 +380,190 @@ mixin AppLocale {
     generalGreat: 'Great'
   };
 
+  static const Map<String, dynamic> VI = {
+    // Home Page
+    homePageTitle: 'VIHearBat',
+    homePageSubtitle: 'your hearing companion',
+    homePageWordsTitle: 'Train Words',
+    homePageSoundsTitle: 'Train Sounds',
+    homePageSpeechTitle: 'Train Speech',
+    homePageMusicTitle: 'Train Music',
+    homePageCustomTitle: 'Custom Module Builder',
+    homePageWordsDesc: 'Sharpen your listening with an extensive collection of diverse words',
+    homePageSoundsDesc: 'Discover and recognize a wide range of sounds, from urban buzz to tranquil nature',
+    homePageSpeechDesc: 'Refine your listening by hearing sentences and repeating them back',
+    homePageMusicDesc: 'Tune your ear to musical patterns and pitch variations, mastering melody and tone recognition',
+    homePageCustomDesc: 'Personalize your auditory learning by creating your own modules',
+
+    // Navigation Bar
+    navBarHome: 'Home',
+    navBarInsights: 'Insights',
+    navBarProfile: 'Profile',
+
+    // Sound Adjustments Page
+    soundAdjustPageReady: 'Ready',
+    soundAdjustPagePleaseAdjust: 'Please adjust your \nsound settings',
+
+    // Settings Page
+    settingsPageTitle: 'SETTINGS',
+    settingsPageLanguageTitle: 'Language',
+    settingsPageLanguageEnglish: 'English',
+    settingsPageLanguageVietnamese: 'Vietnamese',
+
+    settingsPageFeedbackTitle: 'Feedback Sound',
+    settingsPageFeedbackOn: 'On',
+    settingsPageFeedbackOff: 'Off',
+
+    settingsPageVoiceTitle: 'Voice Select',
+    settingsPageVoiceUSFemale: 'American Female',
+    settingsPageVoiceUSMale: 'American Male',
+    settingsPageVoiceUKFemale: 'English Female',
+    settingsPageVoiceUKMale: 'English Male',
+    settingsPageVoiceINFemale: 'Indian Female',
+    settingsPageVoiceINMale: 'Indian Male',
+    settingsPageVoiceAUFemale: 'Australian Female',
+    settingsPageVoiceAUMale: 'Australian Male',
+
+    settingsPageClearCache: 'CLEAR CACHE',
+
+    // Difficulty Selection Page
+    selectionPageDifficultyTitle: 'Difficulty',
+    selectionPageDifficultySubtitle: 'By completing modules, you can unlock difficulty levels',
+    selectionPageDifficultyNormal: 'Normal',
+    selectionPageDifficultyHard: 'Hard',
+
+    selectionPageVoiceTitle: 'Voice Type',
+    selectionPageVoiceSubtitle: 'Random swaps between male and female',
+    selectionPageVoiceFemale: 'Female',
+    selectionPageVoiceMale: 'Male',
+    selectionPageVoiceRandom: 'Random',
+
+    selectionPageBackgroundTitle: 'Background Noise',
+    selectionPageBackgroundSubtitle: 'Background noises to add an extra challenge',
+    selectionPageBackgroundNone: 'None',
+    selectionPageBackgroundRain: 'Rain',
+    selectionPageBackgroundCoffee: 'Coffee Shop',
+
+    selectionPageIntensityTitle: 'Noise Intensity',
+    selectionPageIntensitySubtitle: 'Choose the intensity of background noises',
+    selectionPageIntensityLow: 'Low',
+    selectionPageIntensityMedium: 'Medium',
+    selectionPageIntensityHigh: 'High',
+
+    selectionPageStart: 'START EXERCISE',
+
+    // Insights Page
+    insightsPageTitle: 'INSIGHTS',
+    insightsPageToday: 'Today',
+    insightsPageTimePracticed: 'Time practiced',
+    insightsPageMinuteAbbr: 'm',
+    insightsPageDailyGoal: 'of daily goal achieved',
+    insightsPageSpeechAccuracy: 'Speech Accuracy',
+    insightsPageNoiseChallenge: 'Noise Challenge',
+    insightsPageMissedWords: 'View Most Missed Words',
+    insightsPageMissedSounds: 'View Most Missed Sounds',
+    insightsPageSpeechOvertime: 'Speech Overtime',
+
+    // Missed Words Page
+    missedWordsPageMostMissedWords: 'Most Missed Words',
+
+    // Missed Sounds Page
+    missedSoundsPageMostMissedSounds: 'Most Missed Sounds',
+
+    // Word Chapters Page
+    wordChaptersPageTitle: 'WORD',
+
+    // Sound Chapters Page
+    soundChaptersPageTitle: 'SOUND',
+
+    // Speech Chapters Page
+    speechChaptersPageTitle: 'SPEECH',
+
+    // Music Chapters Page
+    musicChaptersPageTitle: 'MUSIC',
+
+    // Custom Modules Page
+    customModulesPageTitle: 'Custom Module Builder',
+    customModulesPageCreate: 'Create Module',
+    customModulesPageStart: 'START',
+
+    // Check Button Widget
+    checkButtonWidgetCheck: 'CHECK',
+
+    // Four Answer Widget
+    fourAnswerWidgetPrompt: 'What do you hear?',
+
+    // Module Widget
+    moduleWidgetWordsMissed: 'Words Missed',
+
+    // Pitch Resolution Widget
+    pitchResolutionWidgetSoundsMissed: 'Sounds Missed',
+    pitchResolutionWidgetGreatJob: 'No sounds missed! Great job!',
+    pitchResolutionWidgetSemitones: 'Semitones',
+    pitchResolutionWidgetPrompt: 'Is the second note higher or lower?',
+    pitchResolutionWidgetHigher: 'Higher',
+    pitchResolutionWidgetLower: 'Lower',
+
+    // Speech Module Widget
+    speechModuleWidgetFailedTranscription: 'Could not transcribe audio.',
+    speechModuleWidgetPrompt: 'Repeat back what you hear!',
+    speechModuleWidgetPlayAudio: 'Play',
+    speechModuleWidgetStopRecording: 'Stop Recording',
+    speechModuleWidgetStartRecording: 'Start Recording',
+    speechModuleWidgetWhatYouSaid: 'What you said:',
+    speechModuleWidgetOriginal: 'Original:',
+    speechModuleWidgetAccuracy: 'Accuracy:',
+    speechModuleWidgetAverage: 'Average Accuracy',
+    speechModuleWidgetHighestAverage: 'Highest Average Accuracy',
+
+    // Alternating Path Layout Widget
+    alternatingPathViewChapterWords: 'View Chapter Words',
+
+    // Animated Button Widget
+    animatedButtonWidgetExercise: 'Exercise',
+    animatedButtonWidgetChapterName: 'Chapter Name:',
+    animatedButtonWidgetCancel: 'Cancel',
+    animatedButtonWidgetStart: 'Start',
+
+    // Module Card Widget
+    moduleCardWidgetHearWords: 'HEAR WORDS',
+
+    // Edit Custom Module
+    editCustomModuleMaximumOf: 'Maximum of',
+    editCustomModuleGroupsAllowed: 'groups allowed',
+    editCustomModuleDeleteModule: 'Delete Module',
+    editCustomModuleDeleteModuleWarning: 'This is the last answer group. Deleting it will remove the entire module. Continue?',
+    editCustomModuleDeleteGroup: 'Delete Group',
+    editCustomModuleDeleteGroupWarning: 'Are you sure you want to delete this answer group?',
+    editCustomModuleGroupDeleted: 'Group deleted (unsaved)',
+    editCustomModuleDelete: 'Delete',
+    editCustomModuleGenerationFailed: 'Could not generate enough related words for group',
+    editCustomModuleGenerationError: 'Error generating words for group',
+    editCustomModuleSavedSuccessfully: 'Module saved successfully',
+    editCustomModuleNoValidGroups: 'No valid answer groups to save. Please add at least one word.',
+    editCustomModuleDiscardChanges: 'Discard Changes?',
+    editCustomModuleUnsavedChangesWarning: 'You have unsaved changes.\nAre you sure you want to exit?',
+    editCustomModuleKeepEditing: 'KEEP EDITING',
+    editCustomModuleDiscard: 'DISCARD',
+    editCustomModuleNoGroupsFound: 'No answer groups found for this module',
+    editCustomModuleAddSet: 'Add Set',
+    editCustomModuleSave: 'SAVE',
+    editCustomModuleSet: 'Set',
+
+    // General (Multi-Page)
+    generalAccentPreview: 'Hello this is how I sound',
+    generalCancel: 'CANCEL',
+    generalLoading: 'Loading...',
+    generalContinue: 'CONTINUE',
+    generalYouChose: 'You Chose',
+    generalCorrectAnswer: 'Correct Answer',
+    generalLessonComplete: 'Lesson Complete!',
+    generalScore: 'Score',
+    generalHighestScore: 'Highest Score',
+    generalCorrect: 'Correct',
+    generalIncorrect: 'Incorrect',
+    generalGreat: 'Great'
+  };
 
   // idk some examples of other langs from the package readme
   static const Map<String, dynamic> KM = {homePageWordsTitle: 'ការធ្វើមូលដ្ឋានីយកម្ម'};

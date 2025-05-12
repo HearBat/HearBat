@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../models/chapter_model.dart';
+import '../../../utils/data_service_util.dart';
 import '../../../utils/translations.dart';
 import 'word_path.dart';
 import '../../../widgets/top_bar_widget.dart';
@@ -22,32 +24,7 @@ class _WordChaptersState extends State<WordChapters> {
 
   Future<void> _loadChapters() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String language = prefs.getString('languagePreference') ?? 'English';
-
-    if (language == 'English') {
-      chapters = [
-        {
-          "name": "Beginner Foundations",
-          "image": "assets/visuals/HBWordsChapterOne.png",
-        },
-        {
-          "name": "Intermediate Progress",
-          "image": "assets/visuals/HB_WordsChapterTwo.png",
-        },
-        {
-          "name": "Advanced Exploration",
-          "image": "assets/visuals/HBWordsChapterThree.png",
-        },
-        {
-          "name": "Proficient Application",
-          "image": "assets/visuals/HBWordsChapterFour.png",
-        },
-        {
-          "name": "Expert Mastery",
-          "image": "assets/visuals/HBWordsChapterFive.png",
-        },
-      ];
-    }
+    chapters = DataService().getWordChapters();
 
     setState(() {
       isLoading = false; // Update isLoading to false to render the UI

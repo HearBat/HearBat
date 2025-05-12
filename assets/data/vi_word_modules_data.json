@@ -1,0 +1,175 @@
+{
+  "chapters": [
+    {
+      "name": "Word Test Placeholder",
+      "image": "assets/visuals/HBWordsChapterOne.png",
+      "modules": [
+        {
+          "name": "Module 1",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Kangaroo"
+                },
+                {
+                  "answer": "Ice"
+                },
+                {
+                  "answer": "Peanut"
+                },
+                {
+                  "answer": "Encyclopedia"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Salt"
+                },
+                {
+                  "answer": "Cafeteria"
+                },
+                {
+                  "answer": "Football"
+                },
+                {
+                  "answer": "Hamburger"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Popcorn"
+                },
+                {
+                  "answer": "Superbowl"
+                },
+                {
+                  "answer": "Vote"
+                },
+                {
+                  "answer": "Nebraska"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Umbrella"
+                },
+                {
+                  "answer": "Cupcake"
+                },
+                {
+                  "answer": "Motorcycle"
+                },
+                {
+                  "answer": "Shoe"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Seven"
+                },
+                {
+                  "answer": "Certify"
+                },
+                {
+                  "answer": "Twice"
+                },
+                {
+                  "answer": "Escalator"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Dictionary"
+                },
+                {
+                  "answer": "Suitcase"
+                },
+                {
+                  "answer": "Unicorn"
+                },
+                {
+                  "answer": "Book"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Seventeen"
+                },
+                {
+                  "answer": "Baseball"
+                },
+                {
+                  "answer": "Gum"
+                },
+                {
+                  "answer": "Bottle"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Airport"
+                },
+                {
+                  "answer": "Pen"
+                },
+                {
+                  "answer": "Briefcase"
+                },
+                {
+                  "answer": "Computer"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Calendar"
+                },
+                {
+                  "answer": "Ball"
+                },
+                {
+                  "answer": "Anniversary"
+                },
+                {
+                  "answer": "Window"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Eyes"
+                },
+                {
+                  "answer": "Dalmatian"
+                },
+                {
+                  "answer": "Apple"
+                },
+                {
+                  "answer": "Orange"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

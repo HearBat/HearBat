@@ -2,6 +2,7 @@
   "chapters": [
     {
       "name": "Vowels",
+      "image": "assets/visuals/HBWordsChapterOne.png",
       "modules": [
         {
           "name": "Module 1",
@@ -67,6 +68,7 @@
     },
     {
       "name": "Consonants",
+      "image": "assets/visuals/HBWordsChapterTwo.png",
       "modules": [
         {
           "name": "Module 1",
@@ -132,6 +134,7 @@
     },
     {
       "name": "Prosody and Intonation",
+      "image": "assets/visuals/HBWordsChapterThree.png",
       "modules": [
         {
           "name": "Module 1",

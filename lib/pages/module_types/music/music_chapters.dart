@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../utils/data_service_util.dart';
 import '../../../utils/translations.dart';
 import 'music_path.dart';
 import '../../../widgets/top_bar_widget.dart';
@@ -7,11 +8,7 @@ import '../../../widgets/chapter_card_widget.dart';
 class MusicChapters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Map<String, String>> chapters = [
-      { "name": "Pitch Resolution",
-        "image": "assets/visuals/HBSoundChapterOne.png",
-      },
-    ];
+    List<Map<String, String>> chapters = DataService().getMusicChapters();
 
     return Scaffold(
       appBar: TopBar(

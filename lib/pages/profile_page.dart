@@ -3,7 +3,9 @@ import 'package:hearbat/widgets/top_bar_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
 
+import '../main.dart';
 import '../utils/cache_util.dart';
+import '../utils/data_service_util.dart';
 import '../utils/google_tts_util.dart';
 import '../utils/translations.dart';
 
@@ -315,6 +317,14 @@ class LanguageOptionsWidgetState extends State<LanguageOptionsWidget> {
     setState(() {
       _selectedLanguage = value;
       widget.updatePreferenceCallback('languagePreference', value);
+      switch(value) {
+        case 'English':
+          localization.translate('en');
+          DataService().loadJsonLanguageSpecific();
+        case 'Vietnamese':
+          localization.translate('vi');
+          DataService().loadJsonLanguageSpecific();
+      }
     });
   }
 
@@ -354,14 +364,14 @@ class LanguageOptionsWidgetState extends State<LanguageOptionsWidget> {
     return Column(
       children: <Widget>[
         _buildOption(AppLocale.settingsPageLanguageEnglish.getString(context), 'English', 'assets/visuals/us_flag.png'),
-        // Divider(
-        //   color: Color.fromARGB(255, 7, 45, 78),
-        //   thickness: 3,
-        //   indent: 20,
-        //   endIndent: 20,
-        // ),
-        // _buildOption(
-        //     'Vietnamese', 'Vietnamese', 'assets/visuals/vietnam_flag.png'),
+         Divider(
+           color: Color.fromARGB(255, 7, 45, 78),
+           thickness: 3,
+           indent: 20,
+           endIndent: 20,
+         ),
+         _buildOption(
+             AppLocale.settingsPageLanguageVietnamese.getString(context), 'Vietnamese', 'assets/visuals/vietnam_flag.png'),
       ],
     );
   }
