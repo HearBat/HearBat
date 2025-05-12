@@ -47,5 +47,21 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+
+		<!-- FCM Configurations -->
+		<key>UIBackgroundModes</key>
+		<array>
+			<string>fetch</string>
+			<string>remote-notification</string>
+		</array>
+
+		<key>FirebaseAppDelegateProxyEnabled</key>
+		<false/>
+
+		<key>FirebaseMessagingAutoInitEnabled</key>
+		<true/>
+		<key>FirebaseMessagingSenderID</key>
+		<string>1027895213174</string> <!-- Replace with actual FCM Sender ID -->
+
 	</dict>
 </plist>
