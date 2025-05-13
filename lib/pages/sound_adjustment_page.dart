@@ -45,7 +45,15 @@ class SoundAdjustmentPageState extends State<SoundAdjustmentPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Please adjust your \nsound settings',
+                  'Sound Check!\n',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  'Adjust your volume until you can\ncomfortably hear the music',
                   style: TextStyle(
                     fontSize: 24,
                   ),
