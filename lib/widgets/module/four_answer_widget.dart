@@ -200,7 +200,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Expanded(
+        SizedBox.expand(
           child: SingleChildScrollView(
             child: Column(
               children: [
