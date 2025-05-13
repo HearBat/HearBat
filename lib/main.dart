@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hearbat/stats/stats_db.dart';
+import 'package:hearbat/streaks/streaks_db.dart';
 import 'package:provider/provider.dart';
 import 'providers/my_app_state.dart';
+import 'streaks/streaks_provider.dart';
 import 'pages/sound_adjustment_page.dart'; 
 import 'utils/config_util.dart';
 import 'utils/data_service_util.dart';
@@ -16,6 +18,7 @@ Future<void> main() async {
   await ConfigurationManager().fetchConfiguration();
   await DataService().loadJson();
   await StatsDatabase().init();
+  await StreaksDatabase.instance.database;
   runApp(const MyApp());
 }
 
@@ -47,8 +50,11 @@ class _MyAppState extends State<MyApp> {
   
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => MyAppState()),
+        ChangeNotifierProvider(create: (context) => StreakProvider()),
+      ],
       child: MaterialApp(
         supportedLocales: localization.supportedLocales,
         localizationsDelegates: localization.localizationsDelegates,

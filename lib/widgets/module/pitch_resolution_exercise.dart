@@ -10,6 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/utils/audio_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:confetti/confetti.dart';
+import 'package:provider/provider.dart';
+import 'package:hearbat/streaks/streaks_provider.dart';
 
 class MissedAnswer {
   final int semitoneDifference;
@@ -82,6 +84,16 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
     });
   }
 
+  //Used to record activity for streaks
+  Future<void> _recordStreakActivity() async {
+    try {
+      final provider = Provider.of<StreakProvider>(context, listen: false);
+      await provider.recordActivity(1); // This handles both DB update and UI refresh
+    } catch (e) {
+      print('Error recording streak activity: $e');
+    }
+  }
+
   void playCorrectChime() async {
     final player = AudioPlayer();
     await player.play(AssetSource("audio/sounds/feedback/correct answer chime.mp3"));
@@ -118,6 +130,8 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
 
   void checkAnswer(String selectedAnswer) {
     if (currentCorrectAnswer == null || _selectedDirection != null) return;
+
+    _recordStreakActivity(); // Record streak activity when a question is answered
 
     final semitoneDifference = extractSemitoneDifference(currentCorrectAnswer!.path!);
     final isAnswerCorrect = selectedAnswer == currentCorrectAnswer!.answer;

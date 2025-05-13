@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../streaks/streaks_provider.dart';
 import 'module_types/words/word_chapters.dart';
 import 'module_types/sound/sound_chapters.dart';
 import 'module_types/speech/speech_chapters.dart';
 import 'module_types/custom/custom_path.dart';
 import 'module_types/music/music_chapters.dart';
+import 'daily_streak_page.dart';
+import 'package:provider/provider.dart';
 import '../widgets/home_card_widget.dart';
+import '../widgets/daily_streak_widget.dart';
 import '../utils/text_util.dart';
 import '../utils/translations.dart';
 
@@ -25,11 +29,24 @@ class HomePage extends StatelessWidget {
             children: [
               SizedBox(
                 width: double.infinity,
-                height: 200,
+                height: 240,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Column(
+                    Positioned(
+                      top: 50,
+                      right: 20,
+                      child: Consumer<StreakProvider>(
+                        builder: (context, provider, _) => GestureDetector(
+                          onTap: () => Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => DailyStreakPage())),
+                          child: StreakBadge(),
+                        ),
+                      ),
+                    ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 50.0),
+                    child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(height: 30),
@@ -53,6 +70,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
                     ),
                   ],
                 ),

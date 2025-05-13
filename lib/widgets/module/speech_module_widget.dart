@@ -13,6 +13,8 @@ import 'package:confetti/confetti.dart';
 import 'dart:math';
 import 'score_widget.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:provider/provider.dart';
+import 'package:hearbat/streaks/streaks_provider.dart';
 
 class SpeechModuleWidget extends StatefulWidget {
   final String chapter;
@@ -71,6 +73,15 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
       selectedFeedback = prefs
           .getString('feedbackPreference'); // Default to 'on' if no saved value
     });
+  }
+
+  Future<void> _recordStreakActivity() async {
+    try {
+      final provider = Provider.of<StreakProvider>(context, listen: false);
+      await provider.recordActivity(1); // Record 1 activity
+    } catch (e) {
+      print('Error recording streak activity: $e');
+    }
   }
 
   // Plays the audio that indicates the user selected the correct answer
@@ -180,6 +191,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   }
 
   void _submitRecording() {
+    _recordStreakActivity(); // Record streak activity when a question is answered
+
     setState(() {
       _gradeSum += _grade;
       _attempts++;
