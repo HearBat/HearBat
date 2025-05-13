@@ -1,15 +1,16 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+
+@pragma('vm:entry-point')
 class PushNotifications {
   Future<void> initFirebaseMessaging() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
     // Request permission
     await messaging.requestPermission();
-
     await messaging.subscribeToTopic('daily_reminder');
 
-    // Testing purposes
+    // FCM token appears in console to use for test messages
     String? token = await messaging.getToken();
     print('FCM Token: $token');
 
@@ -20,6 +21,5 @@ class PushNotifications {
         print('FCM Notification Received: ${message.notification!.title}');
       }
     });
-}
-
+  }
 }
