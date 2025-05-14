@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../utils/translations.dart';
 
 class CheckButtonWidget extends StatelessWidget {
   final bool isCheckingAnswer;
@@ -16,8 +17,8 @@ class CheckButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String check = "CHECK";
-    String continueWord = 'CONTINUE';
+    String check = AppLocale.checkButtonWidgetCheck.getString(context);
+    String continueWord = AppLocale.generalContinue.getString(context);
 
     return ElevatedButton(
       onPressed: isSelectedWordValid ? onPressed : null,

@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         SizedBox(height: 30),
                         Text(
-                          "HearBat",
+                          AppLocale.homePageTitle.getString(context),
                           style: GoogleFonts.londrinaSolid(
                             textStyle: TextStyle(
                               fontSize: 100,
@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "your hearing companion",
+                          AppLocale.homePageSubtitle.getString(context),
                           style: GoogleFonts.londrinaSolid(
                             textStyle: TextStyle(
                               fontSize: 30,
@@ -58,32 +58,32 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               HomeCardWidget(
-                cardText: AppLocale.homePageTrainWords.getString(context),
-                description: wordDesc,
+                cardText: AppLocale.homePageWordsTitle.getString(context),
+                description: AppLocale.homePageWordsDesc.getString(context),
                 destinationPage: WordChapters(),
                 image: "assets/visuals/HB_Word.png",
               ),
               HomeCardWidget(
-                cardText: AppLocale.homePageTrainSounds.getString(context),
-                description: soundDesc,
+                cardText: AppLocale.homePageSoundsTitle.getString(context),
+                description: AppLocale.homePageSoundsDesc.getString(context),
                 destinationPage: SoundChapters(),
                 image: "assets/visuals/HB_Music.png",
               ),
               HomeCardWidget(
-                cardText: 'Train Speech',
-                description: speechDesc,
+                cardText: AppLocale.homePageSpeechTitle.getString(context),
+                description: AppLocale.homePageSpeechDesc.getString(context),
                 destinationPage: SpeechChapters(),
                 image: "assets/visuals/HB_Speech.png",
               ),
               HomeCardWidget(
-                cardText: 'Train Music',
-                description: musicDesc,
+                cardText: AppLocale.homePageMusicTitle.getString(context),
+                description: AppLocale.homePageMusicDesc.getString(context),
                 destinationPage: MusicChapters(),
                 image: "assets/visuals/HB_Music.png",
               ),
               HomeCardWidget(
-                cardText: 'Custom Module Builder',
-                description: customDesc,
+                cardText: AppLocale.homePageCustomTitle.getString(context),
+                description: AppLocale.homePageCustomDesc.getString(context),
                 destinationPage: CustomPath(),
                 image: "assets/visuals/HB_Custom.png",
               ),

@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/utils/audio_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:confetti/confetti.dart';
+import '../../utils/translations.dart';
 
 class MissedAnswer {
   final int semitoneDifference;
@@ -209,7 +210,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
                         child: AutoSizeText(
-                          'Lesson Complete!',
+                          AppLocale.generalLessonComplete.getString(context),
                           maxLines: 1,
                           style: TextStyle(
                               fontSize: 32,
@@ -222,7 +223,8 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                         context: context,
                         type: ScoreType.score,
                         correctAnswersCount: correctAnswers.toString(),
-                        subtitleText: "Score",
+                        subtitleText: AppLocale.generalScore.getString(context),
+                        isHighest: false,
                         icon: Icon(
                           Icons.star,
                           color: Color.fromARGB(255, 7, 45, 78),
@@ -235,7 +237,8 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                         context: context,
                         type: ScoreType.score,
                         correctAnswersCount: correctAnswers.toString(),
-                        subtitleText: "Highest Score",
+                        subtitleText: AppLocale.generalHighestScore.getString(context),
+                        isHighest: true,
                         icon: Icon(
                           Icons.emoji_events,
                           color: Color.fromARGB(255, 255, 255, 255),
@@ -273,7 +276,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 10.0),
                                 child: Text(
-                                  'Sounds Missed',
+                                  AppLocale.pitchResolutionWidgetSoundsMissed.getString(context),
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
@@ -287,7 +290,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                               Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Text(
-                                  'No sounds missed! Great job!',
+                                  AppLocale.pitchResolutionWidgetGreatJob.getString(context),
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 7, 45, 78),
                                     fontSize: 16,
@@ -320,7 +323,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                                             Column(
                                               children: [
                                                 Text(
-                                                  'You Chose',
+                                                  AppLocale.generalYouChose.getString(context),
                                                   style: TextStyle(
                                                     color: Color.fromARGB(255, 7, 45, 78),
                                                     fontWeight: FontWeight.bold,
@@ -341,7 +344,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "${missedAnswer.semitoneDifference} Semitones",
+                                                  "${missedAnswer.semitoneDifference} ${AppLocale.pitchResolutionWidgetSemitones.getString(context)}",
                                                   style: TextStyle(
                                                     color: Color.fromARGB(255, 7, 45, 78),
                                                     fontSize: 14,
@@ -363,7 +366,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                                             Column(
                                               children: [
                                                 Text(
-                                                  'Correct',
+                                                  AppLocale.generalCorrect.getString(context),
                                                   style: TextStyle(
                                                     color: Color.fromARGB(255, 7, 45, 78),
                                                     fontWeight: FontWeight.bold,
@@ -384,7 +387,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "${missedAnswer.semitoneDifference} Semitones",
+                                                  "${missedAnswer.semitoneDifference} ${AppLocale.pitchResolutionWidgetSemitones.getString(context)}",
                                                   style: TextStyle(
                                                     color: Color.fromARGB(255, 7, 45, 78),
                                                     fontSize: 14,
@@ -423,7 +426,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                     elevation: 5,
                   ),
                   child: Text(
-                    'CONTINUE',
+                    AppLocale.generalContinue.getString(context),
                     style: TextStyle(
                       color: const Color.fromARGB(255, 255, 255, 255),
                       fontSize: 20,
@@ -449,7 +452,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 20.0),
                 child: Text(
-                  'Is the second note higher or lower?',
+                  AppLocale.pitchResolutionWidgetPrompt.getString(context),
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -589,7 +592,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: Text(
-                    'Great',
+                    AppLocale.generalGreat.getString(context),
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -614,7 +617,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                       Padding(
                         padding: const EdgeInsets.only(right: 30.0),
                         child: Text(
-                          'Incorrect',
+                          AppLocale.generalIncorrect.getString(context),
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -623,7 +626,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                         ),
                       ),
                       Text(
-                        'Correct',
+                        AppLocale.generalCorrect.getString(context),
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -652,7 +655,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              "Lower",
+                              AppLocale.pitchResolutionWidgetLower.getString(context),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 22,
@@ -678,7 +681,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                           label: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              "Higher",
+                              AppLocale.pitchResolutionWidgetHigher.getString(context),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 22,
@@ -711,7 +714,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                         ),
                         onPressed: moveToNextQuestion,
                         child: Text(
-                          'Continue',
+                          AppLocale.generalContinue.getString(context),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,

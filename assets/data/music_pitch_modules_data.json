@@ -2,6 +2,7 @@
   "chapters": [
     {
       "name": "Pitch Resolution",
+      "image": "assets/visuals/HBWordsChapterOne.png",
       "modules": [
         {
           "name": "Module 1",

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
+import '../../utils/translations.dart';
 
 class AnimatedButton extends StatefulWidget {
   // final String chapterName;
@@ -65,8 +66,8 @@ class AnimatedButtonState extends State<AnimatedButton>
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Exercise'),
-            content: Text('Chapter name: ${widget.moduleName}'),
+            title: Text(AppLocale.animatedButtonWidgetExercise.getString(context)),
+            content: Text('${AppLocale.animatedButtonWidgetChapterName.getString(context)} ${widget.moduleName}'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -75,7 +76,7 @@ class AnimatedButtonState extends State<AnimatedButton>
                     _buttonColor = const Color.fromARGB(255, 241, 223, 254);
                   });
                 },
-                child: const Text('Cancel'),
+                child: Text(AppLocale.animatedButtonWidgetCancel.getString(context)),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -93,7 +94,7 @@ class AnimatedButtonState extends State<AnimatedButton>
                     _buttonColor = const Color.fromARGB(255, 241, 223, 254);
                   });
                 },
-                child: const Text('Start'),
+                child: Text(AppLocale.animatedButtonWidgetStart.getString(context)),
               ),
             ],
           );
