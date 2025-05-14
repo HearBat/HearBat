@@ -49,7 +49,7 @@ class SoundAdjustmentPageState extends State<SoundAdjustmentPage> {
                   App.Locale.soundAdjustPageSoundCheck.getString(context),
                   style: TextStyle(
                     fontSize: 30,
-                    fountWeight: fontWeight: FontWeight.w700,
+                    fontWeight: fontWeight: FontWeight.w700,
                   ),
                   textAlign: TextAlign.center,
                 ),
