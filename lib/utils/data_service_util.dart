@@ -22,16 +22,6 @@ class DataService {
 
   Future<void> loadJson() async {
     try {
-      if (_soundChapters.isEmpty) {
-        String jsonString = await rootBundle.loadString(
-            'assets/data/sound_modules_data.json');
-        Map<String, dynamic> jsonData = json.decode(jsonString);
-        _soundChapters = {
-          for (var chapter in jsonData['chapters']) chapter['name']: Chapter
-              .fromJson(chapter)
-        };
-      }
-
       if (_musicChapters.isEmpty) {
         String jsonString = await rootBundle.loadString(
             'assets/data/music_pitch_modules_data.json');
@@ -60,6 +50,14 @@ class DataService {
         Map<String, dynamic> jsonData = json.decode(jsonString);
         _wordChapters.clear();
         _wordChapters = {
+          for (var chapter in jsonData['chapters']) chapter['name']: Chapter
+              .fromJson(chapter)
+        };
+
+        jsonString = await rootBundle.loadString(
+            'assets/data/${languageCode}_sound_modules_data.json');
+        jsonData = json.decode(jsonString);
+        _soundChapters = {
           for (var chapter in jsonData['chapters']) chapter['name']: Chapter
               .fromJson(chapter)
         };

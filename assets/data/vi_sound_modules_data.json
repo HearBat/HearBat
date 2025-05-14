@@ -1,0 +1,255 @@
+{
+  "chapters": [
+    {
+      "name": "Home Sounds",
+      "image": "assets/visuals/HBSoundChapterOne.png",
+      "modules": [
+        {
+          "name": "Module 1",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Door Close",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                },
+                {
+                  "answer": "Kettle Whistling",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                },
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/home/cat meow.mp3",
+                  "image": "assets/visuals/home/cat meow.png"
+                },
+                {
+                  "answer": "Printer",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Toilet Flush",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                },
+                {
+                  "answer": "Wind Chimes",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                },
+                {
+                  "answer": "Telephone Ringing",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Vacuum",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Dog Bark",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Microwave",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
+                },
+                {
+                  "answer": "Pencil Writing",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                },
+                {
+                  "answer": "Clock Ticking",
+                  "path": "audio/sounds/home/clock ticking.mp3",
+                  "image": "assets/visuals/home/clock ticking.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Alarm Clock Beep",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                },
+                {
+                  "answer": "Garbage Disposal",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Doorbell",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Washing Machine",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Computer Keyboard Clicking",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                },
+                {
+                  "answer": "Shower Curtains",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Knife Sharpen",
+                  "path": "audio/sounds/home/knife sharpen.mp3",
+                  "image": "assets/visuals/home/knife sharpening.png"
+                },
+                {
+                  "answer": "Ice Dispenser",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Electric Shaver",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                },
+                {
+                  "answer": "Cutting Paper",
+                  "path": "audio/sounds/home/cutting paper.mp3",
+                  "image": "assets/visuals/home/cutting paper emoji.png"
+                },
+                {
+                  "answer": "Book Page Flipping",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                },
+                {
+                  "answer": "Mouse Click",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Toothbrush Brushing",
+                  "path": "audio/sounds/home/toothbrush brushing.mp3",
+                  "image": "assets/visuals/home/toothbrush brushing.png"
+                },
+                {
+                  "answer": "Telephone Ringing",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Dog Bark",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Printer",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Door Close",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                },
+                {
+                  "answer": "Kettle Whistling",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                },
+                {
+                  "answer": "Alarm Clock Beep",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                },
+                {
+                  "answer": "Wind Chimes",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Microwave",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
+                },
+                {
+                  "answer": "Vacuum",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                },
+                {
+                  "answer": "Clock Ticking",
+                  "path": "audio/sounds/home/clock ticking.mp3",
+                  "image": "assets/visuals/home/clock ticking.png"
+                },
+                {
+                  "answer": "Pencil Writing",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cat Meow",
+                  "path": "audio/sounds/home/cat meow.mp3",
+                  "image": "assets/visuals/home/cat meow.png"
+                },
+                {
+                  "answer": "Garbage Disposal",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Washing Machine",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                },
+                {
+                  "answer": "Computer Keyboard Clicking",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
