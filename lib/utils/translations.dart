@@ -228,7 +228,8 @@ mixin AppLocale {
 
     // Sound Adjustments Page
     soundAdjustPageReady: 'Ready',
-    soundAdjustPagePleaseAdjust: 'Please adjust your \nsound settings',
+    soundAdjustPageSoundCheck: 'Sound Check!\n'
+    soundAdjustPagePleaseAdjust: 'Adjust your volume until you can\ncomfortably hear the music',
 
     // Settings Page
     settingsPageTitle: 'SETTINGS',
