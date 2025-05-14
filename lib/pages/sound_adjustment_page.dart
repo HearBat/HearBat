@@ -46,6 +46,14 @@ class SoundAdjustmentPageState extends State<SoundAdjustmentPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
+                  App.Locale.soundAdjustPageSoundCheck.getString(context),
+                  style: TextStyle(
+                    fontSize: 30,
+                    fountWeight: fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
                   AppLocale.soundAdjustPagePleaseAdjust.getString(context),
                   style: TextStyle(
                     fontSize: 24,
