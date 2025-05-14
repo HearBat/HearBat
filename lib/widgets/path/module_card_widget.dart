@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import '../../pages/module_types/words/module_words_page.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
+import '../../utils/translations.dart';
 
 class ModuleCard extends StatefulWidget {
   final String moduleName;
@@ -50,7 +51,7 @@ Future<void> _cacheAndNavigate() async {
             children: [
               CircularProgressIndicator(),
               SizedBox(width: 10),
-              Text("Loading..."),
+              Text(AppLocale.generalLoading.getString(context)),
             ],
           ),
         );
@@ -139,7 +140,7 @@ Future<void> _cacheAndNavigate() async {
                         ),
                       ),
                       child: Text(
-                        "HEAR WORDS",
+                        AppLocale.moduleCardWidgetHearWords.getString(context),
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,

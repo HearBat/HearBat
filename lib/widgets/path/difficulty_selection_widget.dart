@@ -5,6 +5,7 @@ import 'package:hearbat/utils/cache_sentences_util.dart';
 import 'package:hearbat/widgets/module/speech_module_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/google_tts_util.dart';
+import '../../utils/translations.dart';
 import '../module/module_widget.dart';
 import '../module/pitch_resolution_exercise.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
@@ -33,29 +34,6 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
   final CacheWordsUtil cacheUtil = CacheWordsUtil();
   bool isCaching = false;
   String? _voiceType;
-
-
-  List<String> voiceTypes = [
-    "en-US-Studio-O",
-    "en-GB-Neural2-C",
-    "en-IN-Neural2-A",
-    "en-AU-Neural2-C",
-    "en-US-Studio-Q",
-    "en-GB-Neural2-B",
-    "en-IN-Neural2-B",
-    "en-AU-Neural2-B",
-  ];
-
-  Map<String, String> voiceTypeTitles = {
-    "en-US-Studio-O": "US Female",
-    "en-GB-Neural2-C": "UK Female",
-    "en-IN-Neural2-A": "IN Female",
-    "en-AU-Neural2-C": "AU Female",
-    "en-US-Studio-Q": "US Male",
-    "en-GB-Neural2-B": "UK Male",
-    "en-IN-Neural2-B": "IN Male",
-    "en-AU-Neural2-B": "AU Male",
-  };
 
   @override
   void initState() {
@@ -114,7 +92,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
             children: [
               CircularProgressIndicator(),
               SizedBox(width: 10),
-              Text("Loading..."),
+              Text(AppLocale.generalLoading.getString(context)),
             ],
           ),
         );
@@ -190,7 +168,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                 //only display difficulty setting if requested
                 if (widget.displayDifficulty)...[
                   Text(
-                    "Difficulty",
+                    AppLocale.selectionPageDifficultyTitle.getString(context),
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 20,
@@ -198,7 +176,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                     ),
                   ),
                   Text(
-                    "By completing modules, you can unlock difficulty levels",
+                    AppLocale.selectionPageDifficultySubtitle.getString(context),
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 13,
@@ -229,7 +207,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                 ],
                 if (widget.displayVoice)...[
                   Text(
-                    "Voice Type",
+                    AppLocale.selectionPageVoiceTitle.getString(context),
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 20,
@@ -237,7 +215,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                     ),
                   ),
                   Text(
-                    "Random swaps between male and female",
+                    AppLocale.selectionPageVoiceSubtitle.getString(context),
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 13,
@@ -267,14 +245,14 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   SizedBox(height: 20.0),
                 ],
                 Text(
-                  "Background Noise",
+                  AppLocale.selectionPageBackgroundTitle.getString(context),
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  "Background noises to add an extra challenge",
+                  AppLocale.selectionPageBackgroundSubtitle.getString(context),
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 13,
@@ -303,14 +281,14 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                 ),
                 SizedBox(height: 20.0),
                 Text(
-                  "Noise Intensity",
+                  AppLocale.selectionPageIntensityTitle.getString(context),
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  "Choose the intensity of background noises",
+                  AppLocale.selectionPageIntensitySubtitle.getString(context),
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 13,
@@ -351,7 +329,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                       minimumSize: Size(380, 50),
                     ),
                     child: Text(
-                      'START EXERCISE',
+                      AppLocale.selectionPageStart.getString(context),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -379,7 +357,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                       minimumSize: Size(380, 50),
                     ),
                     child: Text(
-                      'CANCEL',
+                      AppLocale.generalCancel.getString(context),
                       style: TextStyle(
                         color: Color.fromARGB(255, 7, 45, 78),
                         fontSize: 20,
@@ -513,21 +491,21 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _buildOption('Female', voiceOptions[0]),
+        _buildOption(AppLocale.selectionPageVoiceFemale.getString(context), voiceOptions[0]),
         Divider(
           color: Color.fromARGB(255, 7, 45, 78),
           thickness: 3,
           indent: 20,
           endIndent: 20,
         ),
-        _buildOption('Male', voiceOptions[1]),
+        _buildOption(AppLocale.selectionPageVoiceMale.getString(context), voiceOptions[1]),
         Divider(
           color: Color.fromARGB(255, 7, 45, 78),
           thickness: 3,
           indent: 20,
           endIndent: 20,
         ),
-        _buildOption('Random', 'isRandom'),
+        _buildOption(AppLocale.selectionPageVoiceRandom.getString(context), 'isRandom'),
       ],
     );
   }
@@ -585,7 +563,7 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
     }
   }
 
-  Widget _buildOption(String sound, String value) {
+  Widget _buildOption(String display, String value) {
     bool isSelected = _selectedSound == value;
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.0),
@@ -599,7 +577,7 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
             padding: const EdgeInsets.only(left: 5.0),
             child: ListTile(
               title: Text(
-                sound,
+                display,
                 style: TextStyle(
                   fontSize: 14,
                 ),
@@ -618,21 +596,21 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _buildOption('None', 'None'),
+        _buildOption(AppLocale.selectionPageBackgroundNone.getString(context), 'None'),
         Divider(
           color: Color.fromARGB(255, 7, 45, 78),
           thickness: 3,
           indent: 20,
           endIndent: 20,
         ),
-        _buildOption('Rain', 'Rain Sound'),
+        _buildOption(AppLocale.selectionPageBackgroundRain.getString(context), 'Rain Sound'),
         Divider(
           color: Color.fromARGB(255, 7, 45, 78),
           thickness: 3,
           indent: 20,
           endIndent: 20,
         ),
-        _buildOption('Coffee Shop', 'Shop Sound'),
+        _buildOption(AppLocale.selectionPageBackgroundCoffee.getString(context), 'Shop Sound'),
       ],
     );
   }
@@ -672,10 +650,10 @@ class VolumeOptionsWidgetState extends State<VolumeOptionsWidget> {
     }
   }
 
-  Future<void> _handleTap(String value) async {
+  Future<void> _handleTap(String volume) async {
     setState(() {
-      _selectedVolume = value;
-      widget.updatePreferenceCallback('audioVolumePreference', value);
+      _selectedVolume = volume;
+      widget.updatePreferenceCallback('audioVolumePreference', volume);
     });
 
     // Play the selected background noise for 3 seconds as a preview
@@ -687,7 +665,7 @@ class VolumeOptionsWidgetState extends State<VolumeOptionsWidget> {
     }
   }
 
-  Widget _buildOption(String volume) {
+  Widget _buildOption(String display, String volume) {
     bool isSelected = _selectedVolume == volume;
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.0),
@@ -701,7 +679,7 @@ class VolumeOptionsWidgetState extends State<VolumeOptionsWidget> {
             padding: const EdgeInsets.only(left: 5.0),
             child: ListTile(
               title: Text(
-                volume,
+                display,
                 style: TextStyle(
                   fontSize: 14,
                 ),
@@ -720,21 +698,21 @@ class VolumeOptionsWidgetState extends State<VolumeOptionsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _buildOption('Low'),
+        _buildOption(AppLocale.selectionPageIntensityLow.getString(context), 'Low'),
         Divider(
           color: Color.fromARGB(255, 7, 45, 78),
           thickness: 3,
           indent: 20,
           endIndent: 20,
         ),
-        _buildOption('Medium'),
+        _buildOption(AppLocale.selectionPageIntensityMedium.getString(context), 'Medium'),
         Divider(
           color: Color.fromARGB(255, 7, 45, 78),
           thickness: 3,
           indent: 20,
           endIndent: 20,
         ),
-        _buildOption('High'),
+        _buildOption(AppLocale.selectionPageIntensityHigh.getString(context), 'High'),
       ],
     );
   }
@@ -773,7 +751,7 @@ class DifficultyOptionsWidgetState extends State<DifficultyOptionsWidget> {
     });
   }
 
-  Widget _buildOption(String difficulty) {
+  Widget _buildOption(String display, String difficulty) {
     bool isSelected = _selectedDifficulty == difficulty;
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.0),
@@ -787,7 +765,7 @@ class DifficultyOptionsWidgetState extends State<DifficultyOptionsWidget> {
             padding: const EdgeInsets.only(left: 5.0),
             child: ListTile(
               title: Text(
-                difficulty,
+                display,
                 style: TextStyle(
                   fontSize: 14,
                 ),
@@ -806,14 +784,14 @@ class DifficultyOptionsWidgetState extends State<DifficultyOptionsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _buildOption('Normal'),
+        _buildOption(AppLocale.selectionPageDifficultyNormal.getString(context), 'Normal'),
         Divider(
           color: Color.fromARGB(255, 7, 45, 78),
           thickness: 3,
           indent: 20,
           endIndent: 20,
         ),
-        _buildOption('Hard'),
+        _buildOption(AppLocale.selectionPageDifficultyHard.getString(context), 'Hard'),
       ],
     );
   }

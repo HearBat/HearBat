@@ -7,6 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../utils/google_stt_util.dart';
 import '../../utils/google_tts_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../utils/translations.dart';
 import 'module_progress_bar_widget.dart';
 import 'check_button_widget.dart';
 import 'package:confetti/confetti.dart';
@@ -166,7 +167,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
         });
       } catch (e) {
         setState(() {
-          _transcription = 'Could not transcribe audio.';
+          _transcription = AppLocale.speechModuleWidgetFailedTranscription.getString(context);
           _grade = 0.0;
           _isSubmitted = true;
         });
@@ -249,7 +250,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text('Repeat back what you hear!',
+                        Text(
+                            AppLocale.speechModuleWidgetPrompt.getString(context),
                             style: TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold)),
                         SizedBox(height: 20),
@@ -263,7 +265,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                           onPressed: _playSentence,
                           icon: Icon(Icons.volume_up,
                               color: Colors.white, size: 30),
-                          label: Text('Play',
+                          label: Text(AppLocale.speechModuleWidgetPlayAudio.getString(context),
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
                         ),
@@ -281,7 +283,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                             ),
                           ),
                           child: Text(
-                            _isRecording ? 'Stop Recording' : 'Start Recording',
+                            _isRecording ? AppLocale.speechModuleWidgetStopRecording.getString(context) : AppLocale.speechModuleWidgetStartRecording.getString(context),
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
@@ -293,7 +295,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                               color: Colors.blue[100],
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Text('What you said: $_transcription',
+                            child: Text('${AppLocale.speechModuleWidgetWhatYouSaid.getString(context)} $_transcription',
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.black),
                                 textAlign: TextAlign.center),
@@ -306,13 +308,13 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                               color: Colors.green[100],
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Text('Original: $_sentence',
+                            child: Text('${AppLocale.speechModuleWidgetOriginal.getString(context)} $_sentence',
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.black),
                                 textAlign: TextAlign.center),
                           ),
                           SizedBox(height: 30),
-                          Text('Accuracy: ${_grade.toStringAsFixed(2)}%',
+                          Text('${AppLocale.speechModuleWidgetAccuracy.getString(context)} ${_grade.toStringAsFixed(2)}%',
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center),
@@ -378,7 +380,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
             child: AutoSizeText(
-              'Lesson Complete!',
+              AppLocale.generalLessonComplete.getString(context),
               maxLines: 1,
               style: TextStyle(
                   fontSize: 32,
@@ -392,7 +394,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
             context: context,
             type: ScoreType.average,
             correctAnswersCount: (_gradeSum / _attempts).toStringAsFixed(2),
-            subtitleText: "Average Accuracy",
+            subtitleText: AppLocale.speechModuleWidgetAverage.getString(context),
+            isHighest: false,
             icon: Icon(
               Icons.star,
               color: Color.fromARGB(255, 7, 45, 78),
@@ -405,7 +408,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
             context: context,
             type: ScoreType.average,
             correctAnswersCount: (_gradeSum / _attempts).toStringAsFixed(2),
-            subtitleText: "Highest Average Accuracy",
+            subtitleText: AppLocale.speechModuleWidgetHighestAverage.getString(context),
+            isHighest: true,
             icon: Icon(
               Icons.emoji_events,
               color: Color.fromARGB(255, 255, 255, 255),
@@ -433,7 +437,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                 elevation: 5,
               ),
               child: Text(
-                'CONTINUE',
+                AppLocale.generalContinue.getString(context),
                 style: TextStyle(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   fontSize: 20,

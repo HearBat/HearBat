@@ -71,10 +71,11 @@ class Module {
 
 class Chapter {
   final String name;
+  final String image;
   final Map<String, Module> modules;
-  Chapter(this.name, this.modules);
+  Chapter(this.name, this.image, this.modules);
 
-  static final Chapter _empty = Chapter("", {});
+  static final Chapter _empty = Chapter("", "", {});
 
   factory Chapter.empty() {
     return _empty;
@@ -82,6 +83,7 @@ class Chapter {
   static Chapter fromJson(Map<String, dynamic> json) {
     return Chapter(
         json['name'],
+        json['image'],
         { for (Map<String, dynamic> module in (json['modules'] as List<dynamic>)) module['name'] : Module.fromJson(module) }
     );
   }
@@ -89,6 +91,7 @@ class Chapter {
   Map<String, dynamic> toJson() {
     return {
       'name': name,
+      'image': image,
       'modules': modules.map((name, module) => MapEntry(name, module.toJson())),
     };
   }

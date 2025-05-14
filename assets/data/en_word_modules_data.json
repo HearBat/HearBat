@@ -2,6 +2,7 @@
   "chapters": [
     {
       "name": "Beginner Foundations",
+      "image": "assets/visuals/HBWordsChapterOne.png",
       "modules": [
         {
           "name": "Module 1",
@@ -347,6 +348,7 @@
     },
     {
       "name": "Intermediate Progress",
+      "image": "assets/visuals/HBWordsChapterTwo.png",
       "modules": [
         {
           "name": "Module 1",
@@ -692,6 +694,7 @@
     },
     {
       "name": "Advanced Exploration",
+      "image": "assets/visuals/HBWordsChapterThree.png",
       "modules": [
         {
           "name": "Module 1",
@@ -1037,6 +1040,7 @@
     },
     {
       "name": "Proficient Application",
+      "image": "assets/visuals/HBWordsChapterFour.png",
       "modules": [
         {
           "name": "Module 1",
@@ -1382,6 +1386,7 @@
     },
     {
       "name": "Expert Mastery",
+      "image": "assets/visuals/HBWordsChapterFive.png",
       "modules": [
         {
           "name": "Module 1",

@@ -89,17 +89,19 @@ flutter:
     - assets/audio/sounds/nature/
     - assets/audio/background/
     - assets/audio/sounds/music_pitch/
+    - assets/audio/sounds/feedback/correct answer chime.mp3
+    - assets/audio/sounds/feedback/wrong answer chime.mp3
     - assets/visuals/
     - assets/visuals/home/
     - assets/visuals/music/
     - assets/visuals/nature/
     - assets/visuals/music_pitch/
     - assets/data/sound_modules_data.json
-    - assets/data/speech_modules_data.json
-    - assets/data/word_modules_data.json
     - assets/data/music_pitch_modules_data.json
-    - assets/audio/sounds/feedback/correct answer chime.mp3
-    - assets/audio/sounds/feedback/wrong answer chime.mp3
+    - assets/data/en_speech_modules_data.json
+    - assets/data/en_word_modules_data.json
+    - assets/data/vi_speech_modules_data.json
+    - assets/data/vi_word_modules_data.json
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
