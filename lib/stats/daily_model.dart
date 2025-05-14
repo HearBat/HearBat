@@ -56,4 +56,21 @@ class Daily {
     }
     return result.first['id'] as int;
   }
+
+  static Future<int> getPracticeTime(DateTime date) async {
+    final dailyId = await getIDByDate(date);
+    if (dailyId == null) {
+      return 0;
+    }
+
+    final db = await StatsDatabase().database;
+    final result = await db.rawQuery('''
+      SELECT practice_time
+      FROM daily
+      WHERE id=?''', [dailyId]);
+    if (result.isEmpty) {
+      return 0;
+    }
+    return result.first['practice_time'] as int;
+  }
 }

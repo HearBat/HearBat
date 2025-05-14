@@ -85,4 +85,25 @@ class Answer {
       WHERE exercise_id=? AND name=?''',
       [exerciseId, name]);
   }
+
+  // Return a list of the top-n most missed answers
+  static Future<List<Answer>> getMostMissed(String exerciseType, int n) async {
+    final exerciseId = await Exercise.getIDByType(exerciseType);
+    if (exerciseId == null) {
+      return [];
+    }
+
+    final db = await StatsDatabase().database;
+    final result = await db.rawQuery('''
+      SELECT *
+      FROM answer
+      WHERE exercise_id=? AND incorrect>0
+      ORDER BY incorrect DESC
+      LIMIT ?''', [exerciseId, n]);
+    if (result.isEmpty) {
+      return [];
+    }
+
+    return result.map((row) => fromMap(row)).toList();
+  }
 }

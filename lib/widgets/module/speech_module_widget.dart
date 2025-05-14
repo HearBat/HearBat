@@ -214,7 +214,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
         "speech",
         DateTime.now(),
         score,
-        maxScore);
+        maxScore,
+        bgNoise: BackgroundNoiseUtil.isPlaying ? BackgroundNoiseUtil.volume : 0.0);
       await Module.updateStats(
         "speech",
         widget.title,
