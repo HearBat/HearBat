@@ -34,7 +34,7 @@ mixin AppLocale {
 
   // Sound Adjustments Page
   static const String soundAdjustPageReady = 'soundAdjustPageReady';
-  static const String soundAdjustPageSoundCheck: 'soundAdjustPageSoundCheck',
+  static const String soundAdjustPageSoundCheck = 'soundAdjustPageSoundCheck',
   static const String soundAdjustPagePleaseAdjust = 'soundAdjustPagePleaseAdjust';
 
   // Settings Page
