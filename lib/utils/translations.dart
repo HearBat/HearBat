@@ -228,7 +228,7 @@ mixin AppLocale {
 
     // Sound Adjustments Page
     soundAdjustPageReady: 'Ready',
-    soundAdjustPageSoundCheck: 'Sound Check!\n'
+    soundAdjustPageSoundCheck: 'Sound Check!\n',
     soundAdjustPagePleaseAdjust: 'Adjust your volume until you can\ncomfortably hear the music',
 
     // Settings Page
