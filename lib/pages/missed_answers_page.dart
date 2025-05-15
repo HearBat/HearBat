@@ -54,13 +54,18 @@ class MissedAnswersPageState extends State<MissedAnswersPage> {
                     color: Colors.black87,
                   ),
                 ),
-                Column(
-                  children: _missedAnswers.isEmpty
-                      ? [Center(child: Text("No missed ${widget.type} yet.\n"))]
-                      : _missedAnswers.map((answer) {
-                          return MissedAnswerWidget(word: answer.name, missCount: answer.incorrect!);
-                        }).toList(),
-                ),
+                _missedAnswers.isEmpty
+                  ? Center(child: Text("No missed ${widget.type} yet.\n"))
+                  : Expanded(
+                    child: ListView.builder(
+                      itemCount: _missedAnswers.length,
+                      padding: EdgeInsets.only(top: 10),
+                      itemBuilder: (context, index) {
+                        final answer = _missedAnswers[index];
+                        return MissedAnswerWidget(word: answer.name, missCount: answer.incorrect!);
+                      }
+                    ),
+                  ),
               ],
             ),
           ),
