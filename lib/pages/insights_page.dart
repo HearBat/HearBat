@@ -8,6 +8,8 @@ import 'package:hearbat/utils/translations.dart';
 import 'package:hearbat/widgets/top_bar_widget.dart';
 
 class InsightsPage extends StatefulWidget {
+  const InsightsPage({super.key});
+
   @override
   InsightsPageState createState() => InsightsPageState();
 }
@@ -18,6 +20,12 @@ class InsightsPageState extends State<InsightsPage> {
   int _timePracticed = 0;
   int _speechAccuracy = 0;
   int _noiseAccuracy = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchDailyStats(DateTime.now());
+  }
 
   void _fetchDailyStats(DateTime date) async {
     final timePracticed = await Daily.getPracticeTime(date);
