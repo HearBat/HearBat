@@ -39,6 +39,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   String _sentence = '';
   double _grade = 0.0;
   double _gradeSum = 0.0;
+  int _highScore = 0;
   int _attempts = 0;
   String voiceType = '';
   bool _isSubmitted = false;
@@ -54,11 +55,21 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
 
   String? selectedFeedback = 'on';
 
+  void fetchHighScore() async {
+    final module = await Module.getModuleByName(widget.title);
+    if (module == null) {
+      return;
+    }
+
+    _highScore = module.highScore ?? 0;
+  }
+
   @override
   void initState() {
     super.initState();
-    voiceType = widget.voiceType;
     _init();
+
+    voiceType = widget.voiceType;
     _loadVoiceType();
     _sentence = _getRandomSentence();
     _playSentence();
@@ -66,6 +77,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     setState(() {});
     BackgroundNoiseUtil.playSavedSound();
     _loadFeedbackPreference();
+
+    fetchHighScore();
   }
 
   // Load the saved feedback preference from SharedPreferences
@@ -183,6 +196,10 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     });
   }
 
+  int _getEffectiveScore() {
+    return (_gradeSum / _attempts).ceil();
+  }
+
   void _submitRecording() async {
     setState(() {
       _gradeSum += _grade; // This is being called twice...
@@ -209,7 +226,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     // Make sure this is being executed when _isCompleted is true
     if (_isCompleted) {
       const maxScore = 100;
-      final score = (_gradeSum / 2 / numberOfExercises).ceil(); // Average out of 100
+      final score = _getEffectiveScore(); // Average out of 100
       await ExerciseScore.insert(
         "speech",
         DateTime.now(),
@@ -412,9 +429,9 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
           ScoreWidget(
             context: context,
             type: ScoreType.average,
-            correctAnswersCount: (_gradeSum / _attempts).toStringAsFixed(2),
+            correctAnswersCount: _getEffectiveScore().toStringAsFixed(2),
             subtitleText: AppLocale.speechModuleWidgetAverage.getString(context),
-            isHighest: false,
+            isHighest: _getEffectiveScore() > _highScore,
             icon: Icon(
               Icons.star,
               color: Color.fromARGB(255, 7, 45, 78),
@@ -426,7 +443,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
           ScoreWidget(
             context: context,
             type: ScoreType.average,
-            correctAnswersCount: (_gradeSum / _attempts).toStringAsFixed(2),
+            correctAnswersCount: _highScore.toStringAsFixed(2),
             subtitleText: AppLocale.speechModuleWidgetHighestAverage.getString(context),
             isHighest: true,
             icon: Icon(

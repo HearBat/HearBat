@@ -44,6 +44,7 @@ class PitchResolutionExercise extends StatefulWidget {
 class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
   int currentQuestionIndex = 0;
   int correctAnswers = 0;
+  int _highScore = 0;
   List<MissedAnswer> missedAnswers = [];
   bool isPlaying = false;
   bool showFeedback = false;
@@ -65,6 +66,8 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
     BackgroundNoiseUtil.initialize().then((_) {
       BackgroundNoiseUtil.playSavedSound();
     });
+
+    fetchHighScore();
   }
 
   @override
@@ -87,6 +90,15 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
     setState(() {
       selectedFeedback = prefs.getString('feedbackPreference') ?? 'On';
     });
+  }
+
+  void fetchHighScore() async {
+    final module = await module_stats.Module.getModuleByName(widget.title);
+    if (module == null) {
+      return;
+    }
+
+    _highScore = module.highScore ?? 0;
   }
 
   void playCorrectChime() async {
@@ -240,7 +252,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                         type: ScoreType.score,
                         correctAnswersCount: correctAnswers.toString(),
                         subtitleText: AppLocale.generalScore.getString(context),
-                        isHighest: false,
+                        isHighest: true,
                         icon: Icon(
                           Icons.star,
                           color: Color.fromARGB(255, 7, 45, 78),
@@ -252,7 +264,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                       ScoreWidget(
                         context: context,
                         type: ScoreType.score,
-                        correctAnswersCount: correctAnswers.toString(),
+                        correctAnswersCount: _highScore.toString(),
                         subtitleText: AppLocale.generalHighestScore.getString(context),
                         isHighest: true,
                         icon: Icon(

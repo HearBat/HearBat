@@ -26,7 +26,7 @@ class ModuleWidget extends StatefulWidget {
     required this.title,
     required this.type,
     required this.answerGroups,
-    required this.isWord
+    required this.isWord,
   });
 
   @override
@@ -43,6 +43,16 @@ class _ModulePageState extends State<ModuleWidget> {
   ConfettiController _confettiController =
       ConfettiController(duration: const Duration(seconds: 3));
   String language = 'English';
+  int _highScore = 0;
+
+  void fetchHighScore() async {
+    final module = await module_stats.Module.getModuleByName(widget.title);
+    if (module == null) {
+      return;
+    }
+
+    _highScore = module.highScore ?? 0;
+  }
 
   @override
   void initState() {
@@ -52,6 +62,8 @@ class _ModulePageState extends State<ModuleWidget> {
 
     googleTTSUtil.initialize();
     AudioUtil.initialize();
+
+    fetchHighScore();
 
     BackgroundNoiseUtil.initialize().then((_) {
       BackgroundNoiseUtil.playSavedSound();
@@ -299,7 +311,7 @@ class _ModulePageState extends State<ModuleWidget> {
               type: ScoreType.score,
               correctAnswersCount: correctAnswersCount.toString(),
               subtitleText: AppLocale.generalScore.getString(context),
-              isHighest: false,
+              isHighest: correctAnswersCount > _highScore,
               icon: Icon(
                 Icons.star,
                 color: Color.fromARGB(255, 7, 45, 78),
@@ -311,7 +323,7 @@ class _ModulePageState extends State<ModuleWidget> {
             ScoreWidget(
               context: context,
               type: ScoreType.score,
-              correctAnswersCount: correctAnswersCount.toString(),
+              correctAnswersCount: _highScore.toString(),
               subtitleText: AppLocale.generalHighestScore.getString(context),
               isHighest: true,
               icon: Icon(
