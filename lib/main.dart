@@ -7,13 +7,22 @@ import 'pages/sound_adjustment_page.dart';
 import 'utils/config_util.dart';
 import 'utils/data_service_util.dart';
 import 'utils/translations.dart';
+import 'utils/push_notifs.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 final FlutterLocalization localization = FlutterLocalization.instance;
+
+// Ensure background messages are received
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print('Handling a background message: ${message.messageId}');
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterLocalization.instance.ensureInitialized();
   await ConfigurationManager().fetchConfiguration();
+  await PushNotifications().initFirebaseMessaging(); // FCM
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await DataService().loadJson();
   await StatsDatabase().init();
   runApp(const MyApp());
