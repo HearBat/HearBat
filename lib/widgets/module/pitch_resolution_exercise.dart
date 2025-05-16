@@ -252,7 +252,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                         type: ScoreType.score,
                         correctAnswersCount: correctAnswers.toString(),
                         subtitleText: AppLocale.generalScore.getString(context),
-                        isHighest: true,
+                        isHighest: correctAnswers > _highScore,
                         icon: Icon(
                           Icons.star,
                           color: Color.fromARGB(255, 7, 45, 78),
