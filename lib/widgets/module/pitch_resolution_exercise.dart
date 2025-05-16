@@ -1,16 +1,19 @@
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:hearbat/models/chapter_model.dart';
-import 'package:hearbat/utils/background_noise_util.dart';
-import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
-import 'package:hearbat/widgets/module/score_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hearbat/utils/audio_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:confetti/confetti.dart';
-import '../../utils/translations.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:hearbat/models/chapter_model.dart';
+import 'package:hearbat/stats/exercise_score_model.dart';
+import 'package:hearbat/stats/module_model.dart' as module_stats;
+import 'package:hearbat/utils/audio_util.dart';
+import 'package:hearbat/utils/background_noise_util.dart';
+import 'package:hearbat/utils/translations.dart';
+import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
+import 'package:hearbat/widgets/module/score_widget.dart';
 
 class MissedAnswer {
   final int semitoneDifference;
@@ -27,9 +30,12 @@ class MissedAnswer {
 }
 
 class PitchResolutionExercise extends StatefulWidget {
+  final String title;
   final List<AnswerGroup> answerGroups;
 
-  PitchResolutionExercise({required this.answerGroups});
+  PitchResolutionExercise({
+    required this.title,
+    required this.answerGroups});
 
   @override
   PitchResolutionExerciseState createState() => PitchResolutionExerciseState();
@@ -38,6 +44,7 @@ class PitchResolutionExercise extends StatefulWidget {
 class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
   int currentQuestionIndex = 0;
   int correctAnswers = 0;
+  int _highScore = 0;
   List<MissedAnswer> missedAnswers = [];
   bool isPlaying = false;
   bool showFeedback = false;
@@ -59,6 +66,8 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
     BackgroundNoiseUtil.initialize().then((_) {
       BackgroundNoiseUtil.playSavedSound();
     });
+
+    fetchHighScore();
   }
 
   @override
@@ -81,6 +90,15 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
     setState(() {
       selectedFeedback = prefs.getString('feedbackPreference') ?? 'On';
     });
+  }
+
+  void fetchHighScore() async {
+    final module = await module_stats.Module.getModuleByName(widget.title);
+    if (module == null) {
+      return;
+    }
+
+    _highScore = module.highScore ?? 0;
   }
 
   void playCorrectChime() async {
@@ -170,6 +188,16 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
   }
 
   void showResults() {
+    ExerciseScore.insert(
+      "music",
+      DateTime.now(),
+      correctAnswers,
+      widget.answerGroups.length);
+    module_stats.Module.updateStats(
+      "music",
+      widget.title,
+      correctAnswers);
+
     setState(() {
       moduleCompleted = true;
     });
@@ -224,7 +252,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                         type: ScoreType.score,
                         correctAnswersCount: correctAnswers.toString(),
                         subtitleText: AppLocale.generalScore.getString(context),
-                        isHighest: false,
+                        isHighest: correctAnswers > _highScore,
                         icon: Icon(
                           Icons.star,
                           color: Color.fromARGB(255, 7, 45, 78),
@@ -236,7 +264,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                       ScoreWidget(
                         context: context,
                         type: ScoreType.score,
-                        correctAnswersCount: correctAnswers.toString(),
+                        correctAnswersCount: _highScore.toString(),
                         subtitleText: AppLocale.generalHighestScore.getString(context),
                         isHighest: true,
                         icon: Icon(

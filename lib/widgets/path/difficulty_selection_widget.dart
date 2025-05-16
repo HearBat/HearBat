@@ -14,6 +14,7 @@ import 'package:hearbat/utils/background_noise_util.dart';
 // ignore_for_file: use_build_context_synchronously
 class DifficultySelectionWidget extends StatefulWidget {
   final String moduleName;
+  final String exerciseType;
   final String? chapter;
   final List<AnswerGroup> answerGroups;
   final bool isWord; //determines if TTS is used
@@ -21,8 +22,16 @@ class DifficultySelectionWidget extends StatefulWidget {
   final bool displayVoice;
   final List<String>? sentences; // Speech module specific
 
-  DifficultySelectionWidget(
-      {required this.moduleName, this.chapter, required this.answerGroups, required this.isWord,required this.displayDifficulty, required this.displayVoice, this.sentences});
+  DifficultySelectionWidget({
+    required this.moduleName,
+    required this.exerciseType,
+    this.chapter,
+    required this.answerGroups,
+    required this.isWord,
+    required this.displayDifficulty,
+    required this.displayVoice,
+    this.sentences,
+  });
 
   @override
   DifficultySelectionWidgetState createState() =>
@@ -121,7 +130,9 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PitchResolutionExercise(answerGroups: answerGroups),
+          builder: (context) => PitchResolutionExercise(
+            title: "${widget.chapter ?? 'Pitch'} ${widget.moduleName}",
+            answerGroups: answerGroups),
         ),
       );
     }
@@ -131,7 +142,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
         context,
         MaterialPageRoute(
           builder: (context) => SpeechModuleWidget(
-            chapter: moduleName,
+            title: "${widget.chapter ?? 'Speech'} ${widget.moduleName}",
             sentences: widget.sentences!,
             voiceType: _voiceType!,
           ),
@@ -144,7 +155,8 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
         context,
         MaterialPageRoute(
           builder: (context) => ModuleWidget(
-            title: moduleName,
+            title: "${widget.chapter ?? 'Custom'} ${widget.moduleName}",
+            type: widget.exerciseType,
             answerGroups: answerGroups,
             isWord: widget.isWord,
           ),

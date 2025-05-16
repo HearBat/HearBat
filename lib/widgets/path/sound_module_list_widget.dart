@@ -20,6 +20,7 @@ class SoundModuleListWidget extends StatelessWidget {
           builder: (context) => DifficultySelectionWidget(
             moduleName: moduleName,
             chapter: chapter,
+            exerciseType: "sounds",
             answerGroups: answerGroups,
             isWord: false,
             displayDifficulty: false,

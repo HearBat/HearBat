@@ -1,27 +1,33 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:hearbat/models/chapter_model.dart';
-import 'package:hearbat/utils/background_noise_util.dart';
-import 'package:hearbat/utils/audio_util.dart';
-import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
-import '../../utils/translations.dart';
 import 'four_answer_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hearbat/utils/google_tts_util.dart';
 import 'word_missed_button_widget.dart';
 import 'package:confetti/confetti.dart';
 import 'score_widget.dart';
 
+import 'package:hearbat/models/chapter_model.dart';
+import 'package:hearbat/stats/exercise_score_model.dart';
+import 'package:hearbat/stats/module_model.dart' as module_stats;
+import 'package:hearbat/utils/audio_util.dart';
+import 'package:hearbat/utils/background_noise_util.dart';
+import 'package:hearbat/utils/google_tts_util.dart';
+import 'package:hearbat/utils/translations.dart';
+import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
+
 class ModuleWidget extends StatefulWidget {
   final String title;
+  final String type;
   final List<AnswerGroup> answerGroups;
   final bool isWord;
 
-  ModuleWidget(
-      {super.key,
-      required this.title,
-      required this.answerGroups,
-      required this.isWord});
+  ModuleWidget({
+    super.key,
+    required this.title,
+    required this.type,
+    required this.answerGroups,
+    required this.isWord,
+  });
 
   @override
   State createState() => _ModulePageState();
@@ -37,6 +43,16 @@ class _ModulePageState extends State<ModuleWidget> {
   ConfettiController _confettiController =
       ConfettiController(duration: const Duration(seconds: 3));
   String language = 'English';
+  int _highScore = 0;
+
+  void fetchHighScore() async {
+    final module = await module_stats.Module.getModuleByName(widget.title);
+    if (module == null) {
+      return;
+    }
+
+    _highScore = module.highScore ?? 0;
+  }
 
   @override
   void initState() {
@@ -46,6 +62,8 @@ class _ModulePageState extends State<ModuleWidget> {
 
     googleTTSUtil.initialize();
     AudioUtil.initialize();
+
+    fetchHighScore();
 
     BackgroundNoiseUtil.initialize().then((_) {
       BackgroundNoiseUtil.playSavedSound();
@@ -212,8 +230,22 @@ class _ModulePageState extends State<ModuleWidget> {
     return Container(
       color: Color.fromARGB(255, 232, 218, 255),
       child: FourAnswerWidget(
+        exerciseType: widget.type,
         answerGroups: widget.answerGroups,
-        onCompletion: () => setState(() => moduleCompleted = true),
+        onCompletion: () {
+          // Save stats
+          ExerciseScore.insert(
+            widget.type,
+            DateTime.now(),
+            correctAnswersCount,
+            widget.answerGroups.length);
+          module_stats.Module.updateStats(
+            widget.type,
+            widget.title,
+            correctAnswersCount);
+
+          setState(() => moduleCompleted = true);
+        },
         onCorrectAnswer: () {
           setState(() {
             correctAnswersCount++;
@@ -279,7 +311,7 @@ class _ModulePageState extends State<ModuleWidget> {
               type: ScoreType.score,
               correctAnswersCount: correctAnswersCount.toString(),
               subtitleText: AppLocale.generalScore.getString(context),
-              isHighest: false,
+              isHighest: correctAnswersCount > _highScore,
               icon: Icon(
                 Icons.star,
                 color: Color.fromARGB(255, 7, 45, 78),
@@ -291,7 +323,7 @@ class _ModulePageState extends State<ModuleWidget> {
             ScoreWidget(
               context: context,
               type: ScoreType.score,
-              correctAnswersCount: correctAnswersCount.toString(),
+              correctAnswersCount: _highScore.toString(),
               subtitleText: AppLocale.generalHighestScore.getString(context),
               isHighest: true,
               icon: Icon(
