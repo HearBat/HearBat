@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:hearbat/streaks/streaks_provider.dart';
-import 'package:hearbat/streaks/streaks_db.dart';
-import 'package:hearbat/streaks/streaks_model.dart';
 import 'package:intl/intl.dart';
+import '../streaks/streaks_model.dart';
 
 class DailyStreakPage extends StatefulWidget {
   const DailyStreakPage({super.key});
@@ -13,268 +12,72 @@ class DailyStreakPage extends StatefulWidget {
 }
 
 class _DailyStreakPageState extends State<DailyStreakPage> {
-  String _debugInfo = 'Loading debug info...';
   bool _showDebug = false;
   DateTime _simulatedNow = DateTime.now();
-  final TextEditingController _timeController = TextEditingController(
-    text: DateFormat('HH:mm').format(DateTime.now()),
-  );
-  final ScrollController _debugScrollController = ScrollController();
+  int _practiceTimeInput = 300;
+  String _databaseContent = '';
 
   @override
   void initState() {
     super.initState();
-    _loadDebugInfo();
+    Provider.of<StreakProvider>(context, listen: false).loadStreakData();
   }
 
-  @override
-  void dispose() {
-    _timeController.dispose();
-    _debugScrollController.dispose();
-    super.dispose();
+  Future<void> _moveDate(int days) async {
+    setState(() {
+      _simulatedNow = _simulatedNow.add(Duration(days: days));
+    });
+    await Provider.of<StreakProvider>(context, listen: false)
+        .recalculateStreaksForDate(_simulatedNow);
   }
 
-  String get _displayTime {
-    return DateFormat('yyyy-MM-dd HH:mm').format(_simulatedNow);
+  String _formatPracticeTime(int seconds) {
+    final duration = Duration(seconds: seconds);
+    final hours = duration.inHours;
+    final minutes = duration.inMinutes.remainder(60);
+
+    if (hours > 0) {
+      return '${hours}h ${minutes}m';
+    } else if (minutes > 0) {
+      return '${minutes}m';
+    } else {
+      return '<1m';
+    }
   }
 
-  Future<void> _loadDebugInfo() async {
+  Future<void> _addSession() async {
+    final provider = Provider.of<StreakProvider>(context, listen: false);
+    // Use _debugDate instead of DateTime.now()
+    await provider.recordPracticeTimeForDate(_practiceTimeInput, _simulatedNow);
+    await _updateDatabaseContent();
+    setState(() {});
+  }
+
+  Future<void> _updateDatabaseContent() async {
+    final provider = Provider.of<StreakProvider>(context, listen: false);
+    final db = await provider.getDatabaseInstance();
+
     try {
-      final db = await StreaksDatabase.instance.database;
-      final activities = await db.query('streak_activity');
-
-      String formatActivity(Map<String, dynamic> activity) {
-        final utcDate = activity['activity_date'] is String
-            ? DateTime.parse(activity['activity_date'] as String)
-            : activity['activity_date'] as DateTime;
-        final lastActivityTime = activity['last_activity_time'] is String
-            ? DateTime.parse(activity['last_activity_time'] as String)
-            : activity['last_activity_time'] as DateTime;
-        return '${utcDate.toIso8601String()} (UTC) | '
-            'Last activity: ${lastActivityTime.toIso8601String()} (UTC) | '
-            '${activity['total_practice_time']} secs';
-      }
+      final activities = await db.query('daily_activity');
+      final streakData = await db.query('streak_data');
 
       setState(() {
-        _debugInfo = '''
-=== STREAK DATABASE DEBUG INFO ===
-(All times shown in UTC exactly as stored in database)
+        _databaseContent = '''
+Daily Activities:
+${activities.map((a) => '${a['date']}: ${a['total_time']} sec').join('\n')}
 
-ACTIVITIES:
-${activities.map(formatActivity).join('\n')}
-
-TOTAL ACTIVITIES: ${activities.length}
+Streak Data:
+${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['longest_streak']} days').join('\n')}
 ''';
       });
     } catch (e) {
       setState(() {
-        _debugInfo = 'Error loading debug info: $e';
+        _databaseContent = 'Error reading database: $e';
       });
     }
   }
 
-  Future<void> _advanceSimulatedDay() async {
-    final provider = context.read<StreakProvider>();
-    setState(() => _simulatedNow = _simulatedNow.add(const Duration(days: 1)));
-    await _loadDebugInfo();
-    provider.loadStreakData();
-  }
-
-  Future<void> _rewindSimulatedDay() async {
-    final provider = context.read<StreakProvider>();
-    setState(() => _simulatedNow = _simulatedNow.subtract(const Duration(days: 1)));
-    await _loadDebugInfo();
-    provider.loadStreakData();
-  }
-
-  Future<void> _recordTestActivity() async {
-    final timeParts = _timeController.text.split(':');
-    final hour = int.tryParse(timeParts[0]) ?? 12;
-    final minute = int.tryParse(timeParts[1]) ?? 0;
-
-    setState(() {
-      _simulatedNow = DateTime(
-        _simulatedNow.year,
-        _simulatedNow.month,
-        _simulatedNow.day,
-        hour,
-        minute,
-      );
-    });
-
-    // Create local date without time (for proper UTC conversion)
-    final localDate = DateTime(
-      _simulatedNow.year,
-      _simulatedNow.month,
-      _simulatedNow.day,
-    );
-
-    await Provider.of<StreakProvider>(context, listen: false)
-        .recordActivityForDate(60, localDate.toUtc());
-    await _loadDebugInfo();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Your Streak'),
-        actions: [
-          IconButton(
-            icon: Icon(
-                _showDebug ? Icons.bug_report : Icons.bug_report_outlined),
-            onPressed: () {
-              setState(() {
-                _showDebug = !_showDebug;
-              });
-            },
-          ),
-        ],
-      ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight),
-              child: Consumer<StreakProvider>(
-                builder: (context, provider, _) {
-                  return Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        if (_showDebug) ...[
-                          Text(
-                            'Simulated Date: $_displayTime, (Local)',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 8),
-                        ],
-                        _buildStreakHeader(provider.currentStreak),
-                        const SizedBox(height: 24),
-                        _buildWeeklyCalendar(provider.weeklyActivities),
-
-                        if (_showDebug) ...[
-                          const SizedBox(height: 24),
-                          const Divider(),
-                          const Text('DEBUG INFO',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 8),
-                          Container(
-                            height: 150,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Scrollbar(
-                              controller: _debugScrollController,
-                              child: SingleChildScrollView(
-                                controller: _debugScrollController,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    _debugInfo,
-                                    style: const TextStyle(
-                                        fontFamily: 'monospace', fontSize: 12),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0),
-                            child: TextField(
-                              controller: _timeController,
-                              decoration: const InputDecoration(
-                                labelText: 'Activity Time (HH:mm) - Local Time',
-                                border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 8),
-                              ),
-                              keyboardType: TextInputType.datetime,
-                              onChanged: (value) {
-                                final timeParts = value.split(':');
-                                if (timeParts.length == 2) {
-                                  final hour = int.tryParse(timeParts[0]) ??
-                                      _simulatedNow.hour;
-                                  final minute = int.tryParse(timeParts[1]) ??
-                                      _simulatedNow.minute;
-                                  setState(() {
-                                    _simulatedNow = DateTime(
-                                      _simulatedNow.year,
-                                      _simulatedNow.month,
-                                      _simulatedNow.day,
-                                      hour,
-                                      minute,
-                                    );
-                                  });
-                                }
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Wrap(
-                            spacing: 6,
-                            runSpacing: 6,
-                            children: [
-                              SizedBox(
-                                width: 110,
-                                height: 32,
-                                child: ElevatedButton(
-                                  onPressed: _advanceSimulatedDay,
-                                  child: const Text(
-                                      '+1 Day', style: TextStyle(fontSize: 11)),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 110,
-                                height: 32,
-                                child: ElevatedButton(
-                                  onPressed: _rewindSimulatedDay,
-                                  child: const Text(
-                                      '-1 Day', style: TextStyle(fontSize: 11)),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 110,
-                                height: 32,
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    final provider = context.read<StreakProvider>(); // Get before async
-                                    await StreaksDatabase.instance.resetStreak();
-                                    await _loadDebugInfo();
-                                    provider.loadStreakData();
-                                  },
-                                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                                  child: const Text('Reset', style: TextStyle(fontSize: 11)),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 110,
-                                height: 32,
-                                child: ElevatedButton(
-                                  onPressed: _recordTestActivity,
-                                  child: const Text(
-                                      'Add', style: TextStyle(fontSize: 11)),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildStreakHeader(int currentStreak) {
+  Widget _buildStreakHeader(int currentStreak, int longestStreak) {
     return Column(
       children: [
         const Icon(Icons.local_fire_department, size: 60, color: Colors.orange),
@@ -285,6 +88,11 @@ TOTAL ACTIVITIES: ${activities.length}
         ),
         const SizedBox(height: 4),
         Text(
+          'Longest streak: $longestStreak days',
+          style: TextStyle(color: Colors.grey[600]),
+        ),
+        const SizedBox(height: 4),
+        Text(
           currentStreak > 0 ? 'Keep it going!' : 'Start practicing!',
           style: TextStyle(color: Colors.grey[600]),
         ),
@@ -292,13 +100,69 @@ TOTAL ACTIVITIES: ${activities.length}
     );
   }
 
-  Widget _buildWeeklyCalendar(List<StreakActivity> activities) {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Your Streak'),
+        actions: [
+          IconButton(
+            icon: Icon(_showDebug ? Icons.bug_report : Icons.bug_report_outlined),
+            onPressed: () {
+              setState(() {
+                _showDebug = !_showDebug;
+                if (_showDebug) {
+                  _updateDatabaseContent();
+                }
+              });
+            },
+          ),
+        ],
+      ),
+      body: Consumer<StreakProvider>(
+        builder: (context, provider, _) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                _buildStreakHeader(provider.currentStreak, provider.longestStreak),
+                const SizedBox(height: 24),
+                _buildWeeklyCalendar(provider.weeklyActivities),
+                const SizedBox(height: 16),
+                FutureBuilder<int>(
+                  future: provider.getPracticeTimeForDate(_simulatedNow),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    }
+                    if (snapshot.hasError) {
+                      return Text(
+                        'Error loading practice time',
+                        style: TextStyle(color: Colors.red[600], fontSize: 16),
+                      );
+                    }
+                    final practiceTime = snapshot.data ?? 0;
+                    return Text(
+                      'Practice on ${DateFormat('MMM d').format(_simulatedNow)}: ${_formatPracticeTime(practiceTime)}',
+                      style: const TextStyle(fontSize: 16),
+                    );
+                  },
+                ),
+                if (_showDebug) _buildDebugControls(provider),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildWeeklyCalendar(List<DailyActivity> activities) {
     const weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
-    // Generate dates for each displayed day (3 before, current, 3 after)
+    // Generate dates centered around _simulatedNow
     final dates = List.generate(7, (index) {
-      final offset = index - 3; // -3 to +3 range for 7 days
-      return _simulatedNow.add(Duration(days: offset));
+      return _simulatedNow.add(Duration(days: index - 3));
     });
 
     return Column(
@@ -307,43 +171,152 @@ TOTAL ACTIVITIES: ${activities.length}
         const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: List.generate(7, (index) {
-            final date = dates[index];
-            final isToday = date.day == _simulatedNow.day &&
+          children: dates.map((date) {
+            final isCurrent = date.day == _simulatedNow.day &&
                 date.month == _simulatedNow.month &&
                 date.year == _simulatedNow.year;
 
-            final hasActivity = activities.any((activity) {
-              final activityUtcDate = activity.activityDate is String
-                  ? DateTime.parse(activity.activityDate as String)
-                  : activity.activityDate;
-              return activityUtcDate.year == date.year &&
-                  activityUtcDate.month == date.month &&
-                  activityUtcDate.day == date.day;
-            });
+            final activity = activities.firstWhere(
+                  (a) => a.date == DateFormat('yyyy-MM-dd').format(date),
+              orElse: () => DailyActivity(
+                date: DateFormat('yyyy-MM-dd').format(date),
+                totalTime: 0,
+                lastUpdated: date,
+              ),
+            );
 
             return Column(
               children: [
                 Container(
-                  width: 36,
-                  height: 36,
                   decoration: BoxDecoration(
-                    color: isToday ? Colors.orange.withAlpha(51) : null,
+                    color: isCurrent ? Colors.orange.withAlpha(102) : null,
                     shape: BoxShape.circle,
-                    border: isToday ? Border.all(color: Colors.orange) : null,
+                    border: Border.all(
+                      color: isCurrent ? Colors.orange : Colors.transparent,
+                    ),
                   ),
                   child: Icon(
-                    hasActivity ? Icons.check : Icons.circle_outlined,
-                    color: hasActivity ? Colors.orange : Colors.grey,
+                    activity.totalTime > 0 ? Icons.check : Icons.circle_outlined,
+                    color: activity.totalTime > 0 ? Colors.orange : Colors.grey,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(weekdays[date.weekday - 1]),
+                if (activity.totalTime > 0)
+                  Text(
+                    _formatPracticeTime(activity.totalTime),
+                    style: const TextStyle(fontSize: 10),
+                  ),
               ],
             );
-          }),
+          }).toList(),
         ),
       ],
+    );
+  }
+
+  Widget _buildDebugControls(StreakProvider provider) {
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Colors.grey[100],
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Column(
+            children: [
+              const Text('DEBUG CONTROLS', style: TextStyle(fontWeight: FontWeight.bold)),
+              const Divider(),
+              const SizedBox(height: 8),
+
+              // Practice time input
+              Row(
+                children: [
+                  const Text('Practice Time (sec):'),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        _practiceTimeInput = int.tryParse(value) ?? 300;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: '300',
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 16),
+
+              // Date controls
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => _moveDate(-1),
+                    child: const Text('-1 Day'),
+                  ),
+                  ElevatedButton(
+                    onPressed: _addSession,
+                    child: const Text('Add Session'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _moveDate(1),
+                    child: const Text('+1 Day'),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 8),
+              Text(
+                'Current debug date: ${DateFormat('yyyy-MM-dd').format(_simulatedNow)}',
+                style: const TextStyle(fontSize: 14),
+              ),
+
+              const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () async {
+                  await provider.resetAllData();
+                  setState(() {
+                    _simulatedNow = DateTime.now();
+                  });
+                  await _updateDatabaseContent();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                ),
+                child: const Text('Reset All Data'),
+              ),
+
+              const SizedBox(height: 16),
+              Text(
+                'Current streak: ${provider.currentStreak} days',
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                'Longest streak: ${provider.longestStreak} days',
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              ),
+
+              const SizedBox(height: 8),
+              const Text(
+                'Database Content:',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                _databaseContent,
+                style: const TextStyle(fontSize: 12, fontFamily: 'monospace'),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

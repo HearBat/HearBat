@@ -8,8 +8,6 @@ import '../../utils/audio_util.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:provider/provider.dart';
-import 'package:hearbat/streaks/streaks_provider.dart';
 
 class FourAnswerWidget extends StatefulWidget {
   final List<AnswerGroup> answerGroups;
@@ -64,16 +62,6 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
     setState(() {
       selectedFeedback = prefs.getString('feedbackPreference'); // Default to 'on' if no saved value
     });
-  }
-
-  //Used to record activity for streaks
-  Future<void> _recordStreakActivity() async {
-    try {
-      final provider = Provider.of<StreakProvider>(context, listen: false);
-      await provider.recordActivity(1); // This handles both DB update and UI refresh
-    } catch (e) {
-      print('Error recording streak activity: $e');
-    }
   }
 
   // Plays the audio that indicates the user selected the correct answer
@@ -133,7 +121,6 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
   // Checks if the selected answer is correct and updates the state.
   void checkAnswer() {
     setState(() {
-      _recordStreakActivity(); // Record streak activity when a question is answered
 
       if (selectedWord!.answer == correctWord.answer) {
         if (selectedFeedback == 'On') {

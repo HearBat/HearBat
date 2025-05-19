@@ -1,22 +1,24 @@
 import 'package:flutter/foundation.dart';
 import 'package:hearbat/streaks/streaks_db.dart';
 import 'package:hearbat/streaks/streaks_model.dart';
+import 'package:intl/intl.dart';
+import 'package:sqflite/sqflite.dart';
 
 class StreakProvider with ChangeNotifier {
   int _currentStreak = 0;
-  List<StreakActivity> _weeklyActivities = [];
-  bool _isLoading = true; // Add loading state
+  int _longestStreak = 0;
+  List<DailyActivity> _weeklyActivities = [];
+  bool _isLoading = true;
+  int _todayPracticeTime = 0;
 
   int get currentStreak => _currentStreak;
-  List<StreakActivity> get weeklyActivities => _weeklyActivities;
-  bool get isLoading => _isLoading; // Expose loading state
+  int get longestStreak => _longestStreak;
+  List<DailyActivity> get weeklyActivities => _weeklyActivities;
+  int get todayPracticeTime => _todayPracticeTime;
+  bool get isLoading => _isLoading;
 
   StreakProvider() {
-    _initialize(); // Load data when provider is created
-  }
-
-  Future<void> _initialize() async {
-    await loadStreakData();
+    loadStreakData();
   }
 
   Future<void> loadStreakData() async {
@@ -24,30 +26,43 @@ class StreakProvider with ChangeNotifier {
       _isLoading = true;
       notifyListeners();
 
-      final meta = await StreaksDatabase.instance.getStreakMetadata();
-      _currentStreak = meta.currentStreak;
-      _weeklyActivities = await StreaksDatabase.instance.getWeeklyActivities();
+      final streakData = await StreaksDatabase.instance.getCurrentStreak();
+      _currentStreak = streakData['current'];
+      _longestStreak = streakData['longest'];
 
-      debugPrint('Loaded streak: $_currentStreak'); // Debug print
+      final activities = await StreaksDatabase.instance.getWeeklyActivities();
+      _weeklyActivities = activities.map(DailyActivity.fromMap).toList();
+
+      _todayPracticeTime = await StreaksDatabase.instance.getTodayPracticeTime();
     } catch (e) {
       debugPrint('Error loading streak data: $e');
       _currentStreak = 0;
+      _longestStreak = 0;
       _weeklyActivities = [];
+      _todayPracticeTime = 0;
     } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
 
-  Future<void> recordActivityForDate(int practiceTime, DateTime date) async {
+  Future<Database> getDatabaseInstance() async {
+    return await StreaksDatabase.instance.database;
+  }
+
+  Future<int> getPracticeTimeForDate(DateTime date) async {
+    return await StreaksDatabase.instance.getPracticeTimeForDate(date);
+  }
+
+  Future<void> recordPracticeTime(int seconds) async {
     try {
       _isLoading = true;
       notifyListeners();
 
-      await StreaksDatabase.instance.recordActivityForDate(practiceTime, date);
+      await StreaksDatabase.instance.recordDailyActivity(seconds);
       await loadStreakData();
     } catch (e) {
-      debugPrint('Error recording activity for date: $e');
+      debugPrint('Error recording practice time: $e');
       rethrow;
     } finally {
       _isLoading = false;
@@ -55,15 +70,48 @@ class StreakProvider with ChangeNotifier {
     }
   }
 
-  Future<void> recordActivity(int practiceTime) async {
+  Future<void> recordPracticeTimeForDate(int seconds, DateTime date) async {
     try {
       _isLoading = true;
       notifyListeners();
 
-      await StreaksDatabase.instance.recordActivity(practiceTime);
+      final utcDate = DateTime.utc(date.year, date.month, date.day);
+      await StreaksDatabase.instance.recordDailyActivityForDate(seconds, utcDate);
       await loadStreakData();
     } catch (e) {
-      debugPrint('Error recording activity: $e');
+      debugPrint('Error recording practice time: $e');
+      rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> recalculateStreaksForDate(DateTime date) async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+
+      await StreaksDatabase.instance.updateStreakForDate(date);
+      await loadStreakData();
+    } catch (e) {
+      debugPrint('Error recalculating streaks: $e');
+      rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> resetAllData() async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+
+      await StreaksDatabase.instance.resetAllData();
+      await loadStreakData();
+    } catch (e) {
+      debugPrint('Error resetting data: $e');
       rethrow;
     } finally {
       _isLoading = false;

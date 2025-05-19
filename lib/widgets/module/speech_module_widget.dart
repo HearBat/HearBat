@@ -45,6 +45,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   int numberOfExercises = 8;
   String language = 'English';
   bool _isCheckPressed = false;
+  DateTime? _moduleStartTime;
+  late StreakProvider _streakProvider;
   ConfettiController _confettiController =
       ConfettiController(duration: const Duration(seconds: 3));
 
@@ -53,8 +55,15 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   String? selectedFeedback = 'on';
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _streakProvider = Provider.of<StreakProvider>(context, listen: false);
+  }
+
+  @override
   void initState() {
     super.initState();
+    _moduleStartTime = DateTime.now();
     voiceType = widget.voiceType;
     _init();
     _loadVoiceType();
@@ -75,15 +84,6 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     });
   }
 
-  Future<void> _recordStreakActivity() async {
-    try {
-      final provider = Provider.of<StreakProvider>(context, listen: false);
-      await provider.recordActivity(1); // Record 1 activity
-    } catch (e) {
-      print('Error recording streak activity: $e');
-    }
-  }
-
   // Plays the audio that indicates the user selected the correct answer
   void playCorrectChime() async {
     final player = AudioPlayer();
@@ -102,6 +102,13 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     voiceType = prefs.getString('voicePreference') ?? voiceType;
     language = prefs.getString('languagePreference')!;
+  }
+
+  Future<void> _recordModuleCompletion() async {
+    if (_moduleStartTime != null) {
+      final duration = DateTime.now().difference(_moduleStartTime!).inSeconds;
+      await _streakProvider.recordPracticeTimeForDate(duration, _moduleStartTime!);
+    }
   }
 
   Future<void> _playSentence() async {
@@ -191,8 +198,6 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   }
 
   void _submitRecording() {
-    _recordStreakActivity(); // Record streak activity when a question is answered
-
     setState(() {
       _gradeSum += _grade;
       _attempts++;
@@ -363,6 +368,9 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   }
 
   Widget buildCompletionScreen() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _recordModuleCompletion();
+    });
     return Stack(
       alignment: Alignment.topCenter,
       children: [
@@ -462,9 +470,12 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
 
   @override
   void dispose() {
+    if (!_isCompleted) {
+      _recordModuleCompletion(); // ← Catches all other exits
+    }
     _recorder.closeRecorder();
-    super.dispose();
     _confettiController.dispose();
     BackgroundNoiseUtil.stopSound();
+    super.dispose();
   }
 }

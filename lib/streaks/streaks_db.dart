@@ -1,12 +1,13 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:hearbat/streaks/streaks_model.dart';
+import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:intl/intl.dart';
 
 class StreaksDatabase {
   static final StreaksDatabase instance = StreaksDatabase._init();
   static Database? _database;
+  bool _isInitialized = false;
 
   StreaksDatabase._init();
 
@@ -22,54 +23,54 @@ class StreaksDatabase {
 
     return await openDatabase(
       path,
-      version: 3, // Incremented version for new streak logic
+      version: 1,
       onCreate: _createDB,
-      onUpgrade: _upgradeDB,
+      onOpen: (db) async {
+        await _verifyTables(db);
+      },
     );
   }
 
+  Future<void> _verifyTables(Database db) async {
+    try {
+      await db.rawQuery('SELECT 1 FROM daily_activity LIMIT 1');
+      await db.rawQuery('SELECT 1 FROM streak_data LIMIT 1');
+      _isInitialized = true;
+    } catch (e) {
+      debugPrint('Tables not found, creating them...');
+      await _createDB(db, 1);
+      _isInitialized = true;
+    }
+  }
+
   Future _createDB(Database db, int version) async {
-    await db.transaction((txn) async {
-      await txn.execute('''
-        CREATE TABLE streak_activity (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          activity_date TEXT UNIQUE NOT NULL,
-          last_activity_time TEXT NOT NULL,
-          total_practice_time INTEGER DEFAULT 0
-        )
-      ''');
+    await db.execute('''
+      CREATE TABLE daily_activity (
+        date TEXT PRIMARY KEY,
+        total_time INTEGER DEFAULT 0,
+        last_updated TEXT NOT NULL
+      )
+    ''');
 
-      await txn.execute('''
-        CREATE TABLE streak_metadata (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          current_streak INTEGER DEFAULT 0,
-          longest_streak INTEGER DEFAULT 0,
-          last_updated TEXT NOT NULL
-        )
-      ''');
+    await db.execute('''
+      CREATE TABLE streak_data (
+        current_streak INTEGER DEFAULT 0,
+        longest_streak INTEGER DEFAULT 0
+      )
+    ''');
 
-      await txn.execute('''
-        CREATE INDEX idx_activity_date 
-        ON streak_activity(activity_date)
-      ''');
-
-      // Initialize metadata
-      await txn.insert('streak_metadata', {
-        'current_streak': 0,
-        'longest_streak': 0,
-        'last_updated': DateTime.now().toUtc().toIso8601String()
-      });
+    // Initialize streak data
+    await db.insert('streak_data', {
+      'current_streak': 0,
+      'longest_streak': 0
     });
   }
 
-  Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
-    if (oldVersion < 2) {
-      await db.execute('''
-        CREATE INDEX idx_activity_date 
-        ON streak_activity(activity_date)
-      ''');
+  Future<void> ensureInitialized() async {
+    if (!_isInitialized) {
+      final db = await database;
+      await _verifyTables(db);
     }
-    // Add any additional upgrade logic here if needed
   }
 
   Future<void> close() async {
@@ -78,228 +79,153 @@ class StreaksDatabase {
     await db.close();
   }
 
-  /// Records activity if no activity exists for the current UTC day
-  Future<void> recordActivity(int practiceTime) async {
+  Future<void> recordDailyActivity(int seconds) async {
     final db = await database;
+    final now = DateTime.now().toUtc();
+    final today = DateFormat('yyyy-MM-dd').format(now);
+
     await db.transaction((txn) async {
-      final nowUtc = DateTime.now().toUtc();
-      final todayUtc = DateTime.utc(nowUtc.year, nowUtc.month, nowUtc.day);
+      await txn.rawInsert('''
+        INSERT INTO daily_activity (date, total_time, last_updated)
+        VALUES (?, ?, ?)
+        ON CONFLICT(date) DO UPDATE SET
+          total_time = total_time + excluded.total_time,
+          last_updated = excluded.last_updated
+      ''', [today, seconds, now.toIso8601String()]);
 
-      // Check if activity already exists for today
-      final existing = await txn.query(
-        'streak_activity',
-        where: 'date(activity_date) = date(?)',
-        whereArgs: [todayUtc.toIso8601String()],
-      );
-
-      if (existing.isEmpty) {
-        // Only record if no activity for today
-        await txn.insert(
-          'streak_activity',
-          {
-            'activity_date': todayUtc.toIso8601String(),
-            'last_activity_time': nowUtc.toIso8601String(),
-            'total_practice_time': practiceTime,
-          },
-          conflictAlgorithm: ConflictAlgorithm.replace,
-        );
-
-        await _updateStreak(txn);
-      } else {
-        // Update existing activity with new practice time
-        await txn.update(
-          'streak_activity',
-          {
-            'last_activity_time': nowUtc.toIso8601String(),
-            'total_practice_time': practiceTime,
-          },
-          where: 'date(activity_date) = date(?)',
-          whereArgs: [todayUtc.toIso8601String()],
-        );
-      }
+      await _updateStreak(txn, now);
     });
   }
 
-  Future<void> recordActivityForDate(int practiceTime, DateTime date) async {
+  Future<void> recordDailyActivityForDate(int seconds, DateTime date) async {
     final db = await database;
+    final dateStr = DateFormat('yyyy-MM-dd').format(date.toUtc());
+
     await db.transaction((txn) async {
-      final dateUtc = date.toUtc();
-      final dayUtc = DateTime.utc(dateUtc.year, dateUtc.month, dateUtc.day);
+      await txn.rawInsert('''
+        INSERT INTO daily_activity (date, total_time, last_updated)
+        VALUES (?, ?, ?)
+        ON CONFLICT(date) DO UPDATE SET
+          total_time = total_time + excluded.total_time,
+          last_updated = excluded.last_updated
+      ''', [dateStr, seconds, DateTime.now().toUtc().toIso8601String()]);
 
-      // Check if activity already exists for this day
-      final existing = await txn.query(
-        'streak_activity',
-        where: 'date(activity_date) = date(?)',
-        whereArgs: [dayUtc.toIso8601String()],
-      );
-
-      if (existing.isEmpty) {
-        await txn.insert(
-          'streak_activity',
-          {
-            'activity_date': dayUtc.toIso8601String(),
-            'last_activity_time': dateUtc.toIso8601String(),
-            'total_practice_time': practiceTime,
-          },
-          conflictAlgorithm: ConflictAlgorithm.replace,
-        );
-      } else {
-        await txn.update(
-          'streak_activity',
-          {
-            'last_activity_time': dateUtc.toIso8601String(),
-            'total_practice_time': practiceTime,
-          },
-          where: 'date(activity_date) = date(?)',
-          whereArgs: [dayUtc.toIso8601String()],
-        );
-      }
-
-      await _updateStreak(txn);
+      await _updateStreak(txn, date);
     });
   }
 
-  /// Checks if we should record a new activity (no activity for current UTC day)
-  Future<bool> shouldRecordActivity() async {
+  Future<void> updateStreakForDate(DateTime date) async {
     final db = await database;
-    final nowUtc = DateTime.now().toUtc();
-    final todayUtc = DateTime.utc(nowUtc.year, nowUtc.month, nowUtc.day);
-
-    final activities = await db.query(
-      'streak_activity',
-      where: 'date(activity_date) = date(?)',
-      whereArgs: [todayUtc.toIso8601String()],
-    );
-
-    return activities.isEmpty;
+    await db.transaction((txn) async {
+      await _updateStreak(txn, date);
+    });
   }
 
-  /// Updates streak counts based on UTC calendar days
-  Future<void> _updateStreak(Transaction txn) async {
+  Future<void> _updateStreak(Transaction txn, DateTime currentDate) async {
     final activities = await txn.query(
-      'streak_activity',
-      orderBy: 'activity_date DESC',
+      'daily_activity',
+      columns: ['date'],
+      orderBy: 'date DESC',
     );
 
-    if (activities.isEmpty) {
-      await txn.update('streak_metadata', {'current_streak': 0});
+    int streak = 0;
+    final currentDateStr = DateFormat('yyyy-MM-dd').format(currentDate.toUtc());
+
+    // Convert all activity dates to DateTime objects and sort them newest to oldest
+    final activityDates = activities.map((a) => DateTime.parse(a['date'] as String)).toList();
+    activityDates.sort((a, b) => b.compareTo(a));
+
+    // Check if current date or previous day has activity
+    final hasCurrentDateActivity = activityDates.any((date) =>
+    DateFormat('yyyy-MM-dd').format(date) == currentDateStr);
+
+    final yesterday = currentDate.subtract(const Duration(days: 1));
+    final hasYesterdayActivity = activityDates.any((date) =>
+    DateFormat('yyyy-MM-dd').format(date) == DateFormat('yyyy-MM-dd').format(yesterday));
+
+    // If no activity today and no activity yesterday, streak is 0
+    if (!hasCurrentDateActivity && !hasYesterdayActivity) {
+      await txn.update('streak_data', {
+        'current_streak': 0,
+        'longest_streak': (await txn.query('streak_data')).first['longest_streak'] as int
+      });
       return;
     }
 
-    int streak = 0;
-    DateTime? previousLocalDate;
+    // Start counting from most recent activity date backward
+    DateTime checkDate = hasCurrentDateActivity ? currentDate : yesterday;
+    bool streakActive = true;
 
-    for (final activity in activities) {
-      final utcDate = DateTime.parse(activity['activity_date'] as String);
-      final localDate = utcDate.toLocal();
-      final currentDate = DateTime(localDate.year, localDate.month, localDate.day);
+    while (streakActive) {
+      final checkDateStr = DateFormat('yyyy-MM-dd').format(checkDate);
 
-      if (previousLocalDate == null) {
-        streak = 1;
-        previousLocalDate = currentDate;
-        continue;
-      }
-
-      final difference = previousLocalDate.difference(currentDate).inDays;
-
-      if (difference == 1) {
+      if (activityDates.any((date) =>
+      DateFormat('yyyy-MM-dd').format(date) == checkDateStr)) {
         streak++;
-        previousLocalDate = currentDate;
-      } else if (difference > 1) {
-        break;
+        checkDate = checkDate.subtract(const Duration(days: 1));
+      } else {
+        streakActive = false;
       }
     }
 
-    await txn.update('streak_metadata', {'current_streak': streak});
-  }
-
-  /// Gets the last activity date in local time
-  Future<DateTime?> getLastActivityLocalDate() async {
-    try {
-      final db = await database;
-      final activities = await db.query(
-        'streak_activity',
-        orderBy: 'activity_date DESC',
-        limit: 1,
-      );
-
-      if (activities.isEmpty) return null;
-
-      final utcDate = DateTime.parse(activities.first['activity_date'] as String);
-      return utcDate.toLocal();
-    } catch (e) {
-      return null;
-    }
-  }
-
-  Future<StreakMetadata> getStreakMetadata() async {
-    try {
-      final db = await database;
-      final maps = await db.query('streak_metadata');
-      if (maps.isEmpty) throw Exception('No streak metadata found');
-      return StreakMetadata.fromMap(maps.first);
-    } catch (e) {
-      return StreakMetadata(
-        currentStreak: 0,
-        longestStreak: 0,
-        lastUpdated: DateTime.now().toUtc(),
-      );
-    }
-  }
-
-  Future<int> getCurrentStreak() async {
-    final meta = await getStreakMetadata();
-    return meta.currentStreak;
-  }
-
-  Future<List<StreakActivity>> getWeeklyActivities() async {
-    final db = await database;
-    final maps = await db.query('streak_activity'); // No date filtering
-    return maps.map(StreakActivity.fromMap).toList();
-  }
-
-  Future<void> resetStreak() async {
-    final db = await database;
-    await db.transaction((txn) async {
-      await txn.delete('streak_activity');
-      await txn.update(
-        'streak_metadata',
-        {
-          'current_streak': 0,
-          'longest_streak': 0,
-          'last_updated': DateTime.now().toUtc().toIso8601String(),
-        },
-      );
+    // Update streak data
+    final currentLongest = (await txn.query('streak_data')).first['longest_streak'] as int;
+    await txn.update('streak_data', {
+      'current_streak': streak,
+      'longest_streak': max(streak, currentLongest)
     });
   }
 
-  Future<void> backupToFile(String filePath) async {
+  Future<Map<String, dynamic>> getCurrentStreak() async {
     final db = await database;
-    final file = File(filePath);
-
-    final activities = await db.query('streak_activity');
-    final metadata = await db.query('streak_metadata');
-
-    await file.writeAsString(jsonEncode({
-      'activities': activities,
-      'metadata': metadata,
-    }));
+    final data = (await db.query('streak_data')).first;
+    return {
+      'current': data['current_streak'] as int,
+      'longest': data['longest_streak'] as int
+    };
   }
 
-  Future<void> restoreFromFile(String filePath) async {
+  Future<int> getPracticeTimeForDate(DateTime date) async {
     final db = await database;
-    final file = File(filePath);
-    final data = jsonDecode(await file.readAsString());
+    final dateStr = DateFormat('yyyy-MM-dd').format(date);
+    final result = await db.query(
+      'daily_activity',
+      where: 'date = ?',
+      whereArgs: [dateStr],
+    );
+    return result.isEmpty ? 0 : result.first['total_time'] as int;
+  }
 
+  Future<int> getTodayPracticeTime() async {
+    final db = await database;
+    final today = DateFormat('yyyy-MM-dd').format(DateTime.now().toUtc());
+
+    final result = await db.query(
+      'daily_activity',
+      where: 'date = ?',
+      whereArgs: [today],
+    );
+
+    return result.isEmpty ? 0 : result.first['total_time'] as int;
+  }
+
+  Future<List<Map<String, dynamic>>> getWeeklyActivities() async {
+    final db = await database;
+    return await db.query(
+      'daily_activity',
+      orderBy: 'date DESC',
+      limit: 7,
+    );
+  }
+
+  Future<void> resetAllData() async {
+    final db = await database;
     await db.transaction((txn) async {
-      await txn.delete('streak_activity');
-      await txn.delete('streak_metadata');
-
-      for (final activity in data['activities']) {
-        await txn.insert('streak_activity', activity);
-      }
-
-      await txn.insert('streak_metadata', data['metadata']);
+      await txn.delete('daily_activity');
+      await txn.update('streak_data', {
+        'current_streak': 0,
+        'longest_streak': 0
+      });
     });
   }
 }
