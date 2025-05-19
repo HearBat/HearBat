@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import '../../pages/module_types/words/words_list_page.dart';
 import '../../utils/data_service_util.dart';
+import '../../utils/translations.dart';
 
 class AlternatingPathLayout extends StatefulWidget {
   final IndexedWidgetBuilder itemBuilder;
@@ -78,7 +79,7 @@ class _AlternatingPathLayoutState extends State<AlternatingPathLayout> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: Text(
-                    'View Chapter Words',
+                    AppLocale.alternatingPathViewChapterWords.getString(context),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

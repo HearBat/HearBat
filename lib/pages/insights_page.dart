@@ -1,16 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:hearbat/widgets/top_bar_widget.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'missed_words_page.dart';
-import 'missed_sounds_page.dart';
+
+import 'package:hearbat/pages/missed_answers_page.dart';
+import 'package:hearbat/stats/daily_model.dart';
+import 'package:hearbat/stats/exercise_score_model.dart';
+import 'package:hearbat/utils/translations.dart';
+import 'package:hearbat/widgets/top_bar_widget.dart';
 
 class InsightsPage extends StatefulWidget {
+  const InsightsPage({super.key});
+
   @override
   InsightsPageState createState() => InsightsPageState();
 }
 
 class InsightsPageState extends State<InsightsPage> {
   DateTime _focusedDay = DateTime.now(); // Current day
+  double _progressBarValue = 0.0;
+  int _timePracticed = 0;
+  int _speechAccuracy = 0;
+  int _noiseAccuracy = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchDailyStats(DateTime.now());
+  }
+
+  void _fetchDailyStats(DateTime date) async {
+    final timePracticed = await Daily.getPracticeTime(date);
+    final speechAccuracy = await ExerciseScore.getExerciseAccuracyByDay("speech", date);
+    // This currently tracks the average bg noise level of speech exercises--can reevaluate later
+    final noiseAccuracy = await ExerciseScore.getExerciseBGNoiseByDay("speech", date);
+
+    setState(() {
+      _timePracticed = timePracticed;
+      _speechAccuracy = (speechAccuracy*100).ceil();
+      _noiseAccuracy = (noiseAccuracy*100).ceil();
+    });
+  }
 
   // Navigate to previous month
   void _goToPreviousMonth() {
@@ -51,13 +79,13 @@ class InsightsPageState extends State<InsightsPage> {
       }
     }
 
-    return 'Today, ${monthNames[date.month - 1]} ${date.day}${suffix(date.day)}';
+    return '${AppLocale.insightsPageToday.getString(context)}, ${monthNames[date.month - 1]} ${date.day}${suffix(date.day)}';
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopBar(title: 'INSIGHTS'),
+      appBar: TopBar(title: AppLocale.insightsPageTitle.getString(context)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
@@ -72,10 +100,6 @@ class InsightsPageState extends State<InsightsPage> {
 
 Widget _buildCalendar() {
   DateTime today = DateTime.now();
-  double progressBarValue = 0.6;
-  int timePracticed = 40;
-  int speechAccuracy = 78;
-  int noiseAccuracy = 8;
 
   return Padding(
     padding: const EdgeInsets.all(16.0),
@@ -133,6 +157,13 @@ Widget _buildCalendar() {
                   setState(() {
                     _focusedDay = newFocusedDay;
                   });
+                  _fetchDailyStats(_focusedDay);
+                },
+                onDaySelected: (selectedDay, newFocusedDay) {
+                  setState(() {
+                    _focusedDay = newFocusedDay;
+                  });
+                  _fetchDailyStats(selectedDay);
                 },
                 startingDayOfWeek: StartingDayOfWeek.sunday,
                 headerVisible: false,
@@ -222,7 +253,7 @@ Widget _buildCalendar() {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Time practiced',
+                        AppLocale.insightsPageTimePracticed.getString(context),
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -230,7 +261,7 @@ Widget _buildCalendar() {
                         ),
                       ),
                       Text(
-                        '${timePracticed}m',
+                        '$_timePracticed${AppLocale.insightsPageMinuteAbbr.getString(context)}',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -246,7 +277,7 @@ Widget _buildCalendar() {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: LinearProgressIndicator(
-                    value: progressBarValue,
+                    value: _progressBarValue,
                     backgroundColor: Colors.grey[300],
                     valueColor: AlwaysStoppedAnimation<Color>(
                       Color.fromARGB(255, 110, 211, 97),
@@ -256,7 +287,7 @@ Widget _buildCalendar() {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '${(progressBarValue * 100).toInt()}% of daily goal achieved',
+                    '${(_progressBarValue * 100).toInt()}% ${AppLocale.insightsPageDailyGoal.getString(context)}',
                     style: TextStyle(fontSize: 12, color: Colors.black87),
                   ),
 
@@ -278,7 +309,7 @@ Widget _buildCalendar() {
                           crossAxisAlignment: CrossAxisAlignment.start, // Left-aligned
                           children: [
                             Text(
-                              '$speechAccuracy%',
+                              '$_speechAccuracy%',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -287,7 +318,7 @@ Widget _buildCalendar() {
                             ),
                             SizedBox(height: 4),
                             Text(
-                              'Speech Accuracy',
+                              AppLocale.insightsPageSpeechAccuracy.getString(context),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -314,7 +345,7 @@ Widget _buildCalendar() {
                           crossAxisAlignment: CrossAxisAlignment.start, // Left-aligned
                           children: [
                             Text(
-                              '$noiseAccuracy%',
+                              '$_noiseAccuracy%',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -323,7 +354,7 @@ Widget _buildCalendar() {
                             ),
                             SizedBox(height: 4),
                             Text(
-                              'Noise Challenge',
+                              AppLocale.insightsPageNoiseChallenge.getString(context),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -350,7 +381,7 @@ Widget _buildCalendar() {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MissedWordsPage()),
+          MaterialPageRoute(builder: (context) => MissedAnswersPage(type: "words")),
         );
       },
       child: Container(
@@ -362,7 +393,7 @@ Widget _buildCalendar() {
         ),
         child: Center(
           child: Text(
-            'View Most Missed Words',
+            AppLocale.insightsPageMissedWords.getString(context),
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -380,7 +411,7 @@ Widget _buildCalendar() {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MissedSoundsPage()),
+          MaterialPageRoute(builder: (context) => MissedAnswersPage(type: "sounds")),
         );
       },
       child: Container(
@@ -392,7 +423,7 @@ Widget _buildCalendar() {
         ),
         child: Center(
           child: Text(
-            'View Most Missed Sounds',
+            AppLocale.insightsPageMissedSounds.getString(context),
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -432,7 +463,7 @@ Widget _buildCalendar() {
             child: 
             Center(
               child: Text(
-              'Speech Overtime',
+              AppLocale.insightsPageSpeechOvertime.getString(context),
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -458,4 +489,3 @@ Widget _buildCalendar() {
     );
   }
 }
-

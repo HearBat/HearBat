@@ -1,15 +1,19 @@
 import "dart:math";
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:hearbat/models/chapter_model.dart';
-import 'word_button_widget.dart';
-import 'incorrect_card_widget.dart';
-import '../../utils/google_tts_util.dart';
-import '../../utils/audio_util.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:audioplayers/audioplayers.dart';
+
+import 'package:hearbat/models/chapter_model.dart';
+import 'package:hearbat/stats/answer_model.dart' as answer_stats;
+import 'package:hearbat/utils/audio_util.dart';
+import 'package:hearbat/utils/google_tts_util.dart';
+import 'package:hearbat/utils/translations.dart';
+import 'package:hearbat/widgets/module/word_button_widget.dart';
+import 'package:hearbat/widgets/module/incorrect_card_widget.dart';
 
 class FourAnswerWidget extends StatefulWidget {
+  final String exerciseType;
   final List<AnswerGroup> answerGroups;
   final VoidCallback onCompletion;
   final VoidCallback onCorrectAnswer;
@@ -20,6 +24,7 @@ class FourAnswerWidget extends StatefulWidget {
 
   FourAnswerWidget({
     super.key,
+    required this.exerciseType,
     required this.answerGroups,
     required this.onCompletion,
     required this.onCorrectAnswer,
@@ -119,7 +124,13 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
   }
 
   // Checks if the selected answer is correct and updates the state.
-  void checkAnswer() {
+  void checkAnswer() async {
+    // Update answer stats
+    await answer_stats.Answer.updateStats(
+        widget.exerciseType,
+        correctWord.answer,
+        selectedWord!.answer == correctWord.answer);
+
     setState(() {
 
       if (selectedWord!.answer == correctWord.answer) {
@@ -197,7 +208,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "What do you hear?",
+                      AppLocale.fourAnswerWidgetPrompt.getString(context),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 28,
@@ -310,7 +321,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                           Padding(
                             padding: const EdgeInsets.only(right: 30.0),
                             child: Text(
-                              'Incorrect',
+                              AppLocale.generalIncorrect.getString(context),
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -319,7 +330,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                             ),
                           ),
                           Text(
-                            'Correct',
+                            AppLocale.generalCorrect.getString(context),
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -347,7 +358,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                             ),
                             onPressed: proceedToNext,
                             child: Text(
-                              'Continue',
+                              AppLocale.generalContinue.getString(context),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -375,7 +386,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      'Great',
+                      AppLocale.generalGreat.getString(context),
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,

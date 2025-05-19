@@ -2,6 +2,7 @@
   "chapters": [
     {
       "name": "Home Sounds",
+      "image": "assets/visuals/HBSoundChapterOne.png",
       "modules": [
         {
           "name": "Module 1",
@@ -987,6 +988,7 @@
     },
     {
       "name": "Music Sounds",
+      "image": "assets/visuals/HBSoundChapterTwo.png",
       "modules": [
         {
           "name": "Module 1",
@@ -1972,6 +1974,7 @@
     },
     {
       "name": "Nature Sounds",
+      "image": "assets/visuals/HBSoundChapterThree.png",
       "modules": [
         {
           "name": "Module 1",

@@ -5,6 +5,7 @@ import 'package:hearbat/widgets/top_bar_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hearbat/utils/custom_util.dart';
 import 'package:hearbat/utils/user_module_util.dart';
+import '../../../utils/translations.dart';
 import "../../../widgets/custom_module_card_widget.dart";
 
 class CustomPath extends StatefulWidget {
@@ -75,6 +76,7 @@ class CustomPathState extends State<CustomPath> {
         MaterialPageRoute(
           builder: (context) => DifficultySelectionWidget(
             moduleName: moduleName,
+            exerciseType: "words",
             answerGroups: answerGroups,
             isWord: true,
             displayDifficulty: false,
@@ -92,7 +94,7 @@ class CustomPathState extends State<CustomPath> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
-        title: "Custom Module Builder",
+        title: AppLocale.customModulesPageTitle.getString(context),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -123,7 +125,7 @@ class CustomPathState extends State<CustomPath> {
                     elevation: 0, // remove the default material shadow
                   ),
                   child: Text(
-                    "Create Module",
+                    AppLocale.customModulesPageCreate.getString(context),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

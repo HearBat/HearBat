@@ -1,0 +1,25 @@
+{
+  "chapters": [
+    {
+      "name": "Speech Test Placeholder",
+      "image": "assets/visuals/HBWordsChapterOne.png",
+      "modules": [
+        {
+          "name": "Module 1",
+          "speechGroups": [
+            "A big cat sat on the mat.",
+            "He runs from the sun.",
+            "The bus stops at the park.",
+            "A red apple is on the table.",
+            "The clock ticks at midnight.",
+            "Can you pass the salt?",
+            "Take the last cookie from the jar.",
+            "That hat looks too flat.",
+            "Grab the map from the back.",
+            "Act fast, or it's gone."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
+import 'package:hearbat/utils/translations.dart';
 import '../widgets/module/module_widget.dart';
 import 'package:hearbat/utils/cache_words_util.dart';
 // import '../../../../utils/gemini_util.dart';
@@ -55,7 +56,7 @@ class CustomModuleState extends State<CustomModule> {
               children: [
                 CircularProgressIndicator(),
                 SizedBox(width: 10),
-                Text("Loading..."),
+                Text(AppLocale.generalLoading.getString(context)),
               ],
             ),
           ),
@@ -66,6 +67,7 @@ class CustomModuleState extends State<CustomModule> {
     // Once caching is done, show the WordModuleWidget
     return ModuleWidget(
       title: widget.moduleName,
+      type: "words",
       answerGroups: widget.answerGroups,
       isWord: true,
     );

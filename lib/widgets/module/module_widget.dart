@@ -8,21 +8,27 @@ import '../../streaks/streaks_provider.dart';
 import 'package:provider/provider.dart';
 import 'four_answer_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hearbat/utils/google_tts_util.dart';
 import 'word_missed_button_widget.dart';
 import 'package:confetti/confetti.dart';
 import 'score_widget.dart';
+import 'package:hearbat/stats/exercise_score_model.dart';
+import 'package:hearbat/stats/module_model.dart' as module_stats;
+import 'package:hearbat/utils/google_tts_util.dart';
+import 'package:hearbat/utils/translations.dart';
 
 class ModuleWidget extends StatefulWidget {
   final String title;
+  final String type;
   final List<AnswerGroup> answerGroups;
   final bool isWord;
 
-  ModuleWidget(
-      {super.key,
-      required this.title,
-      required this.answerGroups,
-      required this.isWord});
+  ModuleWidget({
+    super.key,
+    required this.title,
+    required this.type,
+    required this.answerGroups,
+    required this.isWord,
+  });
 
   @override
   State createState() => _ModulePageState();
@@ -40,11 +46,21 @@ class _ModulePageState extends State<ModuleWidget> {
   String language = 'English';
   late StreakProvider _streakProvider;
   DateTime? _moduleStartTime;
+  int _highScore = 0;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _streakProvider = Provider.of<StreakProvider>(context, listen: false);
+  }
+
+  void fetchHighScore() async {
+    final module = await module_stats.Module.getModuleByName(widget.title);
+    if (module == null) {
+      return;
+    }
+
+    _highScore = module.highScore ?? 0;
   }
 
   @override
@@ -55,6 +71,8 @@ class _ModulePageState extends State<ModuleWidget> {
 
     googleTTSUtil.initialize();
     AudioUtil.initialize();
+
+    fetchHighScore();
 
     BackgroundNoiseUtil.initialize().then((_) {
       BackgroundNoiseUtil.playSavedSound();
@@ -143,7 +161,7 @@ class _ModulePageState extends State<ModuleWidget> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Text(
-                    'Words Missed',
+                    AppLocale.moduleWidgetWordsMissed.getString(context),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -174,7 +192,7 @@ class _ModulePageState extends State<ModuleWidget> {
                             answer: incorrectAnswerPairs[index][0].answer,
                             onPressed: () =>
                                 playAnswer(incorrectAnswerPairs[index][0]),
-                            headerText: 'You Chose',
+                            headerText: AppLocale.generalYouChose.getString(context),
                             color: Color.fromARGB(255, 195, 74, 74),
                           ),
                           SizedBox(width: 8),
@@ -182,7 +200,7 @@ class _ModulePageState extends State<ModuleWidget> {
                               answer: incorrectAnswerPairs[index][1].answer,
                               onPressed: () =>
                                   playAnswer(incorrectAnswerPairs[index][1]),
-                              headerText: 'Correct Answer',
+                              headerText: AppLocale.generalCorrectAnswer.getString(context),
                               color: Color.fromARGB(255, 129, 221, 121)),
                         ],
                       ),
@@ -232,8 +250,22 @@ class _ModulePageState extends State<ModuleWidget> {
     return Container(
       color: Color.fromARGB(255, 232, 218, 255),
       child: FourAnswerWidget(
+        exerciseType: widget.type,
         answerGroups: widget.answerGroups,
-        onCompletion: () => setState(() => moduleCompleted = true),
+        onCompletion: () {
+          // Save stats
+          ExerciseScore.insert(
+            widget.type,
+            DateTime.now(),
+            correctAnswersCount,
+            widget.answerGroups.length);
+          module_stats.Module.updateStats(
+            widget.type,
+            widget.title,
+            correctAnswersCount);
+
+          setState(() => moduleCompleted = true);
+        },
         onCorrectAnswer: () {
           setState(() {
             correctAnswersCount++;
@@ -287,7 +319,7 @@ class _ModulePageState extends State<ModuleWidget> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
               child: AutoSizeText(
-                'Lesson Complete!',
+                AppLocale.generalLessonComplete.getString(context),
                 maxLines: 1,
                 style: TextStyle(
                     fontSize: 32,
@@ -301,7 +333,8 @@ class _ModulePageState extends State<ModuleWidget> {
               context: context,
               type: ScoreType.score,
               correctAnswersCount: correctAnswersCount.toString(),
-              subtitleText: "Score",
+              subtitleText: AppLocale.generalScore.getString(context),
+              isHighest: correctAnswersCount > _highScore,
               icon: Icon(
                 Icons.star,
                 color: Color.fromARGB(255, 7, 45, 78),
@@ -313,8 +346,9 @@ class _ModulePageState extends State<ModuleWidget> {
             ScoreWidget(
               context: context,
               type: ScoreType.score,
-              correctAnswersCount: correctAnswersCount.toString(),
-              subtitleText: "Highest Score",
+              correctAnswersCount: _highScore.toString(),
+              subtitleText: AppLocale.generalHighestScore.getString(context),
+              isHighest: true,
               icon: Icon(
                 Icons.emoji_events,
                 color: Color.fromARGB(255, 255, 255, 255),
@@ -344,7 +378,7 @@ class _ModulePageState extends State<ModuleWidget> {
                   elevation: 5,
                 ),
                 child: Text(
-                  'CONTINUE',
+                  AppLocale.generalContinue.getString(context),
                   style: TextStyle(
                     color: const Color.fromARGB(255, 255, 255, 255),
                     fontSize: 20,
