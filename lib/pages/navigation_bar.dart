@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../utils/translations.dart';
-import 'home_page.dart';
-import 'profile_page.dart';
-import 'insights_page.dart';
+
+import 'package:hearbat/pages/home_page.dart';
+import 'package:hearbat/pages/insights_page.dart';
+import 'package:hearbat/pages/profile_page.dart';
+import 'package:hearbat/utils/translations.dart';
 
 class MyNavBar extends StatefulWidget {
   @override
@@ -11,14 +12,14 @@ class MyNavBar extends StatefulWidget {
 
 class _MyNavBarState extends State<MyNavBar> {
   int selectedIndex = 0;
+  Key _insightsPageKey = UniqueKey();
   Key _profilePageKey = UniqueKey();
 
   // Store navigation keys to maintain state
   final List<GlobalKey<NavigatorState>> _navigatorKeys = [
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
-    GlobalKey<NavigatorState>(),
-    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>()
   ];
 
   @override
@@ -70,6 +71,10 @@ class _MyNavBarState extends State<MyNavBar> {
   void _selectTab(int index) {
     setState(() {
       if (index == 1 && selectedIndex != 1) {
+        // Rebuild insights page
+        _insightsPageKey = UniqueKey();
+      }
+      if (index == 2 && selectedIndex != 2) {
         // Rebuild profile page
         _profilePageKey = UniqueKey();
       }
@@ -85,7 +90,10 @@ class _MyNavBarState extends State<MyNavBar> {
         onGenerateRoute: (routeSettings) {
           return MaterialPageRoute(
             builder: (context) {
-              final pages = [HomePage(), InsightsPage(), ProfilePage(key: _profilePageKey)];
+              final pages = [
+                HomePage(),
+                InsightsPage(key: _insightsPageKey),
+                ProfilePage(key: _profilePageKey)];
               return pages[index];
             },
           );

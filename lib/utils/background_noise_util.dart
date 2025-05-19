@@ -7,7 +7,8 @@ class BackgroundNoiseUtil {
   static final AudioPlayer _backgroundAudioPlayer = AudioPlayer()
     ..setReleaseMode(ReleaseMode.loop);
 
-  static bool _isPlaying = false; //Track if audio currently playing
+  static bool isPlaying = false; //Track if audio currently playing
+  static double volume = 0.3;
   static Timer? _previewTimer; //Track the timer for use in settings
 
   static Future<void> initialize() async {
@@ -32,7 +33,7 @@ class BackgroundNoiseUtil {
 
   // Plays the saved background sound based on user preference.
   static Future<void> playSavedSound() async {
-    if (_isPlaying) {
+    if (isPlaying) {
       await stopSound();
     }
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -40,7 +41,7 @@ class BackgroundNoiseUtil {
     String? audioVolume = prefs.getString('audioVolumePreference');
 
     if (backgroundSound != null && backgroundSound != 'None') {
-      _isPlaying = true;
+      isPlaying = true;
       String fileName = backgroundSound.replaceAll(' Sound', '').toLowerCase();
       await _adjustVolume(audioVolume);
       await _backgroundAudioPlayer.play(
@@ -62,7 +63,7 @@ class BackgroundNoiseUtil {
   // Stops the currently playing background sound.
   static Future<void> stopSound() async {
     await _backgroundAudioPlayer.stop();
-    _isPlaying = false;
+    isPlaying = false;
     _previewTimer?.cancel(); // Cancel the preview timer
     _previewTimer = null;
   }
@@ -71,13 +72,14 @@ class BackgroundNoiseUtil {
   static Future<void> _adjustVolume(String? volumeLevel) async {
     switch (volumeLevel) {
       case 'Low':
-        _backgroundAudioPlayer.setVolume(0.3);
+        volume = 0.3;
       case 'Medium':
-        _backgroundAudioPlayer.setVolume(0.7);  
+        volume = 0.7;
       case 'High':
-        _backgroundAudioPlayer.setVolume(1.0);
+        volume = 1.0;
       default:
-        _backgroundAudioPlayer.setVolume(0.3);
+        volume = 0.3;
     }
+    _backgroundAudioPlayer.setVolume(volume);
   }
 }

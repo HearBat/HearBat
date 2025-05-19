@@ -1,6 +1,9 @@
+import 'package:hearbat/stats/exercise_model.dart';
 import 'package:hearbat/stats/stats_db.dart';
 
 class Answer {
+  static const _table = "answer";
+
   final int exerciseId;
   final String name;
   final int? correct;
@@ -31,8 +34,76 @@ class Answer {
     );
   }
 
-  static Future<int> insert(Answer answer) async {
+  static Future<int?> insert(String exerciseType, String name) async {
+    final exerciseId = await Exercise.getIDByType(exerciseType);
+    if (exerciseId == null) {
+      return null;
+    }
+
     final db = await StatsDatabase().database;
-    return await db.insert('answer', answer.toMap());
+    return await db.rawInsert('''
+      INSERT INTO $_table (exercise_id, name)
+      VALUES (?, ?)''',
+      [exerciseId, name]);
+  }
+
+  static Future<Answer?> getAnswer(String exerciseType, String name) async {
+    final exerciseId = await Exercise.getIDByType(exerciseType);
+    if (exerciseId == null) {
+      return null;
+    }
+
+    final db = await StatsDatabase().database;
+    final result = await db.rawQuery('''
+      SELECT *
+      FROM $_table
+      WHERE exercise_id=? AND name=?''',
+      [exerciseId, name]);
+    if (result.isEmpty) {
+      return null;
+    }
+    return Answer.fromMap(result.first);
+  }
+
+  static Future<int?> updateStats(String exerciseType, String name, bool correct) async {
+    // Create answer row if it doesn't exist
+    final answer = await getAnswer(exerciseType, name);
+    if (answer == null) {
+      await insert(exerciseType, name);
+    }
+
+    final exerciseId = await Exercise.getIDByType(exerciseType);
+    if (exerciseId == null) {
+      return null;
+    }
+
+    final db = await StatsDatabase().database;
+    final col = correct ? "correct" : "incorrect";
+    return await db.rawUpdate('''
+      UPDATE $_table
+      SET $col = $col + 1
+      WHERE exercise_id=? AND name=?''',
+      [exerciseId, name]);
+  }
+
+  // Return a list of the top-n most missed answers
+  static Future<List<Answer>> getMostMissed(String exerciseType, int n) async {
+    final exerciseId = await Exercise.getIDByType(exerciseType);
+    if (exerciseId == null) {
+      return [];
+    }
+
+    final db = await StatsDatabase().database;
+    final result = await db.rawQuery('''
+      SELECT *
+      FROM answer
+      WHERE exercise_id=? AND incorrect>0
+      ORDER BY incorrect DESC
+      LIMIT ?''', [exerciseId, n]);
+    if (result.isEmpty) {
+      return [];
+    }
+
+    return result.map((row) => fromMap(row)).toList();
   }
 }
