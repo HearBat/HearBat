@@ -3,9 +3,6 @@
 // need this for AppLocale.title.getString(context) and I dont want to import 2 files everywhere we need to translate
 export 'package:flutter_localization/flutter_localization.dart';
 
-
-
-
 // for the formatting it would be nice if we could have some standard format maybe
 // {page}{some identifier} or {widget}{some identifier}
 // just so we kind of know what it is off a first look, and let's try to keep translations together based on where theyre being used
@@ -404,192 +401,143 @@ mixin AppLocale {
   };
 
   static const Map<String, dynamic> VI = {
-    // Home Page
-    homePageTitle: 'VIHearBat',
-    homePageSubtitle: 'your hearing companion',
-    homePageWordsTitle: 'Train Words',
-    homePageSoundsTitle: 'Train Sounds',
-    homePageSpeechTitle: 'Train Speech',
-    homePageMusicTitle: 'Train Music',
-    homePageCustomTitle: 'Custom Module Builder',
-    homePageWordsDesc: 'Sharpen your listening with an extensive collection of diverse words',
-    homePageSoundsDesc: 'Discover and recognize a wide range of sounds, from urban buzz to tranquil nature',
-    homePageSpeechDesc: 'Refine your listening by hearing sentences and repeating them back',
-    homePageMusicDesc: 'Tune your ear to musical patterns and pitch variations, mastering melody and tone recognition',
-    homePageCustomDesc: 'Personalize your auditory learning by creating your own modules',
-
-    // Navigation Bar
-    navBarHome: 'Home',
-    navBarInsights: 'Insights',
-    navBarProfile: 'Profile',
-
-    // Sound Adjustments Page
-    soundAdjustPageReady: 'Ready',
-    soundAdjustPageSoundCheck: 'Sound Check!\n',
-    soundAdjustPagePleaseAdjust: 'Please adjust your \nsound settings',
-
-    // Settings Page
-    settingsPageTitle: 'SETTINGS',
-    settingsPageLanguageTitle: 'Language',
-    settingsPageLanguageEnglish: 'English',
-    settingsPageLanguageVietnamese: 'Test Language Switched (on)',
-
-    settingsPageFeedbackTitle: 'Feedback Sound',
-    settingsPageFeedbackOn: 'On',
-    settingsPageFeedbackOff: 'Off',
-
-    settingsPageVoiceTitle: 'Voice Select',
-    settingsPageVoiceUSFemale: 'American Female',
-    settingsPageVoiceUSMale: 'American Male',
-    settingsPageVoiceUKFemale: 'English Female',
-    settingsPageVoiceUKMale: 'English Male',
-    settingsPageVoiceINFemale: 'Indian Female',
-    settingsPageVoiceINMale: 'Indian Male',
-    settingsPageVoiceAUFemale: 'Australian Female',
-    settingsPageVoiceAUMale: 'Australian Male',
-
-    settingsPageClearCache: 'CLEAR CACHE',
-
-    // Difficulty Selection Page
-    selectionPageDifficultyTitle: 'Difficulty',
-    selectionPageDifficultySubtitle: 'By completing modules, you can unlock difficulty levels',
-    selectionPageDifficultyNormal: 'Normal',
-    selectionPageDifficultyHard: 'Hard',
-
-    selectionPageVoiceTitle: 'Voice Type',
-    selectionPageVoiceSubtitle: 'Random swaps between male and female',
-    selectionPageVoiceFemale: 'Female',
-    selectionPageVoiceMale: 'Male',
-    selectionPageVoiceRandom: 'Random',
-
-    selectionPageBackgroundTitle: 'Background Noise',
-    selectionPageBackgroundSubtitle: 'Background noises to add an extra challenge',
-    selectionPageBackgroundNone: 'None',
-    selectionPageBackgroundRain: 'Rain',
-    selectionPageBackgroundCoffee: 'Coffee Shop',
-
-    selectionPageIntensityTitle: 'Noise Intensity',
-    selectionPageIntensitySubtitle: 'Choose the intensity of background noises',
-    selectionPageIntensityLow: 'Low',
-    selectionPageIntensityMedium: 'Medium',
-    selectionPageIntensityHigh: 'High',
-
-    selectionPageStart: 'START EXERCISE',
-
-    // Insights Page
-    insightsPageTitle: 'INSIGHTS',
-    insightsPageToday: 'Today',
-    insightsPageTimePracticed: 'Time practiced',
-    insightsPageMinuteAbbr: 'm',
-    insightsPageDailyGoal: 'of daily goal achieved',
-    insightsPageSpeechAccuracy: 'Speech Accuracy',
-    insightsPageNoiseChallenge: 'Noise Challenge',
-    insightsPageMissedWords: 'View Most Missed Words',
-    insightsPageMissedSounds: 'View Most Missed Sounds',
-    insightsPageSpeechOvertime: 'Speech Overtime',
-
-    // Missed Words Page
-    missedWordsPageMostMissedWords: 'Most Missed Words',
-
-    // Missed Sounds Page
-    missedSoundsPageMostMissedSounds: 'Most Missed Sounds',
-
-    // Word Chapters Page
-    wordChaptersPageTitle: 'WORD',
-
-    // Sound Chapters Page
-    soundChaptersPageTitle: 'SOUND',
-
-    // Speech Chapters Page
-    speechChaptersPageTitle: 'SPEECH',
-
-    // Music Chapters Page
-    musicChaptersPageTitle: 'MUSIC',
-
-    // Custom Modules Page
-    customModulesPageTitle: 'Custom Module Builder',
-    customModulesPageCreate: 'Create Module',
-    customModulesPageStart: 'START',
-
-    // Check Button Widget
-    checkButtonWidgetCheck: 'CHECK',
-
-    // Four Answer Widget
-    fourAnswerWidgetPrompt: 'What do you hear?',
-
-    // Module Widget
-    moduleWidgetWordsMissed: 'Words Missed',
-
-    // Pitch Resolution Widget
-    pitchResolutionWidgetSoundsMissed: 'Sounds Missed',
-    pitchResolutionWidgetGreatJob: 'No sounds missed! Great job!',
-    pitchResolutionWidgetSemitones: 'Semitones',
-    pitchResolutionWidgetPrompt: 'Is the second note higher or lower?',
-    pitchResolutionWidgetHigher: 'Higher',
-    pitchResolutionWidgetLower: 'Lower',
-
-    // Speech Module Widget
-    speechModuleWidgetFailedTranscription: 'Could not transcribe audio.',
-    speechModuleWidgetPrompt: 'Repeat back what you hear!',
-    speechModuleWidgetPlayAudio: 'Play',
-    speechModuleWidgetStopRecording: 'Stop Recording',
-    speechModuleWidgetStartRecording: 'Start Recording',
-    speechModuleWidgetWhatYouSaid: 'What you said:',
-    speechModuleWidgetOriginal: 'Original:',
-    speechModuleWidgetAccuracy: 'Accuracy:',
-    speechModuleWidgetAverage: 'Average Accuracy',
-    speechModuleWidgetHighestAverage: 'Highest Average Accuracy',
-
-    // Alternating Path Layout Widget
-    alternatingPathViewChapterWords: 'View Chapter Words',
-
-    // Animated Button Widget
-    animatedButtonWidgetExercise: 'Exercise',
-    animatedButtonWidgetChapterName: 'Chapter Name:',
-    animatedButtonWidgetCancel: 'Cancel',
-    animatedButtonWidgetStart: 'Start',
-
-    // Module Card Widget
-    moduleCardWidgetHearWords: 'HEAR WORDS',
-
-    // Edit Custom Module
-    editCustomModuleMaximumOf: 'Maximum of',
-    editCustomModuleGroupsAllowed: 'groups allowed',
-    editCustomModuleDeleteModule: 'Delete Module',
-    editCustomModuleDeleteModuleWarning: 'This is the last answer group. Deleting it will remove the entire module. Continue?',
-    editCustomModuleDeleteGroup: 'Delete Group',
-    editCustomModuleDeleteGroupWarning: 'Are you sure you want to delete this answer group?',
-    editCustomModuleGroupDeleted: 'Group deleted (unsaved)',
-    editCustomModuleDelete: 'Delete',
-    editCustomModuleGenerationFailed: 'Could not generate enough related words for group',
-    editCustomModuleGenerationError: 'Error generating words for group',
-    editCustomModuleSavedSuccessfully: 'Module saved successfully',
-    editCustomModuleNoValidGroups: 'No valid answer groups to save. Please add at least one word.',
-    editCustomModuleDiscardChanges: 'Discard Changes?',
-    editCustomModuleUnsavedChangesWarning: 'You have unsaved changes.\nAre you sure you want to exit?',
-    editCustomModuleKeepEditing: 'KEEP EDITING',
-    editCustomModuleDiscard: 'DISCARD',
-    editCustomModuleNoGroupsFound: 'No answer groups found for this module',
-    editCustomModuleAddSet: 'Add Set',
-    editCustomModuleSave: 'SAVE',
-    editCustomModuleSet: 'Set',
-
-    // General (Multi-Page)
-    generalAccentPreview: 'Hello this is how I sound',
-    generalCancel: 'CANCEL',
-    generalLoading: 'Loading...',
-    generalContinue: 'CONTINUE',
-    generalYouChose: 'You Chose',
-    generalCorrectAnswer: 'Correct Answer',
-    generalLessonComplete: 'Lesson Complete!',
-    generalScore: 'Score',
-    generalHighestScore: 'Highest Score',
-    generalCorrect: 'Correct',
-    generalIncorrect: 'Incorrect',
-    generalGreat: 'Great'
+    homePageTitle: 'NgheBat',
+    homePageSubtitle: 'người bạn đồng hành thính giác của bạn',
+    homePageWordsTitle: 'Từ vựng về tàu hỏa',
+    homePageSoundsTitle: 'Âm thanh tàu hỏa',
+    homePageSpeechTitle: 'Bài phát biểu về tàu hỏa',
+    homePageMusicTitle: 'Âm nhạc tàu hỏa',
+    homePageCustomTitle: 'Trình xây dựng mô-đun tùy chỉnh',
+    homePageWordsDesc: 'Làm sắc nét khả năng nghe của bạn với bộ sưu tập từ vựng đa dạng',
+    homePageSoundsDesc: 'Khám phá và nhận biết nhiều loại âm thanh, từ tiếng ồn đô thị đến tiếng động của thiên nhiên yên tĩnh',
+    homePageSpeechDesc: 'Cải thiện khả năng nghe của bạn bằng cách nghe các câu và lặp lại chúng',
+    homePageMusicDesc: 'Điều chỉnh tai của bạn theo các mẫu nhạc và các biến thể cao độ, nắm vững giai điệu và nhận dạng âm điệu',
+    homePageCustomDesc: 'Cá nhân hóa việc học thính giác của bạn bằng cách tạo các mô-đun của riêng bạn',
+    navBarHome: 'Trang chủ',
+    navBarInsights: 'Thông tin chi tiết',
+    navBarProfile: 'Hồ sơ',
+    soundAdjustPageReady: 'Sẵn sàng',
+    soundAdjustPageSoundCheck: 'Kiểm tra âm thanh!\n',
+    soundAdjustPagePleaseAdjust: 'Điều chỉnh âm lượng cho đến khi bạn có thể thoải mái nghe nhạc',
+    settingsPageTitle: 'CÀI ĐẶT',
+    settingsPageLanguageTitle: 'Ngôn ngữ',
+    settingsPageLanguageEnglish: 'Tiếng Anh',
+    settingsPageLanguageVietnamese: 'Kiểm tra ngôn ngữ chuyển đổi (tắt)',
+    settingsPageFeedbackTitle: 'Phản hồi âm thanh',
+    settingsPageFeedbackOn: 'TRÊN',
+    settingsPageFeedbackOff: 'Tắt',
+    settingsPageVoiceTitle: 'Chọn giọng nói',
+    settingsPageVoiceUSFemale: 'Nữ Mỹ',
+    settingsPageVoiceUSMale: 'Nam Mỹ',
+    settingsPageVoiceUKFemale: 'Tiếng Anh Nữ',
+    settingsPageVoiceUKMale: 'Tiếng Anh Nam',
+    settingsPageVoiceINFemale: 'Nữ Ấn Độ',
+    settingsPageVoiceINMale: 'Nam Ấn Độ',
+    settingsPageVoiceAUFemale: 'Nữ Úc',
+    settingsPageVoiceAUMale: 'Nam Úc',
+    settingsPageClearCache: 'XÓA BỘ NHỚ CACHE',
+    selectionPageDifficultyTitle: 'Khó khăn',
+    selectionPageDifficultySubtitle: 'Bằng cách hoàn thành các mô-đun, bạn có thể mở khóa các cấp độ khó',
+    selectionPageDifficultyNormal: 'Bình thường',
+    selectionPageDifficultyHard: 'Cứng',
+    selectionPageVoiceTitle: 'Kiểu giọng nói',
+    selectionPageVoiceSubtitle: 'Sự hoán đổi ngẫu nhiên giữa nam và nữ',
+    selectionPageVoiceFemale: 'Nữ giới',
+    selectionPageVoiceMale: 'Nam giới',
+    selectionPageVoiceRandom: 'Ngẫu nhiên',
+    selectionPageBackgroundTitle: 'Tiếng ồn nền',
+    selectionPageBackgroundSubtitle: 'Tiếng ồn nền để tăng thêm thử thách',
+    selectionPageBackgroundNone: 'Không có',
+    selectionPageBackgroundRain: 'Cơn mưa',
+    selectionPageBackgroundCoffee: 'Quán cà phê',
+    selectionPageIntensityTitle: 'Cường độ tiếng ồn',
+    selectionPageIntensitySubtitle: 'Chọn cường độ tiếng ồn nền',
+    selectionPageIntensityLow: 'Thấp',
+    selectionPageIntensityMedium: 'Trung bình',
+    selectionPageIntensityHigh: 'Cao',
+    selectionPageStart: 'BẮT ĐẦU BÀI TẬP',
+    insightsPageTitle: 'THÔNG TIN CHI TIẾT',
+    insightsPageToday: 'Hôm nay',
+    insightsPageTimePracticed: 'Thời gian thực hành',
+    insightsPageMinuteAbbr: 'tôi',
+    insightsPageDailyGoal: 'của mục tiêu hàng ngày đạt được',
+    insightsPageSpeechAccuracy: 'Độ chính xác của giọng nói',
+    insightsPageNoiseChallenge: 'Thử thách tiếng ồn',
+    insightsPageMissedWords: 'Xem những từ bị bỏ lỡ nhiều nhất',
+    insightsPageMissedSounds: 'Xem những âm thanh bị bỏ lỡ nhiều nhất',
+    insightsPageSpeechOvertime: 'Bài phát biểu ngoài giờ',
+    missedWordsPageMostMissedWords: 'Những từ bị bỏ lỡ nhiều nhất',
+    missedSoundsPageMostMissedSounds: 'Âm thanh bị bỏ lỡ nhiều nhất',
+    wordChaptersPageTitle: 'TỪ',
+    soundChaptersPageTitle: 'ÂM THANH',
+    speechChaptersPageTitle: 'LỜI NÓI',
+    musicChaptersPageTitle: 'ÂM NHẠC',
+    customModulesPageTitle: 'Trình xây dựng mô-đun tùy chỉnh',
+    customModulesPageCreate: 'Tạo Module',
+    customModulesPageStart: 'BẮT ĐẦU',
+    checkButtonWidgetCheck: 'KIỂM TRA',
+    fourAnswerWidgetPrompt: 'Bạn nghe thấy gì?',
+    moduleWidgetWordsMissed: 'Từ bị bỏ lỡ',
+    pitchResolutionWidgetSoundsMissed: 'Âm thanh bị bỏ lỡ',
+    pitchResolutionWidgetGreatJob: 'Không có âm thanh nào bị bỏ sót! Làm tốt lắm!',
+    pitchResolutionWidgetSemitones: 'Nửa cung',
+    pitchResolutionWidgetPrompt: 'Nốt thứ hai cao hơn hay thấp hơn?',
+    pitchResolutionWidgetHigher: 'Cao hơn',
+    pitchResolutionWidgetLower: 'Thấp hơn',
+    speechModuleWidgetFailedTranscription: 'Không thể phiên âm âm thanh.',
+    speechModuleWidgetPrompt: 'Lặp lại những gì bạn nghe được!',
+    speechModuleWidgetPlayAudio: 'Chơi',
+    speechModuleWidgetStopRecording: 'Dừng ghi âm',
+    speechModuleWidgetStartRecording: 'Bắt đầu ghi âm',
+    speechModuleWidgetWhatYouSaid: 'Bạn đã nói gì:',
+    speechModuleWidgetOriginal: 'Nguyên bản:',
+    speechModuleWidgetAccuracy: 'Sự chính xác:',
+    speechModuleWidgetAverage: 'Độ chính xác trung bình',
+    speechModuleWidgetHighestAverage: 'Độ chính xác trung bình cao nhất',
+    alternatingPathViewChapterWords: 'Xem chương từ',
+    animatedButtonWidgetExercise: 'Bài tập',
+    animatedButtonWidgetChapterName: 'Tên chương:',
+    animatedButtonWidgetCancel: 'Hủy bỏ',
+    animatedButtonWidgetStart: 'Bắt đầu',
+    moduleCardWidgetHearWords: 'NGHE TỪ',
+    editCustomModuleMaximumOf: 'Tối đa của',
+    editCustomModuleGroupsAllowed: 'nhóm được phép',
+    editCustomModuleDeleteModule: 'Xóa Mô-đun',
+    editCustomModuleDeleteModuleWarning: 'Đây là nhóm câu trả lời cuối cùng. Xóa nhóm này sẽ xóa toàn bộ mô-đun. Tiếp tục?',
+    editCustomModuleDeleteGroup: 'Xóa nhóm',
+    editCustomModuleDeleteGroupWarning: 'Bạn có chắc chắn muốn xóa nhóm câu trả lời này không?',
+    editCustomModuleGroupDeleted: 'Nhóm đã xóa (chưa lưu)',
+    editCustomModuleDelete: 'Xóa bỏ',
+    editCustomModuleGenerationFailed: 'Không thể tạo đủ từ liên quan cho nhóm',
+    editCustomModuleGenerationError: 'Lỗi khi tạo từ cho nhóm',
+    editCustomModuleSavedSuccessfully: 'Mô-đun đã được lưu thành công',
+    editCustomModuleNoValidGroups: 'Không có nhóm câu trả lời hợp lệ nào để lưu. Vui lòng thêm ít nhất một từ.',
+    editCustomModuleDiscardChanges: 'Hủy bỏ thay đổi?',
+    editCustomModuleUnsavedChangesWarning: 'Bạn chưa lưu thay đổi.\nBạn có chắc chắn muốn thoát không?',
+    editCustomModuleKeepEditing: 'TIẾP TỤC CHỈNH SỬA',
+    editCustomModuleDiscard: 'BỎ QUA',
+    editCustomModuleNoGroupsFound: 'Không tìm thấy nhóm câu trả lời nào cho mô-đun này',
+    editCustomModuleAddSet: 'Thêm Bộ',
+    editCustomModuleSave: 'CỨU',
+    editCustomModuleSet: 'Bộ',
+    customUtilAlreadyExists: 'Các mô-đun đã tồn tại',
+    customUtilReturnToModule: 'Quay lại Mô-đun',
+    customUtilOverwrite: 'Ghi đè',
+    customUtilTitle: 'Người tạo mô-đun',
+    customUtilEntryPrompt: 'Nhập từ bạn muốn!',
+    customUtilModuleName: 'Tên mô-đun',
+    customUtilSaveModule: 'Lưu Mô-đun',
+    generalAccentPreview: 'Xin chào, đây là cách tôi nói',
+    generalCancel: 'HỦY BỎ',
+    generalLoading: 'Đang tải...',
+    generalContinue: 'TIẾP TỤC',
+    generalYouChose: 'Bạn đã chọn',
+    generalCorrectAnswer: 'Câu trả lời đúng',
+    generalLessonComplete: 'Bài học đã hoàn tất!',
+    generalScore: 'Điểm',
+    generalHighestScore: 'Điểm cao nhất',
+    generalCorrect: 'Chính xác',
+    generalIncorrect: 'Không đúng',
+    generalGreat: 'Tuyệt'
   };
-
-  // idk some examples of other langs from the package readme
-  static const Map<String, dynamic> KM = {homePageWordsTitle: 'ការធ្វើមូលដ្ឋានីយកម្ម'};
-  static const Map<String, dynamic> JA = {homePageWordsTitle: 'ローカリゼーション'};
 }
