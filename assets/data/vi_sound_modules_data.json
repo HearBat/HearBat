@@ -1,31 +1,31 @@
 {
   "chapters": [
     {
-      "name": "Home Sounds",
+      "name": "Trang chủ Âm thanh",
       "image": "assets/visuals/HBSoundChapterOne.png",
       "modules": [
         {
-          "name": "Module 1",
+          "name": "Mô-đun 1",
           "answerGroups": [
             {
               "answers": [
                 {
-                  "answer": "Door Close",
+                  "answer": "Cửa đóng lại",
                   "path": "audio/sounds/home/door close.mp3",
                   "image": "assets/visuals/home/door close emoji.png"
                 },
                 {
-                  "answer": "Kettle Whistling",
+                  "answer": "Tiếng còi ấm đun nước",
                   "path": "audio/sounds/home/kettle whistling.mp3",
                   "image": "assets/visuals/home/kettle whistling.png"
                 },
                 {
-                  "answer": "Cat Meow",
+                  "answer": "Tiếng mèo kêu",
                   "path": "audio/sounds/home/cat meow.mp3",
                   "image": "assets/visuals/home/cat meow.png"
                 },
                 {
-                  "answer": "Printer",
+                  "answer": "Máy in",
                   "path": "audio/sounds/home/printer.mp3",
                   "image": "assets/visuals/home/printer emoji.png"
                 }
@@ -34,22 +34,22 @@
             {
               "answers": [
                 {
-                  "answer": "Toilet Flush",
+                  "answer": "Xả bồn cầu",
                   "path": "audio/sounds/home/toilet flush.mp3",
                   "image": "assets/visuals/home/toilet flush.png"
                 },
                 {
-                  "answer": "Wind Chimes",
+                  "answer": "Chuông gió",
                   "path": "audio/sounds/home/wind chimes.mp3",
                   "image": "assets/visuals/home/wind chimes.png"
                 },
                 {
-                  "answer": "Telephone Ringing",
+                  "answer": "Chuông điện thoại",
                   "path": "audio/sounds/home/telephone ringing.mp3",
                   "image": "assets/visuals/home/telephone.png"
                 },
                 {
-                  "answer": "Vacuum",
+                  "answer": "Chân không",
                   "path": "audio/sounds/home/vacuum.mp3",
                   "image": "assets/visuals/home/vacuum.png"
                 }
@@ -58,22 +58,22 @@
             {
               "answers": [
                 {
-                  "answer": "Dog Bark",
+                  "answer": "Tiếng chó sủa",
                   "path": "audio/sounds/home/dog bark.mp3",
                   "image": "assets/visuals/home/dog bark.png"
                 },
                 {
-                  "answer": "Microwave",
+                  "answer": "Lò vi sóng",
                   "path": "audio/sounds/home/microwave.mp3",
                   "image": "assets/visuals/home/microwave.png"
                 },
                 {
-                  "answer": "Pencil Writing",
+                  "answer": "Viết bằng bút chì",
                   "path": "audio/sounds/home/pencil writing.mp3",
                   "image": "assets/visuals/home/pencil writing.png"
                 },
                 {
-                  "answer": "Clock Ticking",
+                  "answer": "Đồng hồ tích tắc",
                   "path": "audio/sounds/home/clock ticking.mp3",
                   "image": "assets/visuals/home/clock ticking.png"
                 }
@@ -82,22 +82,22 @@
             {
               "answers": [
                 {
-                  "answer": "Alarm Clock Beep",
+                  "answer": "Tiếng bíp của đồng hồ báo thức",
                   "path": "audio/sounds/home/alarm clock beep.mp3",
                   "image": "assets/visuals/home/alarm clock.png"
                 },
                 {
-                  "answer": "Garbage Disposal",
+                  "answer": "Xử lý rác thải",
                   "path": "audio/sounds/home/garbage disposal.mp3",
                   "image": "assets/visuals/home/garbage disposal.png"
                 },
                 {
-                  "answer": "Doorbell",
+                  "answer": "Chuông cửa",
                   "path": "audio/sounds/home/doorbell.mp3",
                   "image": "assets/visuals/home/doorbell emoji.png"
                 },
                 {
-                  "answer": "Washing Machine",
+                  "answer": "Máy giặt",
                   "path": "audio/sounds/home/washing machine.mp3",
                   "image": "assets/visuals/home/washing machine.png"
                 }
@@ -106,22 +106,22 @@
             {
               "answers": [
                 {
-                  "answer": "Computer Keyboard Clicking",
+                  "answer": "Tiếng nhấp chuột của bàn phím máy tính",
                   "path": "audio/sounds/home/computer keyboard clicking.mp3",
                   "image": "assets/visuals/home/keyboard.png"
                 },
                 {
-                  "answer": "Shower Curtains",
+                  "answer": "Rèm tắm",
                   "path": "audio/sounds/home/shower curtains.mp3",
                   "image": "assets/visuals/home/shower curtains.png"
                 },
                 {
-                  "answer": "Knife Sharpen",
+                  "answer": "Mài dao",
                   "path": "audio/sounds/home/knife sharpen.mp3",
                   "image": "assets/visuals/home/knife sharpening.png"
                 },
                 {
-                  "answer": "Ice Dispenser",
+                  "answer": "Máy làm đá",
                   "path": "audio/sounds/home/ice dispenser.mp3",
                   "image": "assets/visuals/home/ice dispenser.png"
                 }
@@ -130,22 +130,22 @@
             {
               "answers": [
                 {
-                  "answer": "Electric Shaver",
+                  "answer": "Máy cạo râu điện",
                   "path": "audio/sounds/home/electric shaver.mp3",
                   "image": "assets/visuals/home/electric shaver.png"
                 },
                 {
-                  "answer": "Cutting Paper",
+                  "answer": "Cắt giấy",
                   "path": "audio/sounds/home/cutting paper.mp3",
                   "image": "assets/visuals/home/cutting paper emoji.png"
                 },
                 {
-                  "answer": "Book Page Flipping",
+                  "answer": "Lật trang sách",
                   "path": "audio/sounds/home/book page flipping.mp3",
                   "image": "assets/visuals/home/book page flipping.png"
                 },
                 {
-                  "answer": "Mouse Click",
+                  "answer": "Nhấp chuột",
                   "path": "audio/sounds/home/mouse click.mp3",
                   "image": "assets/visuals/home/mouse click.png"
                 }
@@ -154,22 +154,22 @@
             {
               "answers": [
                 {
-                  "answer": "Toothbrush Brushing",
+                  "answer": "Đánh răng bằng bàn chải",
                   "path": "audio/sounds/home/toothbrush brushing.mp3",
                   "image": "assets/visuals/home/toothbrush brushing.png"
                 },
                 {
-                  "answer": "Telephone Ringing",
+                  "answer": "Chuông điện thoại",
                   "path": "audio/sounds/home/telephone ringing.mp3",
                   "image": "assets/visuals/home/telephone.png"
                 },
                 {
-                  "answer": "Dog Bark",
+                  "answer": "Tiếng chó sủa",
                   "path": "audio/sounds/home/dog bark.mp3",
                   "image": "assets/visuals/home/dog bark.png"
                 },
                 {
-                  "answer": "Printer",
+                  "answer": "Máy in",
                   "path": "audio/sounds/home/printer.mp3",
                   "image": "assets/visuals/home/printer emoji.png"
                 }
@@ -178,22 +178,22 @@
             {
               "answers": [
                 {
-                  "answer": "Door Close",
+                  "answer": "Cửa đóng lại",
                   "path": "audio/sounds/home/door close.mp3",
                   "image": "assets/visuals/home/door close emoji.png"
                 },
                 {
-                  "answer": "Kettle Whistling",
+                  "answer": "Tiếng còi ấm đun nước",
                   "path": "audio/sounds/home/kettle whistling.mp3",
                   "image": "assets/visuals/home/kettle whistling.png"
                 },
                 {
-                  "answer": "Alarm Clock Beep",
+                  "answer": "Tiếng bíp của đồng hồ báo thức",
                   "path": "audio/sounds/home/alarm clock beep.mp3",
                   "image": "assets/visuals/home/alarm clock.png"
                 },
                 {
-                  "answer": "Wind Chimes",
+                  "answer": "Chuông gió",
                   "path": "audio/sounds/home/wind chimes.mp3",
                   "image": "assets/visuals/home/wind chimes.png"
                 }
@@ -202,22 +202,22 @@
             {
               "answers": [
                 {
-                  "answer": "Microwave",
+                  "answer": "Lò vi sóng",
                   "path": "audio/sounds/home/microwave.mp3",
                   "image": "assets/visuals/home/microwave.png"
                 },
                 {
-                  "answer": "Vacuum",
+                  "answer": "Chân không",
                   "path": "audio/sounds/home/vacuum.mp3",
                   "image": "assets/visuals/home/vacuum.png"
                 },
                 {
-                  "answer": "Clock Ticking",
+                  "answer": "Đồng hồ tích tắc",
                   "path": "audio/sounds/home/clock ticking.mp3",
                   "image": "assets/visuals/home/clock ticking.png"
                 },
                 {
-                  "answer": "Pencil Writing",
+                  "answer": "Viết bằng bút chì",
                   "path": "audio/sounds/home/pencil writing.mp3",
                   "image": "assets/visuals/home/pencil writing.png"
                 }
@@ -226,24 +226,2731 @@
             {
               "answers": [
                 {
-                  "answer": "Cat Meow",
+                  "answer": "Tiếng mèo kêu",
                   "path": "audio/sounds/home/cat meow.mp3",
                   "image": "assets/visuals/home/cat meow.png"
                 },
                 {
-                  "answer": "Garbage Disposal",
+                  "answer": "Xử lý rác thải",
                   "path": "audio/sounds/home/garbage disposal.mp3",
                   "image": "assets/visuals/home/garbage disposal.png"
                 },
                 {
-                  "answer": "Washing Machine",
+                  "answer": "Máy giặt",
                   "path": "audio/sounds/home/washing machine.mp3",
                   "image": "assets/visuals/home/washing machine.png"
                 },
                 {
-                  "answer": "Computer Keyboard Clicking",
+                  "answer": "Tiếng nhấp chuột của bàn phím máy tính",
                   "path": "audio/sounds/home/computer keyboard clicking.mp3",
                   "image": "assets/visuals/home/keyboard.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 2",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Xả bồn cầu",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                },
+                {
+                  "answer": "Máy làm đá",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                },
+                {
+                  "answer": "Mài dao",
+                  "path": "audio/sounds/home/knife sharpen.mp3",
+                  "image": "assets/visuals/home/knife sharpening.png"
+                },
+                {
+                  "answer": "Nhấp chuột",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chuông cửa",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Máy cạo râu điện",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                },
+                {
+                  "answer": "Chuông gió",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                },
+                {
+                  "answer": "Rèm tắm",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Lật trang sách",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                },
+                {
+                  "answer": "Đồng hồ tích tắc",
+                  "path": "audio/sounds/home/clock ticking.mp3",
+                  "image": "assets/visuals/home/clock ticking.png"
+                },
+                {
+                  "answer": "Lò vi sóng",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
+                },
+                {
+                  "answer": "Chân không",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Tiếng nhấp chuột của bàn phím máy tính",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                },
+                {
+                  "answer": "Chuông điện thoại",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Tiếng chó sủa",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Máy giặt",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Xử lý rác thải",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Tiếng bíp của đồng hồ báo thức",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                },
+                {
+                  "answer": "Viết bằng bút chì",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                },
+                {
+                  "answer": "Cửa đóng lại",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Máy in",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                },
+                {
+                  "answer": "Tiếng còi ấm đun nước",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                },
+                {
+                  "answer": "Tiếng mèo kêu",
+                  "path": "audio/sounds/home/cat meow.mp3",
+                  "image": "assets/visuals/home/cat meow.png"
+                },
+                {
+                  "answer": "Đánh răng bằng bàn chải",
+                  "path": "audio/sounds/home/toothbrush brushing.mp3",
+                  "image": "assets/visuals/home/toothbrush brushing.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cắt giấy",
+                  "path": "audio/sounds/home/cutting paper.mp3",
+                  "image": "assets/visuals/home/cutting paper emoji.png"
+                },
+                {
+                  "answer": "Máy làm đá",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                },
+                {
+                  "answer": "Nhấp chuột",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                },
+                {
+                  "answer": "Chân không",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Xả bồn cầu",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                },
+                {
+                  "answer": "Rèm tắm",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Máy cạo râu điện",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                },
+                {
+                  "answer": "Chuông gió",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chuông cửa",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Lò vi sóng",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
+                },
+                {
+                  "answer": "Mài dao",
+                  "path": "audio/sounds/home/knife sharpen.mp3",
+                  "image": "assets/visuals/home/knife sharpening.png"
+                },
+                {
+                  "answer": "Lật trang sách",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Tiếng chó sủa",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Chuông điện thoại",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Tiếng nhấp chuột của bàn phím máy tính",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                },
+                {
+                  "answer": "Xử lý rác thải",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 3",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Viết bằng bút chì",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                },
+                {
+                  "answer": "Máy in",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                },
+                {
+                  "answer": "Nhấp chuột",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                },
+                {
+                  "answer": "Tiếng nhấp chuột của bàn phím máy tính",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Xả bồn cầu",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                },
+                {
+                  "answer": "Rèm tắm",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Máy giặt",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                },
+                {
+                  "answer": "Máy làm đá",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cửa đóng lại",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                },
+                {
+                  "answer": "Chuông cửa",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Chuông điện thoại",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Tiếng bíp của đồng hồ báo thức",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Tiếng còi ấm đun nước",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                },
+                {
+                  "answer": "Chân không",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                },
+                {
+                  "answer": "Xử lý rác thải",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Lò vi sóng",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chuông gió",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                },
+                {
+                  "answer": "Đồng hồ tích tắc",
+                  "path": "audio/sounds/home/clock ticking.mp3",
+                  "image": "assets/visuals/home/clock ticking.png"
+                },
+                {
+                  "answer": "Lật trang sách",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                },
+                {
+                  "answer": "Máy cạo râu điện",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Tiếng mèo kêu",
+                  "path": "audio/sounds/home/cat meow.mp3",
+                  "image": "assets/visuals/home/cat meow.png"
+                },
+                {
+                  "answer": "Tiếng chó sủa",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Đánh răng bằng bàn chải",
+                  "path": "audio/sounds/home/toothbrush brushing.mp3",
+                  "image": "assets/visuals/home/toothbrush brushing.png"
+                },
+                {
+                  "answer": "Cắt giấy",
+                  "path": "audio/sounds/home/cutting paper.mp3",
+                  "image": "assets/visuals/home/cutting paper emoji.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Nhấp chuột",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                },
+                {
+                  "answer": "Tiếng nhấp chuột của bàn phím máy tính",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                },
+                {
+                  "answer": "Máy in",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                },
+                {
+                  "answer": "Viết bằng bút chì",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Rèm tắm",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Xả bồn cầu",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                },
+                {
+                  "answer": "Máy làm đá",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                },
+                {
+                  "answer": "Máy giặt",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chuông điện thoại",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                },
+                {
+                  "answer": "Chuông cửa",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Cửa đóng lại",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                },
+                {
+                  "answer": "Tiếng bíp của đồng hồ báo thức",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Lò vi sóng",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
+                },
+                {
+                  "answer": "Tiếng còi ấm đun nước",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                },
+                {
+                  "answer": "Chân không",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                },
+                {
+                  "answer": "Xử lý rác thải",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 4",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Máy làm đá",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                },
+                {
+                  "answer": "Chuông gió",
+                  "path": "audio/sounds/home/wind chimes.mp3",
+                  "image": "assets/visuals/home/wind chimes.png"
+                },
+                {
+                  "answer": "Máy cạo râu điện",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                },
+                {
+                  "answer": "Xả bồn cầu",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Rèm tắm",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Tiếng chó sủa",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Chuông cửa",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Viết bằng bút chì",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Máy giặt",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                },
+                {
+                  "answer": "Xử lý rác thải",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Tiếng mèo kêu",
+                  "path": "audio/sounds/home/cat meow.mp3",
+                  "image": "assets/visuals/home/cat meow.png"
+                },
+                {
+                  "answer": "Nhấp chuột",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Máy in",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                },
+                {
+                  "answer": "Chân không",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                },
+                {
+                  "answer": "Lật trang sách",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                },
+                {
+                  "answer": "Lò vi sóng",
+                  "path": "audio/sounds/home/microwave.mp3",
+                  "image": "assets/visuals/home/microwave.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Mài dao",
+                  "path": "audio/sounds/home/knife sharpen.mp3",
+                  "image": "assets/visuals/home/knife sharpening.png"
+                },
+                {
+                  "answer": "Tiếng nhấp chuột của bàn phím máy tính",
+                  "path": "audio/sounds/home/computer keyboard clicking.mp3",
+                  "image": "assets/visuals/home/keyboard.png"
+                },
+                {
+                  "answer": "Tiếng bíp của đồng hồ báo thức",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                },
+                {
+                  "answer": "Chuông điện thoại",
+                  "path": "audio/sounds/home/telephone ringing.mp3",
+                  "image": "assets/visuals/home/telephone.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đồng hồ tích tắc",
+                  "path": "audio/sounds/home/clock ticking.mp3",
+                  "image": "assets/visuals/home/clock ticking.png"
+                },
+                {
+                  "answer": "Cắt giấy",
+                  "path": "audio/sounds/home/cutting paper.mp3",
+                  "image": "assets/visuals/home/cutting paper emoji.png"
+                },
+                {
+                  "answer": "Cửa đóng lại",
+                  "path": "audio/sounds/home/door close.mp3",
+                  "image": "assets/visuals/home/door close emoji.png"
+                },
+                {
+                  "answer": "Tiếng còi ấm đun nước",
+                  "path": "audio/sounds/home/kettle whistling.mp3",
+                  "image": "assets/visuals/home/kettle whistling.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đánh răng bằng bàn chải",
+                  "path": "audio/sounds/home/toothbrush brushing.mp3",
+                  "image": "assets/visuals/home/toothbrush brushing.png"
+                },
+                {
+                  "answer": "Rèm tắm",
+                  "path": "audio/sounds/home/shower curtains.mp3",
+                  "image": "assets/visuals/home/shower curtains.png"
+                },
+                {
+                  "answer": "Máy làm đá",
+                  "path": "audio/sounds/home/ice dispenser.mp3",
+                  "image": "assets/visuals/home/ice dispenser.png"
+                },
+                {
+                  "answer": "Nhấp chuột",
+                  "path": "audio/sounds/home/mouse click.mp3",
+                  "image": "assets/visuals/home/mouse click.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Máy giặt",
+                  "path": "audio/sounds/home/washing machine.mp3",
+                  "image": "assets/visuals/home/washing machine.png"
+                },
+                {
+                  "answer": "Chân không",
+                  "path": "audio/sounds/home/vacuum.mp3",
+                  "image": "assets/visuals/home/vacuum.png"
+                },
+                {
+                  "answer": "Xử lý rác thải",
+                  "path": "audio/sounds/home/garbage disposal.mp3",
+                  "image": "assets/visuals/home/garbage disposal.png"
+                },
+                {
+                  "answer": "Máy cạo râu điện",
+                  "path": "audio/sounds/home/electric shaver.mp3",
+                  "image": "assets/visuals/home/electric shaver.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chuông cửa",
+                  "path": "audio/sounds/home/doorbell.mp3",
+                  "image": "assets/visuals/home/doorbell emoji.png"
+                },
+                {
+                  "answer": "Tiếng bíp của đồng hồ báo thức",
+                  "path": "audio/sounds/home/alarm clock beep.mp3",
+                  "image": "assets/visuals/home/alarm clock.png"
+                },
+                {
+                  "answer": "Tiếng chó sủa",
+                  "path": "audio/sounds/home/dog bark.mp3",
+                  "image": "assets/visuals/home/dog bark.png"
+                },
+                {
+                  "answer": "Xả bồn cầu",
+                  "path": "audio/sounds/home/toilet flush.mp3",
+                  "image": "assets/visuals/home/toilet flush.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Viết bằng bút chì",
+                  "path": "audio/sounds/home/pencil writing.mp3",
+                  "image": "assets/visuals/home/pencil writing.png"
+                },
+                {
+                  "answer": "Máy in",
+                  "path": "audio/sounds/home/printer.mp3",
+                  "image": "assets/visuals/home/printer emoji.png"
+                },
+                {
+                  "answer": "Cắt giấy",
+                  "path": "audio/sounds/home/cutting paper.mp3",
+                  "image": "assets/visuals/home/cutting paper emoji.png"
+                },
+                {
+                  "answer": "Lật trang sách",
+                  "path": "audio/sounds/home/book page flipping.mp3",
+                  "image": "assets/visuals/home/book page flipping.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Âm thanh âm nhạc",
+      "image": "assets/visuals/HBSoundChapterTwo.png",
+      "modules": [
+        {
+          "name": "Mô-đun 1",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Đàn piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "Đàn vĩ cầm",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                },
+                {
+                  "answer": "Trống",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                },
+                {
+                  "answer": "Sáo",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn Guitar Acoustic",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Kèn saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Trống Bongo",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Đàn hạc",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Kèn Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Đàn Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Kèn Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                },
+                {
+                  "answer": "Đàn accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn violoncello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                },
+                {
+                  "answer": "Đàn ghita điện",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Đàn Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                },
+                {
+                  "answer": "Kèn Cor Pháp",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                },
+                {
+                  "answer": "Kèn trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                },
+                {
+                  "answer": "Trống Conga",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                },
+                {
+                  "answer": "Đàn mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Máy ghi âm",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                },
+                {
+                  "answer": "Kèn ô-boa",
+                  "path": "audio/sounds/music/oboe.mp3",
+                  "image": "assets/visuals/music/oboe.png"
+                },
+                {
+                  "answer": "Harmonica",
+                  "path": "audio/sounds/music/harmonica.mp3",
+                  "image": "assets/visuals/music/harmonica.png"
+                },
+                {
+                  "answer": "Tiểu cầm",
+                  "path": "audio/sounds/music/piccolo.mp3",
+                  "image": "assets/visuals/music/piccolo.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Sáo",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Trống",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                },
+                {
+                  "answer": "Đàn vĩ cầm",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                },
+                {
+                  "answer": "Đàn piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn hạc",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                },
+                {
+                  "answer": "Kèn saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Đàn Guitar Acoustic",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Trống Bongo",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Kèn Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                },
+                {
+                  "answer": "Kèn Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Đàn accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn ghita điện",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Đàn violoncello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                },
+                {
+                  "answer": "Kèn Cor Pháp",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                },
+                {
+                  "answer": "Đàn Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 2",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Đàn accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                },
+                {
+                  "answer": "Đàn vĩ cầm",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                },
+                {
+                  "answer": "Đàn ghita điện",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Trống",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn hạc",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                },
+                {
+                  "answer": "Trống Bongo",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Sáo",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Kèn trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                },
+                {
+                  "answer": "Kèn saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Kèn Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Đàn violoncello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "Đàn mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "Kèn Cor Pháp",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                },
+                {
+                  "answer": "Máy ghi âm",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Đàn Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                },
+                {
+                  "answer": "Kèn ô-boa",
+                  "path": "audio/sounds/music/oboe.mp3",
+                  "image": "assets/visuals/music/oboe.png"
+                },
+                {
+                  "answer": "Trống Conga",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn Guitar Acoustic",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Harmonica",
+                  "path": "audio/sounds/music/harmonica.mp3",
+                  "image": "assets/visuals/music/harmonica.png"
+                },
+                {
+                  "answer": "Tiểu cầm",
+                  "path": "audio/sounds/music/piccolo.mp3",
+                  "image": "assets/visuals/music/piccolo.png"
+                },
+                {
+                  "answer": "Kèn Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn vĩ cầm",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                },
+                {
+                  "answer": "Trống",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                },
+                {
+                  "answer": "Đàn accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                },
+                {
+                  "answer": "Đàn ghita điện",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Sáo",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Trống Bongo",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Đàn hạc",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                },
+                {
+                  "answer": "Kèn trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Kèn saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Đàn violoncello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                },
+                {
+                  "answer": "Đàn ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                },
+                {
+                  "answer": "Kèn Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "Máy ghi âm",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                },
+                {
+                  "answer": "Đàn piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "Kèn Cor Pháp",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 3",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Đàn Guitar Acoustic",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Đàn ghita điện",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Đàn ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                },
+                {
+                  "answer": "Đàn Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Trống",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                },
+                {
+                  "answer": "Trống Bongo",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Trống Conga",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                },
+                {
+                  "answer": "Đàn Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn vĩ cầm",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                },
+                {
+                  "answer": "Đàn violoncello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                },
+                {
+                  "answer": "Đàn mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "Đàn hạc",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Sáo",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Tiểu cầm",
+                  "path": "audio/sounds/music/piccolo.mp3",
+                  "image": "assets/visuals/music/piccolo.png"
+                },
+                {
+                  "answer": "Máy ghi âm",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                },
+                {
+                  "answer": "Kèn Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Kèn saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Kèn trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                },
+                {
+                  "answer": "Kèn Cor Pháp",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                },
+                {
+                  "answer": "Kèn Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "Đàn accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                },
+                {
+                  "answer": "Harmonica",
+                  "path": "audio/sounds/music/harmonica.mp3",
+                  "image": "assets/visuals/music/harmonica.png"
+                },
+                {
+                  "answer": "Đàn Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Kèn ô-boa",
+                  "path": "audio/sounds/music/oboe.mp3",
+                  "image": "assets/visuals/music/oboe.png"
+                },
+                {
+                  "answer": "Kèn Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Kèn saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Sáo",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Đàn mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "Đàn ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                },
+                {
+                  "answer": "Đàn Guitar Acoustic",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn ghita điện",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Đàn Guitar Acoustic",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Đàn Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Đàn ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Trống Bongo",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Trống Conga",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                },
+                {
+                  "answer": "Trống",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                },
+                {
+                  "answer": "Đàn Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 4",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Đàn mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "Đàn ghita điện",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Máy ghi âm",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                },
+                {
+                  "answer": "Trống Bongo",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Kèn Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                },
+                {
+                  "answer": "Đàn hạc",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                },
+                {
+                  "answer": "Kèn ô-boa",
+                  "path": "audio/sounds/music/oboe.mp3",
+                  "image": "assets/visuals/music/oboe.png"
+                },
+                {
+                  "answer": "Đàn vĩ cầm",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "Kèn Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Kèn saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Kèn Cor Pháp",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Sáo",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Tiểu cầm",
+                  "path": "audio/sounds/music/piccolo.mp3",
+                  "image": "assets/visuals/music/piccolo.png"
+                },
+                {
+                  "answer": "Kèn trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                },
+                {
+                  "answer": "Trống Conga",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn violoncello",
+                  "path": "audio/sounds/music/cello.mp3",
+                  "image": "assets/visuals/music/cello.png"
+                },
+                {
+                  "answer": "Đàn accordion",
+                  "path": "audio/sounds/music/accordion.mp3",
+                  "image": "assets/visuals/music/accordion.png"
+                },
+                {
+                  "answer": "Harmonica",
+                  "path": "audio/sounds/music/harmonica.mp3",
+                  "image": "assets/visuals/music/harmonica.png"
+                },
+                {
+                  "answer": "Trống",
+                  "path": "audio/sounds/music/drums.mp3",
+                  "image": "assets/visuals/music/drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                },
+                {
+                  "answer": "Đàn Banjo",
+                  "path": "audio/sounds/music/banjo.mp3",
+                  "image": "assets/visuals/music/banjo.png"
+                },
+                {
+                  "answer": "Đàn Guitar Acoustic",
+                  "path": "audio/sounds/music/acoustic guitar.mp3",
+                  "image": "assets/visuals/music/acoustic guitar.png"
+                },
+                {
+                  "answer": "Đàn ukulele",
+                  "path": "audio/sounds/music/ukelele.mp3",
+                  "image": "assets/visuals/music/ukelele.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Kèn saxophone",
+                  "path": "audio/sounds/music/saxophone.mp3",
+                  "image": "assets/visuals/music/saxophone.png"
+                },
+                {
+                  "answer": "Sáo",
+                  "path": "audio/sounds/music/flute.mp3",
+                  "image": "assets/visuals/music/flute.png"
+                },
+                {
+                  "answer": "Đàn mandolin",
+                  "path": "audio/sounds/music/mandolin.mp3",
+                  "image": "assets/visuals/music/mandolin.png"
+                },
+                {
+                  "answer": "Đàn vĩ cầm",
+                  "path": "audio/sounds/music/violin.mp3",
+                  "image": "assets/visuals/music/violin.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn piano",
+                  "path": "audio/sounds/music/piano.mp3",
+                  "image": "assets/visuals/music/piano.png"
+                },
+                {
+                  "answer": "Đàn ghita điện",
+                  "path": "audio/sounds/music/electric guitar.mp3",
+                  "image": "assets/visuals/music/electric guitar.png"
+                },
+                {
+                  "answer": "Kèn Clarinet",
+                  "path": "audio/sounds/music/clarinet.mp3",
+                  "image": "assets/visuals/music/clarinet.png"
+                },
+                {
+                  "answer": "Kèn Tuba",
+                  "path": "audio/sounds/music/tuba.mp3",
+                  "image": "assets/visuals/music/tuba.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đàn hạc",
+                  "path": "audio/sounds/music/harp.mp3",
+                  "image": "assets/visuals/music/harp.png"
+                },
+                {
+                  "answer": "Máy ghi âm",
+                  "path": "audio/sounds/music/recorder.mp3",
+                  "image": "assets/visuals/music/recorder.png"
+                },
+                {
+                  "answer": "Trống Bongo",
+                  "path": "audio/sounds/music/bongo drums.mp3",
+                  "image": "assets/visuals/music/bongo drums.png"
+                },
+                {
+                  "answer": "Trống Conga",
+                  "path": "audio/sounds/music/conga drums.mp3",
+                  "image": "assets/visuals/music/conga drums.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Kèn ô-boa",
+                  "path": "audio/sounds/music/oboe.mp3",
+                  "image": "assets/visuals/music/oboe.png"
+                },
+                {
+                  "answer": "Kèn Cor Pháp",
+                  "path": "audio/sounds/music/french horn.mp3",
+                  "image": "assets/visuals/music/frenchhorn.png"
+                },
+                {
+                  "answer": "Kèn trombone",
+                  "path": "audio/sounds/music/trombone.mp3",
+                  "image": "assets/visuals/music/trombone.png"
+                },
+                {
+                  "answer": "Đàn Xylophone",
+                  "path": "audio/sounds/music/xylophone.mp3",
+                  "image": "assets/visuals/music/xylophone.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Âm thanh thiên nhiên",
+      "image": "assets/visuals/HBSoundChapterThree.png",
+      "modules": [
+        {
+          "name": "Mô-đun 1",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Chim",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "Dòng chảy của sông",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                },
+                {
+                  "answer": "Sấm sét",
+                  "path": "audio/sounds/nature/thunder.mp3",
+                  "image": "assets/visuals/nature/thunder.png"
+                },
+                {
+                  "answer": "Con ếch",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Tiếng mèo kêu",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Con voi",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                },
+                {
+                  "answer": "Đá Bỏ Qua",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                },
+                {
+                  "answer": "Ve sầu",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Lửa trại",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                },
+                {
+                  "answer": "Dế",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                },
+                {
+                  "answer": "Tiếng cú hú",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Con vịt",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chó",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Đá rơi",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                },
+                {
+                  "answer": "Rắn",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Thổ Nhĩ Kỳ",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Con lợn",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Con cừu",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Gió",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                },
+                {
+                  "answer": "Đi bộ qua những chiếc lá",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Muỗi",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                },
+                {
+                  "answer": "Chim gõ kiến",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Cơn mưa",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Chim ưng",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Dòng chảy của sông",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                },
+                {
+                  "answer": "Chó sói đồng cỏ",
+                  "path": "audio/sounds/nature/coyote.mp3",
+                  "image": "assets/visuals/nature/coyote.png"
+                },
+                {
+                  "answer": "Chim",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "Con voi",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đá Bỏ Qua",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                },
+                {
+                  "answer": "Tiếng mèo kêu",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Con ếch",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                },
+                {
+                  "answer": "Ve sầu",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Dế",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                },
+                {
+                  "answer": "Lửa trại",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                },
+                {
+                  "answer": "Con vịt",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                },
+                {
+                  "answer": "Tiếng cú hú",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chó",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Rắn",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Thổ Nhĩ Kỳ",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                },
+                {
+                  "answer": "Đá rơi",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 2",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Con cừu",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Con lợn",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Gió",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                },
+                {
+                  "answer": "Đi bộ qua những chiếc lá",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chim gõ kiến",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Muỗi",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                },
+                {
+                  "answer": "Cơn mưa",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Chim ưng",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chim",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "Con voi",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                },
+                {
+                  "answer": "Con ếch",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                },
+                {
+                  "answer": "Dòng chảy của sông",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Ve sầu",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                },
+                {
+                  "answer": "Đá Bỏ Qua",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                },
+                {
+                  "answer": "Tiếng mèo kêu",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Chó sói đồng cỏ",
+                  "path": "audio/sounds/nature/coyote.mp3",
+                  "image": "assets/visuals/nature/coyote.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Dế",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                },
+                {
+                  "answer": "Con vịt",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                },
+                {
+                  "answer": "Tiếng cú hú",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Lửa trại",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đá rơi",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                },
+                {
+                  "answer": "Chó",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Thổ Nhĩ Kỳ",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                },
+                {
+                  "answer": "Rắn",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Gió",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                },
+                {
+                  "answer": "Con cừu",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Con lợn",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Đi bộ qua những chiếc lá",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Muỗi",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                },
+                {
+                  "answer": "Chim gõ kiến",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Chim ưng",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                },
+                {
+                  "answer": "Cơn mưa",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Con voi",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                },
+                {
+                  "answer": "Chim",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "Dòng chảy của sông",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                },
+                {
+                  "answer": "Con ếch",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chó sói đồng cỏ",
+                  "path": "audio/sounds/nature/coyote.mp3",
+                  "image": "assets/visuals/nature/coyote.png"
+                },
+                {
+                  "answer": "Ve sầu",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                },
+                {
+                  "answer": "Tiếng mèo kêu",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Đá Bỏ Qua",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 3",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Tiếng cú hú",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Dế",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                },
+                {
+                  "answer": "Lửa trại",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                },
+                {
+                  "answer": "Con vịt",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Rắn",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Đá rơi",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                },
+                {
+                  "answer": "Chó",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Thổ Nhĩ Kỳ",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đi bộ qua những chiếc lá",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                },
+                {
+                  "answer": "Gió",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                },
+                {
+                  "answer": "Con cừu",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Con lợn",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chim ưng",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                },
+                {
+                  "answer": "Chim gõ kiến",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Cơn mưa",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Muỗi",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Con ếch",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                },
+                {
+                  "answer": "Chim",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "Dòng chảy của sông",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                },
+                {
+                  "answer": "Con voi",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Tiếng mèo kêu",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Ve sầu",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                },
+                {
+                  "answer": "Chó sói đồng cỏ",
+                  "path": "audio/sounds/nature/coyote.mp3",
+                  "image": "assets/visuals/nature/coyote.png"
+                },
+                {
+                  "answer": "Đá Bỏ Qua",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Con vịt",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                },
+                {
+                  "answer": "Tiếng cú hú",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Lửa trại",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                },
+                {
+                  "answer": "Dế",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Thổ Nhĩ Kỳ",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                },
+                {
+                  "answer": "Rắn",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Chó",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Đá rơi",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Con cừu",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Con lợn",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Gió",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                },
+                {
+                  "answer": "Đi bộ qua những chiếc lá",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cơn mưa",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Chim ưng",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                },
+                {
+                  "answer": "Chim gõ kiến",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Muỗi",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 4",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Con voi",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                },
+                {
+                  "answer": "Chim ưng",
+                  "path": "audio/sounds/nature/hawk.mp3",
+                  "image": "assets/visuals/nature/hawk.png"
+                },
+                {
+                  "answer": "Ve sầu",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                },
+                {
+                  "answer": "Dòng chảy của sông",
+                  "path": "audio/sounds/nature/river flow.mp3",
+                  "image": "assets/visuals/nature/river flow.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chim gõ kiến",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Cơn mưa",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Con ếch",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                },
+                {
+                  "answer": "Con cừu",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Tiếng mèo kêu",
+                  "path": "audio/sounds/nature/cat meow.mp3",
+                  "image": "assets/visuals/nature/cat.png"
+                },
+                {
+                  "answer": "Con vịt",
+                  "path": "audio/sounds/nature/duck.mp3",
+                  "image": "assets/visuals/nature/duck.png"
+                },
+                {
+                  "answer": "Muỗi",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
+                },
+                {
+                  "answer": "Gió",
+                  "path": "audio/sounds/nature/wind.mp3",
+                  "image": "assets/visuals/nature/wind.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Tiếng cú hú",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Lửa trại",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                },
+                {
+                  "answer": "Sấm sét",
+                  "path": "audio/sounds/nature/thunder.mp3",
+                  "image": "assets/visuals/nature/thunder.png"
+                },
+                {
+                  "answer": "Đá Bỏ Qua",
+                  "path": "audio/sounds/nature/rock skip.mp3",
+                  "image": "assets/visuals/nature/rock skipping.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Dế",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                },
+                {
+                  "answer": "Thổ Nhĩ Kỳ",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                },
+                {
+                  "answer": "Con lợn",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Chim",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Rắn",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Chó",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Đá rơi",
+                  "path": "audio/sounds/nature/rocks falling.mp3",
+                  "image": "assets/visuals/nature/rockslide.png"
+                },
+                {
+                  "answer": "Chó sói đồng cỏ",
+                  "path": "audio/sounds/nature/coyote.mp3",
+                  "image": "assets/visuals/nature/coyote.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đi bộ qua những chiếc lá",
+                  "path": "audio/sounds/nature/walking through leaves.mp3",
+                  "image": "assets/visuals/nature/walking through leaves.png"
+                },
+                {
+                  "answer": "Chim",
+                  "path": "audio/sounds/nature/bird.mp3",
+                  "image": "assets/visuals/nature/bird.png"
+                },
+                {
+                  "answer": "Con voi",
+                  "path": "audio/sounds/nature/elephant.mp3",
+                  "image": "assets/visuals/nature/elephant.png"
+                },
+                {
+                  "answer": "Lửa trại",
+                  "path": "audio/sounds/nature/campfire.mp3",
+                  "image": "assets/visuals/nature/campfire.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cơn mưa",
+                  "path": "audio/sounds/nature/rain.mp3",
+                  "image": "assets/visuals/nature/rain.png"
+                },
+                {
+                  "answer": "Tiếng cú hú",
+                  "path": "audio/sounds/nature/owl hoot.mp3",
+                  "image": "assets/visuals/nature/owl.png"
+                },
+                {
+                  "answer": "Con ếch",
+                  "path": "audio/sounds/nature/frog.mp3",
+                  "image": "assets/visuals/nature/frog.png"
+                },
+                {
+                  "answer": "Dế",
+                  "path": "audio/sounds/nature/crickets.mp3",
+                  "image": "assets/visuals/nature/crickets.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chó",
+                  "path": "audio/sounds/nature/dog.mp3",
+                  "image": "assets/visuals/nature/dog.png"
+                },
+                {
+                  "answer": "Ve sầu",
+                  "path": "audio/sounds/nature/cicadas.mp3",
+                  "image": "assets/visuals/nature/cicadas.png"
+                },
+                {
+                  "answer": "Rắn",
+                  "path": "audio/sounds/nature/snake.mp3",
+                  "image": "assets/visuals/nature/snake.png"
+                },
+                {
+                  "answer": "Thổ Nhĩ Kỳ",
+                  "path": "audio/sounds/nature/turkey.mp3",
+                  "image": "assets/visuals/nature/turkey.png"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chim gõ kiến",
+                  "path": "audio/sounds/nature/woodpecker.mp3",
+                  "image": "assets/visuals/nature/woodpecker.png"
+                },
+                {
+                  "answer": "Con cừu",
+                  "path": "audio/sounds/nature/sheep.mp3",
+                  "image": "assets/visuals/nature/sheep.png"
+                },
+                {
+                  "answer": "Con lợn",
+                  "path": "audio/sounds/nature/pig.mp3",
+                  "image": "assets/visuals/nature/pig.png"
+                },
+                {
+                  "answer": "Muỗi",
+                  "path": "audio/sounds/nature/mosquito.mp3",
+                  "image": "assets/visuals/nature/mosquito.png"
                 }
               ]
             }
