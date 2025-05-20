@@ -32,6 +32,9 @@ dependencies:
   firebase_remote_config: ^5.4.0
   firebase_messaging: ^15.2.5 # FCM
   firebase_analytics: ^11.4.5
+  firebase_auth: ^5.5.0
+  cloud_firestore: ^5.6.7
+  device_info_plus: ^9.0.0
 
   dotted_border: ^2.1.0
   auto_size_text: ^3.0.0

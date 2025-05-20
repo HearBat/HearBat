@@ -1,15 +1,63 @@
+import 'dart:async';
 import 'dart:math';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' hide Transaction;
+import 'package:device_info_plus/device_info_plus.dart';
 
 class StreaksDatabase {
   static final StreaksDatabase instance = StreaksDatabase._init();
   static Database? _database;
   bool _isInitialized = false;
 
-  StreaksDatabase._init();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
+
+  CollectionReference? _dailyActivityRef;
+  DocumentReference? _streakDataRef;
+  String? _deviceId;
+
+  StreaksDatabase._init() {
+    _initializePaths();
+  }
+
+  Future<String> _getDeviceId() async {
+    if (_deviceId != null) return _deviceId!;
+
+    try {
+      if (Platform.isAndroid) {
+        final androidInfo = await _deviceInfo.androidInfo;
+        _deviceId = androidInfo.id;
+      } else if (Platform.isIOS) {
+        final iosInfo = await _deviceInfo.iosInfo;
+        _deviceId = iosInfo.identifierForVendor;
+      } else {
+        _deviceId = 'unsupported_device';
+      }
+      return _deviceId!;
+    } catch (e) {
+      debugPrint('Error getting device ID: $e');
+      _deviceId = 'fallback_device_id';
+      return _deviceId!;
+    }
+  }
+
+  Future<void> _initializePaths() async {
+    final deviceId = await _getDeviceId();
+    _dailyActivityRef = _firestore
+        .collection('device_data')
+        .doc(deviceId)
+        .collection('daily_activity');
+
+    _streakDataRef = _firestore
+        .collection('device_data')
+        .doc(deviceId)
+        .collection('streak_data')
+        .doc('current');
+  }
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -37,7 +85,6 @@ class StreaksDatabase {
       await db.rawQuery('SELECT 1 FROM streak_data LIMIT 1');
       _isInitialized = true;
     } catch (e) {
-      debugPrint('Tables not found, creating them...');
       await _createDB(db, 1);
       _isInitialized = true;
     }
@@ -55,14 +102,15 @@ class StreaksDatabase {
     await db.execute('''
       CREATE TABLE streak_data (
         current_streak INTEGER DEFAULT 0,
-        longest_streak INTEGER DEFAULT 0
+        longest_streak INTEGER DEFAULT 0,
+        last_updated TEXT NOT NULL
       )
     ''');
 
-    // Initialize streak data
     await db.insert('streak_data', {
       'current_streak': 0,
-      'longest_streak': 0
+      'longest_streak': 0,
+      'last_updated': DateTime.now().toUtc().toIso8601String()
     });
   }
 
@@ -79,46 +127,183 @@ class StreaksDatabase {
     await db.close();
   }
 
-  Future<void> recordDailyActivity(int seconds) async {
-    final db = await database;
-    final now = DateTime.now().toUtc();
-    final today = DateFormat('yyyy-MM-dd').format(now);
+  Future<bool> _shouldSyncBeforeLocalUpdate(String date) async {
+    final remoteDoc = await _dailyActivityRef!.doc(date).get();
+    if (!remoteDoc.exists) return false;
 
-    await db.transaction((txn) async {
-      await txn.rawInsert('''
-        INSERT INTO daily_activity (date, total_time, last_updated)
-        VALUES (?, ?, ?)
-        ON CONFLICT(date) DO UPDATE SET
-          total_time = total_time + excluded.total_time,
-          last_updated = excluded.last_updated
-      ''', [today, seconds, now.toIso8601String()]);
+    final localData = await database.then((db) => db.query(
+      'daily_activity',
+      where: 'date = ?',
+      whereArgs: [date],
+    ));
 
-      await _updateStreak(txn, now);
+    return localData.isEmpty ||
+        (remoteDoc['total_time'] as int) > (localData.first['total_time'] as int);
+  }
+
+  Future<void> syncWithFirestore() async {
+    if (_dailyActivityRef == null || _streakDataRef == null) return;
+
+    try {
+      final db = await database;
+      await _syncDailyActivities(db);
+      await _syncStreakData(db);
+    } catch (e) {
+      debugPrint('Error syncing with Firestore: $e');
+    }
+  }
+
+  Future<void> _syncDailyActivities(Database db) async {
+    final localActivities = await db.query('daily_activity');
+    final remoteSnapshot = await _dailyActivityRef!.get();
+
+    final localMap = {for (var a in localActivities) a['date'] as String: a};
+    final remoteMap = {for (var d in remoteSnapshot.docs) d.id: d.data() as Map<String, dynamic>};
+
+    for (final remoteEntry in remoteMap.entries) {
+      final localEntry = localMap[remoteEntry.key];
+      final remoteData = remoteEntry.value;
+      final remoteTime = remoteData['total_time'] as int;
+
+      if (localEntry == null) {
+        await db.insert('daily_activity', {
+          'date': remoteEntry.key,
+          'total_time': remoteTime,
+          'last_updated': remoteData['last_updated'],
+        });
+      } else {
+        final localTime = localEntry['total_time'] as int;
+        if (remoteTime > localTime) {
+          await db.update(
+            'daily_activity',
+            {
+              'total_time': remoteTime,
+              'last_updated': remoteData['last_updated'],
+            },
+            where: 'date = ?',
+            whereArgs: [remoteEntry.key],
+          );
+        }
+      }
+    }
+
+    for (final localEntry in localMap.entries) {
+      final remoteData = remoteMap[localEntry.key];
+      final localTime = localEntry.value['total_time'] as int;
+
+      if (remoteData == null) {
+        await _dailyActivityRef!.doc(localEntry.key).set({
+          'total_time': localTime,
+          'last_updated': localEntry.value['last_updated'],
+        });
+      } else {
+        final remoteTime = remoteData['total_time'] as int;
+        if (localTime > remoteTime) {
+          await _dailyActivityRef!.doc(localEntry.key).update({
+            'total_time': localTime,
+            'last_updated': localEntry.value['last_updated'],
+          });
+        }
+      }
+    }
+  }
+
+  Future<void> _syncStreakData(Database db) async {
+    final localData = (await db.query('streak_data')).first;
+    final remoteDoc = await _streakDataRef!.get();
+    final nowIso = DateTime.now().toUtc().toIso8601String();
+
+    if (!remoteDoc.exists) {
+      await _streakDataRef!.set({
+        'current_streak': localData['current_streak'],
+        'longest_streak': localData['longest_streak'],
+        'last_updated': nowIso,
+      });
+      return;
+    }
+
+    final remoteData = remoteDoc.data() as Map<String, dynamic>;
+    final bestCurrentStreak = max(localData['current_streak'] as int, remoteData['current_streak'] as int);
+    final bestLongestStreak = max(localData['longest_streak'] as int, remoteData['longest_streak'] as int);
+
+    await db.update(
+      'streak_data',
+      {
+        'current_streak': bestCurrentStreak,
+        'longest_streak': bestLongestStreak,
+        'last_updated': nowIso,
+      },
+    );
+
+    await _streakDataRef!.update({
+      'current_streak': bestCurrentStreak,
+      'longest_streak': bestLongestStreak,
+      'last_updated': nowIso,
     });
   }
 
-  Future<void> recordDailyActivityForDate(int seconds, DateTime date) async {
-    final db = await database;
-    final dateStr = DateFormat('yyyy-MM-dd').format(date.toUtc());
+  Future<void> recordDailyActivity(int seconds) async {
+    final now = DateTime.now().toUtc();
+    final today = DateFormat('yyyy-MM-dd').format(now);
+    final nowIso = now.toIso8601String();
 
+    final db = await database;
     await db.transaction((txn) async {
       await txn.rawInsert('''
-        INSERT INTO daily_activity (date, total_time, last_updated)
-        VALUES (?, ?, ?)
-        ON CONFLICT(date) DO UPDATE SET
-          total_time = total_time + excluded.total_time,
-          last_updated = excluded.last_updated
-      ''', [dateStr, seconds, DateTime.now().toUtc().toIso8601String()]);
+      INSERT INTO daily_activity (date, total_time, last_updated)
+      VALUES (?, ?, ?)
+      ON CONFLICT(date) DO UPDATE SET
+        total_time = total_time + excluded.total_time,
+        last_updated = excluded.last_updated
+      ''', [today, seconds, nowIso]);
+
+      await _updateStreak(txn, now);
+    });
+
+    unawaited(syncWithFirestore());
+  }
+
+  Future<void> recordDailyActivityForDate(int seconds, DateTime date) async {
+    final dateStr = DateFormat('yyyy-MM-dd').format(date.toUtc());
+    final nowIso = DateTime.now().toUtc().toIso8601String();
+
+    if (await _shouldSyncBeforeLocalUpdate(dateStr)) await syncWithFirestore();
+
+    final db = await database;
+    await db.transaction((txn) async {
+      await txn.rawInsert('''
+      INSERT INTO daily_activity (date, total_time, last_updated)
+      VALUES (?, ?, ?)
+      ON CONFLICT(date) DO UPDATE SET
+        total_time = total_time + excluded.total_time,
+        last_updated = excluded.last_updated
+    ''', [dateStr, seconds, nowIso]);
 
       await _updateStreak(txn, date);
     });
+
+    if (!await _shouldSyncBeforeLocalUpdate(dateStr)) unawaited(syncWithFirestore());
   }
 
   Future<void> updateStreakForDate(DateTime date) async {
     final db = await database;
+    final nowIso = DateTime.now().toUtc().toIso8601String();
+
     await db.transaction((txn) async {
       await _updateStreak(txn, date);
+      await txn.update('streak_data', {'last_updated': nowIso});
     });
+
+    try {
+      final streak = await getCurrentStreak();
+      await _streakDataRef!.set({
+        'current_streak': streak['current'],
+        'longest_streak': streak['longest'],
+        'last_updated': nowIso,
+      });
+    } catch (e) {
+      debugPrint('Error updating Firestore streak: $e');
+    }
   }
 
   Future<void> _updateStreak(Transaction txn, DateTime currentDate) async {
@@ -130,12 +315,9 @@ class StreaksDatabase {
 
     int streak = 0;
     final currentDateStr = DateFormat('yyyy-MM-dd').format(currentDate.toUtc());
-
-    // Convert all activity dates to DateTime objects and sort them newest to oldest
     final activityDates = activities.map((a) => DateTime.parse(a['date'] as String)).toList();
     activityDates.sort((a, b) => b.compareTo(a));
 
-    // Check if current date or previous day has activity
     final hasCurrentDateActivity = activityDates.any((date) =>
     DateFormat('yyyy-MM-dd').format(date) == currentDateStr);
 
@@ -143,7 +325,6 @@ class StreaksDatabase {
     final hasYesterdayActivity = activityDates.any((date) =>
     DateFormat('yyyy-MM-dd').format(date) == DateFormat('yyyy-MM-dd').format(yesterday));
 
-    // If no activity today and no activity yesterday, streak is 0
     if (!hasCurrentDateActivity && !hasYesterdayActivity) {
       await txn.update('streak_data', {
         'current_streak': 0,
@@ -152,15 +333,12 @@ class StreaksDatabase {
       return;
     }
 
-    // Start counting from most recent activity date backward
     DateTime checkDate = hasCurrentDateActivity ? currentDate : yesterday;
     bool streakActive = true;
 
     while (streakActive) {
       final checkDateStr = DateFormat('yyyy-MM-dd').format(checkDate);
-
-      if (activityDates.any((date) =>
-      DateFormat('yyyy-MM-dd').format(date) == checkDateStr)) {
+      if (activityDates.any((date) => DateFormat('yyyy-MM-dd').format(date) == checkDateStr)) {
         streak++;
         checkDate = checkDate.subtract(const Duration(days: 1));
       } else {
@@ -168,7 +346,6 @@ class StreaksDatabase {
       }
     }
 
-    // Update streak data
     final currentLongest = (await txn.query('streak_data')).first['longest_streak'] as int;
     await txn.update('streak_data', {
       'current_streak': streak,
@@ -199,13 +376,11 @@ class StreaksDatabase {
   Future<int> getTodayPracticeTime() async {
     final db = await database;
     final today = DateFormat('yyyy-MM-dd').format(DateTime.now().toUtc());
-
     final result = await db.query(
       'daily_activity',
       where: 'date = ?',
       whereArgs: [today],
     );
-
     return result.isEmpty ? 0 : result.first['total_time'] as int;
   }
 
@@ -218,13 +393,41 @@ class StreaksDatabase {
     );
   }
 
-  Future<void> resetAllData() async {
+  Future<void> resetRemoteData() async {
+    final nowIso = DateTime.now().toUtc().toIso8601String();
+
+    try {
+      final batch = _firestore.batch();
+      final activities = await _dailyActivityRef!.get();
+      for (final doc in activities.docs) {
+        batch.delete(doc.reference);
+      }
+
+      batch.set(_streakDataRef!, {
+        'current_streak': 0,
+        'longest_streak': 0,
+        'last_updated': nowIso,
+      });
+
+      await batch.commit();
+
+      debugPrint('Successfully reset all remote data');
+    } catch (e) {
+      debugPrint('Error resetting remote data: $e');
+      rethrow;
+    }
+  }
+
+  Future<void> resetLocalData() async {
     final db = await database;
+    final nowIso = DateTime.now().toUtc().toIso8601String();
+
     await db.transaction((txn) async {
       await txn.delete('daily_activity');
       await txn.update('streak_data', {
         'current_streak': 0,
-        'longest_streak': 0
+        'longest_streak': 0,
+        'last_updated': nowIso,
       });
     });
   }

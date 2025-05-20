@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:hearbat/streaks/streaks_db.dart';
 import 'package:hearbat/streaks/streaks_model.dart';
-import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 
 class StreakProvider with ChangeNotifier {
@@ -103,12 +102,32 @@ class StreakProvider with ChangeNotifier {
     }
   }
 
-  Future<void> resetAllData() async {
+  Future<void> forceFirestoreSync() async {
+    await StreaksDatabase.instance.syncWithFirestore();
+  }
+
+  Future<void> resetRemoteData() async {
     try {
       _isLoading = true;
       notifyListeners();
 
-      await StreaksDatabase.instance.resetAllData();
+      await StreaksDatabase.instance.resetRemoteData();
+      await loadStreakData(); // Refresh the local data after remote reset
+    } catch (e) {
+      debugPrint('Error resetting remote data: $e');
+      rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> resetLocalData() async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+
+      await StreaksDatabase.instance.resetLocalData();
       await loadStreakData();
     } catch (e) {
       debugPrint('Error resetting data: $e');

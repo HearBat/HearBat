@@ -47,7 +47,6 @@ class _DailyStreakPageState extends State<DailyStreakPage> {
 
   Future<void> _addSession() async {
     final provider = Provider.of<StreakProvider>(context, listen: false);
-    // Use _debugDate instead of DateTime.now()
     await provider.recordPracticeTimeForDate(_practiceTimeInput, _simulatedNow);
     await _updateDatabaseContent();
     setState(() {});
@@ -159,8 +158,6 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
 
   Widget _buildWeeklyCalendar(List<DailyActivity> activities) {
     const weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-
-    // Generate dates centered around _simulatedNow
     final dates = List.generate(7, (index) {
       return _simulatedNow.add(Duration(days: index - 3));
     });
@@ -229,8 +226,29 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
               const Text('DEBUG CONTROLS', style: TextStyle(fontWeight: FontWeight.bold)),
               const Divider(),
               const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                    await provider.forceFirestoreSync();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Manual sync completed')));
+                    await _updateDatabaseContent();
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Sync failed: $e')));
+                  }
+                },
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.sync, size: 20),
+                    SizedBox(width: 8),
+                    Text('Force Sync'),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
 
-              // Practice time input
               Row(
                 children: [
                   const Text('Practice Time (sec):'),
@@ -253,7 +271,6 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
 
               const SizedBox(height: 16),
 
-              // Date controls
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -271,7 +288,6 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
                   ),
                 ],
               ),
-
               const SizedBox(height: 8),
               Text(
                 'Current debug date: ${DateFormat('yyyy-MM-dd').format(_simulatedNow)}',
@@ -281,7 +297,7 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
               const SizedBox(height: 8),
               ElevatedButton(
                 onPressed: () async {
-                  await provider.resetAllData();
+                  await provider.resetLocalData();
                   setState(() {
                     _simulatedNow = DateTime.now();
                   });
@@ -290,7 +306,22 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
                 ),
-                child: const Text('Reset All Data'),
+                child: const Text('Reset Local Data'),
+              ),
+
+              const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () async {
+                  await provider.resetRemoteData();
+                  setState(() {
+                    _simulatedNow = DateTime.now();
+                  });
+                  await _updateDatabaseContent();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                ),
+                child: const Text('Reset Remote Data'),
               ),
 
               const SizedBox(height: 16),

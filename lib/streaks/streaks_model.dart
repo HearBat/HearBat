@@ -1,4 +1,4 @@
-// streaks_model.dart
+
 class DailyActivity {
   final String date;
   final int totalTime;
