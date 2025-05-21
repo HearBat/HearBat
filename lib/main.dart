@@ -43,8 +43,6 @@ class _MyAppState extends State<MyApp> {
       mapLocales: [
         const MapLocale('en', AppLocale.EN),
         const MapLocale('vi', AppLocale.VI),
-        const MapLocale('km', AppLocale.KM),
-        const MapLocale('ja', AppLocale.JA),
       ],
       initLanguageCode: 'en',
     );
