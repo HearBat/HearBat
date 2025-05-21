@@ -409,7 +409,7 @@ mixin AppLocale {
     homePageMusicTitle: 'Tập nghe âm nhạc',
     homePageCustomTitle: 'Tự tạo mô-đun ',
     homePageWordsDesc: 'Làm sắc nét khả năng nghe của bạn với bộ sưu tập từ vựng đa dạng',
-    homePageSoundsDesc: 'Khám phá và nhận biết nhiều loại âm thanh, từ tiếng ồn thành phố đến tiếng của thiên nhiên',
+    homePageSoundsDesc: 'Khám phá nhiều loại âm thanh, từ tiếng ồn thành phố đến tiếng của thiên nhiên',
     homePageSpeechDesc: 'Cải thiện khả năng nghe của bạn bằng cách nghe các câu và lặp lại chúng',
     homePageMusicDesc: 'Rèn luyện tai của bạn theo các mẫu nhạc và các biến thể cao độ',
     homePageCustomDesc: 'Cá nhân hóa việc học thính giác của bạn bằng cách tạo các mô-đun của riêng bạn',
