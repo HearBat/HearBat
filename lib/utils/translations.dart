@@ -402,7 +402,7 @@ mixin AppLocale {
 
   static const Map<String, dynamic> VI = {
     homePageTitle: 'HearBat',
-    homePageSubtitle: 'người bạn đồng hành thính giác của bạn',
+    homePageSubtitle: 'bạn đồng hành thính giác của bạn',
     homePageWordsTitle: 'Tập nghe từ',
     homePageSoundsTitle: 'Tập nghe âm thanh',
     homePageSpeechTitle: 'Tập nói theo',
