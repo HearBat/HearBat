@@ -5,7 +5,8 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:provider/provider.dart';
+import 'package:hearbat/streaks/streaks_provider.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/stats/exercise_score_model.dart';
 import 'package:hearbat/stats/module_model.dart' as module_stats;
@@ -53,7 +54,16 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
   String selectedFeedback = 'On';
   String? _selectedDirection;
   Answer? currentCorrectAnswer;
+  DateTime? _moduleStartTime;
+  late StreakProvider _streakProvider;
   ConfettiController _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _streakProvider = Provider.of<StreakProvider>(context, listen: false);
+  }
 
   @override
   void initState() {
@@ -63,6 +73,7 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
     _confettiController = ConfettiController(duration: const Duration(seconds: 3));
     _confettiController.play();
     AudioUtil.initialize();
+    _moduleStartTime = DateTime.now();
     BackgroundNoiseUtil.initialize().then((_) {
       BackgroundNoiseUtil.playSavedSound();
     });
@@ -72,6 +83,9 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
 
   @override
   void dispose() {
+    if (!moduleCompleted) {
+      _recordModuleCompletion(); // ← Catches all other exits
+    }
     BackgroundNoiseUtil.stopSound();
     AudioUtil.stop();
     _confettiController.dispose();
@@ -137,7 +151,6 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
 
   void checkAnswer(String selectedAnswer) {
     if (currentCorrectAnswer == null || _selectedDirection != null) return;
-
     final semitoneDifference = extractSemitoneDifference(currentCorrectAnswer!.path!);
     final isAnswerCorrect = selectedAnswer == currentCorrectAnswer!.answer;
 
@@ -203,7 +216,17 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
     });
   }
 
+  Future<void> _recordModuleCompletion() async {
+    if (_moduleStartTime != null) {
+      final duration = DateTime.now().difference(_moduleStartTime!).inSeconds;
+      await _streakProvider.recordPracticeTimeForDate(duration, _moduleStartTime!);
+    }
+  }
+
   Widget buildCompletionScreen() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _recordModuleCompletion();
+    });
     BackgroundNoiseUtil.stopSound();
     return Scaffold(
       body: Stack(

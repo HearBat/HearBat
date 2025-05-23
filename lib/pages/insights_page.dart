@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import 'package:hearbat/pages/missed_answers_page.dart';
-import 'package:hearbat/stats/daily_model.dart';
 import 'package:hearbat/stats/exercise_score_model.dart';
 import 'package:hearbat/utils/translations.dart';
 import 'package:hearbat/widgets/top_bar_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:hearbat/streaks/streaks_provider.dart';
 
 class InsightsPage extends StatefulWidget {
   const InsightsPage({super.key});
@@ -20,6 +21,7 @@ class InsightsPageState extends State<InsightsPage> {
   int _timePracticed = 0;
   int _speechAccuracy = 0;
   int _noiseAccuracy = 0;
+  static const int _dailyGoalSeconds = 600;
 
   @override
   void initState() {
@@ -28,7 +30,8 @@ class InsightsPageState extends State<InsightsPage> {
   }
 
   void _fetchDailyStats(DateTime date) async {
-    final timePracticed = await Daily.getPracticeTime(date);
+    final provider = Provider.of<StreakProvider>(context, listen: false);
+    final timePracticed = await provider.getPracticeTimeForDate(date);
     final speechAccuracy = await ExerciseScore.getExerciseAccuracyByDay("speech", date);
     // This currently tracks the average bg noise level of speech exercises--can reevaluate later
     final noiseAccuracy = await ExerciseScore.getExerciseBGNoiseByDay("speech", date);
@@ -37,6 +40,10 @@ class InsightsPageState extends State<InsightsPage> {
       _timePracticed = timePracticed;
       _speechAccuracy = (speechAccuracy*100).ceil();
       _noiseAccuracy = (noiseAccuracy*100).ceil();
+      _progressBarValue = _timePracticed / _dailyGoalSeconds;
+      if (_progressBarValue > 1.0) {
+        _progressBarValue = 1.0;
+      }
     });
   }
 
@@ -80,6 +87,20 @@ class InsightsPageState extends State<InsightsPage> {
     }
 
     return '${AppLocale.insightsPageToday.getString(context)}, ${monthNames[date.month - 1]} ${date.day}${suffix(date.day)}';
+  }
+
+  String _formatPracticeTime(int totalSeconds) {
+    final hours = totalSeconds ~/ 3600;
+    final minutes = (totalSeconds % 3600) ~/ 60;
+    final seconds = totalSeconds % 60;
+
+    if (hours > 0) {
+      return '${hours}:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+    } else if (minutes > 0) {
+      return '${minutes}:${seconds.toString().padLeft(2, '0')}';
+    } else {
+      return '0:${seconds.toString().padLeft(2, '0')}';
+    }
   }
 
   @override
@@ -261,7 +282,7 @@ Widget _buildCalendar() {
                         ),
                       ),
                       Text(
-                        '$_timePracticed${AppLocale.insightsPageMinuteAbbr.getString(context)}',
+                        _formatPracticeTime(_timePracticed),
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -286,10 +307,10 @@ Widget _buildCalendar() {
                   ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    '${(_progressBarValue * 100).toInt()}% ${AppLocale.insightsPageDailyGoal.getString(context)}',
-                    style: TextStyle(fontSize: 12, color: Colors.black87),
-                  ),
+                    Text(
+                      '${_formatPracticeTime(_timePracticed)} / ${_formatPracticeTime(_dailyGoalSeconds)}',
+                      style: TextStyle(fontSize: 12, color: Colors.black87),
+                    ),
 
                       // Accuracy Box
                   const SizedBox(height: 16),
