@@ -6,7 +6,6 @@ import 'module_types/speech/speech_chapters.dart';
 import 'module_types/custom/custom_path.dart';
 import 'module_types/music/music_chapters.dart';
 import '../widgets/home_card_widget.dart';
-import '../utils/text_util.dart';
 import '../utils/translations.dart';
 
 class HomePage extends StatelessWidget {

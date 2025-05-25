@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../models/chapter_model.dart';
 import '../../../utils/data_service_util.dart';
 import '../../../utils/translations.dart';
 import 'word_path.dart';
 import '../../../widgets/top_bar_widget.dart';
 import '../../../widgets/chapter_card_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class WordChapters extends StatefulWidget {
   @override
@@ -23,11 +21,10 @@ class _WordChaptersState extends State<WordChapters> {
   }
 
   Future<void> _loadChapters() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
     chapters = DataService().getWordChapters();
 
     setState(() {
-      isLoading = false; // Update isLoading to false to render the UI
+      isLoading = false;
     });
   }
 

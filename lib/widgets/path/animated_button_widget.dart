@@ -23,9 +23,10 @@ class AnimatedButtonState extends State<AnimatedButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<EdgeInsets> _buttonMarginAnimation;
+  late Animation<double> _shadowOffsetAnimation;
   Color _buttonColor = const Color.fromARGB(255, 241, 223, 254);
 
-  @override
+@override
   void initState() {
     super.initState();
     _animationController = AnimationController(
@@ -42,7 +43,18 @@ class AnimatedButtonState extends State<AnimatedButton>
         curve: Curves.easeInOut,
       ),
     );
+
+    _shadowOffsetAnimation = Tween<double>(
+      begin: 8.0,  
+      end: 8.0,    
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
   }
+
 
   @override
   void dispose() {
@@ -56,12 +68,10 @@ class AnimatedButtonState extends State<AnimatedButton>
 
   void _handleTapUp(TapUpDetails details) {
     _animationController.reverse().then((_) async {
-      // change button color on tap
       setState(() {
         _buttonColor = Color.fromARGB(255, 98, 81, 162);
       });
 
-      // show alert for exercise start
       await showDialog(
         context: context,
         builder: (context) {
@@ -112,34 +122,61 @@ class AnimatedButtonState extends State<AnimatedButton>
     _animationController.reverse();
   }
 
-  @override
+@override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _buttonMarginAnimation,
+      animation: _animationController,
       builder: (context, child) {
-        return Container(
-          margin: _buttonMarginAnimation.value,
-          alignment: Alignment.center,
-          height: 50 * 1.2,
-          width: 100 * 1.5,
-          decoration: BoxDecoration(
-            color: _buttonColor,
-            borderRadius:
-                BorderRadius.all(Radius.elliptical(100 * 1.5, 50 * 1.5)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withAlpha((0.5 * 255).toInt()),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: Offset(0, 3),
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Positioned(
+              top: _shadowOffsetAnimation.value,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 50 * 1.2,
+                width: 100 * 1.2,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.2),
+                  borderRadius: BorderRadius.all(
+                    Radius.elliptical(100 * 1.5, 50 * 1.5),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-          child: GestureDetector(
-            onTapDown: _handleTapDown,
-            onTapUp: _handleTapUp,
-            onTapCancel: _handleTapCancel,
-          ),
+            ),
+            Container(
+              margin: _buttonMarginAnimation.value,
+              alignment: Alignment.center,
+              height: 50 * 1.2,
+              width: 100 * 1.2,
+              decoration: BoxDecoration(
+                color: _buttonColor,
+                borderRadius:
+                    BorderRadius.all(Radius.elliptical(100 * 1.5, 50 * 1.5)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withAlpha((0.3 * 255).toInt()),
+                    spreadRadius: 2,
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: GestureDetector(
+                onTapDown: _handleTapDown,
+                onTapUp: _handleTapUp,
+                onTapCancel: _handleTapCancel,
+              ),
+            ),
+          ],
         );
       },
     );

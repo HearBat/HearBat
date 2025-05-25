@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
 import 'package:hearbat/models/chapter_model.dart';
+import 'package:hearbat/widgets/path/module_button_with_progress.dart';
 import 'alternating_path_layout_widget.dart';
-import 'animated_button_widget.dart';
 
 class ModuleListWidget extends StatefulWidget {
   final Map<String, Module> modules;
   final String chapter;
   final String exerciseType;
 
-  ModuleListWidget({
-    super.key,
-    required this.modules,
-    required this.chapter,
-    required this.exerciseType
-  });
+  ModuleListWidget(
+      {super.key,
+      required this.modules,
+      required this.chapter,
+      required this.exerciseType});
 
   @override
   ModuleListWidgetState createState() => ModuleListWidgetState();
@@ -46,33 +45,17 @@ class ModuleListWidgetState extends State<ModuleListWidget>
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
-        child: AlternatingPathLayout(
+        child: 
+            AlternatingPathLayout(
           itemCount: moduleList.length,
           itemBuilder: (context, index) {
             final module = moduleList[index];
-            return Stack(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 50 * 1.2,
-                    width: 100 * 1.5,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 7, 45, 78),
-                      borderRadius: BorderRadius.all(
-                          Radius.elliptical(100 * 1.5, 50 * 1.5)),
-                    ),
-                  ),
-                ),
-                AnimatedButton(
-                  moduleName: module.key,
-                  answerGroups: module.value.answerGroups,
-                  onButtonPressed: (String key, List<dynamic> value) {
-                    navigate(key, value.cast<AnswerGroup>());
-                  },
-                ),
-              ],
+            return ModuleButtonWithProgress(
+              moduleName: module.key,
+              answerGroups: module.value.answerGroups,
+              onButtonPressed: navigate,
+              filledSections: 1,
+              totalSections: 3,
             );
           },
           itemSize: 120.0,
