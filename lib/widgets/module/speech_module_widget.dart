@@ -23,10 +23,8 @@ class SpeechModuleWidget extends StatefulWidget {
   final List<String> sentences;
   final String voiceType;
 
-  SpeechModuleWidget({
-    required this.title,
-    required this.sentences,
-    required this.voiceType});
+  SpeechModuleWidget(
+      {required this.title, required this.sentences, required this.voiceType});
 
   @override
   SpeechModuleWidgetState createState() => SpeechModuleWidgetState();
@@ -183,7 +181,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
         });
       } catch (e) {
         setState(() {
-          _transcription = AppLocale.speechModuleWidgetFailedTranscription.getString(context);
+          _transcription = AppLocale.speechModuleWidgetFailedTranscription
+              .getString(context);
           _grade = 0.0;
           _isSubmitted = true;
         });
@@ -227,16 +226,10 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     if (_isCompleted) {
       const maxScore = 100;
       final score = _getEffectiveScore(); // Average out of 100
-      await ExerciseScore.insert(
-        "speech",
-        DateTime.now(),
-        score,
-        maxScore,
-        bgNoise: BackgroundNoiseUtil.isPlaying ? BackgroundNoiseUtil.volume : 0.0);
-      await Module.updateStats(
-        "speech",
-        widget.title,
-        score);
+      await ExerciseScore.insert("speech", DateTime.now(), score, maxScore,
+          bgNoise:
+              BackgroundNoiseUtil.isPlaying ? BackgroundNoiseUtil.volume : 0.0);
+      await Module.updateStats("speech", widget.title, score);
     }
   }
 
@@ -287,7 +280,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                            AppLocale.speechModuleWidgetPrompt.getString(context),
+                            AppLocale.speechModuleWidgetPrompt
+                                .getString(context),
                             style: TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold)),
                         SizedBox(height: 20),
@@ -301,17 +295,20 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                           onPressed: _playSentence,
                           icon: Icon(Icons.volume_up,
                               color: Colors.white, size: 30),
-                          label: Text(AppLocale.speechModuleWidgetPlayAudio.getString(context),
+                          label: Text(
+                              AppLocale.speechModuleWidgetPlayAudio
+                                  .getString(context),
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white)),
                         ),
                         SizedBox(height: 30),
                         ElevatedButton(
-                          onPressed: _toggleRecording,
+                          onPressed: _isCheckPressed ? null : _toggleRecording,
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
                             backgroundColor:
                                 _isRecording ? Colors.red : Colors.green,
+                            disabledBackgroundColor: Colors.grey,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 50, vertical: 20),
                             shape: RoundedRectangleBorder(
@@ -319,9 +316,13 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                             ),
                           ),
                           child: Text(
-                            _isRecording ? AppLocale.speechModuleWidgetStopRecording.getString(context) : AppLocale.speechModuleWidgetStartRecording.getString(context),
-                            style: TextStyle(fontSize: 20),
-                          ),
+                              _isRecording
+                                  ? AppLocale.speechModuleWidgetStopRecording
+                                      .getString(context)
+                                  : AppLocale.speechModuleWidgetStartRecording
+                                      .getString(context),
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white)),
                         ),
                         SizedBox(height: 30),
                         if (_transcription.isNotEmpty)
@@ -331,7 +332,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                               color: Colors.blue[100],
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Text('${AppLocale.speechModuleWidgetWhatYouSaid.getString(context)} $_transcription',
+                            child: Text(
+                                '${AppLocale.speechModuleWidgetWhatYouSaid.getString(context)} $_transcription',
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.black),
                                 textAlign: TextAlign.center),
@@ -344,13 +346,15 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
                               color: Colors.green[100],
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Text('${AppLocale.speechModuleWidgetOriginal.getString(context)} $_sentence',
+                            child: Text(
+                                '${AppLocale.speechModuleWidgetOriginal.getString(context)} $_sentence',
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.black),
                                 textAlign: TextAlign.center),
                           ),
                           SizedBox(height: 30),
-                          Text('${AppLocale.speechModuleWidgetAccuracy.getString(context)} ${_grade.toStringAsFixed(2)}%',
+                          Text(
+                              '${AppLocale.speechModuleWidgetAccuracy.getString(context)} ${_grade.toStringAsFixed(2)}%',
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center),
@@ -430,7 +434,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
             context: context,
             type: ScoreType.average,
             correctAnswersCount: _getEffectiveScore().toStringAsFixed(2),
-            subtitleText: AppLocale.speechModuleWidgetAverage.getString(context),
+            subtitleText:
+                AppLocale.speechModuleWidgetAverage.getString(context),
             isHighest: _getEffectiveScore() > _highScore,
             icon: Icon(
               Icons.star,
@@ -444,7 +449,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
             context: context,
             type: ScoreType.average,
             correctAnswersCount: _highScore.toStringAsFixed(2),
-            subtitleText: AppLocale.speechModuleWidgetHighestAverage.getString(context),
+            subtitleText:
+                AppLocale.speechModuleWidgetHighestAverage.getString(context),
             isHighest: true,
             icon: Icon(
               Icons.emoji_events,
