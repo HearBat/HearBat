@@ -207,7 +207,7 @@ class FeedbackOptionsWidget extends StatefulWidget {
 
 
 class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
-  String _selectedFeedback = "On";
+  String _selectedFeedback = "Off";
 
   @override
   void initState() {
