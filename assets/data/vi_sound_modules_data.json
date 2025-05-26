@@ -1,7 +1,7 @@
 {
   "chapters": [
     {
-      "name": "Trang chủ Âm thanh",
+      "name": "Tiếng ở nhà",
       "image": "assets/visuals/HBSoundChapterOne.png",
       "modules": [
         {
@@ -987,7 +987,7 @@
       ]
     },
     {
-      "name": "Âm thanh âm nhạc",
+      "name": "Tiếng âm nhạc",
       "image": "assets/visuals/HBSoundChapterTwo.png",
       "modules": [
         {
@@ -1973,7 +1973,7 @@
       ]
     },
     {
-      "name": "Âm thanh thiên nhiên",
+      "name": "Tiếng thiên nhiên",
       "image": "assets/visuals/HBSoundChapterThree.png",
       "modules": [
         {
