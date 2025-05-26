@@ -1,22 +1,199 @@
 {
   "chapters": [
     {
-      "name": "Speech Test Placeholder",
+      "name": "Nguyên âm",
       "image": "assets/visuals/HBWordsChapterOne.png",
       "modules": [
         {
-          "name": "Module 1",
+          "name": "Mô-đun 1",
           "speechGroups": [
-            "A big cat sat on the mat.",
-            "He runs from the sun.",
-            "The bus stops at the park.",
-            "A red apple is on the table.",
-            "The clock ticks at midnight.",
-            "Can you pass the salt?",
-            "Take the last cookie from the jar.",
-            "That hat looks too flat.",
-            "Grab the map from the back.",
-            "Act fast, or it's gone."
+            "Một con mèo lớn ngồi trên tấm thảm.",
+            "Anh ấy chạy trốn khỏi mặt trời.",
+            "Xe buýt dừng ở công viên.",
+            "Có một quả táo đỏ ở trên bàn.",
+            "Đồng hồ điểm đúng nửa đêm.",
+            "Bạn có thể chuyền muối được không?",
+            "Lấy chiếc bánh quy cuối cùng ra khỏi lọ.",
+            "Chiếc mũ đó trông phẳng quá.",
+            "Lấy bản đồ ở phía sau.",
+            "Hãy hành động nhanh, nếu không nó sẽ biến mất."
+          ]
+        },
+        {
+          "name": "Mô-đun 2",
+          "speechGroups": [
+            "Mở cửa sổ vào buổi tối.",
+            "Cây cối che bóng mát cho con đường rộng.",
+            "Những chú chim bay qua hồ mới.",
+            "Đôi giày này chật quá.",
+            "Nữ hoàng vẫy tay chào đám đông.",
+            "Anh ấy nói bằng giọng rõ ràng.",
+            "Hãy giữ bí mật giữa chúng ta nhé.",
+            "Cho ngỗng ăn ở ao.",
+            "Để lại quân cờ trên băng ghế.",
+            "Cánh đồng nằm ở phía bên kia con suối."
+          ]
+        },
+        {
+          "name": "Mô-đun 3",
+          "speechGroups": [
+            "Kéo dây lên đồi.",
+            "Đặt cuốn sách lên kệ.",
+            "Một con chuột nhỏ chạy dưới ghế.",
+            "Con chó nhảy qua khúc gỗ.",
+            "Bụi phủ kín chiếc đồng hồ cũ.",
+            "Trăng tròn soi sáng con đường.",
+            "Đẩy xe lên dốc.",
+            "Nhà sư cầu nguyện một mình.",
+            "Cô ấy cắt dây.",
+            "May mắn sẽ đến với những ai cố gắng."
+          ]
+        },
+        {
+          "name": "Mô-đun 4",
+          "speechGroups": [
+            "Sương giá lạnh lẽo bao phủ cây cối.",
+            "Giữ màu sắc đậm ở mức cao.",
+            "Anh ấy đã bán chiếc nhẫn vàng cũ.",
+            "Nếp gấp trên tờ giấy rất sắc nét.",
+            "Colt chạy băng qua sân.",
+            "Phí qua cầu đã tăng lên.",
+            "Nấm mốc phát triển trên gạch lạnh.",
+            "Họ kể chuyện bên đống lửa.",
+            "Mắng ít đi và lắng nghe nhiều hơn.",
+            "Những người lính diễu hành xuống đường."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Phụ âm",
+      "image": "assets/visuals/HBWordsChapterTwo.png",
+      "modules": [
+        {
+          "name": "Mô-đun 1",
+          "speechGroups": [
+            "Mark nhảy qua hàng rào.",
+            "Một con chó đuổi theo quả bóng lăn.",
+            "Con mèo cào ghế sofa.",
+            "Những chú chim bay về phương Nam để trú đông.",
+            "Trẻ em chơi đùa trong công viên.",
+            "Anh ta đánh rơi chiếc ly xuống sàn.",
+            "Tiếng còi xe inh ỏi trên đường.",
+            "Cô ấy đã viết một lá thư cho bạn mình.",
+            "Gió thổi lá bay tứ tung.",
+            "Lính cứu hỏa đã nhanh chóng tới hiện trường."
+          ]
+        },
+        {
+          "name": "Mô-đun 2",
+          "speechGroups": [
+            "Một cái cây đổ ngang qua đường.",
+            "Cuốn sách rơi khỏi kệ.",
+            "Trời mưa tầm tã suốt cả ngày.",
+            "Cô ấy buộc chặt dây giày.",
+            "Tấm rèm tung bay trong gió.",
+            "Những quả bóng bay lên trời.",
+            "Anh thì thầm nói với cô một bí mật.",
+            "Sóng biển đập vào bờ.",
+            "Một con vịt kêu ở đằng xa.",
+            "Tiếng chìa khóa kêu leng keng trong túi anh."
+          ]
+        },
+        {
+          "name": "Mô-đun 3",
+          "speechGroups": [
+            "Tiếng đồng hồ tích tắc rất to vào ban đêm.",
+            "Một cành cây gãy dưới sức nặng.",
+            "Trẻ em la hét ở sân chơi.",
+            "Cô ấy nhanh chóng chải tóc.",
+            "Anh ấy khóa cửa trước khi rời đi.",
+            "Lá cây xào xạc trong gió.",
+            "Một con ếch nhảy xuống ao.",
+            "Tờ giấy nhàu nát trong tay anh.",
+            "Người đánh trống đập mạnh vào trống.",
+            "Những tia chớp lóe sáng trên bầu trời."
+          ]
+        },
+        {
+          "name": "Mô-đun 4",
+          "speechGroups": [
+            "Cô ấy cầm lấy túi và rời đi.",
+            "Anh ta mệt mỏi ngồi phịch xuống ghế.",
+            "Cô giáo gọi tên chúng tôi.",
+            "Một con ong vo ve gần những bông hoa.",
+            "Họ xếp những chiếc hộp ở góc phòng.",
+            "Một con sóc chạy vụt lên cây.",
+            "Tiếng bước chân vang vọng trong hành lang.",
+            "Một chiếc bút rơi xuống sàn.",
+            "Cô ấy ngửi chiếc bánh mới.",
+            "Cánh cổng kêu cót két khi mở ra."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ngữ điệu và Ngữ điệu",
+      "image": "assets/visuals/HBWordsChapterThree.png",
+      "modules": [
+        {
+          "name": "Mô-đun 1",
+          "speechGroups": [
+            "Bạn có tới dự tiệc không?",
+            "Anh ấy thực sự đã trúng số!",
+            "Bạn vui lòng mở cửa sổ được không?",
+            "Wow, đó thực sự là một chương trình tuyệt vời!",
+            "Bạn có biết chìa khóa của tôi ở đâu không?",
+            "Nhanh lên, chúng ta sắp muộn rồi!",
+            "Bạn nghĩ gì về bộ phim này?",
+            "Hãy cẩn thận với những mảnh kính vỡ!",
+            "Bạn bao nhiêu tuổi khi chuyển đến đây?",
+            "Tôi không thể tin là bạn đã làm điều đó!"
+          ]
+        },
+        {
+          "name": "Mô-đun 2",
+          "speechGroups": [
+            "Chuyện đó có thực sự xảy ra không?",
+            "Cô ấy là cầu thủ giỏi nhất trong đội!",
+            "Bạn có thể giúp tôi giải quyết vấn đề này không?",
+            "Thật là một bức tranh đẹp!",
+            "Cửa hàng tạp hóa gần nhất ở đâu?",
+            "Hãy cẩn thận với chiếc bình đó!",
+            "Tàu khởi hành lúc mấy giờ?",
+            "Hãy cẩn thận khi bước trên băng!",
+            "Ai kể cho bạn câu chuyện đó?",
+            "Thật vui khi được gặp lại bạn!"
+          ]
+        },
+        {
+          "name": "Mô-đun 3",
+          "speechGroups": [
+            "Tại sao bạn lại thì thầm?",
+            "Buổi hòa nhạc thực sự tuyệt vời!",
+            "Tôi có thể mượn bộ sạc điện thoại của bạn được không?",
+            "Đó chính xác là điều tôi muốn!",
+            "Làm sao để đến sân bay từ đây?",
+            "Hãy nói nhỏ khi ở thư viện.",
+            "Khi nào là hạn chót cho dự án này?",
+            "Đừng quên khóa cửa nhé!",
+            "Bạn đã gặp người hàng xóm mới chưa?",
+            "Cảm ơn sự giúp đỡ của bạn rất nhiều!"
+          ]
+        },
+        {
+          "name": "Mô-đun 4",
+          "speechGroups": [
+            "Chỗ này có người ngồi chưa?",
+            "Tôi không bao giờ nghĩ mình sẽ chiến thắng!",
+            "Bạn có thể nói lại lần nữa được không?",
+            "Thật không thể tin được, bạn làm thế nào vậy?",
+            "Tối qua bạn ở đâu?",
+            "Hãy tránh xa mép!",
+            "Bạn muốn ăn gì vào bữa tối?",
+            "Hãy giữ im lặng khi xem phim!",
+            "Ai sẽ cùng chúng ta ăn trưa?",
+            "Tôi thực sự tự hào về bạn!"
           ]
         }
       ]
