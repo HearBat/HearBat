@@ -443,7 +443,9 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
           ScoreWidget(
             context: context,
             type: ScoreType.average,
-            correctAnswersCount: _highScore.toStringAsFixed(2),
+            correctAnswersCount: _getEffectiveScore() > _highScore
+                ? _getEffectiveScore().toStringAsFixed(2)
+                : _highScore.toStringAsFixed(2),
             subtitleText: AppLocale.speechModuleWidgetHighestAverage.getString(context),
             isHighest: true,
             icon: Icon(
