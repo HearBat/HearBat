@@ -323,7 +323,9 @@ class _ModulePageState extends State<ModuleWidget> {
             ScoreWidget(
               context: context,
               type: ScoreType.score,
-              correctAnswersCount: _highScore.toString(),
+              correctAnswersCount: correctAnswersCount > _highScore
+                ? correctAnswersCount.toString()
+                : _highScore.toString(),
               subtitleText: AppLocale.generalHighestScore.getString(context),
               isHighest: true,
               icon: Icon(

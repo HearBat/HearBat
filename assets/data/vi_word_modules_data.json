@@ -1,169 +1,664 @@
 {
   "chapters": [
     {
-      "name": "Word Test Placeholder",
+      "name": "Nền tảng cho người mới bắt đầu",
       "image": "assets/visuals/HBWordsChapterOne.png",
       "modules": [
         {
-          "name": "Module 1",
+          "name": "Mô-đun 1",
           "answerGroups": [
             {
               "answers": [
                 {
-                  "answer": "Kangaroo"
+                  "answer": "Con thỏ"
                 },
                 {
-                  "answer": "Ice"
+                  "answer": "Đá"
                 },
                 {
-                  "answer": "Peanut"
+                  "answer": "Đậu phộng"
                 },
                 {
-                  "answer": "Encyclopedia"
+                  "answer": "Sách"
                 }
               ]
             },
             {
               "answers": [
                 {
-                  "answer": "Salt"
+                  "answer": "Muối"
                 },
                 {
-                  "answer": "Cafeteria"
+                  "answer": "Phòng ăn trưa của trường"
                 },
                 {
-                  "answer": "Football"
+                  "answer": "Bóng đá"
                 },
                 {
-                  "answer": "Hamburger"
+                  "answer": "bánh hamburger"
                 }
               ]
             },
             {
               "answers": [
                 {
-                  "answer": "Popcorn"
+                  "answer": "Bỏng ngô"
                 },
                 {
-                  "answer": "Superbowl"
+                  "answer": "Trò chơi"
                 },
                 {
-                  "answer": "Vote"
+                  "answer": "Chọn"
                 },
                 {
-                  "answer": "Nebraska"
+                  "answer": "Tình trạng"
                 }
               ]
             },
             {
               "answers": [
                 {
-                  "answer": "Umbrella"
+                  "answer": "Chiếc ô"
                 },
                 {
-                  "answer": "Cupcake"
+                  "answer": "Bánh nướng xốp"
                 },
                 {
-                  "answer": "Motorcycle"
+                  "answer": "Xe đạp"
                 },
                 {
-                  "answer": "Shoe"
+                  "answer": "Giày"
                 }
               ]
             },
             {
               "answers": [
                 {
-                  "answer": "Seven"
+                  "answer": "Bảy"
                 },
                 {
-                  "answer": "Certify"
+                  "answer": "Chấp thuận"
                 },
                 {
-                  "answer": "Twice"
+                  "answer": "Hai lần"
                 },
                 {
-                  "answer": "Escalator"
+                  "answer": "Cầu thang"
                 }
               ]
             },
             {
               "answers": [
                 {
-                  "answer": "Dictionary"
+                  "answer": "Từ điển"
                 },
                 {
-                  "answer": "Suitcase"
+                  "answer": "Va li"
                 },
                 {
-                  "answer": "Unicorn"
+                  "answer": "Ngựa"
                 },
                 {
-                  "answer": "Book"
+                  "answer": "Sách"
                 }
               ]
             },
             {
               "answers": [
                 {
-                  "answer": "Seventeen"
+                  "answer": "Mười"
                 },
                 {
-                  "answer": "Baseball"
+                  "answer": "Bóng chày"
                 },
                 {
-                  "answer": "Gum"
+                  "answer": "Kẹo cao su"
                 },
                 {
-                  "answer": "Bottle"
+                  "answer": "Cái chai"
                 }
               ]
             },
             {
               "answers": [
                 {
-                  "answer": "Airport"
+                  "answer": "Sân bay"
                 },
                 {
-                  "answer": "Pen"
+                  "answer": "Cái bút"
                 },
                 {
-                  "answer": "Briefcase"
+                  "answer": "Cái túi"
                 },
                 {
-                  "answer": "Computer"
+                  "answer": "Máy tính"
                 }
               ]
             },
             {
               "answers": [
                 {
-                  "answer": "Calendar"
+                  "answer": "Lịch"
                 },
                 {
-                  "answer": "Ball"
+                  "answer": "Quả bóng"
                 },
                 {
-                  "answer": "Anniversary"
+                  "answer": "Sinh nhật"
                 },
                 {
-                  "answer": "Window"
+                  "answer": "Cửa sổ"
                 }
               ]
             },
             {
               "answers": [
                 {
-                  "answer": "Eyes"
+                  "answer": "Mắt"
                 },
                 {
-                  "answer": "Dalmatian"
+                  "answer": "Chó"
                 },
                 {
-                  "answer": "Apple"
+                  "answer": "Quả táo"
                 },
                 {
-                  "answer": "Orange"
+                  "answer": "Quả cam"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 2",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Mười"
+                },
+                {
+                  "answer": "Buổi tiệc"
+                },
+                {
+                  "answer": "Kính"
+                },
+                {
+                  "answer": "Buổi tiệc"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Than đá"
+                },
+                {
+                  "answer": "Máy ảnh"
+                },
+                {
+                  "answer": "Giữ"
+                },
+                {
+                  "answer": "Châu phi"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Điện thoại"
+                },
+                {
+                  "answer": "Ảo thuật"
+                },
+                {
+                  "answer": "Chìa khóa"
+                },
+                {
+                  "answer": "xúc xích"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Quốc gia"
+                },
+                {
+                  "answer": "Bóng đá"
+                },
+                {
+                  "answer": "Người tuyết"
+                },
+                {
+                  "answer": "Sáu"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Oregon"
+                },
+                {
+                  "answer": "Có thể"
+                },
+                {
+                  "answer": "Co giãn"
+                },
+                {
+                  "answer": "Cái xẻng"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Nướng"
+                },
+                {
+                  "answer": "Củ hành"
+                },
+                {
+                  "answer": "Đoạn trích"
+                },
+                {
+                  "answer": "Bão"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Mì Ý"
+                },
+                {
+                  "answer": "Máy in"
+                },
+                {
+                  "answer": "Dây giày"
+                },
+                {
+                  "answer": "Chào"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chuột"
+                },
+                {
+                  "answer": "Trường học"
+                },
+                {
+                  "answer": "Buổi tiệc"
+                },
+                {
+                  "answer": "Tủ sách"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Viên thuốc"
+                },
+                {
+                  "answer": "Nhân vật"
+                },
+                {
+                  "answer": "Nhân vật"
+                },
+                {
+                  "answer": "Đàn ghita"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chiếc ô"
+                },
+                {
+                  "answer": "Bánh nướng xốp"
+                },
+                {
+                  "answer": "Xe máy"
+                },
+                {
+                  "answer": "Giày"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 3",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Xúc xắc"
+                },
+                {
+                  "answer": "Giường"
+                },
+                {
+                  "answer": "Chảo"
+                },
+                {
+                  "answer": "Sừng"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đầu gối"
+                },
+                {
+                  "answer": "Vồ lấy"
+                },
+                {
+                  "answer": "Hơn"
+                },
+                {
+                  "answer": "Vượt qua"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Điện thoại"
+                },
+                {
+                  "answer": "Đã gặp"
+                },
+                {
+                  "answer": "Chơi"
+                },
+                {
+                  "answer": "Hai"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cừu non"
+                },
+                {
+                  "answer": "Mềm mại"
+                },
+                {
+                  "answer": "Xe tải"
+                },
+                {
+                  "answer": "Chìa khóa"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Ném"
+                },
+                {
+                  "answer": "Mận"
+                },
+                {
+                  "answer": "Làm rơi"
+                },
+                {
+                  "answer": "Với tới"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Bao"
+                },
+                {
+                  "answer": "Dây thừng"
+                },
+                {
+                  "answer": "Sâu"
+                },
+                {
+                  "answer": "Mũi"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Nghĩa là"
+                },
+                {
+                  "answer": "Đĩa"
+                },
+                {
+                  "answer": "Cửa hàng"
+                },
+                {
+                  "answer": "Mũ"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Bạn bè"
+                },
+                {
+                  "answer": "Sai"
+                },
+                {
+                  "answer": "Ánh sáng"
+                },
+                {
+                  "answer": "Vàng"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Gọi"
+                },
+                {
+                  "answer": "Đánh"
+                },
+                {
+                  "answer": "Phô mai"
+                },
+                {
+                  "answer": "Mái nhà"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đậu"
+                },
+                {
+                  "answer": "Nhúng"
+                },
+                {
+                  "answer": "Bàn chân"
+                },
+                {
+                  "answer": "Xe hơi"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mô-đun 4",
+          "answerGroups": [
+            {
+              "answers": [
+                {
+                  "answer": "Bữa ăn"
+                },
+                {
+                  "answer": "Câu nói đùa"
+                },
+                {
+                  "answer": "Nhẫn"
+                },
+                {
+                  "answer": "Điều chỉnh"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Chổi"
+                },
+                {
+                  "answer": "Con mèo"
+                },
+                {
+                  "answer": "Rác"
+                },
+                {
+                  "answer": "Phù thủy"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Mềm mại"
+                },
+                {
+                  "answer": "Cừu non"
+                },
+                {
+                  "answer": "Xe tải"
+                },
+                {
+                  "answer": "Chìa khóa"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Sâu"
+                },
+                {
+                  "answer": "Mũi"
+                },
+                {
+                  "answer": "Bao"
+                },
+                {
+                  "answer": "Xích"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Tiền mặt"
+                },
+                {
+                  "answer": "Vui vẻ"
+                },
+                {
+                  "answer": "Quả lê"
+                },
+                {
+                  "answer": "Con ong"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Ném"
+                },
+                {
+                  "answer": "Mận"
+                },
+                {
+                  "answer": "Bắn tung tóe"
+                },
+                {
+                  "answer": "Với tới"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Nồi"
+                },
+                {
+                  "answer": "Vòng"
+                },
+                {
+                  "answer": "Thân cây"
+                },
+                {
+                  "answer": "Chuột"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Đậu"
+                },
+                {
+                  "answer": "Nước xốt"
+                },
+                {
+                  "answer": "Bàn chân"
+                },
+                {
+                  "answer": "Xe hơi"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Cá rô"
+                },
+                {
+                  "answer": "Đã bán"
+                },
+                {
+                  "answer": "Tàu thủy"
+                },
+                {
+                  "answer": "Của tôi"
+                }
+              ]
+            },
+            {
+              "answers": [
+                {
+                  "answer": "Điện thoại"
+                },
+                {
+                  "answer": "Đã gặp"
+                },
+                {
+                  "answer": "Chơi"
+                },
+                {
+                  "answer": "Hai"
                 }
               ]
             }

@@ -264,7 +264,9 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
                       ScoreWidget(
                         context: context,
                         type: ScoreType.score,
-                        correctAnswersCount: _highScore.toString(),
+                        correctAnswersCount: correctAnswers > _highScore
+                          ? correctAnswers.toString()
+                          : _highScore.toString(),
                         subtitleText: AppLocale.generalHighestScore.getString(context),
                         isHighest: true,
                         icon: Icon(
