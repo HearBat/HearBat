@@ -132,6 +132,7 @@ class _FourAnswerWidgetState extends State<FourAnswerWidget> {
         selectedWord!.answer == correctWord.answer);
 
     setState(() {
+
       if (selectedWord!.answer == correctWord.answer) {
         if (selectedFeedback == 'On') {
           playCorrectChime(); // Play a chime if the answer is correct

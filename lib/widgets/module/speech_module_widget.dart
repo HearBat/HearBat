@@ -7,7 +7,7 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:provider/provider.dart';
 import 'package:hearbat/stats/exercise_score_model.dart';
 import 'package:hearbat/stats/module_model.dart';
 import 'package:hearbat/utils/background_noise_util.dart';
@@ -17,6 +17,7 @@ import 'package:hearbat/utils/translations.dart';
 import 'package:hearbat/widgets/module/score_widget.dart';
 import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
 import 'package:hearbat/widgets/module/check_button_widget.dart';
+import 'package:hearbat/streaks/streaks_provider.dart';
 
 class SpeechModuleWidget extends StatefulWidget {
   final String title;
@@ -46,6 +47,8 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   int numberOfExercises = 8;
   String language = 'English';
   bool _isCheckPressed = false;
+  DateTime? _moduleStartTime;
+  late StreakProvider _streakProvider;
   ConfettiController _confettiController =
       ConfettiController(duration: const Duration(seconds: 3));
 
@@ -63,10 +66,17 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _streakProvider = Provider.of<StreakProvider>(context, listen: false);
+  }
+
+  @override
   void initState() {
     super.initState();
+    _moduleStartTime = DateTime.now();
+    voiceType = widget.voiceType;
     _init();
-
     voiceType = widget.voiceType;
     _loadVoiceType();
     _sentence = _getRandomSentence();
@@ -75,7 +85,6 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     setState(() {});
     BackgroundNoiseUtil.playSavedSound();
     _loadFeedbackPreference();
-
     fetchHighScore();
   }
 
@@ -106,6 +115,13 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     voiceType = prefs.getString('voicePreference') ?? voiceType;
     language = prefs.getString('languagePreference')!;
+  }
+
+  Future<void> _recordModuleCompletion() async {
+    if (_moduleStartTime != null) {
+      final duration = DateTime.now().difference(_moduleStartTime!).inSeconds;
+      await _streakProvider.recordPracticeTimeForDate(duration, _moduleStartTime!);
+    }
   }
 
   Future<void> _playSentence() async {
@@ -392,6 +408,9 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
   }
 
   Widget buildCompletionScreen() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _recordModuleCompletion();
+    });
     return Stack(
       alignment: Alignment.topCenter,
       children: [
@@ -496,9 +515,12 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
 
   @override
   void dispose() {
+    if (!_isCompleted) {
+      _recordModuleCompletion(); // ← Catches all other exits
+    }
     _recorder.closeRecorder();
-    super.dispose();
     _confettiController.dispose();
     BackgroundNoiseUtil.stopSound();
+    super.dispose();
   }
 }
