@@ -102,6 +102,16 @@ class StreakProvider with ChangeNotifier {
     }
   }
 
+  Future<List<DailyActivity>> getAllActivities() async {
+    try {
+      final activities = await StreaksDatabase.instance.getAllActivities();
+      return activities.map(DailyActivity.fromMap).toList();
+    } catch (e) {
+      debugPrint('Error getting all activities: $e');
+      return [];
+    }
+  }
+
   Future<void> forceFirestoreSync() async {
     await StreaksDatabase.instance.syncWithFirestore();
   }

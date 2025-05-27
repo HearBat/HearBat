@@ -117,6 +117,27 @@ mixin AppLocale {
   static const String customModulesPageCreate = 'customModulesPageStart';
   static const String customModulesPageStart = 'customModulesPageCreate';
 
+  // Daily Streak Page
+  static const String dailyStreakPageTitle = 'dailyStreakPageTitle';
+  static const String dailyStreakPageLongestStreak = 'dailyStreakPageLongestStreak';
+  static const String dailyStreakPageKeepGoing = 'dailyStreakPageKeepGoing';
+  static const String dailyStreakPageStartPracticing = 'dailyStreakPageStartPracticing';
+  static const String dailyStreakPageThisWeek = 'dailyStreakPageThisWeek';
+  static const String dailyStreakPagePracticeOn = 'dailyStreakPagePracticeOn';
+  static const String dailyStreakPageErrorLoading = 'dailyStreakPageErrorLoading';
+  static const String dailyStreakPageDays = 'dailyStreakPageDays';
+  static const String dailyStreakPageHours = 'dailyStreakPageHours';
+  static const String dailyStreakPageMinutes = 'dailyStreakPageMinutes';
+  static const String dailyStreakPageLessThanMinute = 'dailyStreakPageLessThanMinute';
+  static const String dailyStreakPageWeekdayMonday = 'dailyStreakPageWeekdayMonday';
+  static const String dailyStreakPageWeekdayTuesday = 'dailyStreakPageWeekdayTuesday';
+  static const String dailyStreakPageWeekdayWednesday = 'dailyStreakPageWeekdayWednesday';
+  static const String dailyStreakPageWeekdayThursday = 'dailyStreakPageWeekdayThursday';
+  static const String dailyStreakPageWeekdayFriday = 'dailyStreakPageWeekdayFriday';
+  static const String dailyStreakPageWeekdaySaturday = 'dailyStreakPageWeekdaySaturday';
+  static const String dailyStreakPageWeekdaySunday = 'dailyStreakPageWeekdaySunday';
+
+
   // Check Button Widget
   static const String checkButtonWidgetCheck = 'checkButtonWidget';
 
@@ -311,6 +332,26 @@ mixin AppLocale {
     customModulesPageTitle: 'Custom Module Builder',
     customModulesPageCreate: 'Create Module',
     customModulesPageStart: 'START',
+
+    // Daily Streak Page
+    dailyStreakPageTitle: 'Your Streak',
+    dailyStreakPageLongestStreak: 'Longest streak: {days} days',
+    dailyStreakPageKeepGoing: 'Keep it going!',
+    dailyStreakPageStartPracticing: 'Start practicing!',
+    dailyStreakPageThisWeek: 'This week',
+    dailyStreakPagePracticeOn: 'Practice on {date}: {time}',
+    dailyStreakPageErrorLoading: 'Error loading practice time',
+    dailyStreakPageDays: '{days} days',
+    dailyStreakPageHours: '{hours}h {minutes}m',
+    dailyStreakPageMinutes: '{minutes}m',
+    dailyStreakPageLessThanMinute: '<1m',
+    dailyStreakPageWeekdayMonday: 'M',
+    dailyStreakPageWeekdayTuesday: 'T',
+    dailyStreakPageWeekdayWednesday: 'W',
+    dailyStreakPageWeekdayThursday: 'T',
+    dailyStreakPageWeekdayFriday: 'F',
+    dailyStreakPageWeekdaySaturday: 'S',
+    dailyStreakPageWeekdaySunday: 'S',
 
     // Check Button Widget
     checkButtonWidgetCheck: 'CHECK',
@@ -539,6 +580,24 @@ mixin AppLocale {
     generalHighestScore: 'Điểm cao nhất',
     generalCorrect: 'Chính xác',
     generalIncorrect: 'Không đúng',
-    generalGreat: 'Tuyệt'
+    generalGreat: 'Tuyệt',
+    dailyStreakPageTitle: 'Chuỗi ngày của bạn',
+    dailyStreakPageLongestStreak: 'Chuỗi dài nhất: {days} ngày',
+    dailyStreakPageKeepGoing: 'Tiếp tục phát huy nhé!',
+    dailyStreakPageStartPracticing: 'Bắt đầu luyện tập thôi!',
+    dailyStreakPageThisWeek: 'Tuần này',
+    dailyStreakPagePracticeOn: 'Luyện tập vào {date}: {time}',
+    dailyStreakPageErrorLoading: 'Lỗi khi tải thời gian luyện tập',
+    dailyStreakPageDays: '{days} ngày',
+    dailyStreakPageHours: '{hours}giờ {minutes}phút',
+    dailyStreakPageMinutes: '{minutes}phút',
+    dailyStreakPageLessThanMinute: '<1phút',
+    dailyStreakPageWeekdayMonday: 'T2',
+    dailyStreakPageWeekdayTuesday: 'T3',
+    dailyStreakPageWeekdayWednesday: 'T4',
+    dailyStreakPageWeekdayThursday: 'T5',
+    dailyStreakPageWeekdayFriday: 'T6',
+    dailyStreakPageWeekdaySaturday: 'T7',
+    dailyStreakPageWeekdaySunday: 'CN',
   };
 }

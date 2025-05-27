@@ -7,6 +7,7 @@ import 'package:hearbat/utils/translations.dart';
 import 'package:hearbat/widgets/top_bar_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:hearbat/streaks/streaks_provider.dart';
+import 'package:hearbat/pages/daily_streak_page.dart';
 
 class InsightsPage extends StatefulWidget {
   const InsightsPage({super.key});
@@ -20,13 +21,30 @@ class InsightsPageState extends State<InsightsPage> {
   double _progressBarValue = 0.0;
   int _timePracticed = 0;
   int _speechAccuracy = 0;
-  int _noiseAccuracy = 0;
+  //int _noiseAccuracy = 0;
   static const int _dailyGoalSeconds = 600;
+  Map<DateTime, int> _activityMap = {};
 
   @override
   void initState() {
     super.initState();
     _fetchDailyStats(DateTime.now());
+    _loadActivityData();
+  }
+
+  void _loadActivityData() async {
+    final provider = Provider.of<StreakProvider>(context, listen: false);
+    final activities = await provider.getAllActivities();
+
+    Map<DateTime, int> tempMap = {};
+    for (var activity in activities) {
+      final date = DateTime.parse(activity.date);
+      tempMap[DateTime(date.year, date.month, date.day)] = activity.totalTime;
+    }
+
+    setState(() {
+      _activityMap = tempMap;
+    });
   }
 
   void _fetchDailyStats(DateTime date) async {
@@ -34,12 +52,12 @@ class InsightsPageState extends State<InsightsPage> {
     final timePracticed = await provider.getPracticeTimeForDate(date);
     final speechAccuracy = await ExerciseScore.getExerciseAccuracyByDay("speech", date);
     // This currently tracks the average bg noise level of speech exercises--can reevaluate later
-    final noiseAccuracy = await ExerciseScore.getExerciseBGNoiseByDay("speech", date);
+    //final noiseAccuracy = await ExerciseScore.getExerciseBGNoiseByDay("speech", date);
 
     setState(() {
       _timePracticed = timePracticed;
       _speechAccuracy = (speechAccuracy*100).ceil();
-      _noiseAccuracy = (noiseAccuracy*100).ceil();
+      //_noiseAccuracy = (noiseAccuracy*100).ceil();
       _progressBarValue = _timePracticed / _dailyGoalSeconds;
       if (_progressBarValue > 1.0) {
         _progressBarValue = 1.0;
@@ -119,112 +137,137 @@ class InsightsPageState extends State<InsightsPage> {
     );
   }
 
-Widget _buildCalendar() {
-  DateTime today = DateTime.now();
+  Widget _buildCalendar() {
+    DateTime today = DateTime.now();
 
-  return Padding(
-    padding: const EdgeInsets.all(16.0),
-    child: Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 8,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
+    return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
             children: [
               Container(
-                width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 7, 45, 78),
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: _goToPreviousMonth,
-                      child: Icon(Icons.arrow_back, color: Colors.white),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 8,
+                      offset: Offset(0, 4),
                     ),
-                    Text(
-                      _formattedMonthYear(_focusedDay),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 7, 45, 78),
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: _goToPreviousMonth,
+                            child: Icon(Icons.arrow_back, color: Colors.white),
+                          ),
+                          Text(
+                            _formattedMonthYear(_focusedDay),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: _goToNextMonth,
+                            child: Icon(Icons.arrow_forward, color: Colors.white),
+                          ),
+                        ],
                       ),
                     ),
-                    GestureDetector(
-                      onTap: _goToNextMonth,
-                      child: Icon(Icons.arrow_forward, color: Colors.white),
+
+                    TableCalendar(
+                      firstDay: DateTime.utc(2020, 1, 1),
+                      lastDay: DateTime.utc(2030, 12, 31),
+                      focusedDay: _focusedDay,
+                      onPageChanged: (newFocusedDay) {
+                        setState(() {
+                          _focusedDay = newFocusedDay;
+                        });
+                        _fetchDailyStats(_focusedDay);
+                      },
+                      onDaySelected: (selectedDay, newFocusedDay) {
+                        setState(() {
+                          _focusedDay = newFocusedDay;
+                        });
+                        _fetchDailyStats(selectedDay);
+                      },
+                      startingDayOfWeek: StartingDayOfWeek.sunday,
+                      headerVisible: false,
+                      daysOfWeekHeight: 16,
+                      daysOfWeekStyle: DaysOfWeekStyle(
+                        dowTextFormatter: (date, locale) {
+                          final weekday = date.weekday;
+                          return ['S', 'M', 'T', 'W', 'T', 'F', 'S'][weekday % 7];
+                        },
+                        weekdayStyle: TextStyle(
+                          color: Color.fromARGB(179, 0, 0, 0),
+                          fontWeight: FontWeight.bold,
+                        ),
+                        weekendStyle: TextStyle(
+                          color: Color.fromARGB(179, 0, 0, 0),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      calendarStyle: CalendarStyle(
+                        cellMargin: EdgeInsets.zero,
+                        cellPadding: EdgeInsets.symmetric(vertical: 4),
+                        todayDecoration: BoxDecoration(
+                          color: Color.fromARGB(255, 7, 45, 78),
+                          shape: BoxShape.circle,
+                        ),
+                        selectedDecoration: BoxDecoration(
+                          color: Colors.green[700],
+                          shape: BoxShape.circle,
+                        ),
+                        defaultTextStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                        weekendTextStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      calendarBuilders: CalendarBuilders(
+                        markerBuilder: (context, date, events) {
+                          final normalizedDate = DateTime(date.year, date.month, date.day);
+                          if (_activityMap.containsKey(normalizedDate) && _activityMap[normalizedDate]! > 0) {
+                            return Positioned(
+                              right: 1,
+                              bottom: 1,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.green[700],
+                                  shape: BoxShape.circle,
+                                ),
+                                width: 8,
+                                height: 8,
+                              ),
+                            );
+                          }
+                          return SizedBox.shrink();
+                        },
+                      ),
                     ),
                   ],
                 ),
               ),
 
-              TableCalendar(
-                firstDay: DateTime.utc(2020, 1, 1),
-                lastDay: DateTime.utc(2030, 12, 31),
-                focusedDay: _focusedDay,
-                onPageChanged: (newFocusedDay) {
-                  setState(() {
-                    _focusedDay = newFocusedDay;
-                  });
-                  _fetchDailyStats(_focusedDay);
-                },
-                onDaySelected: (selectedDay, newFocusedDay) {
-                  setState(() {
-                    _focusedDay = newFocusedDay;
-                  });
-                  _fetchDailyStats(selectedDay);
-                },
-                startingDayOfWeek: StartingDayOfWeek.sunday,
-                headerVisible: false,
-                daysOfWeekHeight: 16,
-                daysOfWeekStyle: DaysOfWeekStyle(
-                  dowTextFormatter: (date, locale) {
-                    final weekday = date.weekday;
-                    return ['S', 'M', 'T', 'W', 'T', 'F', 'S'][weekday % 7];
-                  },
-                  weekdayStyle: TextStyle(
-                    color: Color.fromARGB(179, 0, 0, 0),
-                    fontWeight: FontWeight.bold,
-                  ),
-                  weekendStyle: TextStyle(
-                    color: Color.fromARGB(179, 0, 0, 0),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                calendarStyle: CalendarStyle(
-                  cellMargin: EdgeInsets.zero,
-                  cellPadding: EdgeInsets.symmetric(vertical: 4),
-                  todayDecoration: BoxDecoration(
-                    color: Color.fromARGB(255, 7, 45, 78),
-                    shape: BoxShape.circle,
-                  ),
-                  defaultTextStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                  weekendTextStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+              const SizedBox(height: 16),
 
-        const SizedBox(height: 16),
 
         // Daily tracker page
         Container(
@@ -353,7 +396,7 @@ Widget _buildCalendar() {
 
                     SizedBox(width: 12), // space between the two boxes
 
-                    // Noise Accuracy Box
+                    // Streak widget
                     Expanded(
                       child: Container(
                         height: 80,
@@ -362,38 +405,55 @@ Widget _buildCalendar() {
                           color: Color.fromARGB(255, 7, 45, 78),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start, // Left-aligned
-                          children: [
-                            Text(
-                              '$_noiseAccuracy%',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
+                        child: Consumer<StreakProvider>(
+                          builder: (context, provider, _) => GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (_) => DailyStreakPage()),
                             ),
-                            SizedBox(height: 4),
-                            Text(
-                              AppLocale.insightsPageNoiseChallenge.getString(context),
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.local_fire_department,
+                                        color: Colors.orange, size: 24),
+                                    SizedBox(width: 8),
+                                    Text(
+                                      '${provider.currentStreak}',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  AppLocale.dailyStreakPageDays.getString(context)
+                                      .replaceFirst('{days}', ''),
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),            
-                  ]
-                ),      
-              ]
-            ),
-          )
-        ],
-      ),
-    ),
+                    ),
+                  ],
+                ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
 
     const SizedBox(height: 16), 
 

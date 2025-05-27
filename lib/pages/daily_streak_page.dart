@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:hearbat/streaks/streaks_provider.dart';
 import 'package:intl/intl.dart';
 import '../streaks/streaks_model.dart';
+import '../utils/translations.dart';
 
 class DailyStreakPage extends StatefulWidget {
   const DailyStreakPage({super.key});
@@ -37,11 +38,14 @@ class _DailyStreakPageState extends State<DailyStreakPage> {
     final minutes = duration.inMinutes.remainder(60);
 
     if (hours > 0) {
-      return '${hours}h ${minutes}m';
+      return AppLocale.dailyStreakPageHours.getString(context)
+          .replaceFirst('{hours}', '$hours')
+          .replaceFirst('{minutes}', '$minutes');
     } else if (minutes > 0) {
-      return '${minutes}m';
+      return AppLocale.dailyStreakPageMinutes.getString(context)
+          .replaceFirst('{minutes}', '$minutes');
     } else {
-      return '<1m';
+      return AppLocale.dailyStreakPageLessThanMinute.getString(context);
     }
   }
 
@@ -82,17 +86,19 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
         const Icon(Icons.local_fire_department, size: 60, color: Colors.orange),
         const SizedBox(height: 8),
         Text(
-          '$currentStreak day${currentStreak != 1 ? 's' : ''}',
+          AppLocale.dailyStreakPageDays.getString(context).replaceFirst('{days}', '$currentStreak'),
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 4),
         Text(
-          'Longest streak: $longestStreak days',
+          AppLocale.dailyStreakPageLongestStreak.getString(context).replaceFirst('{days}', '$longestStreak'),
           style: TextStyle(color: Colors.grey[600]),
         ),
         const SizedBox(height: 4),
         Text(
-          currentStreak > 0 ? 'Keep it going!' : 'Start practicing!',
+          currentStreak > 0
+              ? AppLocale.dailyStreakPageKeepGoing.getString(context)
+              : AppLocale.dailyStreakPageStartPracticing.getString(context),
           style: TextStyle(color: Colors.grey[600]),
         ),
       ],
@@ -103,8 +109,8 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Streak'),
-        actions: [
+        title: Text(AppLocale.dailyStreakPageTitle.getString(context)),
+        /*actions: [
           IconButton(
             icon: Icon(_showDebug ? Icons.bug_report : Icons.bug_report_outlined),
             onPressed: () {
@@ -116,7 +122,7 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
               });
             },
           ),
-        ],
+        ],*/
       ),
       body: Consumer<StreakProvider>(
         builder: (context, provider, _) {
@@ -136,13 +142,15 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
                     }
                     if (snapshot.hasError) {
                       return Text(
-                        'Error loading practice time',
+                        AppLocale.dailyStreakPageErrorLoading.getString(context),
                         style: TextStyle(color: Colors.red[600], fontSize: 16),
                       );
                     }
                     final practiceTime = snapshot.data ?? 0;
                     return Text(
-                      'Practice on ${DateFormat('MMM d').format(_simulatedNow)}: ${_formatPracticeTime(practiceTime)}',
+                      AppLocale.dailyStreakPagePracticeOn.getString(context)
+                          .replaceFirst('{date}', DateFormat('MMM d').format(_simulatedNow))
+                          .replaceFirst('{time}', _formatPracticeTime(practiceTime)),
                       style: const TextStyle(fontSize: 16),
                     );
                   },
@@ -157,14 +165,25 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
   }
 
   Widget _buildWeeklyCalendar(List<DailyActivity> activities) {
-    const weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    final weekdays = [
+      AppLocale.dailyStreakPageWeekdayMonday.getString(context),
+      AppLocale.dailyStreakPageWeekdayTuesday.getString(context),
+      AppLocale.dailyStreakPageWeekdayWednesday.getString(context),
+      AppLocale.dailyStreakPageWeekdayThursday.getString(context),
+      AppLocale.dailyStreakPageWeekdayFriday.getString(context),
+      AppLocale.dailyStreakPageWeekdaySaturday.getString(context),
+      AppLocale.dailyStreakPageWeekdaySunday.getString(context),
+    ];
     final dates = List.generate(7, (index) {
       return _simulatedNow.add(Duration(days: index - 3));
     });
 
     return Column(
       children: [
-        const Text('This week', style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(
+          AppLocale.dailyStreakPageThisWeek.getString(context),
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -230,12 +249,19 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
                 onPressed: () async {
                   try {
                     await provider.forceFirestoreSync();
+                    if (!mounted) return;
+
                     ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Manual sync completed')));
+                        SnackBar(content: Text('Manual sync completed'))
+                    );
+
                     await _updateDatabaseContent();
                   } catch (e) {
+                    if (!mounted) return;
+
                     ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Sync failed: $e')));
+                        SnackBar(content: Text('Sync failed: $e'))
+                    );
                   }
                 },
                 child: const Row(

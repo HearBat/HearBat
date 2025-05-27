@@ -418,6 +418,14 @@ class StreaksDatabase {
     }
   }
 
+  Future<List<Map<String, dynamic>>> getAllActivities() async {
+    final db = await database;
+    return await db.query(
+      'daily_activity',
+      orderBy: 'date DESC',
+    );
+  }
+
   Future<void> resetLocalData() async {
     final db = await database;
     final nowIso = DateTime.now().toUtc().toIso8601String();
