@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hearbat/utils/translations.dart';
 
 class MissedAnswerWidget extends StatelessWidget {
   final String word;
@@ -35,7 +36,7 @@ class MissedAnswerWidget extends StatelessWidget {
               ),
             ),
             Text(
-              'Missed: $missCount',
+              '${AppLocale.missedAnswersPageMissed.getString(context)}: $missCount',
               style: const TextStyle(
                 fontSize: 16.0,
                 color: Colors.red, // Highlight the miss count
