@@ -94,11 +94,16 @@ mixin AppLocale {
   static const String insightsPageMissedSounds = 'insightsPageMissedSounds';
   static const String insightsPageSpeechOvertime = 'insightsPageSpeechOvertime';
 
+  // Missed Answers Page
+  static const String missedAnswersPageMissed = 'missedAnswersPageMissed';
+
   // Missed Words Page
   static const String missedWordsPageMostMissedWords = 'missedWordsPageMostMissedWords';
+  static const String missedWordsPageEmpty = 'missedWordsPageEmpty';
 
   // Missed Sounds Page
   static const String missedSoundsPageMostMissedSounds = 'missedSoundsPageMostMissedSounds';
+  static const String missedSoundsPageEmpty = 'missedSoundsPageEmpty';
 
   // Word Chapters Page
   static const String wordChaptersPageTitle = 'wordChaptersPageTitle';
@@ -289,11 +294,16 @@ mixin AppLocale {
     insightsPageMissedSounds: 'View Most Missed Sounds',
     insightsPageSpeechOvertime: 'Speech Overtime',
 
+    // Missed Answers Page
+    missedAnswersPageMissed: 'Missed',
+
     // Missed Words Page
     missedWordsPageMostMissedWords: 'Most Missed Words',
+    missedWordsPageEmpty: 'No missed words yet.',
 
     // Missed Sounds Page
     missedSoundsPageMostMissedSounds: 'Most Missed Sounds',
+    missedSoundsPageEmpty: 'No missed sounds yet.',
 
     // Word Chapters Page
     wordChaptersPageTitle: 'WORD',
@@ -466,8 +476,11 @@ mixin AppLocale {
     insightsPageMissedWords: 'Xem những từ bị sai nhiều nhất',
     insightsPageMissedSounds: 'Xem những âm thanh bị sai nhiều nhất',
     insightsPageSpeechOvertime: 'Trình độ nói theo theo thời gian',
+    missedAnswersPageMissed: 'Bỏ lỡ',
     missedWordsPageMostMissedWords: 'Những từ bị sai nhiều nhất',
+    missedWordsPageEmpty: 'Chưa có từ nào bị bỏ sót.',
     missedSoundsPageMostMissedSounds: 'Âm thanh bị sai nhiều nhất',
+    missedSoundsPageEmpty: 'Chưa có âm thanh nào bị bỏ lỡ.',
     wordChaptersPageTitle: 'TỪ',
     soundChaptersPageTitle: 'ÂM THANH',
     speechChaptersPageTitle: 'NÓI THEO',
