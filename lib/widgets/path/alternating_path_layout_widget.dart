@@ -61,6 +61,7 @@ class _AlternatingPathLayoutState extends State<AlternatingPathLayout> {
     double totalHeight = yOffset;
 
     return SingleChildScrollView(
+      padding: const EdgeInsets.only(bottom: 150.0),
       child: Column(
         children: [
           GestureDetector(

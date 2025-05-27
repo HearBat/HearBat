@@ -43,6 +43,7 @@ class _SoundAlternatingPathLayoutState
     double totalHeight = yOffset;
     
     return SingleChildScrollView(
+      padding: const EdgeInsets.only(bottom: 150.0),
       child: SizedBox(
         height: totalHeight, 
         child: Stack(children: positionedItems)
