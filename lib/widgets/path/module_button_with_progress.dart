@@ -8,15 +8,13 @@ class ModuleButtonWithProgress extends StatelessWidget {
   final List<dynamic> answerGroups;
   final void Function(String, List<AnswerGroup>) onButtonPressed;
   final int filledSections;
-  final int totalSections;
 
   const ModuleButtonWithProgress({
     super.key,
     required this.moduleName,
     required this.answerGroups,
     required this.onButtonPressed,
-    this.filledSections = 0,
-    this.totalSections = 3,
+    required this.filledSections
   });
 
   @override
@@ -41,7 +39,7 @@ class ModuleButtonWithProgress extends StatelessWidget {
           const SizedBox(height: 60),
           ModuleProgressBar(
             filledSections: filledSections,
-            totalSections: totalSections,
+            totalSections: 3,
           ),
         ],
       ),

@@ -187,16 +187,18 @@ class PitchResolutionExerciseState extends State<PitchResolutionExercise> {
     }
   }
 
-  void showResults() {
-    ExerciseScore.insert(
-      "music",
-      DateTime.now(),
-      correctAnswers,
-      widget.answerGroups.length);
-    module_stats.Module.updateStats(
+  void showResults() async {
+    await module_stats.Module.updateStats(
       "music",
       widget.title,
       correctAnswers);
+
+    await ExerciseScore.insert(
+      "music",
+      widget.title,
+      DateTime.now(),
+      correctAnswers,
+      widget.answerGroups.length);
 
     setState(() {
       moduleCompleted = true;

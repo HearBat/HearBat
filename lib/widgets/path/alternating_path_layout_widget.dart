@@ -162,7 +162,7 @@ class _ProgressBarPainter extends CustomPainter {
 
     for (int i = 0; i < totalSections; i++) {
       paint.color = (i >= totalSections - filledSections
-          ? Color.fromARGB(255, 98, 81, 162)
+          ? Color.fromARGB(255, 239, 255, 18)
           : Color.fromARGB(255, 71, 93, 113));
 
       final double currentAngle = startAngle + (i * sectionAngle);

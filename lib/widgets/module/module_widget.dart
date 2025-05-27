@@ -232,18 +232,20 @@ class _ModulePageState extends State<ModuleWidget> {
       child: FourAnswerWidget(
         exerciseType: widget.type,
         answerGroups: widget.answerGroups,
-        onCompletion: () {
-          // Save stats
-          ExerciseScore.insert(
-            widget.type,
-            DateTime.now(),
-            correctAnswersCount,
-            widget.answerGroups.length);
-          module_stats.Module.updateStats(
+        onCompletion: () async {
+          // need to await this to make sure we have a module entry for exercise score to reference
+          await module_stats.Module.updateStats(
             widget.type,
             widget.title,
             correctAnswersCount);
-
+          
+          await ExerciseScore.insert(
+            widget.type,
+            widget.title,
+            DateTime.now(),
+            correctAnswersCount,
+            widget.answerGroups.length);
+          
           setState(() => moduleCompleted = true);
         },
         onCorrectAnswer: () {

@@ -138,7 +138,7 @@ class AnimatedButtonState extends State<AnimatedButton>
                 height: 50 * 1.2,
                 width: 100 * 1.2,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.2),
+                  color: const Color.fromARGB(255, 98, 81, 162),
                   borderRadius: BorderRadius.all(
                     Radius.elliptical(100 * 1.5, 50 * 1.5),
                   ),
