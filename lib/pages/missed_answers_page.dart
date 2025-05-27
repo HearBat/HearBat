@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:hearbat/stats/answer_model.dart';
-import 'package:hearbat/utils/text_util.dart';
+import 'package:hearbat/utils/translations.dart';
 import 'package:hearbat/widgets/top_bar_widget.dart';
 import 'package:hearbat/widgets/insight/missed_answer_widget.dart';
 
@@ -39,7 +39,7 @@ class MissedAnswersPageState extends State<MissedAnswersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopBar(title: 'INSIGHTS'),
+      appBar: TopBar(title: AppLocale.insightsPageTitle.getString(context)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
@@ -47,7 +47,9 @@ class MissedAnswersPageState extends State<MissedAnswersPage> {
             Column(
               children: [
                 Text(
-                  'Most Missed ${capitalizeWord(widget.type)}',
+                  widget.type == "sounds" ?
+                    AppLocale.missedSoundsPageMostMissedSounds.getString(context) :
+                    AppLocale.missedWordsPageMostMissedWords.getString(context),
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -55,7 +57,10 @@ class MissedAnswersPageState extends State<MissedAnswersPage> {
                   ),
                 ),
                 _missedAnswers.isEmpty
-                  ? Center(child: Text("No missed ${widget.type} yet.\n"))
+                  ? Center(child: Text(
+                    widget.type == "sounds" ?
+                      AppLocale.missedSoundsPageEmpty.getString(context) :
+                      AppLocale.missedWordsPageEmpty.getString(context)))
                   : Expanded(
                     child: ListView.builder(
                       itemCount: _missedAnswers.length,
