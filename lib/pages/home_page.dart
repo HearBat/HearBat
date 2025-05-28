@@ -6,7 +6,6 @@ import 'module_types/speech/speech_chapters.dart';
 import 'module_types/custom/custom_path.dart';
 import 'module_types/music/music_chapters.dart';
 import '../widgets/home_card_widget.dart';
-import '../utils/text_util.dart';
 import '../utils/translations.dart';
 
 class HomePage extends StatelessWidget {
@@ -25,34 +24,37 @@ class HomePage extends StatelessWidget {
             children: [
               SizedBox(
                 width: double.infinity,
-                height: 200,
+                height: 240,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(height: 30),
-                        Text(
-                          AppLocale.homePageTitle.getString(context),
-                          style: GoogleFonts.londrinaSolid(
-                            textStyle: TextStyle(
-                              fontSize: 100,
-                              color: Color.fromARGB(255, 7, 45, 78),
-                              height: 0.8,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(height: 30),
+                          Text(
+                            AppLocale.homePageTitle.getString(context),
+                            style: GoogleFonts.londrinaSolid(
+                              textStyle: TextStyle(
+                                fontSize: 100,
+                                color: Color.fromARGB(255, 7, 45, 78),
+                                height: 0.8,
+                              ),
                             ),
                           ),
-                        ),
-                        Text(
-                          AppLocale.homePageSubtitle.getString(context),
-                          style: GoogleFonts.londrinaSolid(
-                            textStyle: TextStyle(
-                              fontSize: 30,
-                              color: Color.fromARGB(255, 7, 45, 78),
+                          Text(
+                            AppLocale.homePageSubtitle.getString(context),
+                            style: GoogleFonts.londrinaSolid(
+                              textStyle: TextStyle(
+                                fontSize: 30,
+                                color: Color.fromARGB(255, 7, 45, 78),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

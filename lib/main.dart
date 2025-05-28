@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hearbat/stats/stats_db.dart';
+import 'package:hearbat/streaks/streaks_db.dart';
 import 'package:provider/provider.dart';
 import 'providers/my_app_state.dart';
+import 'streaks/streaks_provider.dart';
 import 'pages/sound_adjustment_page.dart'; 
 import 'utils/config_util.dart';
 import 'utils/data_service_util.dart';
 import 'utils/translations.dart';
 import 'utils/push_notifs.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 final FlutterLocalization localization = FlutterLocalization.instance;
 
@@ -19,12 +23,17 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,);
   await FlutterLocalization.instance.ensureInitialized();
   await ConfigurationManager().fetchConfiguration();
   await PushNotifications().initFirebaseMessaging(); // FCM
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await DataService().loadJson();
   await StatsDatabase().init();
+  final streaksDb = StreaksDatabase.instance;
+  await streaksDb.database;
+  await streaksDb.syncWithFirestore();
   runApp(const MyApp());
 }
 
@@ -55,8 +64,11 @@ class _MyAppState extends State<MyApp> {
   
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => MyAppState()),
+        ChangeNotifierProvider(create: (context) => StreakProvider()),
+      ],
       child: MaterialApp(
         supportedLocales: localization.supportedLocales,
         localizationsDelegates: localization.localizationsDelegates,

@@ -53,6 +53,9 @@ mixin AppLocale {
   static const String settingsPageVoiceINMale = 'settingsPageVoiceINMale';
   static const String settingsPageVoiceAUFemale = 'settingsPageVoiceAUFemale';
   static const String settingsPageVoiceAUMale = 'settingsPageVoiceAUMale';
+  static const String settingsPageVoiceVIFemale = 'settingsPageVoiceVIFemale';
+  static const String settingsPageVoiceVIMale = 'settingsPageVoiceVIMale';
+
 
   static const String settingsPageClearCache = 'settingsPageClearCache';
 
@@ -121,6 +124,27 @@ mixin AppLocale {
   static const String customModulesPageTitle = 'customModulesPageTitle';
   static const String customModulesPageCreate = 'customModulesPageStart';
   static const String customModulesPageStart = 'customModulesPageCreate';
+
+  // Daily Streak Page
+  static const String dailyStreakPageTitle = 'dailyStreakPageTitle';
+  static const String dailyStreakPageLongestStreak = 'dailyStreakPageLongestStreak';
+  static const String dailyStreakPageKeepGoing = 'dailyStreakPageKeepGoing';
+  static const String dailyStreakPageStartPracticing = 'dailyStreakPageStartPracticing';
+  static const String dailyStreakPageThisWeek = 'dailyStreakPageThisWeek';
+  static const String dailyStreakPagePracticeOn = 'dailyStreakPagePracticeOn';
+  static const String dailyStreakPageErrorLoading = 'dailyStreakPageErrorLoading';
+  static const String dailyStreakPageDays = 'dailyStreakPageDays';
+  static const String dailyStreakPageHours = 'dailyStreakPageHours';
+  static const String dailyStreakPageMinutes = 'dailyStreakPageMinutes';
+  static const String dailyStreakPageLessThanMinute = 'dailyStreakPageLessThanMinute';
+  static const String dailyStreakPageWeekdayMonday = 'dailyStreakPageWeekdayMonday';
+  static const String dailyStreakPageWeekdayTuesday = 'dailyStreakPageWeekdayTuesday';
+  static const String dailyStreakPageWeekdayWednesday = 'dailyStreakPageWeekdayWednesday';
+  static const String dailyStreakPageWeekdayThursday = 'dailyStreakPageWeekdayThursday';
+  static const String dailyStreakPageWeekdayFriday = 'dailyStreakPageWeekdayFriday';
+  static const String dailyStreakPageWeekdaySaturday = 'dailyStreakPageWeekdaySaturday';
+  static const String dailyStreakPageWeekdaySunday = 'dailyStreakPageWeekdaySunday';
+
 
   // Check Button Widget
   static const String checkButtonWidgetCheck = 'checkButtonWidget';
@@ -324,6 +348,26 @@ mixin AppLocale {
     customModulesPageCreate: 'Create Module',
     customModulesPageStart: 'START',
 
+    // Daily Streak Page
+    dailyStreakPageTitle: 'Your Streak',
+    dailyStreakPageLongestStreak: 'Longest streak: {days} days',
+    dailyStreakPageKeepGoing: 'Keep it going!',
+    dailyStreakPageStartPracticing: 'Start practicing!',
+    dailyStreakPageThisWeek: 'This week',
+    dailyStreakPagePracticeOn: 'Practice on {date}: {time}',
+    dailyStreakPageErrorLoading: 'Error loading practice time',
+    dailyStreakPageDays: '{days} days',
+    dailyStreakPageHours: '{hours}h {minutes}m',
+    dailyStreakPageMinutes: '{minutes}m',
+    dailyStreakPageLessThanMinute: '<1m',
+    dailyStreakPageWeekdayMonday: 'M',
+    dailyStreakPageWeekdayTuesday: 'T',
+    dailyStreakPageWeekdayWednesday: 'W',
+    dailyStreakPageWeekdayThursday: 'T',
+    dailyStreakPageWeekdayFriday: 'F',
+    dailyStreakPageWeekdaySaturday: 'S',
+    dailyStreakPageWeekdaySunday: 'S',
+
     // Check Button Widget
     checkButtonWidgetCheck: 'CHECK',
 
@@ -449,6 +493,8 @@ mixin AppLocale {
     settingsPageVoiceINMale: 'Nam Ấn Độ',
     settingsPageVoiceAUFemale: 'Nữ Úc',
     settingsPageVoiceAUMale: 'Nam Úc',
+    settingsPageVoiceVIFemale: 'Nữ Việt Nam',
+    settingsPageVoiceVIMale: 'Nam Việt Nam',
     settingsPageClearCache: 'XÓA BỘ NHỚ',
     selectionPageDifficultyTitle: 'Trình độ khó',
     selectionPageDifficultySubtitle: 'Bằng cách hoàn thành các mô-đun, bạn có thể mở khóa các cấp độ khó',
@@ -475,7 +521,7 @@ mixin AppLocale {
     insightsPageTimePracticed: 'Thời gian luyện tập',
     insightsPageMinuteAbbr: 'ph',
     insightsPageDailyGoal: 'của mục tiêu hàng ngày đạt được',
-    insightsPageSpeechAccuracy: '% chính xác khi nói',
+    insightsPageSpeechAccuracy: 'chính xác khi nói',
     insightsPageNoiseChallenge: 'Thử thách tiếng',
     insightsPageMissedWords: 'Xem những từ bị sai nhiều nhất',
     insightsPageMissedSounds: 'Xem những âm thanh bị sai nhiều nhất',
@@ -558,7 +604,25 @@ mixin AppLocale {
     generalIncorrect: 'Không đúng',
     generalGreat: 'Tuyệt',
     generalPleaseSelect: 'Vui lòng chọn',
-    generalAsTheAnswer: 'làm câu trả lời'
+    generalAsTheAnswer: 'làm câu trả lời',
+    dailyStreakPageTitle: 'Chuỗi ngày của bạn',
+    dailyStreakPageLongestStreak: 'Chuỗi dài nhất: {days} ngày',
+    dailyStreakPageKeepGoing: 'Tiếp tục phát huy nhé!',
+    dailyStreakPageStartPracticing: 'Bắt đầu luyện tập thôi!',
+    dailyStreakPageThisWeek: 'Tuần này',
+    dailyStreakPagePracticeOn: 'Luyện tập vào {date}: {time}',
+    dailyStreakPageErrorLoading: 'Lỗi khi tải thời gian luyện tập',
+    dailyStreakPageDays: '{days} ngày',
+    dailyStreakPageHours: '{hours}giờ {minutes}phút',
+    dailyStreakPageMinutes: '{minutes}phút',
+    dailyStreakPageLessThanMinute: '<1phút',
+    dailyStreakPageWeekdayMonday: 'T2',
+    dailyStreakPageWeekdayTuesday: 'T3',
+    dailyStreakPageWeekdayWednesday: 'T4',
+    dailyStreakPageWeekdayThursday: 'T5',
+    dailyStreakPageWeekdayFriday: 'T6',
+    dailyStreakPageWeekdaySaturday: 'T7',
+    dailyStreakPageWeekdaySunday: 'CN',
   };
 
   static String fetchContextFreeTranslation(String language, String key) {

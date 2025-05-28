@@ -1,19 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:hearbat/models/chapter_model.dart';
+import 'package:hearbat/utils/background_noise_util.dart';
+import 'package:hearbat/utils/audio_util.dart';
+import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
+import '../../streaks/streaks_provider.dart';
+import 'package:provider/provider.dart';
 import 'four_answer_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'word_missed_button_widget.dart';
 import 'package:confetti/confetti.dart';
 import 'score_widget.dart';
-
-import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/stats/exercise_score_model.dart';
 import 'package:hearbat/stats/module_model.dart' as module_stats;
-import 'package:hearbat/utils/audio_util.dart';
-import 'package:hearbat/utils/background_noise_util.dart';
 import 'package:hearbat/utils/google_tts_util.dart';
 import 'package:hearbat/utils/translations.dart';
-import 'package:hearbat/widgets/module/module_progress_bar_widget.dart';
 
 class ModuleWidget extends StatefulWidget {
   final String title;
@@ -43,7 +44,15 @@ class _ModulePageState extends State<ModuleWidget> {
   ConfettiController _confettiController =
       ConfettiController(duration: const Duration(seconds: 3));
   String language = 'English';
+  late StreakProvider _streakProvider;
+  DateTime? _moduleStartTime;
   int _highScore = 0;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _streakProvider = Provider.of<StreakProvider>(context, listen: false);
+  }
 
   void fetchHighScore() async {
     final module = await module_stats.Module.getModuleByName(widget.title);
@@ -68,10 +77,14 @@ class _ModulePageState extends State<ModuleWidget> {
     BackgroundNoiseUtil.initialize().then((_) {
       BackgroundNoiseUtil.playSavedSound();
     });
+    _moduleStartTime = DateTime.now();
   }
 
   @override
   void dispose() {
+    if (!moduleCompleted) {
+      _recordModuleCompletion();
+    }
     BackgroundNoiseUtil.stopSound();
     AudioUtil.stop();
     _confettiController.dispose();
@@ -89,6 +102,13 @@ class _ModulePageState extends State<ModuleWidget> {
         voiceType = storedVoiceType;
       });
     }
+  }
+
+  Future<void> _recordModuleCompletion() async {
+    if (_moduleStartTime != null) {
+      final duration = DateTime.now().difference(_moduleStartTime!).inSeconds;
+        await _streakProvider.recordPracticeTimeForDate(duration, _moduleStartTime!);
+      }
   }
 
   void updateProgress(int newIndex) {
@@ -232,18 +252,20 @@ class _ModulePageState extends State<ModuleWidget> {
       child: FourAnswerWidget(
         exerciseType: widget.type,
         answerGroups: widget.answerGroups,
-        onCompletion: () {
-          // Save stats
-          ExerciseScore.insert(
-            widget.type,
-            DateTime.now(),
-            correctAnswersCount,
-            widget.answerGroups.length);
-          module_stats.Module.updateStats(
+        onCompletion: () async {
+          // need to await this to make sure we have a module entry for exercise score to reference
+          await module_stats.Module.updateStats(
             widget.type,
             widget.title,
             correctAnswersCount);
-
+          
+          await ExerciseScore.insert(
+            widget.type,
+            widget.title,
+            DateTime.now(),
+            correctAnswersCount,
+            widget.answerGroups.length);
+          
           setState(() => moduleCompleted = true);
         },
         onCorrectAnswer: () {
@@ -264,6 +286,9 @@ class _ModulePageState extends State<ModuleWidget> {
   }
 
   Widget buildCompletionScreen() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _recordModuleCompletion();
+    });
     BackgroundNoiseUtil.stopSound();
     return Stack(
       alignment: Alignment.topCenter,
