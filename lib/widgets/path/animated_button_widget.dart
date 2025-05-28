@@ -57,21 +57,29 @@ class AnimatedButtonState extends State<AnimatedButton>
     super.dispose();
   }
 
-  void _onTapDown(_)    => setState(() => _pressed = true);
-  void _onTapCancel()   => setState(() => _pressed = false);
-void _onTapUp(TapUpDetails details) async {
-  setState(() => _pressed = false);
-  setState(() => _buttonColor = _pressedColor);
+void _onTapDown(_) {
+    setState(() => _pressed = true);
+  }
 
-  await Scrollable.ensureVisible(
-    _buttonKey.currentContext!,
-    duration: const Duration(milliseconds: 200),
-    alignment: 0.5,
-  );
+  void _onTapCancel() {
+    setState(() => _pressed = false);
+  }
 
-  _toggleOverlay();
-}
+  void _onTapUp(TapUpDetails details) async {
+    await Future.delayed(const Duration(milliseconds: 100));
 
+    setState(() => _pressed = false);
+
+    setState(() => _buttonColor = _defaultColor);
+
+    await Scrollable.ensureVisible(
+      _buttonKey.currentContext!,
+      duration: const Duration(milliseconds: 200),
+      alignment: 0.5,
+    );
+
+    _toggleOverlay();
+  }
 
   void _toggleOverlay() {
     if (_overlayEntry != null) {
@@ -232,59 +240,69 @@ void _onTapUp(TapUpDetails details) async {
 }
 
 
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        // shadow
-        Positioned(
-          top: _pressed ? 8 : 9,
-          left: 0,
-          right: 0,
-          child: Container(
+ @override
+Widget build(BuildContext context) {
+  final buttonWidth  = 100 * 1.2;
+  final buttonHeight = (60 * 1.2) + 9; 
+
+  return GestureDetector(
+    key: _buttonKey,
+    behavior: HitTestBehavior.translucent,  
+    onTapDown:   _onTapDown,
+    onTapUp:     _onTapUp,
+    onTapCancel: _onTapCancel,
+    child: SizedBox(
+      width:  buttonWidth,
+      height: buttonHeight,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          // 1) shadow layer
+          Positioned(
+            top: _pressed ? 8 : 9,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 60 * 1.2,
+              width:  buttonWidth,
+              decoration: BoxDecoration(
+                color: _pressedColor,
+                borderRadius: const BorderRadius.all(
+                  Radius.elliptical(120, 75),
+                ),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 10,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // 2) animated button face
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 100),
+            margin: EdgeInsets.only(top: _pressed ? 8 : 0),
             height: 60 * 1.2,
-            width: 100 * 1.2,
+            width:  buttonWidth,
             decoration: BoxDecoration(
-              color: _pressedColor,
+              color: _buttonColor,
               borderRadius: const BorderRadius.all(
                 Radius.elliptical(120, 75),
               ),
               boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12, blurRadius: 10, spreadRadius: 2
-                ),
+                BoxShadow(color: Colors.grey, blurRadius: 4, offset: Offset(0, 2)),
               ],
             ),
           ),
-        ),
+        ],
+      ),
+    ),
+  );
+}
 
-        AnimatedContainer(
-          key: _buttonKey,
-          duration: const Duration(milliseconds: 20),
-          margin: EdgeInsets.only(top: _pressed ? 8 : 0),
-          height: 60 * 1.2,
-          width: 100 * 1.2,
-          decoration: BoxDecoration(
-            color: _buttonColor,
-            borderRadius: const BorderRadius.all(
-              Radius.elliptical(120, 75),
-            ),
-            boxShadow: const [
-              BoxShadow(color: Colors.grey, blurRadius: 4, offset: Offset(0, 2)),
-            ],
-          ),
-          child: GestureDetector(
-            onTapDown: _onTapDown,
-            onTapUp: _onTapUp,
-            onTapCancel: _onTapCancel,
-            behavior: HitTestBehavior.opaque,
-            child: const SizedBox.expand(),
-          ),
-        ),
-      ],
-    );
-  }
 }
 
 class _UpArrowPainter extends CustomPainter {
