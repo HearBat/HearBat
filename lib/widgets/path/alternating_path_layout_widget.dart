@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
+import 'dart:math' as math;
 import '../../pages/module_types/words/words_list_page.dart';
 import '../../utils/data_service_util.dart';
 import '../../utils/translations.dart';
@@ -60,6 +61,7 @@ class _AlternatingPathLayoutState extends State<AlternatingPathLayout> {
     double totalHeight = yOffset;
 
     return SingleChildScrollView(
+      padding: const EdgeInsets.only(bottom: 150.0),
       child: Column(
         children: [
           GestureDetector(
@@ -79,7 +81,8 @@ class _AlternatingPathLayoutState extends State<AlternatingPathLayout> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: Text(
-                    AppLocale.alternatingPathViewChapterWords.getString(context),
+                    AppLocale.alternatingPathViewChapterWords
+                        .getString(context),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -98,32 +101,21 @@ class _AlternatingPathLayoutState extends State<AlternatingPathLayout> {
     );
   }
 
-  Positioned _buildPositionedItem(BuildContext context,
-      IndexedWidgetBuilder itemBuilder, double left, double top, int index) {
+  Positioned _buildPositionedItem(
+    BuildContext context,
+    IndexedWidgetBuilder itemBuilder,
+    double left,
+    double top,
+    int index,
+  ) {
     return Positioned(
       left: left,
       top: top,
-      child: Column(
-        children: [
-          SizedBox(
-            width: widget.itemSize,
-            height: widget.itemSize,
-            child: itemBuilder(context, index),
-          ),
-          const SizedBox(height: 6),
-          ModuleProgressBar(
-            filledSections: 1,
-            totalSections: 3,
-            // width: widget.itemSize,      // needed for arc bar
-            // height: widget.itemSize / 2, // needed for arc bar
-          ),
-        ],
-      ),
+      child: itemBuilder(context, index),
     );
   }
 }
 
-// draws progress bar under
 class ModuleProgressBar extends StatelessWidget {
   final int filledSections;
   final int totalSections;
@@ -133,12 +125,15 @@ class ModuleProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _ProgressBarPainter(
-        filledSections: filledSections,
-        totalSections: totalSections,
+    return Transform.translate(
+      offset: const Offset(0, -80), 
+      child: CustomPaint(
+        painter: _ProgressBarPainter(
+          filledSections: filledSections,
+          totalSections: totalSections,
+        ),
+        size: const Size(140, 50),
       ),
-      size: const Size(140, 8), // x (length of bar), y (height of each section)
     );
   }
 }
@@ -154,164 +149,67 @@ class _ProgressBarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final double sectionWidth = size.width / totalSections;
-    final double sectionHeight = size.height;
-
     final paint = Paint()..style = PaintingStyle.fill;
-    // ..strokeCap = StrokeCap.butt;
-    // ..strokeCap = StrokeCap.round;
-    // ..strokeCap = StrokeCap.square;
+
+    final double centerX = size.width / 2;
+    final double centerY = -75;
+    final double radius = 120;
+
+    final double startAngle = math.pi * 0.35;
+    final double endAngle = math.pi - (math.pi * 0.35);
+    final double totalArcAngle = endAngle - startAngle;
+    final double sectionAngle = totalArcAngle / totalSections;
+    final double gapAngle = math.pi / 180 * 2;
 
     for (int i = 0; i < totalSections; i++) {
-      paint.color = (i < filledSections
-          ? Color.fromARGB(255, 98, 81, 162)
+      paint.color = (i >= totalSections - filledSections
+          ? Color.fromARGB(255, 239, 255, 18)
           : Color.fromARGB(255, 71, 93, 113));
 
-      // positioning for each section
-      final left = i * sectionWidth;
+      final double currentAngle = startAngle + (i * sectionAngle);
+      final double nextAngle = currentAngle + sectionAngle;
 
-      // default rectangle
-      final rect = Rect.fromLTRB(
-        left + 2,
-        -40,
-        left + sectionWidth - 2,
-        sectionHeight - 40,
-        // Radius.circular(sectionHeight),
+      final double adjustedCurrentAngle =
+          currentAngle + (i > 0 ? gapAngle / 2 : 0);
+      final double adjustedNextAngle =
+          nextAngle - (i < totalSections - 1 ? gapAngle / 2 : 0);
+
+      final Path sectionPath = Path();
+      final double innerRadius = radius - 8;
+
+      sectionPath.moveTo(
+        centerX + innerRadius * math.cos(adjustedCurrentAngle),
+        centerY + innerRadius * math.sin(adjustedCurrentAngle),
       );
 
-      // rounded for start and end section
-      final rrectLeft = RRect.fromRectAndCorners(
-        rect,
-        topLeft: Radius.circular(sectionHeight),
-        bottomLeft: Radius.circular(sectionHeight),
-      );
-      final rrectRight = RRect.fromRectAndCorners(
-        rect,
-        topRight: Radius.circular(sectionHeight),
-        bottomRight: Radius.circular(sectionHeight),
+      sectionPath.arcTo(
+        Rect.fromCircle(center: Offset(centerX, centerY), radius: innerRadius),
+        adjustedCurrentAngle,
+        adjustedNextAngle - adjustedCurrentAngle,
+        false,
       );
 
-      // decide which rectangle type to draw
-      if (i == 0) {
-        canvas.drawRRect(rrectLeft, paint);
-      } else if (i == totalSections - 1) {
-        canvas.drawRRect(rrectRight, paint);
-      } else {
-        canvas.drawRect(rect, paint);
-      }
+      sectionPath.lineTo(
+        centerX + radius * math.cos(adjustedNextAngle),
+        centerY + radius * math.sin(adjustedNextAngle),
+      );
+
+      sectionPath.arcTo(
+        Rect.fromCircle(center: Offset(centerX, centerY), radius: radius),
+        adjustedNextAngle,
+        -(adjustedNextAngle - adjustedCurrentAngle),
+        false,
+      );
+
+      sectionPath.lineTo(
+        centerX + innerRadius * math.cos(adjustedCurrentAngle),
+        centerY + innerRadius * math.sin(adjustedCurrentAngle),
+      );
+
+      canvas.drawPath(sectionPath, paint);
     }
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
-
-//******************************************************************** testing for arc progress bar ************************************************************
-
-//   Positioned _buildPositionedItem(BuildContext context,
-//       IndexedWidgetBuilder itemBuilder, double left, double top, int index) {
-//     return Positioned(
-//       left: left,
-//       top: top,
-//       child: Column(
-//         children: [
-//           SizedBox(
-//             width: widget.itemSize,
-//             height: widget.itemSize,
-//             child: itemBuilder(context, index),
-//           ),
-//           const SizedBox(height: 6),
-//           ModuleProgressBar(
-//             filledSections: 1,
-//             totalSections: 3,
-//             width: widget.itemSize,
-//             height: widget.itemSize / 2,
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class ModuleProgressBar extends StatelessWidget {
-//   final int filledSections;
-//   final int totalSections;
-//   final double width;
-//   final double height;
-
-//   const ModuleProgressBar({
-//     super.key,
-//     required this.filledSections,
-//     required this.totalSections,
-//     required this.width,
-//     required this.height,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Transform(
-//       alignment: Alignment.center,
-//       transform: Matrix4.rotationX(pi),
-//       child: CustomPaint(
-//         size: Size(width, height / 2),
-//         painter: _ModuleProgressBarPainter(
-//           filledSections: filledSections,
-//           totalSections: totalSections,
-//           width: width,
-//           height: height,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class _ModuleProgressBarPainter extends CustomPainter {
-//   final int filledSections;
-//   final int totalSections;
-//   final double width;
-//   final double height;
-
-//   _ModuleProgressBarPainter({
-//     required this.filledSections,
-//     required this.totalSections,
-//     required this.width,
-//     required this.height,
-//   });
-
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     final Paint paint = Paint()
-//       ..style = PaintingStyle.stroke
-//       ..strokeWidth = 8
-//       ..strokeCap = StrokeCap.round;
-
-//     final double startAngle = pi * 9 / 8; // Start from the left (180°)
-//     final double sweep = pi * (2 - (9/8)); // Half ellipse
-//     final double sectionsweep = sweep / totalSections;
-
-//     for (int i = 0; i < totalSections; i++) {
-//       paint.color =
-//           i < filledSections 
-//           ? Color.fromARGB(255, 98, 81, 162)
-//           : Color.fromARGB(255, 71, 93, 113));
-
-//       final double segStart = startAngle + i * sectionsweep;
-
-//       final Path path = Path()
-//         ..addArc(
-//           Rect.fromCenter(
-//             center: Offset(width / 2, height * 1.75),
-//             width: width * 1.2,
-//             height: height,
-//           ),
-//           segStart,
-//           sectionsweep,
-//         );
-
-//       canvas.drawPath(path, paint);
-//     }
-//   }
-
-//   @override
-//   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
-// }

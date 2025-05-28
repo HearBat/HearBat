@@ -4,12 +4,14 @@ import 'package:hearbat/stats/stats_db.dart';
 class Module {
   static const _table = "module";
 
+  final int? id;
   final int exerciseId;
   final String name;
   final int? highScore;
   final int? timesCompleted;
 
   Module({
+    this.id,
     required this.exerciseId,
     required this.name,
     this.highScore,
@@ -18,6 +20,7 @@ class Module {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'exercise_id': exerciseId,
       'name': name,
       if (highScore != null) 'high_score': highScore,
@@ -27,6 +30,7 @@ class Module {
 
   static Module fromMap(Map<String, dynamic> map) {
     return Module(
+      id: map['id'],
       exerciseId: map['exercise_id'],
       name: map['name'],
       highScore: map['high_score'],

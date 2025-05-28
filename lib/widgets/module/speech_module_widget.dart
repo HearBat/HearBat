@@ -242,10 +242,10 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
     if (_isCompleted) {
       const maxScore = 100;
       final score = _getEffectiveScore(); // Average out of 100
-      await ExerciseScore.insert("speech", DateTime.now(), score, maxScore,
+      await Module.updateStats("speech", widget.title, score);
+      await ExerciseScore.insert("speech", widget.title, DateTime.now(), score, maxScore,
           bgNoise:
               BackgroundNoiseUtil.isPlaying ? BackgroundNoiseUtil.volume : 0.0);
-      await Module.updateStats("speech", widget.title, score);
     }
   }
 

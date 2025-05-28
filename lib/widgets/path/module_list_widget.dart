@@ -1,29 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:hearbat/stats/exercise_score_model.dart';
 import 'package:hearbat/widgets/path/difficulty_selection_widget.dart';
 import 'package:hearbat/models/chapter_model.dart';
+import 'package:hearbat/widgets/path/module_button_with_progress.dart';
 import 'alternating_path_layout_widget.dart';
-import 'animated_button_widget.dart';
 
 class ModuleListWidget extends StatefulWidget {
   final Map<String, Module> modules;
   final String chapter;
   final String exerciseType;
-
+  
   ModuleListWidget({
     super.key,
     required this.modules,
     required this.chapter,
     required this.exerciseType
   });
-
+  
   @override
   ModuleListWidgetState createState() => ModuleListWidgetState();
 }
 
 class ModuleListWidgetState extends State<ModuleListWidget>
     with TickerProviderStateMixin {
+  
+  Future<Map<String, int>> _loadModuleProgress() async {
+    Map<String, int> progress = {};
+    for (String moduleName in widget.modules.keys) {
+      String fullName = '${widget.chapter} $moduleName';
+      int completions = await ExerciseScore.getHighScoreCompletions(fullName);
+      int clampedCompletions = completions.clamp(0, 3);
+      progress[moduleName] = clampedCompletions;
+    }
+    return progress;
+  }
+  
   void navigate(String moduleName, List<AnswerGroup> answerGroups) {
-    Navigator.of(context, rootNavigator: true).push(
+    Navigator.of(context, rootNavigator: true)
+        .push(
       MaterialPageRoute(
         builder: (context) => DifficultySelectionWidget(
           moduleName: moduleName,
@@ -36,47 +50,49 @@ class ModuleListWidgetState extends State<ModuleListWidget>
         ),
         fullscreenDialog: true,
       ),
-    );
+    )
+        .then((_) {
+      // Trigger a rebuild when returning from navigation
+      setState(() {});
+    });
   }
-
+  
   @override
   Widget build(BuildContext context) {
-    var moduleList = widget.modules.entries.toList();
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
-        child: AlternatingPathLayout(
-          itemCount: moduleList.length,
-          itemBuilder: (context, index) {
-            final module = moduleList[index];
-            return Stack(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 50 * 1.2,
-                    width: 100 * 1.5,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 7, 45, 78),
-                      borderRadius: BorderRadius.all(
-                          Radius.elliptical(100 * 1.5, 50 * 1.5)),
-                    ),
-                  ),
-                ),
-                AnimatedButton(
+        child: FutureBuilder<Map<String, int>>(
+          future: _loadModuleProgress(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Container();
+            }
+            
+            if (snapshot.hasError) {
+              return Text('Error loading progress: ${snapshot.error}');
+            }
+            
+            final moduleProgress = snapshot.data ?? {};
+            var moduleList = widget.modules.entries.toList();
+            
+            return AlternatingPathLayout(
+              itemCount: moduleList.length,
+              itemBuilder: (context, index) {
+                final module = moduleList[index];
+                final filledSections = moduleProgress[module.key] ?? 0;
+                
+                return ModuleButtonWithProgress(
                   moduleName: module.key,
                   answerGroups: module.value.answerGroups,
-                  onButtonPressed: (String key, List<dynamic> value) {
-                    navigate(key, value.cast<AnswerGroup>());
-                  },
-                ),
-              ],
+                  onButtonPressed: navigate,
+                  filledSections: filledSections,
+                );
+              },
+              itemSize: 120.0,
+              chapter: widget.chapter,
             );
           },
-          itemSize: 120.0,
-          chapter: widget.chapter,
         ),
       ),
     );
