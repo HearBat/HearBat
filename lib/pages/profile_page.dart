@@ -458,8 +458,8 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
           "vi-VN-Standard-B",
         ];
         voiceTypeTitles = {
-          "vi-VN-Standard-A": AppLocale.settingsPageVoiceUSFemale.getString(context),
-          "vi-VN-Standard-B": AppLocale.settingsPageVoiceUSMale.getString(context),
+          "vi-VN-Standard-A": AppLocale.settingsPageVoiceVIFemale.getString(context),
+          "vi-VN-Standard-B": AppLocale.settingsPageVoiceVIMale.getString(context),
         };
     }
   }

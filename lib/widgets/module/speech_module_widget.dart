@@ -113,8 +113,10 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
 
   Future<void> _loadVoiceType() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    voiceType = prefs.getString('voicePreference') ?? voiceType;
-    language = prefs.getString('languagePreference')!;
+    setState(() {
+      voiceType = prefs.getString('voicePreference') ?? voiceType;
+      language = prefs.getString('languagePreference')!;
+    });
   }
 
   Future<void> _recordModuleCompletion() async {

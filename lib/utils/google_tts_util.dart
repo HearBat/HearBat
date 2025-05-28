@@ -25,7 +25,8 @@ class GoogleTTSUtil {
     "en-IN-Neural2-B": ["en-IN-Neural2-A", "en-IN-Neural2-B"],
     "en-AU-Neural2-C": ["en-AU-Neural2-C", "en-AU-Neural2-B"],
     "en-AU-Neural2-B": ["en-AU-Neural2-C", "en-AU-Neural2-B"],
-    "vi-VN-Standard-A": ["vi-VN-Standard-A","vi-VN-Standard-B"]
+    "vi-VN-Standard-A": ["vi-VN-Standard-A","vi-VN-Standard-B"],
+    "vi-VN-Standard-B": ["vi-VN-Standard-A","vi-VN-Standard-B"]
   };
 
 

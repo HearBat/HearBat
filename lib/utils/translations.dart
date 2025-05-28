@@ -279,6 +279,8 @@ mixin AppLocale {
     settingsPageVoiceINMale: 'Indian Male',
     settingsPageVoiceAUFemale: 'Australian Female',
     settingsPageVoiceAUMale: 'Australian Male',
+    settingsPageVoiceVIFemale: 'Vietnamese Female',
+    settingsPageVoiceVIMale: 'Vietnamese Male',
 
     settingsPageClearCache: 'CLEAR CACHE',
 
