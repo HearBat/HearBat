@@ -23,18 +23,22 @@ class ProfilePageState extends State<ProfilePage> {
   String selectedCorrectFeedback = 'on';
   String selectedWrongFeedback = 'on';
 
-  List<String> voiceTypes = [
-    "en-US-Studio-O",
-    // "en-US-Neural2-C",
-    "en-GB-Neural2-C",
-    "en-IN-Neural2-A",
-    "en-AU-Neural2-C",
-    "en-US-Studio-Q",
-    // "en-US-Neural2-D",
-    "en-GB-Neural2-B",
-    "en-IN-Neural2-B",
-    "en-AU-Neural2-B",
-  ];
+  Map<String, List<String>> voiceTypesMap = {
+    'English': [
+      "en-US-Studio-O",
+      "en-GB-Neural2-C",
+      "en-IN-Neural2-A",
+      "en-AU-Neural2-C",
+      "en-US-Studio-Q",
+      "en-GB-Neural2-B",
+      "en-IN-Neural2-B",
+      "en-AU-Neural2-B",
+      ],
+    'Vietnamese': [
+      "vi-VN-Standard-A",
+      "vi-VN-Standard-B"
+    ],
+  };
 
   @override
   void initState() {
@@ -55,6 +59,9 @@ class ProfilePageState extends State<ProfilePage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
     _loadPreferences();
+    if(key == 'languagePreference' && value != selectedLanguage) {
+      _cacheVoiceTypes();
+    }
   }
 
   Future<void> _cacheVoiceTypes() async {
@@ -63,7 +70,8 @@ class ProfilePageState extends State<ProfilePage> {
     });
     String phraseToCache = AppLocale.generalAccentPreview.getString(context);
     List<Future> downloadFutures = [];
-    for (String voiceType in voiceTypes) {
+    List<String>? voiceTypes = voiceTypesMap[selectedLanguage];
+    for (String voiceType in voiceTypes!) {
       downloadFutures.add(_googleTTSUtil
           .downloadMP3(phraseToCache, voiceType)
           .catchError((e) {}));
@@ -294,6 +302,11 @@ class LanguageOptionsWidget extends StatefulWidget {
 class LanguageOptionsWidgetState extends State<LanguageOptionsWidget> {
   String _selectedLanguage = 'English';
 
+  final Map<String, String> defaultVoiceTypes = {
+    'English': "en-US-Studio-O", // US Female
+    'Vietnamese': "vi-VN-Standard-A",
+  };
+
   @override
   void initState() {
     super.initState();
@@ -319,9 +332,11 @@ class LanguageOptionsWidgetState extends State<LanguageOptionsWidget> {
       switch(value) {
         case 'English':
           localization.translate('en');
+          widget.updatePreferenceCallback('voicePreference', "en-US-Studio-O");
           DataService().loadJsonLanguageSpecific();
         case 'Vietnamese':
           localization.translate('vi');
+          widget.updatePreferenceCallback('voicePreference', "vi-VN-Standard-A");
           DataService().loadJsonLanguageSpecific();
       }
     });
@@ -388,17 +403,7 @@ class VoiceOptionsWidget extends StatefulWidget {
 class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
   String? _selectedVoicePreference;
   final GoogleTTSUtil _googleTTSUtil = GoogleTTSUtil();
-  List<String> voiceTypes = [
-    "en-US-Studio-O", // US Female
-    "en-US-Studio-Q", // US Male
-    "en-GB-Neural2-C", // UK Female
-    "en-GB-Neural2-B", // UK Male
-    "en-IN-Neural2-A", // IN Female
-    "en-IN-Neural2-B", // IN Male
-    "en-AU-Neural2-C", // AU Female
-    "en-AU-Neural2-B", // AU Male
-  ];
-
+  late List<String> voiceTypes;
   late Map<String, String> voiceTypeTitles;
 
   @override
@@ -408,10 +413,11 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
   }
 
   void _loadSavedPreference() async {
+    _loadTranslation();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? savedVoice = prefs.getString('voicePreference');
-    if (savedVoice == null || savedVoice.isEmpty) {
-      savedVoice = 'en-US-Studio-O';
+    if (savedVoice == null || savedVoice.isEmpty || !voiceTypes.contains(savedVoice)) {
+      savedVoice = voiceTypes[0];
       await prefs.setString('voicePreference', savedVoice);
     }
     setState(() {
@@ -419,17 +425,43 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
     });
   }
 
-  void loadTranslation() {
-    voiceTypeTitles = {
-      "en-US-Studio-O": AppLocale.settingsPageVoiceUSFemale.getString(context),
-      "en-US-Studio-Q": AppLocale.settingsPageVoiceUSMale.getString(context),
-      "en-GB-Neural2-C": AppLocale.settingsPageVoiceUKFemale.getString(context),
-      "en-GB-Neural2-B": AppLocale.settingsPageVoiceUKMale.getString(context),
-      "en-IN-Neural2-A": AppLocale.settingsPageVoiceINFemale.getString(context),
-      "en-IN-Neural2-B": AppLocale.settingsPageVoiceINMale.getString(context),
-      "en-AU-Neural2-C": AppLocale.settingsPageVoiceAUFemale.getString(context),
-      "en-AU-Neural2-B": AppLocale.settingsPageVoiceAUMale.getString(context),
-    };
+  void _loadTranslation() async {
+    Locale? locale = localization.currentLocale;
+    String? languageCode = locale?.languageCode;
+    switch(languageCode) {
+
+      case 'en':
+        voiceTypes = [
+          "en-US-Studio-O", // US Female
+          "en-US-Studio-Q", // US Male
+          "en-GB-Neural2-C", // UK Female
+          "en-GB-Neural2-B", // UK Male
+          "en-IN-Neural2-A", // IN Female
+          "en-IN-Neural2-B", // IN Male
+          "en-AU-Neural2-C", // AU Female
+          "en-AU-Neural2-B", // AU Male
+        ];
+        voiceTypeTitles = {
+          "en-US-Studio-O": AppLocale.settingsPageVoiceUSFemale.getString(context),
+          "en-US-Studio-Q": AppLocale.settingsPageVoiceUSMale.getString(context),
+          "en-GB-Neural2-C": AppLocale.settingsPageVoiceUKFemale.getString(context),
+          "en-GB-Neural2-B": AppLocale.settingsPageVoiceUKMale.getString(context),
+          "en-IN-Neural2-A": AppLocale.settingsPageVoiceINFemale.getString(context),
+          "en-IN-Neural2-B": AppLocale.settingsPageVoiceINMale.getString(context),
+          "en-AU-Neural2-C": AppLocale.settingsPageVoiceAUFemale.getString(context),
+          "en-AU-Neural2-B": AppLocale.settingsPageVoiceAUMale.getString(context),
+        };
+
+      case 'vi':
+        voiceTypes = [
+          "vi-VN-Standard-A",
+          "vi-VN-Standard-B",
+        ];
+        voiceTypeTitles = {
+          "vi-VN-Standard-A": AppLocale.settingsPageVoiceUSFemale.getString(context),
+          "vi-VN-Standard-B": AppLocale.settingsPageVoiceUSMale.getString(context),
+        };
+    }
   }
 
   void _handleTap(String value) {
@@ -459,7 +491,8 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    loadTranslation();
+    _loadTranslation();
+    _loadSavedPreference();
     List<Widget> voiceOptionWidgets = [];
     for (int i = 0; i < voiceTypes.length; i++) {
       voiceOptionWidgets.add(

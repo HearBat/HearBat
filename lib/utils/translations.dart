@@ -208,6 +208,8 @@ mixin AppLocale {
   static const String generalCorrect = 'generalCorrect';
   static const String generalIncorrect = 'generalIncorrect';
   static const String generalGreat = 'generalGreat';
+  static const String generalPleaseSelect = 'generalPleaseSelect';
+  static const String generalAsTheAnswer = 'generalAsTheAnswer';
 
   static const Map<String, dynamic> EN = {
     // Home Page
@@ -407,7 +409,9 @@ mixin AppLocale {
     generalHighestScore: 'Highest Score',
     generalCorrect: 'Correct',
     generalIncorrect: 'Incorrect',
-    generalGreat: 'Great'
+    generalGreat: 'Great',
+    generalPleaseSelect: 'Please select',
+    generalAsTheAnswer: 'as the answer'
   };
 
   static const Map<String, dynamic> VI = {
@@ -552,6 +556,19 @@ mixin AppLocale {
     generalHighestScore: 'Điểm cao nhất',
     generalCorrect: 'Chính xác',
     generalIncorrect: 'Không đúng',
-    generalGreat: 'Tuyệt'
+    generalGreat: 'Tuyệt',
+    generalPleaseSelect: 'Vui lòng chọn',
+    generalAsTheAnswer: 'làm câu trả lời'
   };
+
+  static String fetchContextFreeTranslation(String language, String key) {
+    String value = '$language[$key]';
+    switch (language) {
+      case 'English':
+        value = EN[key];
+      case 'Vietnamese':
+        value = VI[key];
+    }
+    return value;
+  }
 }
