@@ -172,7 +172,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
       await _recorder.stopRecorder();
       final sttUtil = GoogleSTTUtil();
       try {
-        final transcription = await sttUtil.transcribeAudio(path);
+        final transcription = await sttUtil.transcribeAudio(path, language);
         double grade = _calculateGrade(_sentence, transcription);
         setState(() {
           _transcription = transcription;
