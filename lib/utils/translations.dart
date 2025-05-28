@@ -512,7 +512,7 @@ mixin AppLocale {
     insightsPageTimePracticed: 'Thời gian luyện tập',
     insightsPageMinuteAbbr: 'ph',
     insightsPageDailyGoal: 'của mục tiêu hàng ngày đạt được',
-    insightsPageSpeechAccuracy: '% chính xác khi nói',
+    insightsPageSpeechAccuracy: 'chính xác khi nói',
     insightsPageNoiseChallenge: 'Thử thách tiếng',
     insightsPageMissedWords: 'Xem những từ bị sai nhiều nhất',
     insightsPageMissedSounds: 'Xem những âm thanh bị sai nhiều nhất',
