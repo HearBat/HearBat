@@ -53,6 +53,9 @@ mixin AppLocale {
   static const String settingsPageVoiceINMale = 'settingsPageVoiceINMale';
   static const String settingsPageVoiceAUFemale = 'settingsPageVoiceAUFemale';
   static const String settingsPageVoiceAUMale = 'settingsPageVoiceAUMale';
+  static const String settingsPageVoiceVIFemale = 'settingsPageVoiceVIFemale';
+  static const String settingsPageVoiceVIMale = 'settingsPageVoiceVIMale';
+
 
   static const String settingsPageClearCache = 'settingsPageClearCache';
 
@@ -229,6 +232,8 @@ mixin AppLocale {
   static const String generalCorrect = 'generalCorrect';
   static const String generalIncorrect = 'generalIncorrect';
   static const String generalGreat = 'generalGreat';
+  static const String generalPleaseSelect = 'generalPleaseSelect';
+  static const String generalAsTheAnswer = 'generalAsTheAnswer';
 
   static const Map<String, dynamic> EN = {
     // Home Page
@@ -274,6 +279,8 @@ mixin AppLocale {
     settingsPageVoiceINMale: 'Indian Male',
     settingsPageVoiceAUFemale: 'Australian Female',
     settingsPageVoiceAUMale: 'Australian Male',
+    settingsPageVoiceVIFemale: 'Vietnamese Female',
+    settingsPageVoiceVIMale: 'Vietnamese Male',
 
     settingsPageClearCache: 'CLEAR CACHE',
 
@@ -448,7 +455,9 @@ mixin AppLocale {
     generalHighestScore: 'Highest Score',
     generalCorrect: 'Correct',
     generalIncorrect: 'Incorrect',
-    generalGreat: 'Great'
+    generalGreat: 'Great',
+    generalPleaseSelect: 'Please select',
+    generalAsTheAnswer: 'as the answer'
   };
 
   static const Map<String, dynamic> VI = {
@@ -486,6 +495,8 @@ mixin AppLocale {
     settingsPageVoiceINMale: 'Nam Ấn Độ',
     settingsPageVoiceAUFemale: 'Nữ Úc',
     settingsPageVoiceAUMale: 'Nam Úc',
+    settingsPageVoiceVIFemale: 'Nữ Việt Nam',
+    settingsPageVoiceVIMale: 'Nam Việt Nam',
     settingsPageClearCache: 'XÓA BỘ NHỚ',
     selectionPageDifficultyTitle: 'Trình độ khó',
     selectionPageDifficultySubtitle: 'Bằng cách hoàn thành các mô-đun, bạn có thể mở khóa các cấp độ khó',
@@ -594,6 +605,8 @@ mixin AppLocale {
     generalCorrect: 'Chính xác',
     generalIncorrect: 'Không đúng',
     generalGreat: 'Tuyệt',
+    generalPleaseSelect: 'Vui lòng chọn',
+    generalAsTheAnswer: 'làm câu trả lời',
     dailyStreakPageTitle: 'Chuỗi ngày của bạn',
     dailyStreakPageLongestStreak: 'Chuỗi dài nhất: {days} ngày',
     dailyStreakPageKeepGoing: 'Tiếp tục phát huy nhé!',
@@ -613,4 +626,15 @@ mixin AppLocale {
     dailyStreakPageWeekdaySaturday: 'T7',
     dailyStreakPageWeekdaySunday: 'CN',
   };
+
+  static String fetchContextFreeTranslation(String language, String key) {
+    String value = '$language[$key]';
+    switch (language) {
+      case 'English':
+        value = EN[key];
+      case 'Vietnamese':
+        value = VI[key];
+    }
+    return value;
+  }
 }

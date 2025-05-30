@@ -16,12 +16,20 @@ class GoogleSTTUtil {
 
   // Transcribes an audio file using Google Speech-to-Text API.
   // Takes `filePath` as input and returns the transcript of the audio.
-  Future<String> transcribeAudio(String filePath) async {
+  Future<String> transcribeAudio(String filePath, String language) async {
     File file = File(filePath);
     if (!await file.exists()) {
       throw Exception("Audio file does not exist at the specified path.");
     }
 
+    // Write language code
+    String languageCode = 'en-US';
+    switch(language) {
+      case 'English':
+        languageCode = 'en-US';
+      case 'Vietnamese':
+        languageCode = 'vi-VN';
+    }
     // Returns cached transcript if available.
     String? transcript = cache[filePath];
     if (transcript != null) {
@@ -47,7 +55,7 @@ class GoogleSTTUtil {
         "config": {
           "encoding": "LINEAR16",
           "sampleRateHertz": 16000,
-          "languageCode": "en-US",
+          "languageCode": languageCode,
           "model": "default",
           "enableAutomaticPunctuation": true
         },
