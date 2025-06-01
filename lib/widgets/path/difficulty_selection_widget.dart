@@ -435,6 +435,10 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
       case "en-AU-Neural2-C":
       case "en-AU-Neural2-B":
         voiceOptions = ["en-AU-Neural2-C", "en-AU-Neural2-B"];
+      case "vi-VN-Standard-A":
+      case "vi-VN-Standard-B":
+        voiceOptions = ["vi-VN-Standard-A", "vi-VN-Standard-B"];
+
     }
 
     setState(() {
@@ -459,7 +463,7 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
         if (_selectedVoicePreference != null &&
             _selectedVoicePreference != 'random') {
           _googleTTSUtil.speak(
-              "Hello this is how I sound", _selectedVoicePreference!);
+              AppLocale.generalAccentPreview.getString(context), _selectedVoicePreference!);
         }
       }
     });

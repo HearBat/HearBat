@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
+import 'package:hearbat/utils/translations.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -23,12 +24,15 @@ class GoogleTTSUtil {
     "en-IN-Neural2-A": ["en-IN-Neural2-A", "en-IN-Neural2-B"],
     "en-IN-Neural2-B": ["en-IN-Neural2-A", "en-IN-Neural2-B"],
     "en-AU-Neural2-C": ["en-AU-Neural2-C", "en-AU-Neural2-B"],
-    "en-AU-Neural2-B": ["en-AU-Neural2-C", "en-AU-Neural2-B"]
+    "en-AU-Neural2-B": ["en-AU-Neural2-C", "en-AU-Neural2-B"],
+    "vi-VN-Standard-A": ["vi-VN-Standard-A","vi-VN-Standard-B"],
+    "vi-VN-Standard-B": ["vi-VN-Standard-A","vi-VN-Standard-B"]
   };
 
 
   bool _isHardMode = false;
   bool _isRandom = false;
+  String? _language = 'English';
 
   GoogleTTSUtil() {
     _loadSavedPreferences();
@@ -60,6 +64,7 @@ class GoogleTTSUtil {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     _isHardMode = prefs.getString('difficultyPreference') == 'Hard';
     _isRandom = prefs.getString('randomVoiceSelectionPreference') == 'isRandom';
+    _language = prefs.getString('languagePreference');
   }
 
 
@@ -73,11 +78,13 @@ class GoogleTTSUtil {
   // Downloads the MP3 file if it's not cached.
   Future<void> speak(String text, String voicetype, {bool isQuestion = false, bool hardModeEnabled = true}) async {
     // Check if this is the special accent preview.
-    bool isAccentPreview = (text == "Hello this is how I sound");
+    bool isAccentPreview = (text == AppLocale.fetchContextFreeTranslation(_language!, AppLocale.generalAccentPreview));
 
     // If hard mode is enabled and it's a question, modify the spoken text.
     if (_isHardMode && !isAccentPreview && isQuestion && hardModeEnabled) {
-      text = "Please select $text as the answer";
+      text = "${AppLocale.fetchContextFreeTranslation(_language!, AppLocale.generalPleaseSelect)} "
+          "$text "
+          "${AppLocale.fetchContextFreeTranslation(_language!, AppLocale.generalAsTheAnswer)}";
     }
 
     // If random voice type, randomly select male or female

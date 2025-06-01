@@ -113,8 +113,10 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
 
   Future<void> _loadVoiceType() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    voiceType = prefs.getString('voicePreference') ?? voiceType;
-    language = prefs.getString('languagePreference')!;
+    setState(() {
+      voiceType = prefs.getString('voicePreference') ?? voiceType;
+      language = prefs.getString('languagePreference')!;
+    });
   }
 
   Future<void> _recordModuleCompletion() async {
@@ -188,7 +190,7 @@ class SpeechModuleWidgetState extends State<SpeechModuleWidget> {
       await _recorder.stopRecorder();
       final sttUtil = GoogleSTTUtil();
       try {
-        final transcription = await sttUtil.transcribeAudio(path);
+        final transcription = await sttUtil.transcribeAudio(path, language);
         double grade = _calculateGrade(_sentence, transcription);
         setState(() {
           _transcription = transcription;
