@@ -6,6 +6,7 @@
       "modules": [
         {
           "name": "Mô-đun 1",
+          "description": "Luyện nghe nguyên âm trong câu đơn giản.",
           "speechGroups": [
             "Một con mèo lớn ngồi trên tấm thảm.",
             "Anh ấy chạy trốn khỏi mặt trời.",
@@ -21,6 +22,7 @@
         },
         {
           "name": "Mô-đun 2",
+          "description": "Nhận biết nguyên âm với từ vựng mới.",
           "speechGroups": [
             "Mở cửa sổ vào buổi tối.",
             "Cây cối che bóng mát cho con đường rộng.",
@@ -36,6 +38,7 @@
         },
         {
           "name": "Mô-đun 3",
+          "description": "Thực hành nguyên âm qua ngữ cảnh tự nhiên.",
           "speechGroups": [
             "Kéo dây lên đồi.",
             "Đặt cuốn sách lên kệ.",
@@ -51,6 +54,7 @@
         },
         {
           "name": "Mô-đun 4",
+          "description": "Phân biệt nguyên âm trong các tình huống đời sống.",
           "speechGroups": [
             "Sương giá lạnh lẽo bao phủ cây cối.",
             "Giữ màu sắc đậm ở mức cao.",
@@ -72,6 +76,7 @@
       "modules": [
         {
           "name": "Mô-đun 1",
+          "description": "Làm quen với phụ âm qua hành động thường ngày.",
           "speechGroups": [
             "Mark nhảy qua hàng rào.",
             "Một con chó đuổi theo quả bóng lăn.",
@@ -87,6 +92,7 @@
         },
         {
           "name": "Mô-đun 2",
+          "description": "Luyện nghe phụ âm qua miêu tả chuyển động.",
           "speechGroups": [
             "Một cái cây đổ ngang qua đường.",
             "Cuốn sách rơi khỏi kệ.",
@@ -102,6 +108,7 @@
         },
         {
           "name": "Mô-đun 3",
+          "description": "Nhận diện phụ âm trong môi trường sống động.",
           "speechGroups": [
             "Tiếng đồng hồ tích tắc rất to vào ban đêm.",
             "Một cành cây gãy dưới sức nặng.",
@@ -117,6 +124,7 @@
         },
         {
           "name": "Mô-đun 4",
+          "description": "Thực hành phụ âm trong hội thoại và mô tả.",
           "speechGroups": [
             "Cô ấy cầm lấy túi và rời đi.",
             "Anh ta mệt mỏi ngồi phịch xuống ghế.",
@@ -138,6 +146,7 @@
       "modules": [
         {
           "name": "Mô-đun 1",
+          "description": "Nghe và hiểu ngữ điệu trong câu hỏi, cảm thán.",
           "speechGroups": [
             "Bạn có tới dự tiệc không?",
             "Anh ấy thực sự đã trúng số!",
@@ -153,6 +162,7 @@
         },
         {
           "name": "Mô-đun 2",
+          "description": "Luyện nghe ngữ điệu trong hội thoại hàng ngày.",
           "speechGroups": [
             "Chuyện đó có thực sự xảy ra không?",
             "Cô ấy là cầu thủ giỏi nhất trong đội!",
@@ -168,6 +178,7 @@
         },
         {
           "name": "Mô-đun 3",
+          "description": "Thực hành ngữ điệu tự nhiên trong lời nói.",
           "speechGroups": [
             "Tại sao bạn lại thì thầm?",
             "Buổi hòa nhạc thực sự tuyệt vời!",
@@ -183,6 +194,7 @@
         },
         {
           "name": "Mô-đun 4",
+          "description": "Nhận biết cảm xúc qua ngữ điệu trong câu.",
           "speechGroups": [
             "Chỗ này có người ngồi chưa?",
             "Tôi không bao giờ nghĩ mình sẽ chiến thắng!",

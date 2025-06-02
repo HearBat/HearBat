@@ -6,6 +6,7 @@
       "modules": [
         {
           "name": "Mô-đun 1",
+          "description": "Nghe và nhận biết tiếng cửa, mèo, ấm nước.",
           "answerGroups": [
             {
               "answers": [
@@ -251,6 +252,7 @@
         },
         {
           "name": "Mô-đun 2",
+          "description": "Nhận diện tiếng máy, chuông, rèm tắm.",
           "answerGroups": [
             {
               "answers": [
@@ -496,6 +498,7 @@
         },
         {
           "name": "Mô-đun 3",
+          "description": "Phân biệt tiếng viết, gõ, xoay trang.",
           "answerGroups": [
             {
               "answers": [
@@ -741,6 +744,7 @@
         },
         {
           "name": "Mô-đun 4",
+          "description": "Nghe tiếng máy, lật sách, dao kéo.",
           "answerGroups": [
             {
               "answers": [
@@ -992,6 +996,7 @@
       "modules": [
         {
           "name": "Mô-đun 1",
+          "description": "Nhận biết tiếng nhạc cụ: piano, trống, sáo, đàn.",
           "answerGroups": [
             {
               "answers": [
@@ -1237,6 +1242,7 @@
         },
         {
           "name": "Mô-đun 2",
+          "description": "Phân biệt tiếng kèn, trống, đàn và nhạc cụ dây.",
           "answerGroups": [
             {
               "answers": [
@@ -1482,6 +1488,7 @@
         },
         {
           "name": "Mô-đun 3",
+          "description": "So sánh các loại đàn, kèn và nhạc cụ gõ.",
           "answerGroups": [
             {
               "answers": [
@@ -1727,6 +1734,7 @@
         },
         {
           "name": "Mô-đun 4",
+          "description": "Nghe và phân biệt tiếng nhạc cụ đa dạng.",
           "answerGroups": [
             {
               "answers": [
@@ -1978,6 +1986,7 @@
       "modules": [
         {
           "name": "Mô-đun 1",
+          "description": "Nghe tiếng động vật, sông, gió và thiên nhiên.",
           "answerGroups": [
             {
               "answers": [
@@ -2223,6 +2232,7 @@
         },
         {
           "name": "Mô-đun 2",
+          "description": "Phân biệt âm thanh rừng, mưa, và tiếng thú vật.",
           "answerGroups": [
             {
               "answers": [
@@ -2468,6 +2478,7 @@
         },
         {
           "name": "Mô-đun 3",
+          "description": "Nhận biết tiếng côn trùng, thú rừng và tự nhiên.",
           "answerGroups": [
             {
               "answers": [
@@ -2713,6 +2724,7 @@
         },
         {
           "name": "Mô-đun 4",
+          "description": "Luyện nghe nhiều âm thiên nhiên quen thuộc.",
           "answerGroups": [
             {
               "answers": [

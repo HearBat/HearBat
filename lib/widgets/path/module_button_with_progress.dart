@@ -5,6 +5,7 @@ import 'animated_button_widget.dart';
 
 class ModuleButtonWithProgress extends StatelessWidget {
   final String moduleName;
+  final String moduleDescription;
   final List<dynamic> answerGroups;
   final void Function(String, List<AnswerGroup>) onButtonPressed;
   final int filledSections;
@@ -14,7 +15,8 @@ class ModuleButtonWithProgress extends StatelessWidget {
     required this.moduleName,
     required this.answerGroups,
     required this.onButtonPressed,
-    required this.filledSections
+    required this.filledSections,
+    required this.moduleDescription
   });
 
   @override
@@ -31,6 +33,7 @@ class ModuleButtonWithProgress extends StatelessWidget {
             children: [
               AnimatedButton(
                 moduleName: moduleName,
+                moduleDescription: moduleDescription,
                 answerGroups: answerGroups,
                 onButtonPressed: (k, v) => onButtonPressed(k, v.cast<AnswerGroup>()),
               ),

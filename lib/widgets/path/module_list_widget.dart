@@ -84,6 +84,7 @@ class ModuleListWidgetState extends State<ModuleListWidget>
                 
                 return ModuleButtonWithProgress(
                   moduleName: module.key,
+                  moduleDescription: module.value.description!,
                   answerGroups: module.value.answerGroups,
                   onButtonPressed: navigate,
                   filledSections: filledSections,

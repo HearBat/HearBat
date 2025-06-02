@@ -1,18 +1,21 @@
 class SpeechModule {
   final String name;
+  final String? description;
   final List<String> speechGroups;
-  SpeechModule(this.name, this.speechGroups);
+  SpeechModule(this.name, this.speechGroups, {this.description});
 
   static SpeechModule fromJson(Map<String, dynamic> json) {
     return SpeechModule(
         json['name'],
-        [for (var item in json['speechGroups']) item.toString()]
+        [for (var item in json['speechGroups']) item.toString()],
+        description: json['description'] as String?,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'name': name,
+      'description': description,
       'speechGroups': speechGroups.map((group) => group).toList(),
     };
   }

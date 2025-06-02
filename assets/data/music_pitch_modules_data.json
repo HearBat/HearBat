@@ -6,6 +6,7 @@
       "modules": [
         {
           "name": "Module 1",
+          "description": "Listen to tones and decide if the pitch goes up or down.",
           "answerGroups": [
             {
               "answers": [

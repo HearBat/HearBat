@@ -6,6 +6,7 @@
       "modules": [
         {
           "name": "Module 1",
+          "description": "Speak back short vowel sounds in simple everyday sentences.",
           "speechGroups": [
             "A big cat sat on the mat.",
             "He runs from the sun.",
@@ -21,6 +22,7 @@
         },
         {
           "name": "Module 2",
+          "description": "Practice long vowel sounds with clearer, drawn-out words.",
           "speechGroups": [
             "Open the window in the evening.",
             "Trees shade the wide path.",
@@ -36,6 +38,7 @@
         },
         {
           "name": "Module 3",
+          "description": "Repeat phrases with soft and rounded vowel tones.",
           "speechGroups": [
             "Pull the rope up the hill.",
             "Put the book on the shelf.",
@@ -51,6 +54,7 @@
         },
         {
           "name": "Module 4",
+          "description": "Repeat deeper vowel sounds with accuracy.",
           "speechGroups": [
             "The cold frost covers the plants.",
             "Hold the bold colors high.",
@@ -72,6 +76,7 @@
       "modules": [
         {
           "name": "Module 1",
+          "description": "Listen for clear consonants and repeat the full sentence.",
           "speechGroups": [
             "Mark jumped over the fence.",
             "A dog chased the rolling ball.",
@@ -87,6 +92,7 @@
         },
         {
           "name": "Module 2",
+          "description": "Catch tricky blends and repeat what you hear.",
           "speechGroups": [
             "A tree fell across the road.",
             "The book fell off the shelf.",
@@ -102,6 +108,7 @@
         },
         {
           "name": "Module 3",
+          "description": "Hear and echo sentences with sharper consonant sounds.",
           "speechGroups": [
             "The clock ticked loudly at night.",
             "A branch snapped under the weight.",
@@ -117,6 +124,7 @@
         },
         {
           "name": "Module 4",
+          "description": "Practice repeating, detailed phrases clearly.",
           "speechGroups": [
             "She grabbed her bag and left.",
             "He slumped into the chair tiredly.",
@@ -138,6 +146,7 @@
       "modules": [
         {
           "name": "Module 1",
+          "description": "Repeat questions and exclamations exactly as you hear them.",
           "speechGroups": [
             "Are you coming to the party?",
             "He actually won the lottery!",
@@ -153,6 +162,7 @@
         },
         {
           "name": "Module 2",
+          "description": "Speak with expressive pitch and emotional emphasis.",
           "speechGroups": [
             "Did it really happen?",
             "She's the best player on the team!",
@@ -168,6 +178,7 @@
         },
         {
           "name": "Module 3",
+          "description": "Listen closely to pitch and phrasing before repeating.",
           "speechGroups": [
             "Why are you whispering?",
             "The concert was absolutely fantastic!",
@@ -183,6 +194,7 @@
         },
         {
           "name": "Module 4",
+          "description": "Repeat full sentences with natural rhythm and tone accuracy.",
           "speechGroups": [
             "Is this seat taken?",
             "I never expected to win!",

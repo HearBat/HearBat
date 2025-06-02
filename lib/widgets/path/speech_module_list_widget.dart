@@ -82,6 +82,7 @@ class SpeechModuleListWidgetState extends State<SpeechModuleListWidget> {
                 
                 return ModuleButtonWithProgress(
                   moduleName: module.key,
+                  moduleDescription: module.value.description!,
                   answerGroups: [],
                   onButtonPressed: (String key, List<dynamic> value) {
                     navigate(module.key, module.value.speechGroups);

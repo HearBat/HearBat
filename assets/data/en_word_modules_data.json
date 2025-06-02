@@ -6,6 +6,7 @@
       "modules": [
         {
           "name": "Module 1",
+          "description": "Distinguish between words with different syllable counts to begin recognizing rhythmic patterns.",
           "answerGroups": [
             {
               "answers": [
@@ -91,6 +92,7 @@
         },
         {
           "name": "Module 2",
+          "description": "Identify syllable stress and differentiate word lengths in everyday vocabulary.",
           "answerGroups": [
             {
               "answers": [
@@ -176,6 +178,7 @@
         },
         {
           "name": "Module 3",
+          "description": "Practice clear one-syllable word recognition with simple consonant sounds.",
           "answerGroups": [
                         {
               "answers": [
@@ -261,6 +264,7 @@
         },
         {
           "name": "Module 4",
+          "description": "Strengthen one-syllable word recognition with trickier end sounds and minimal pairs.",
           "answerGroups": [
                         {
               "answers": [
@@ -352,6 +356,7 @@
       "modules": [
         {
           "name": "Module 1",
+          "description": "Focus on distinguishing similar starting sounds like /k/, /p/, and /s/..",
           "answerGroups": [
                         {
               "answers": [
@@ -437,6 +442,7 @@
         },
         {
           "name": "Module 2",
+          "description": "Practice differentiating between voiced and voiceless pairs and sound clusters.",
           "answerGroups": [
                         {
               "answers": [
@@ -522,6 +528,7 @@
         },
         {
           "name": "Module 3",
+          "description": "Train on vowel shifts and rhyming words to sharpen fine auditory discrimination.",
           "answerGroups": [
                         {
               "answers": [
@@ -607,6 +614,7 @@
         },
         {
           "name": "Module 4",
+          "description": "Sharpen recognition of subtle phoneme changes in similarly structured words.",
           "answerGroups": [
             {
               "answers": [
@@ -698,6 +706,7 @@
       "modules": [
         {
           "name": "Module 1",
+          "description": "Discriminate between minimal pairs with similar vowels or final consonants.",
           "answerGroups": [
             {
               "answers": [
@@ -783,6 +792,7 @@
         },
         {
           "name": "Module 2",
+          "description": "Master confusing consonant blends and visually similar words.",
           "answerGroups": [
             {
               "answers": [
@@ -868,6 +878,7 @@
         },
         {
           "name": "Module 3",
+          "description": "Test recall and recognition under tighter auditory spacing and contrast.",
           "answerGroups": [
             {
               "answers": [
@@ -953,6 +964,7 @@
         },
         {
           "name": "Module 4",
+          "description": "Reinforce mastery of complex blends and varied vowel lengths in similar pairs.",
           "answerGroups": [
             {
               "answers": [
@@ -1044,6 +1056,7 @@
       "modules": [
         {
           "name": "Module 1",
+          "description": "Contrast near-homophones and similar word shapes with precision.",
           "answerGroups": [
             {
               "answers": [
@@ -1129,6 +1142,7 @@
         },
         {
           "name": "Module 2",
+          "description": "Differentiate multisyllabic and compound words with similar acoustic profiles.",
           "answerGroups": [
             {
               "answers": [
@@ -1214,6 +1228,7 @@
         },
         {
           "name": "Module 3",
+          "description": "Apply rapid recognition to real-world vocabulary in challenging combinations.",
           "answerGroups": [
             {
               "answers": [
@@ -1299,6 +1314,7 @@
         },
         {
           "name": "Module 4",
+          "description": "Navigate nuanced sound differences in complex minimal and near-minimal pairs.",
           "answerGroups": [
             {
               "answers": [
@@ -1387,6 +1403,7 @@
     {
       "name": "Expert Mastery",
       "image": "assets/visuals/HBWordsChapterFive.png",
+      "description": "Push auditory limits with words differing by only a single phoneme.",
       "modules": [
         {
           "name": "Module 1",
@@ -1475,6 +1492,7 @@
         },
         {
           "name": "Module 2",
+          "description": "Decode pairs with subtle vowel and consonant distinctions.",
           "answerGroups": [
             {
               "answers": [
@@ -1560,6 +1578,7 @@
         },
         {
           "name": "Module 3",
+          "description": "Challenge listening precision with tricky reversals and swaps.",
           "answerGroups": [
             {
               "answers": [
@@ -1645,6 +1664,7 @@
         },
         {
           "name": "Module 4",
+          "description": "Final test of accuracy and phoneme awareness across the hardest contrast pairs.",
           "answerGroups": [
             {
               "answers": [

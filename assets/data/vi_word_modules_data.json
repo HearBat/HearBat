@@ -6,6 +6,7 @@
       "modules": [
         {
           "name": "Mô-đun 1",
+          "description": "Phân biệt các từ có số lượng âm tiết khác nhau để luyện kỹ năng đếm âm tiết.",
           "answerGroups": [
             {
               "answers": [
@@ -171,6 +172,7 @@
         },
         {
           "name": "Mô-đun 2",
+          "description": "Nhận diện độ dài và nhấn âm trong các từ quen thuộc hàng ngày.",
           "answerGroups": [
             {
               "answers": [
@@ -336,6 +338,7 @@
         },
         {
           "name": "Mô-đun 3",
+          "description": "Tập trung nghe rõ các từ đơn âm đơn giản để làm quen với âm cơ bản.",
           "answerGroups": [
             {
               "answers": [
@@ -501,6 +504,7 @@
         },
         {
           "name": "Mô-đun 4",
+          "description": "Rèn luyện kỹ năng phân biệt âm tiết tương đồng với độ khó tăng dần.",
           "answerGroups": [
             {
               "answers": [

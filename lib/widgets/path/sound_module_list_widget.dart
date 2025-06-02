@@ -81,6 +81,7 @@ class SoundModuleListWidgetState extends State<SoundModuleListWidget> {
                 
                 return ModuleButtonWithProgress(
                   moduleName: module.key,
+                  moduleDescription: module.value.description!,
                   answerGroups: module.value.answerGroups,
                   onButtonPressed: navigate,
                   filledSections: filledSections,

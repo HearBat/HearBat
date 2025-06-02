@@ -51,19 +51,25 @@ class AnswerGroup {
 
 class Module {
   final String name;
+  final String? description;
   final List<AnswerGroup> answerGroups;
-  Module(this.name, this.answerGroups);
+
+  Module(this.name, this.answerGroups, {this.description});
 
   static Module fromJson(Map<String, dynamic> json) {
     return Module(
-        json['name'],
-        (json['answerGroups'] as List<dynamic>).map((item) => AnswerGroup.fromJson(item as Map<String, dynamic>)).toList()
+      json['name'],
+      (json['answerGroups'] as List<dynamic>)
+          .map((item) => AnswerGroup.fromJson(item as Map<String, dynamic>))
+          .toList(),
+      description: json['description'] as String?,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'name': name,
+      'description': description,
       'answerGroups': answerGroups.map((group) => group.toJson()).toList(),
     };
   }

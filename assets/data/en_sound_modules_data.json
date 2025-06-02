@@ -6,6 +6,7 @@
       "modules": [
         {
           "name": "Module 1",
+          "description": "Learn to recognize everyday household sounds like alarms, appliances, and pets.",
           "answerGroups": [
             {
               "answers": [
@@ -251,6 +252,7 @@
         },
         {
           "name": "Module 2",
+          "description": "Practice identifying subtle indoor noises across multiple rooms.",
           "answerGroups": [
             {
               "answers": [
@@ -496,6 +498,7 @@
         },
         {
           "name": "Module 3",
+          "description": "Sharpen your ear for familiar repeating sounds in a home setting.",
           "answerGroups": [
             {
               "answers": [
@@ -741,6 +744,7 @@
         },
         {
           "name": "Module 4",
+          "description": "Challenge yourself with overlapping and tricky home sound combinations.",
           "answerGroups": [
             {
               "answers": [
@@ -992,6 +996,7 @@
       "modules": [
         {
           "name": "Module 1",
+          "description": "Get introduced to common musical instruments and their tones.",
           "answerGroups": [
             {
               "answers": [
@@ -1237,6 +1242,7 @@
         },
         {
           "name": "Module 2",
+          "description": "Train your ear on deeper timbres and more complex instrument sounds.",
           "answerGroups": [
             {
               "answers": [
@@ -1482,6 +1488,7 @@
         },
         {
           "name": "Module 3",
+          "description": "Improve recognition of string, wind, and percussion families.",
           "answerGroups": [
             {
               "answers": [
@@ -1727,6 +1734,7 @@
         },
         {
           "name": "Module 4",
+          "description": "Test your ability to distinguish between similar-sounding instruments.",
           "answerGroups": [
             {
               "answers": [
@@ -1978,6 +1986,7 @@
       "modules": [
         {
           "name": "Module 1",
+          "description": "Explore natural sounds from forests, animals, and weather in peaceful outdoor scenes.",
           "answerGroups": [
             {
               "answers": [
@@ -2223,6 +2232,7 @@
         },
         {
           "name": "Module 2",
+          "description": "Practice identifying a wider range of wildlife and subtle environmental noises.",
           "answerGroups": [
             {
               "answers": [
@@ -2468,6 +2478,7 @@
         },
         {
           "name": "Module 3",
+          "description": "Train your ear to distinguish similar nature sounds across animals and weather types.",
           "answerGroups": [
             {
               "answers": [
@@ -2713,6 +2724,7 @@
         },
         {
           "name": "Module 4",
+          "description": "Tackle advanced sound mixes from the outdoors with layered natural elements.",
           "answerGroups": [
             {
               "answers": [
