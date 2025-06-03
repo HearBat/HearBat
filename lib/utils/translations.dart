@@ -96,6 +96,7 @@ mixin AppLocale {
   static const String insightsPageMissedWords = 'insightsPageMissedWords';
   static const String insightsPageMissedSounds = 'insightsPageMissedSounds';
   static const String insightsPageSpeechOvertime = 'insightsPageSpeechOvertime';
+  static const String insightsPageSpeechAccuracyGraphTitle = 'insightsPageSpeechAccuracyGraphTitle';
 
   // Missed Answers Page
   static const String missedAnswersPageMissed = 'missedAnswersPageMissed';
@@ -321,6 +322,7 @@ mixin AppLocale {
     insightsPageMissedWords: 'View Most Missed Words',
     insightsPageMissedSounds: 'View Most Missed Sounds',
     insightsPageSpeechOvertime: 'Speech Overtime',
+    insightsPageSpeechAccuracyGraphTitle: 'Speech Accuracy',
 
     // Missed Answers Page
     missedAnswersPageMissed: 'Missed',
@@ -528,6 +530,7 @@ mixin AppLocale {
     insightsPageMissedWords: 'Xem những từ bị sai nhiều nhất',
     insightsPageMissedSounds: 'Xem những âm thanh bị sai nhiều nhất',
     insightsPageSpeechOvertime: 'Trình độ nói theo theo thời gian',
+    insightsPageSpeechAccuracyGraphTitle: 'Độ Chính Xác Khi Nói',
     missedAnswersPageMissed: 'Sai',
     missedWordsPageMostMissedWords: 'Những từ bị sai nhiều nhất',
     missedWordsPageEmpty: 'Chưa có từ nào bị sai.',
