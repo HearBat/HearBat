@@ -110,7 +110,7 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocale.dailyStreakPageTitle.getString(context)),
-        actions: [
+        /*actions: [
           IconButton(
             icon: Icon(_showDebug ? Icons.bug_report : Icons.bug_report_outlined),
             onPressed: () {
@@ -122,7 +122,7 @@ ${streakData.map((s) => 'Current: ${s['current_streak']} days, Longest: ${s['lon
               });
             },
           ),
-        ],
+        ],*/
       ),
       body: Consumer<StreakProvider>(
         builder: (context, provider, _) {
