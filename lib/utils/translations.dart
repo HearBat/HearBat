@@ -530,7 +530,7 @@ mixin AppLocale {
     insightsPageMissedWords: 'Xem những từ bị sai nhiều nhất',
     insightsPageMissedSounds: 'Xem những âm thanh bị sai nhiều nhất',
     insightsPageSpeechOvertime: 'Trình độ nói theo theo thời gian',
-    insightsPageSpeechAccuracyGraphTitle: 'Độ Chính Xác Phát Âm',
+    insightsPageSpeechAccuracyGraphTitle: 'Độ Chính Xác Khi Nói',
     missedAnswersPageMissed: 'Sai',
     missedWordsPageMostMissedWords: 'Những từ bị sai nhiều nhất',
     missedWordsPageEmpty: 'Chưa có từ nào bị sai.',
