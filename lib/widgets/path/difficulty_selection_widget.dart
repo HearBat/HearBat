@@ -170,7 +170,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
     return Scaffold(
       appBar: null,
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
@@ -215,7 +215,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 30.0),
                 ],
                 if (widget.displayVoice)...[
                   Text(
@@ -254,7 +254,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 30.0),
                 ],
                 Text(
                   AppLocale.selectionPageBackgroundTitle.getString(context),
@@ -291,7 +291,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 30.0),
                 Text(
                   AppLocale.selectionPageIntensityTitle.getString(context),
                   style: TextStyle(
@@ -327,7 +327,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20.0),
+                Spacer(),
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
@@ -469,33 +469,31 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
     });
   }
 
-  Widget _buildOption(String sound, String value) {
+  Widget _buildOption(String display, String value, {bool isFirst = false, bool isLast = false}) {
     bool isSelected = false;
     if(value == 'isRandom') {
       isSelected = _randomVoiceSelectionPreference == value;
     } else if(_randomVoiceSelectionPreference != 'isRandom') {
       isSelected = _selectedVoicePreference == value;
     }
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8.0),
-      child: InkWell(
-        onTap: () => _handleTap(value),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5.0),
-            child: ListTile(
-              title: Text(
-                sound,
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-              trailing: isSelected
-                  ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
-                  : null,
+    return InkWell(
+      onTap: () => _handleTap(value),
+      child: Container(
+        decoration: BoxDecoration(
+            color: isSelected ? Color.fromARGB(255, 7, 45, 78) : Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.horizontal(
+              left: isFirst ? const Radius.circular(6.0) : Radius.zero,
+              right: isLast ? const Radius.circular(6.0) : Radius.zero,
+            )
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        child: Center(
+          child: Text(
+            display,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: isSelected ? Theme.of(context).scaffoldBackgroundColor : Color.fromARGB(255, 7, 45, 78),
             ),
           ),
         ),
@@ -505,23 +503,17 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: <Widget>[
-        _buildOption(AppLocale.selectionPageVoiceFemale.getString(context), voiceOptions[0]),
-        Divider(
-          color: Color.fromARGB(255, 7, 45, 78),
-          thickness: 3,
-          indent: 20,
-          endIndent: 20,
+        Expanded(
+          child: _buildOption(AppLocale.selectionPageVoiceFemale.getString(context), voiceOptions[0], isFirst: true),
         ),
-        _buildOption(AppLocale.selectionPageVoiceMale.getString(context), voiceOptions[1]),
-        Divider(
-          color: Color.fromARGB(255, 7, 45, 78),
-          thickness: 3,
-          indent: 20,
-          endIndent: 20,
+        Expanded(
+          child:  _buildOption(AppLocale.selectionPageVoiceMale.getString(context), voiceOptions[1]),
         ),
-        _buildOption(AppLocale.selectionPageVoiceRandom.getString(context), 'isRandom'),
+        Expanded(
+          child: _buildOption(AppLocale.selectionPageVoiceRandom.getString(context), 'isRandom', isLast: true),
+        ),
       ],
     );
   }
@@ -579,28 +571,26 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
     }
   }
 
-  Widget _buildOption(String display, String value) {
+  Widget _buildOption(String display, String value, {bool isFirst = false, bool isLast = false}) {
     bool isSelected = _selectedSound == value;
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8.0),
-      child: InkWell(
-        onTap: () => _handleTap(value),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5.0),
-            child: ListTile(
-              title: Text(
-                display,
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-              trailing: isSelected
-                  ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
-                  : null,
+    return InkWell(
+      onTap: () => _handleTap(value),
+      child: Container(
+        decoration: BoxDecoration(
+          color: isSelected ? Color.fromARGB(255, 7, 45, 78) : Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: BorderRadius.horizontal(
+            left: isFirst ? const Radius.circular(6.0) : Radius.zero,
+            right: isLast ? const Radius.circular(6.0) : Radius.zero,
+          )
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        child: Center(
+          child: Text(
+            display,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: isSelected ? Theme.of(context).scaffoldBackgroundColor : Color.fromARGB(255, 7, 45, 78),
             ),
           ),
         ),
@@ -610,23 +600,17 @@ class SoundOptionsWidgetState extends State<SoundOptionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: <Widget>[
-        _buildOption(AppLocale.selectionPageBackgroundNone.getString(context), 'None'),
-        Divider(
-          color: Color.fromARGB(255, 7, 45, 78),
-          thickness: 3,
-          indent: 20,
-          endIndent: 20,
+        Expanded(
+          child: _buildOption(AppLocale.selectionPageBackgroundNone.getString(context), 'None', isFirst: true),
         ),
-        _buildOption(AppLocale.selectionPageBackgroundRain.getString(context), 'Rain Sound'),
-        Divider(
-          color: Color.fromARGB(255, 7, 45, 78),
-          thickness: 3,
-          indent: 20,
-          endIndent: 20,
+        Expanded(
+          child: _buildOption(AppLocale.selectionPageBackgroundRain.getString(context), 'Rain Sound'),
         ),
-        _buildOption(AppLocale.selectionPageBackgroundCoffee.getString(context), 'Shop Sound'),
+        Expanded(
+          child: _buildOption(AppLocale.selectionPageBackgroundCoffee.getString(context), 'Shop Sound', isLast: true),
+        ),
       ],
     );
   }
@@ -681,28 +665,26 @@ class VolumeOptionsWidgetState extends State<VolumeOptionsWidget> {
     }
   }
 
-  Widget _buildOption(String display, String volume) {
-    bool isSelected = _selectedVolume == volume;
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8.0),
-      child: InkWell(
-        onTap: () => _handleTap(volume),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5.0),
-            child: ListTile(
-              title: Text(
-                display,
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-              trailing: isSelected
-                  ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
-                  : null,
+  Widget _buildOption(String display, String value, {bool isFirst = false, bool isLast = false}) {
+    bool isSelected = _selectedVolume == value;
+    return InkWell(
+      onTap: () => _handleTap(value),
+      child: Container(
+        decoration: BoxDecoration(
+            color: isSelected ? Color.fromARGB(255, 7, 45, 78) : Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.horizontal(
+              left: isFirst ? const Radius.circular(6.0) : Radius.zero,
+              right: isLast ? const Radius.circular(6.0) : Radius.zero,
+            )
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        child: Center(
+          child: Text(
+            display,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: isSelected ? Theme.of(context).scaffoldBackgroundColor : Color.fromARGB(255, 7, 45, 78),
             ),
           ),
         ),
@@ -712,23 +694,17 @@ class VolumeOptionsWidgetState extends State<VolumeOptionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: <Widget>[
-        _buildOption(AppLocale.selectionPageIntensityLow.getString(context), 'Low'),
-        Divider(
-          color: Color.fromARGB(255, 7, 45, 78),
-          thickness: 3,
-          indent: 20,
-          endIndent: 20,
+        Expanded(
+          child: _buildOption(AppLocale.selectionPageIntensityLow.getString(context), 'Low', isFirst: true ),
         ),
-        _buildOption(AppLocale.selectionPageIntensityMedium.getString(context), 'Medium'),
-        Divider(
-          color: Color.fromARGB(255, 7, 45, 78),
-          thickness: 3,
-          indent: 20,
-          endIndent: 20,
+        Expanded(
+          child: _buildOption(AppLocale.selectionPageIntensityMedium.getString(context), 'Medium'),
         ),
-        _buildOption(AppLocale.selectionPageIntensityHigh.getString(context), 'High'),
+        Expanded(
+          child: _buildOption(AppLocale.selectionPageIntensityHigh.getString(context), 'High', isLast: true),
+        ),
       ],
     );
   }
@@ -767,28 +743,26 @@ class DifficultyOptionsWidgetState extends State<DifficultyOptionsWidget> {
     });
   }
 
-  Widget _buildOption(String display, String difficulty) {
-    bool isSelected = _selectedDifficulty == difficulty;
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8.0),
-      child: InkWell(
-        onTap: () => _handleTap(difficulty),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5.0),
-            child: ListTile(
-              title: Text(
-                display,
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-              trailing: isSelected
-                  ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
-                  : null,
+  Widget _buildOption(String display, String value, {bool isFirst = false, bool isLast = false}) {
+    bool isSelected = _selectedDifficulty == value;
+    return InkWell(
+      onTap: () => _handleTap(value),
+      child: Container(
+        decoration: BoxDecoration(
+            color: isSelected ? Color.fromARGB(255, 7, 45, 78) : Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.horizontal(
+              left: isFirst ? const Radius.circular(6.0) : Radius.zero,
+              right: isLast ? const Radius.circular(6.0) : Radius.zero,
+            )
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        child: Center(
+          child: Text(
+            display,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: isSelected ? Theme.of(context).scaffoldBackgroundColor : Color.fromARGB(255, 7, 45, 78),
             ),
           ),
         ),
@@ -798,16 +772,14 @@ class DifficultyOptionsWidgetState extends State<DifficultyOptionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: <Widget>[
-        _buildOption(AppLocale.selectionPageDifficultyNormal.getString(context), 'Normal'),
-        Divider(
-          color: Color.fromARGB(255, 7, 45, 78),
-          thickness: 3,
-          indent: 20,
-          endIndent: 20,
+        Expanded(
+          child: _buildOption(AppLocale.selectionPageDifficultyNormal.getString(context), 'Normal', isFirst: true),
         ),
-        _buildOption(AppLocale.selectionPageDifficultyHard.getString(context), 'Hard'),
+        Expanded(
+          child:  _buildOption(AppLocale.selectionPageDifficultyHard.getString(context), 'Hard', isLast: true),
+        ),
       ],
     );
   }
