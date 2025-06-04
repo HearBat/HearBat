@@ -7,18 +7,22 @@ import 'package:path/path.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart' hide Transaction;
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class StreaksDatabase {
   static final StreaksDatabase instance = StreaksDatabase._init();
   static Database? _database;
   bool _isInitialized = false;
+  bool _fcmInitialized = false;
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   CollectionReference? _dailyActivityRef;
   DocumentReference? _streakDataRef;
   String? _deviceId;
+  String? _fcmToken;
 
   StreaksDatabase._init() {
     _initializePaths();
@@ -42,6 +46,51 @@ class StreaksDatabase {
       debugPrint('Error getting device ID: $e');
       _deviceId = 'fallback_device_id';
       return _deviceId!;
+    }
+  }
+
+  Future<void> _initializeFCM() async {
+    if (_fcmInitialized) return;
+
+    try {
+      final settings = await _firebaseMessaging.requestPermission(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+
+      if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+        _fcmToken = await _firebaseMessaging.getToken();
+        debugPrint('Obtained FCM Token: $_fcmToken');
+
+        if (_fcmToken != null && _deviceId != null) {
+          await _storeFcmToken();
+        }
+
+        _firebaseMessaging.onTokenRefresh.listen((newToken) {
+          _fcmToken = newToken;
+          _storeFcmToken();
+        });
+      }
+    } catch (e) {
+      debugPrint('Error initializing FCM: $e');
+    } finally {
+      _fcmInitialized = true;
+    }
+  }
+
+  Future<void> _storeFcmToken() async {
+    if (_deviceId == null || _fcmToken == null) return;
+
+    try {
+      await _firestore.collection('device_tokens').doc(_deviceId).set({
+        'token': _fcmToken,
+        'lastUpdated': FieldValue.serverTimestamp(),
+        'platform': Platform.operatingSystem,
+      }, SetOptions(merge: true));
+      debugPrint('FCM token stored successfully');
+    } catch (e) {
+      debugPrint('Error storing FCM token: $e');
     }
   }
 
@@ -243,6 +292,9 @@ class StreaksDatabase {
   }
 
   Future<void> recordDailyActivity(int seconds) async {
+    // Initialize FCM on first recording
+    await _initializeFCM();
+
     final now = DateTime.now().toUtc();
     final today = DateFormat('yyyy-MM-dd').format(now);
     final nowIso = now.toIso8601String();
@@ -264,6 +316,9 @@ class StreaksDatabase {
   }
 
   Future<void> recordDailyActivityForDate(int seconds, DateTime date) async {
+    // Initialize FCM on first recording
+    await _initializeFCM();
+
     final dateStr = DateFormat('yyyy-MM-dd').format(date.toUtc());
     final nowIso = DateTime.now().toUtc().toIso8601String();
 
