@@ -5,31 +5,11 @@ import 'word_path.dart';
 import '../../../widgets/top_bar_widget.dart';
 import '../../../widgets/chapter_card_widget.dart';
 
-class WordChapters extends StatefulWidget {
-  @override
-  State<WordChapters> createState() => _WordChaptersState();
-}
-
-class _WordChaptersState extends State<WordChapters> {
-  List<Map<String, String>> chapters = [];
-  bool isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadChapters();
-  }
-
-  Future<void> _loadChapters() async {
-    chapters = DataService().getWordChapters();
-
-    setState(() {
-      isLoading = false;
-    });
-  }
-
+class WordChapters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> chapters = DataService().getWordChapters();
+
     return Scaffold(
       appBar: TopBar(
         title: AppLocale.wordChaptersPageTitle.getString(context),

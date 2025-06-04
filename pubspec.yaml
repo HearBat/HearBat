@@ -104,10 +104,11 @@ flutter:
     - assets/visuals/music/
     - assets/visuals/nature/
     - assets/visuals/music_pitch/
-    - assets/data/music_pitch_modules_data.json
+    - assets/data/en_music_pitch_modules_data.json
     - assets/data/en_speech_modules_data.json
     - assets/data/en_word_modules_data.json
     - assets/data/en_sound_modules_data.json
+    - assets/data/vi_music_pitch_modules_data.json
     - assets/data/vi_speech_modules_data.json
     - assets/data/vi_word_modules_data.json
     - assets/data/vi_sound_modules_data.json

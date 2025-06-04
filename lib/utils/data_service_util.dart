@@ -21,21 +21,6 @@ class DataService {
   String? _currentLanguage;
 
   Future<void> loadJson() async {
-    try {
-      if (_musicChapters.isEmpty) {
-        String jsonString = await rootBundle.loadString(
-            'assets/data/music_pitch_modules_data.json');
-        Map<String, dynamic> jsonData = json.decode(jsonString);
-        _musicChapters = {
-          for (var chapter in jsonData['chapters']) chapter['name']: Chapter
-              .fromJson(chapter)
-        };
-      }
-
-    } catch (e) {
-      print('Error decoding JSON data: $e');
-    }
-
     loadJsonLanguageSpecific();
   }
 
@@ -67,6 +52,14 @@ class DataService {
         jsonData = json.decode(jsonString);
         _speechChapters = {
           for (var chapter in jsonData['chapters']) chapter['name']: SpeechChapter
+              .fromJson(chapter)
+        };
+
+        jsonString = await rootBundle.loadString(
+            'assets/data/${languageCode}_music_pitch_modules_data.json');
+        jsonData = json.decode(jsonString);
+        _musicChapters = {
+          for (var chapter in jsonData['chapters']) chapter['name']: Chapter
               .fromJson(chapter)
         };
 

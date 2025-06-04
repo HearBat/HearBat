@@ -126,7 +126,7 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
       Navigator.of(dialogContext!).pop();
     }
 
-    if (widget.chapter == "Pitch Resolution") {
+    if (widget.exerciseType == "music") {
       Navigator.push(
         context,
         MaterialPageRoute(
