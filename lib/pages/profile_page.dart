@@ -22,6 +22,7 @@ class ProfilePageState extends State<ProfilePage> {
   String selectedLanguage = 'English';
   String selectedCorrectFeedback = 'on';
   String selectedWrongFeedback = 'on';
+  bool _hasInitialized = false;
 
   Map<String, List<String>> voiceTypesMap = {
     'English': [
@@ -33,19 +34,24 @@ class ProfilePageState extends State<ProfilePage> {
       "en-GB-Neural2-B",
       "en-IN-Neural2-B",
       "en-AU-Neural2-B",
-      ],
-    'Vietnamese': [
-      "vi-VN-Standard-A",
-      "vi-VN-Standard-B"
     ],
+    'Vietnamese': ["vi-VN-Standard-A", "vi-VN-Standard-B"],
   };
 
   @override
   void initState() {
     super.initState();
     _loadPreferences();
-    _cacheVoiceTypes();
     audioPlayer.setReleaseMode(ReleaseMode.loop);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_hasInitialized) {
+      _hasInitialized = true;
+      _cacheVoiceTypes();
+    }
   }
 
   void _loadPreferences() async {
@@ -59,7 +65,7 @@ class ProfilePageState extends State<ProfilePage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
     _loadPreferences();
-    if(key == 'languagePreference' && value != selectedLanguage) {
+    if (key == 'languagePreference' && value != selectedLanguage) {
       _cacheVoiceTypes();
     }
   }
@@ -213,7 +219,6 @@ class FeedbackOptionsWidget extends StatefulWidget {
   FeedbackOptionsWidgetState createState() => FeedbackOptionsWidgetState();
 }
 
-
 class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
   String _selectedFeedback = "Off";
 
@@ -236,15 +241,15 @@ class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
   // Uses the passed feedbackKey to determine which setting the user wants to modify
   void _handleTap(String feedback) async {
     setState(() {
-        _selectedFeedback = feedback;
-        widget.updatePreferenceCallback("feedbackPreference", _selectedFeedback);
+      _selectedFeedback = feedback;
+      widget.updatePreferenceCallback("feedbackPreference", _selectedFeedback);
     });
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('feedbackPreference', _selectedFeedback);
   }
 
- Widget _buildOption(String display, String value) {
+  Widget _buildOption(String display, String value) {
     bool isSelected = _selectedFeedback == value;
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.0),
@@ -277,7 +282,8 @@ class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _buildOption(AppLocale.settingsPageFeedbackOff.getString(context), 'Off'),
+        _buildOption(
+            AppLocale.settingsPageFeedbackOff.getString(context), 'Off'),
         Divider(
           color: Color.fromARGB(255, 7, 45, 78),
           thickness: 3,
@@ -329,14 +335,15 @@ class LanguageOptionsWidgetState extends State<LanguageOptionsWidget> {
     setState(() {
       _selectedLanguage = value;
       widget.updatePreferenceCallback('languagePreference', value);
-      switch(value) {
+      switch (value) {
         case 'English':
           localization.translate('en');
           widget.updatePreferenceCallback('voicePreference', "en-US-Studio-O");
           DataService().loadJsonLanguageSpecific();
         case 'Vietnamese':
           localization.translate('vi');
-          widget.updatePreferenceCallback('voicePreference', "vi-VN-Standard-A");
+          widget.updatePreferenceCallback(
+              'voicePreference', "vi-VN-Standard-A");
           DataService().loadJsonLanguageSpecific();
       }
     });
@@ -377,15 +384,18 @@ class LanguageOptionsWidgetState extends State<LanguageOptionsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _buildOption(AppLocale.settingsPageLanguageEnglish.getString(context), 'English', 'assets/visuals/us_flag.png'),
-         Divider(
-           color: Color.fromARGB(255, 7, 45, 78),
-           thickness: 3,
-           indent: 20,
-           endIndent: 20,
-         ),
-         _buildOption(
-             AppLocale.settingsPageLanguageVietnamese.getString(context), 'Vietnamese', 'assets/visuals/vietnam_flag.png'),
+        _buildOption(AppLocale.settingsPageLanguageEnglish.getString(context),
+            'English', 'assets/visuals/us_flag.png'),
+        Divider(
+          color: Color.fromARGB(255, 7, 45, 78),
+          thickness: 3,
+          indent: 20,
+          endIndent: 20,
+        ),
+        _buildOption(
+            AppLocale.settingsPageLanguageVietnamese.getString(context),
+            'Vietnamese',
+            'assets/visuals/vietnam_flag.png'),
       ],
     );
   }
@@ -405,11 +415,20 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
   final GoogleTTSUtil _googleTTSUtil = GoogleTTSUtil();
   late List<String> voiceTypes;
   late Map<String, String> voiceTypeTitles;
+  bool _hasInitialized = false;
 
   @override
   void initState() {
     super.initState();
-    _loadSavedPreference();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_hasInitialized) {
+      _hasInitialized = true;
+      _loadSavedPreference();
+    }
   }
 
   void _loadSavedPreference() async {
@@ -425,11 +444,10 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
     });
   }
 
-  void _loadTranslation() async {
+  void _loadTranslation() {
     Locale? locale = localization.currentLocale;
     String? languageCode = locale?.languageCode;
-    switch(languageCode) {
-
+    switch (languageCode) {
       case 'en':
         voiceTypes = [
           "en-US-Studio-O", // US Female
@@ -442,14 +460,22 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
           "en-AU-Neural2-B", // AU Male
         ];
         voiceTypeTitles = {
-          "en-US-Studio-O": AppLocale.settingsPageVoiceUSFemale.getString(context),
-          "en-US-Studio-Q": AppLocale.settingsPageVoiceUSMale.getString(context),
-          "en-GB-Neural2-C": AppLocale.settingsPageVoiceUKFemale.getString(context),
-          "en-GB-Neural2-B": AppLocale.settingsPageVoiceUKMale.getString(context),
-          "en-IN-Neural2-A": AppLocale.settingsPageVoiceINFemale.getString(context),
-          "en-IN-Neural2-B": AppLocale.settingsPageVoiceINMale.getString(context),
-          "en-AU-Neural2-C": AppLocale.settingsPageVoiceAUFemale.getString(context),
-          "en-AU-Neural2-B": AppLocale.settingsPageVoiceAUMale.getString(context),
+          "en-US-Studio-O":
+              AppLocale.settingsPageVoiceUSFemale.getString(context),
+          "en-US-Studio-Q":
+              AppLocale.settingsPageVoiceUSMale.getString(context),
+          "en-GB-Neural2-C":
+              AppLocale.settingsPageVoiceUKFemale.getString(context),
+          "en-GB-Neural2-B":
+              AppLocale.settingsPageVoiceUKMale.getString(context),
+          "en-IN-Neural2-A":
+              AppLocale.settingsPageVoiceINFemale.getString(context),
+          "en-IN-Neural2-B":
+              AppLocale.settingsPageVoiceINMale.getString(context),
+          "en-AU-Neural2-C":
+              AppLocale.settingsPageVoiceAUFemale.getString(context),
+          "en-AU-Neural2-B":
+              AppLocale.settingsPageVoiceAUMale.getString(context),
         };
 
       case 'vi':
@@ -458,8 +484,10 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
           "vi-VN-Standard-B",
         ];
         voiceTypeTitles = {
-          "vi-VN-Standard-A": AppLocale.settingsPageVoiceVIFemale.getString(context),
-          "vi-VN-Standard-B": AppLocale.settingsPageVoiceVIMale.getString(context),
+          "vi-VN-Standard-A":
+              AppLocale.settingsPageVoiceVIFemale.getString(context),
+          "vi-VN-Standard-B":
+              AppLocale.settingsPageVoiceVIMale.getString(context),
         };
     }
   }
@@ -469,8 +497,8 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
       _selectedVoicePreference = value;
       widget.updatePreferenceCallback('voicePreference', value);
       if (_selectedVoicePreference != null) {
-        _googleTTSUtil.speak(
-            AppLocale.generalAccentPreview.getString(context), _selectedVoicePreference!);
+        _googleTTSUtil.speak(AppLocale.generalAccentPreview.getString(context),
+            _selectedVoicePreference!);
       }
     });
   }
@@ -491,8 +519,6 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    _loadTranslation();
-    _loadSavedPreference();
     List<Widget> voiceOptionWidgets = [];
     for (int i = 0; i < voiceTypes.length; i++) {
       voiceOptionWidgets.add(

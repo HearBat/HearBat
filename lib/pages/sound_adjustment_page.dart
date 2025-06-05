@@ -41,6 +41,19 @@ class SoundAdjustmentPageState extends State<SoundAdjustmentPage> {
     return Scaffold(
       body: Stack(
         children: [
+          // PUT IMAGE FIRST (behind everything)
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Transform.translate(
+              offset: Offset(0, 100),
+              child: Image.asset(
+                'assets/visuals/HB_Default.png',
+                width: MediaQuery.of(context).size.width * 0.75,
+                fit: BoxFit.cover,
+              ),
+            )
+          ),
+          // THEN PUT THE CONTENT (in front)
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -63,6 +76,7 @@ class SoundAdjustmentPageState extends State<SoundAdjustmentPage> {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
+                    print("Button pressed!"); // Add this debug line
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => MyNavBar()));
                   },
@@ -81,16 +95,6 @@ class SoundAdjustmentPageState extends State<SoundAdjustmentPage> {
               ],
             ),
           ),
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: Transform.translate(
-                offset: Offset(0, 100),
-                child: Image.asset(
-                  'assets/visuals/HB_Default.png',
-                  width: MediaQuery.of(context).size.width * 0.75,
-                  fit: BoxFit.cover,
-                ),
-              )),
         ],
       ),
     );

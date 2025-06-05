@@ -70,6 +70,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => StreakProvider()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         supportedLocales: localization.supportedLocales,
         localizationsDelegates: localization.localizationsDelegates,
         title: 'HearBat',
