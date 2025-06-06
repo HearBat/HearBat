@@ -249,28 +249,26 @@ class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
     prefs.setString('feedbackPreference', _selectedFeedback);
   }
 
-  Widget _buildOption(String display, String value) {
+  Widget _buildOption(String display, String value, {bool isFirst = false, bool isLast = false}) {
     bool isSelected = _selectedFeedback == value;
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8.0),
-      child: InkWell(
-        onTap: () => _handleTap(value),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5.0),
-            child: ListTile(
-              title: Text(
-                display,
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-              trailing: isSelected
-                  ? Icon(Icons.check, color: Color.fromARGB(255, 7, 45, 78))
-                  : null,
+    return InkWell(
+      onTap: () => _handleTap(value),
+      child: Container(
+        decoration: BoxDecoration(
+            color: isSelected ? Color.fromARGB(255, 7, 45, 78) : Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.horizontal(
+              left: isFirst ? const Radius.circular(6.0) : Radius.zero,
+              right: isLast ? const Radius.circular(6.0) : Radius.zero,
+            )
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        child: Center(
+          child: Text(
+            display,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: isSelected ? Theme.of(context).scaffoldBackgroundColor : Color.fromARGB(255, 7, 45, 78),
             ),
           ),
         ),
@@ -280,17 +278,14 @@ class FeedbackOptionsWidgetState extends State<FeedbackOptionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: <Widget>[
-        _buildOption(
-            AppLocale.settingsPageFeedbackOff.getString(context), 'Off'),
-        Divider(
-          color: Color.fromARGB(255, 7, 45, 78),
-          thickness: 3,
-          indent: 20,
-          endIndent: 20,
+        Expanded(
+          child: _buildOption(AppLocale.settingsPageFeedbackOff.getString(context), 'Off', isFirst: true),
         ),
-        _buildOption(AppLocale.settingsPageFeedbackOn.getString(context), 'On'),
+        Expanded(
+          child: _buildOption(AppLocale.settingsPageFeedbackOn.getString(context), 'On', isLast: true),
+        ),
       ],
     );
   }

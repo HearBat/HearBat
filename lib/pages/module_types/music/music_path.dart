@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/widgets/path/sound_module_list_widget.dart';
 import '../../../utils/data_service_util.dart';
+import '../../../widgets/path/music_module_list_widget.dart';
 import '../../../widgets/top_bar_widget.dart';
 
 class MusicPath extends StatefulWidget {
@@ -125,7 +126,7 @@ class _MusicPathState extends State<MusicPath> {
             Column(
               children: [
                 Expanded(
-                  child: SoundModuleListWidget(modules: modules, chapter: widget.chapter,),
+                  child: MusicModuleListWidget(modules: modules, chapter: widget.chapter,),
                 ),
               ],
             ),
