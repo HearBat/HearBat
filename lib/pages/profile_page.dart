@@ -406,7 +406,7 @@ class VoiceOptionsWidget extends StatefulWidget {
 }
 
 class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
-  String? _selectedVoicePreference;
+ String? _selectedVoicePreference;
   final GoogleTTSUtil _googleTTSUtil = GoogleTTSUtil();
   late List<String> voiceTypes;
   late Map<String, String> voiceTypeTitles;
@@ -423,6 +423,8 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
     if (!_hasInitialized) {
       _hasInitialized = true;
       _loadSavedPreference();
+    } else {
+      _loadTranslation();
     }
   }
 
@@ -455,22 +457,14 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
           "en-AU-Neural2-B", // AU Male
         ];
         voiceTypeTitles = {
-          "en-US-Studio-O":
-              AppLocale.settingsPageVoiceUSFemale.getString(context),
-          "en-US-Studio-Q":
-              AppLocale.settingsPageVoiceUSMale.getString(context),
-          "en-GB-Neural2-C":
-              AppLocale.settingsPageVoiceUKFemale.getString(context),
-          "en-GB-Neural2-B":
-              AppLocale.settingsPageVoiceUKMale.getString(context),
-          "en-IN-Neural2-A":
-              AppLocale.settingsPageVoiceINFemale.getString(context),
-          "en-IN-Neural2-B":
-              AppLocale.settingsPageVoiceINMale.getString(context),
-          "en-AU-Neural2-C":
-              AppLocale.settingsPageVoiceAUFemale.getString(context),
-          "en-AU-Neural2-B":
-              AppLocale.settingsPageVoiceAUMale.getString(context),
+          "en-US-Studio-O": AppLocale.settingsPageVoiceUSFemale.getString(context),
+          "en-US-Studio-Q": AppLocale.settingsPageVoiceUSMale.getString(context),
+          "en-GB-Neural2-C": AppLocale.settingsPageVoiceUKFemale.getString(context),
+          "en-GB-Neural2-B": AppLocale.settingsPageVoiceUKMale.getString(context),
+          "en-IN-Neural2-A": AppLocale.settingsPageVoiceINFemale.getString(context),
+          "en-IN-Neural2-B": AppLocale.settingsPageVoiceINMale.getString(context),
+          "en-AU-Neural2-C": AppLocale.settingsPageVoiceAUFemale.getString(context),
+          "en-AU-Neural2-B": AppLocale.settingsPageVoiceAUMale.getString(context),
         };
 
       case 'vi':
@@ -479,13 +473,12 @@ class VoiceOptionsWidgetState extends State<VoiceOptionsWidget> {
           "vi-VN-Standard-B",
         ];
         voiceTypeTitles = {
-          "vi-VN-Standard-A":
-              AppLocale.settingsPageVoiceVIFemale.getString(context),
-          "vi-VN-Standard-B":
-              AppLocale.settingsPageVoiceVIMale.getString(context),
+          "vi-VN-Standard-A": AppLocale.settingsPageVoiceVIFemale.getString(context),
+          "vi-VN-Standard-B": AppLocale.settingsPageVoiceVIMale.getString(context),
         };
     }
   }
+
 
   void _handleTap(String value) {
     setState(() {
