@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hearbat/models/chapter_model.dart';
 import 'package:hearbat/utils/audio_util.dart';
@@ -83,14 +85,22 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
   }
 
   Future<void> _cacheAndNavigate(
-      String moduleName, List<AnswerGroup> answerGroups) async {
-    if (_voiceType == null) {
-      print("Voice type not set. Unable to cache module words.");
-      return;
-    }
+    String moduleName, List<AnswerGroup> answerGroups) async {
+  if (_voiceType == null) {
+    print("Voice type not set. Unable to cache module words.");
+    return;
+  }
 
-    BuildContext? dialogContext;
+  BuildContext? dialogContext;
+  bool needsToShowDialog = false;
 
+  if (widget.isWord || widget.sentences == null) {
+    needsToShowDialog = await _needsWordCaching(answerGroups, _voiceType!);
+  } else if (widget.sentences != null) {
+    needsToShowDialog = await _needsSentenceCaching(widget.sentences!);
+  }
+
+  if (needsToShowDialog) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -107,164 +117,127 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
         );
       },
     );
+  }
 
-    try {
-      if (widget.isWord || widget.sentences == null) {
-        await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
+  try {
+    if (widget.isWord || widget.sentences == null) {
+      await cacheUtil.cacheModuleWords(answerGroups, _voiceType!);
+    }
+    if (widget.sentences != null) {
+      await CacheSentencesUtil().cacheSentences(widget.sentences!);
+    }
+  } catch (error) {
+    print('Failed to cache content: $error');
+  }
+
+  if (!context.mounted) return;
+
+  if (needsToShowDialog && dialogContext != null && Navigator.canPop(dialogContext!)) {
+    Navigator.of(dialogContext!).pop();
+  }
+
+  if (widget.exerciseType == "music") {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PitchResolutionExercise(
+          title: "${widget.chapter ?? 'Pitch'} ${widget.moduleName}",
+          answerGroups: answerGroups),
+      ),
+    );
+  }
+  else if (widget.sentences != null) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SpeechModuleWidget(
+          title: "${widget.chapter ?? 'Speech'} ${widget.moduleName}",
+          sentences: widget.sentences!,
+          voiceType: _voiceType!,
+        ),
+      ),
+    );
+  }
+  else {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ModuleWidget(
+          title: "${widget.chapter ?? 'Custom'} ${widget.moduleName}",
+          type: widget.exerciseType,
+          answerGroups: answerGroups,
+          isWord: widget.isWord,
+        ),
+      ),
+    );
+  }
+}
+
+Future<bool> _needsWordCaching(List<AnswerGroup> answerGroups, String voiceType) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isHardMode = prefs.getString('difficultyPreference') == 'Hard';
+  
+  String dir = (await getTemporaryDirectory()).path;
+  
+  for (var group in answerGroups) {
+    for (var answer in group.answers) {
+      String textToCache = answer.answer;
+      if (isHardMode) {
+        textToCache = "Please select ${answer.answer} as the answer";
       }
-
-      if (widget.sentences != null) {
-        await CacheSentencesUtil().cacheSentences(widget.sentences!);
+      
+      String filename = "${textToCache.replaceAll(" ", "_")}_$voiceType.mp3";
+      String filePath = "$dir/$filename";
+      File file = File(filePath);
+      
+      if (!await file.exists()) {
+        return true;
       }
-    } catch (error) {
-      print('Failed to cache content: $error');
-    }
-
-    if (!context.mounted) return;
-
-    if (dialogContext != null && Navigator.canPop(dialogContext!)) {
-      Navigator.of(dialogContext!).pop();
-    }
-
-    if (widget.exerciseType == "music") {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PitchResolutionExercise(
-            title: "${widget.chapter ?? 'Pitch'} ${widget.moduleName}",
-            answerGroups: answerGroups),
-        ),
-      );
-    }
-    else if (widget.sentences != null) {
-      // Speech module
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SpeechModuleWidget(
-            title: "${widget.chapter ?? 'Speech'} ${widget.moduleName}",
-            sentences: widget.sentences!,
-            voiceType: _voiceType!,
-          ),
-        ),
-      );
-    }
-    else {
-      // Default module
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ModuleWidget(
-            title: "${widget.chapter ?? 'Custom'} ${widget.moduleName}",
-            type: widget.exerciseType,
-            answerGroups: answerGroups,
-            isWord: widget.isWord,
-          ),
-        ),
-      );
     }
   }
+  return false; 
+}
+
+Future<bool> _needsSentenceCaching(List<String> sentences) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  String voiceType = prefs.getString('voicePreference') ?? 'en-US-Wavenet-D';
+  
+  String dir = (await getTemporaryDirectory()).path;
+  
+  for (var sentence in sentences) {
+    String filename = "${sentence.replaceAll(" ", "_")}_$voiceType.mp3";
+    String filePath = "$dir/$filename";
+    File file = File(filePath);
+    
+    if (!await file.exists()) {
+      return true;
+    }
+  }
+  return false;
+}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
       body: SafeArea(
-        child: Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 20.0),
-                //only display difficulty setting if requested
-                if (widget.displayDifficulty)...[
-                  Text(
-                    AppLocale.selectionPageDifficultyTitle.getString(context),
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    AppLocale.selectionPageDifficultySubtitle.getString(context),
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 10.0),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Theme
-                          .of(context)
-                          .scaffoldBackgroundColor,
-                      borderRadius: BorderRadius.circular(10.0),
-                      border: Border.all(
-                          color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
-                    ),
-                    child: Column(
-                      children: <Widget>[
-                        DifficultyOptionsWidget(
-                          updateDifficultyCallback: (difficulty) =>
-                              _updateDifficulty(difficulty),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 30.0),
-                ],
-                if (widget.displayVoice)...[
-                  Text(
-                    AppLocale.selectionPageVoiceTitle.getString(context),
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    AppLocale.selectionPageVoiceSubtitle.getString(context),
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 10.0),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Theme
-                          .of(context)
-                          .scaffoldBackgroundColor,
-                      borderRadius: BorderRadius.circular(10.0),
-                      border: Border.all(
-                          color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
-                    ),
-                    child: Column(
-                      children: <Widget>[
-                        VoiceOptionsWidget(
-                          updatePreferenceCallback: (preference, value) =>
-                              _updatePreference(preference, value),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 30.0),
-                ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 20.0),
+              if (widget.displayDifficulty)...[
                 Text(
-                  AppLocale.selectionPageBackgroundTitle.getString(context),
+                  AppLocale.selectionPageDifficultyTitle.getString(context),
+                  textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  AppLocale.selectionPageBackgroundSubtitle.getString(context),
+                  AppLocale.selectionPageDifficultySubtitle.getString(context),
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 13,
@@ -284,7 +257,46 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   ),
                   child: Column(
                     children: <Widget>[
-                      SoundOptionsWidget(
+                      DifficultyOptionsWidget(
+                        updateDifficultyCallback: (difficulty) =>
+                            _updateDifficulty(difficulty),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 30.0),
+              ],
+              if (widget.displayVoice)...[
+                Text(
+                  AppLocale.selectionPageVoiceTitle.getString(context),
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  AppLocale.selectionPageVoiceSubtitle.getString(context),
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10.0),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Theme
+                        .of(context)
+                        .scaffoldBackgroundColor,
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      VoiceOptionsWidget(
                         updatePreferenceCallback: (preference, value) =>
                             _updatePreference(preference, value),
                       ),
@@ -292,95 +304,131 @@ class DifficultySelectionWidgetState extends State<DifficultySelectionWidget> {
                   ),
                 ),
                 SizedBox(height: 30.0),
-                Text(
-                  AppLocale.selectionPageIntensityTitle.getString(context),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+              ],
+              Text(
+                AppLocale.selectionPageBackgroundTitle.getString(context),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                AppLocale.selectionPageBackgroundSubtitle.getString(context),
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10.0),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Theme
+                      .of(context)
+                      .scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                      color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    SoundOptionsWidget(
+                      updatePreferenceCallback: (preference, value) =>
+                          _updatePreference(preference, value),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30.0),
+              Text(
+                AppLocale.selectionPageIntensityTitle.getString(context),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                AppLocale.selectionPageIntensitySubtitle.getString(context),
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10.0),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Theme
+                      .of(context)
+                      .scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                      color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    VolumeOptionsWidget(
+                      updatePreferenceCallback: (preference, value) =>
+                          _updatePreference(preference, value),
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _cacheAndNavigate(widget.moduleName, widget.answerGroups);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 7, 45, 78),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    minimumSize: Size(380, 50),
+                  ),
+                  child: Text(
+                    AppLocale.selectionPageStart.getString(context),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-                Text(
-                  AppLocale.selectionPageIntensitySubtitle.getString(context),
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10.0),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Theme
+              ),
+              SizedBox(height: 10.0),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                    Theme
                         .of(context)
                         .scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(
-                        color: Color.fromARGB(255, 7, 45, 78), width: 4.0),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      VolumeOptionsWidget(
-                        updatePreferenceCallback: (preference, value) =>
-                            _updatePreference(preference, value),
-                      ),
-                    ],
-                  ),
-                ),
-                Spacer(),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _cacheAndNavigate(widget.moduleName, widget.answerGroups);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 7, 45, 78),
-                      shape: RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
-                      ),
-                      minimumSize: Size(380, 50),
-                    ),
-                    child: Text(
-                      AppLocale.selectionPageStart.getString(context),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
+                        side: BorderSide(
+                            color: Color.fromARGB(255, 7, 45, 78),
+                            width: 4.0)),
+                    minimumSize: Size(380, 50),
+                  ),
+                  child: Text(
+                    AppLocale.generalCancel.getString(context),
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 7, 45, 78),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                SizedBox(height: 10.0),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                      Theme
-                          .of(context)
-                          .scaffoldBackgroundColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: BorderSide(
-                              color: Color.fromARGB(255, 7, 45, 78),
-                              width: 4.0)),
-                      minimumSize: Size(380, 50),
-                    ),
-                    child: Text(
-                      AppLocale.generalCancel.getString(context),
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 7, 45, 78),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20.0),
-              ],
-            ),
+              ),
+              SizedBox(height: 20.0),
+            ],
           ),
         ),
       ),

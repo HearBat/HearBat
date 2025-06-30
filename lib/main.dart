@@ -16,30 +16,38 @@ import 'firebase_options.dart';
 
 final FlutterLocalization localization = FlutterLocalization.instance;
 
-// Ensure background messages are received
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print('Handling a background message: ${message.messageId}');
 }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,);
-  await FlutterLocalization.instance.ensureInitialized();
-  await ConfigurationManager().fetchConfiguration();
-  await PushNotifications().initFirebaseMessaging(); // FCM
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  await DataService().loadJson();
-  await StatsDatabase().init();
-  final streaksDb = StreaksDatabase.instance;
-  await streaksDb.database;
-  await streaksDb.syncWithFirestore();
+  
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    
+    await FlutterLocalization.instance.ensureInitialized();
+    
+    await DataService().loadJson();
+    await StatsDatabase().init();
+    
+    final streaksDb = StreaksDatabase.instance;
+    await streaksDb.database;
+    
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    
+  } catch (e) {
+    print('Critical initialization error: $e');
+  }
+  
   runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
-
+  
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -47,7 +55,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    super.initState(); 
+    super.initState();
+    
     localization.init(
       mapLocales: [
         const MapLocale('en', AppLocale.EN),
@@ -56,6 +65,22 @@ class _MyAppState extends State<MyApp> {
       initLanguageCode: 'en',
     );
     localization.onTranslatedLanguage = _onTranslatedLanguage;
+    
+    _initializeNetworkFeatures();
+  }
+  
+  Future<void> _initializeNetworkFeatures() async {
+    try {
+      await ConfigurationManager().fetchConfiguration();
+      await PushNotifications().initFirebaseMessaging();
+      
+      final streaksDb = StreaksDatabase.instance;
+      await streaksDb.syncWithFirestore();
+      
+      print('Network features initialized successfully');
+    } catch (e) {
+      print('Network initialization error: $e');
+    }
   }
   
   void _onTranslatedLanguage(Locale? locale) {
@@ -70,6 +95,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => StreakProvider()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         supportedLocales: localization.supportedLocales,
         localizationsDelegates: localization.localizationsDelegates,
         title: 'HearBat',
