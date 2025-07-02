@@ -28,6 +28,10 @@ class DataService {
     Locale? locale = localization.currentLocale;
     String? languageCode = locale?.languageCode;
 
+    if (languageCode != 'en' && languageCode != 'vi') {
+      languageCode = 'en';
+    }
+
     if (languageCode != _currentLanguage) {
       try {
         String jsonString = await rootBundle.loadString(
